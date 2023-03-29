@@ -9,12 +9,15 @@ studentId -- string -- unique identifier for the user
 name -- string -- user's full name
 email -- string -- user's email address
 password -- string -- user's hashed password
+appointment -- [relation appointment schema]
 
 Teacher schema:
 teacherId -- string -- unique identifier for the user
 name -- string -- user's full name
 email -- string -- user's email address
 password -- string -- user's hashed password
+availability -- Date
+appointments [relation appointment schema]
 
 2. User Validation: Express Validator
 
@@ -26,8 +29,8 @@ password -- string -- user's hashed password
 
 Appointment schema:
 
-studentId -- string -- unique identifier for the user
-teacherId -- relation to the teacher schema
+studentId -- string -- unique identifier for the user (relation student)
+teacherId -- relation to the teacher schema (relation teacher)
 start -- timestamp -- start time of the appointment
 end -- timestamp -- end time of the appointment
 status -- string -- status of the appointment (booked, confirmed, cancelled, completed)
