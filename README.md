@@ -35,11 +35,6 @@ start -- timestamp -- start time of the appointment
 end -- timestamp -- end time of the appointment
 status -- string -- status of the appointment (booked, confirmed, cancelled, completed)
 
-Availability schema:
-teacherId
-date
-time
-
 Extras:
 
 - Notification System: We will need to create a notification system that alerts students and teachers when appointments are booked or cancelled. We can use a notification API like Firebase Cloud Messaging or maybe it is just possible using React.
