@@ -40,5 +40,5 @@ server.use((err, req, res, next) => {
 
 //Starting the server
 server.listen(port, () => {
-  console.log(`Server is running on :http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
