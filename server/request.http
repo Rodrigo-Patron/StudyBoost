@@ -18,7 +18,14 @@ Content-Type: application/json
 "email":"banana@apple.com",
 "password":"Bananas24",
 "schoolID":123456789,
-"subject":"Mathematics"
+"subject":"Mathematics",
+"availability": [
+      {
+        "day": "Monday",
+        "start": "23-03-2023",
+        "end": "23-03-2023"
+      }
+    ]
 }
 
 ### STUDENTS LOGIN
@@ -39,3 +46,20 @@ Content-Type: application/json
     "password":"Bananas24"
 
 }
+
+
+### GET TEACHERS AVAIALABILITY
+GET http://localhost:6500/api/availability/
+
+
+### CREATING APPOINTMENT 
+POST http://localhost:6500/api/appointments/
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+"start":"23-03-2023",
+"end":"23-03-2023"
+}
+
+
