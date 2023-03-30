@@ -1,0 +1,41 @@
+### STUDENTS REGISTER
+POST http://localhost:6500/api/students/register
+Content-Type: application/json
+
+{
+"name":"banana",
+"email":"banana@banana.com",
+"password":"Bananas24",
+"schoolID":1234567
+}
+
+### TEACHERS REGISTER
+POST http://localhost:6500/api/teachers/register
+Content-Type: application/json
+
+{
+"name":"banana",
+"email":"banana@apple.com",
+"password":"Bananas24",
+"schoolID":123456789,
+"subject":"Mathematics"
+}
+
+### STUDENTS LOGIN
+POST http://localhost:6500/api/students/login
+Content-Type: application/json
+
+{
+"schoolID":1234567,
+"password":"Bananas24"
+}
+
+### TEACHERS LOGIN
+POST http://localhost:6500/api/teachers/login
+Content-Type: application/json
+
+{
+    "schoolID":123456789,
+    "password":"Bananas24"
+
+}

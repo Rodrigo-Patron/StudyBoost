@@ -11,10 +11,10 @@ export const registerValidator = [
     .withMessage("Password must be in range of 8-16 characters")
     .not()
     .isLowercase()
-    .withMessage("Password must contain a uppercase character")
+    .withMessage("Password must contain an uppercase character")
     .not()
     .isUppercase()
-    .withMessage("Password must contain an lowercase character")
+    .withMessage("Password must contain a lowercase character")
     .not()
     .isNumeric()
     .withMessage("Password must contain a number"),
