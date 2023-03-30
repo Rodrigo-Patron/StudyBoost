@@ -6,6 +6,7 @@ import createError from "http-errors";
 import connectDB from "./lib/db.js";
 import StudentRouter from "./routes/StudentRouter.js";
 import TeacherRouter from "./routes/TeacherRouter.js";
+import AppointmentRouter from "./routes/AppointmentRouter.js";
 import { CheckAuthentication } from "./middleware/Authentication.js";
 
 //Defining server
@@ -30,7 +31,7 @@ server.use(cors());
 //Routes
 server.use("/api/students", StudentRouter);
 server.use("/api/teachers", TeacherRouter);
-//server.use("/api/appointments", CheckAuthentication, AppointmentRouter);
+server.use("/api/appointments", CheckAuthentication, AppointmentRouter);
 
 //Page not found middleware
 server.use("*", (req, res, next) => {
