@@ -4,6 +4,8 @@ import logger from "morgan";
 import cors from "cors";
 import createError from "http-errors";
 import connectDB from "./lib/db.js";
+import StudentRouter from "./routes/StudentRouter.js";
+import { CheckAuthentication } from "./middleware/Authentication.js";
 
 //Defining server
 const server = express();
@@ -25,6 +27,9 @@ server.use(express.urlencoded({ extended: false }));
 server.use(cors());
 
 //Routes
+server.use("/api/students", StudentRouter);
+server.use("/api/teachers", TeachersRouter);
+server.use("/api/appointments", CheckAuthentication, AppointmentRouter);
 
 //Page not found middleware
 server.use("*", (req, res, next) => {
