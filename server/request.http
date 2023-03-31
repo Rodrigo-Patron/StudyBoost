@@ -47,19 +47,18 @@ Content-Type: application/json
 
 }
 
-
-### GET TEACHERS AVAIALABILITY
-GET http://localhost:6500/api/availability/
-
-
-### CREATING APPOINTMENT 
-POST http://localhost:6500/api/appointments/
+### TEACHER CREATING AVAILABILITY TIME 
+POST http://localhost:6500/api/appointments/6426d16e49698190b186cfdc
 Content-Type: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjZkMTZlNDk2OTgxOTBiMTg2Y2ZkYyIsImlhdCI6MTY4MDI2NTYxNSwiZXhwIjoxNjgwMjcyODE1fQ.LAmVG3RW9ArqptsgCYylmVzq53LKf4l-TFXosF-T0Rg
 
 {
-"start":"23-03-2023",
-"end":"23-03-2023"
+"date":"24-03-2023",
+"time":["10:00","11:00","12:00"]
 }
+
+### GET ALL TEACHERS AVAILABILITIES
+GET http://localhost:6500/api/appointments/allAvailability
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjZkMTZlNDk2OTgxOTBiMTg2Y2ZkYyIsImlhdCI6MTY4MDI2NTYxNSwiZXhwIjoxNjgwMjcyODE1fQ.LAmVG3RW9ArqptsgCYylmVzq53LKf4l-TFXosF-T0Rg
 
 

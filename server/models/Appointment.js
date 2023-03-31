@@ -6,11 +6,15 @@ const { Schema, model } = mongoose;
 // Appointment Schema
 const appointmentSchema = new Schema(
   {
-    studentID: { type: Schema.Types.ObjectId, ref: "student" },
     teacherID: { type: Schema.Types.ObjectId, ref: "teacher" },
-    start: { type: String },
-    end: { type: String },
-    status: { type: String },
+    date: [String],
+    time: [String],
+    role: {
+      type: String,
+      enum: ["teacher"],
+      default: "teacher",
+    },
+    author: { type: Schema.Types.ObjectId, ref: "teacher" },
   },
   {
     toJSON: {
