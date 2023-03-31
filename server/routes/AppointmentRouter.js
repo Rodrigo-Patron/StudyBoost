@@ -7,28 +7,6 @@ import Teacher from "../models/Teacher.js";
 // define appointment router
 const AppointmentRouter = express.Router();
 
-// //availability by teacher
-// AppointmentRouter.post("/:teacherId", async (req, res, next) => {
-//   req.body.teacherID = req.userId;
-
-//   try {
-//     const teacher = await Teacher.findById(req.body.teacherID);
-
-//     if (!teacher) {
-//       return next(createError(404, "Teacher not found"));
-//     }
-//     const newAvailability = new Question(req.body);
-//     await newQuestion.save();
-
-//     author.questions.push(newQuestion);
-//     await author.save();
-
-//     res.status(201).send({ newData: newQuestion });
-//   } catch (error) {
-//     next(createError(401, error.message));
-//   }
-// });
-
 AppointmentRouter.post("/:teacherId", async (req, res, next) => {
   try {
     req.body.author = req.userId;
