@@ -29,25 +29,31 @@ const AppointmentRouter = express.Router();
 //   }
 // });
 
-AppointmentRouter.post("/:studentId", async (req, res, next) => {
-  req.body.studentID = req.userId;
-
+AppointmentRouter.post("/:teacherId", async (req, res, next) => {
   try {
-    const student = await Student.findById(req.body.studentID);
+    req.body.author = req.userId;
+    const newAvailability = await Appointment.create(req.body);
+    //^ after creating an appointment, author who is the teacher is added
+    const teacher = await Teacher.findById(req.body.author);
+    teacher.availabilityByTeacher.push(newAvailability._id);
+    teacher.save();
 
-    if (!student) {
-      return next(createError(404, "Student not found"));
-    }
-    const newAppointment = new Appointment(req.body);
-    await newAppointment.save();
-
-    student.appointments.push(newAppointment);
-    await student.save();
-
-    res.status(201).send({ newData: newAppointment });
+    res.status(200).send(newAvailability);
   } catch (error) {
-    next(createError(401, error.message));
+    next(createError(400, error.message));
   }
-});
+})
+  //^ get all availability of teacher
+  .get("/allAvailability", async (req, res, next) => {
+    try {
+      const teachersAvailability = Appointment.find({});
+      //^ get the content instead of an id, exec means execute
+      teachersAvailability.populate("author", "name -_id");
+      const allTimeSlot = await teachersAvailability.exec();
+      res.send(allTimeSlot);
+    } catch (error) {
+      next(createError(500, error.message));
+    }
+  });
 
 export default AppointmentRouter;

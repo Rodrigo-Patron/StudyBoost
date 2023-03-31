@@ -9,13 +9,12 @@ const teacherSchema = new Schema(
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
     schoolID: { type: Number, required: true, trim: true, unique: true },
-    appointments: [{ type: Schema.Types.ObjectId, ref: "appointment" }],
+    appointmentsByStudents: [{ type: Schema.Types.ObjectId, ref: "student" }],
     subject: [{ type: String, required: true, unique: true }],
-    availability: [
+    availabilityByTeacher: [
       {
-        day: { type: String },
-        start: { type: String },
-        end: { type: String },
+        type: Schema.Types.ObjectId,
+        ref: "appointment",
       },
     ],
     role: { type: String, default: "teacher" },
