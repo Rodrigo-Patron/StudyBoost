@@ -8,16 +8,18 @@ const teacherSchema = new Schema(
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
-    schoolID: { type: Number, required: true, trim: true, unique: true },
-    appointmentsByStudents: [{ type: Schema.Types.ObjectId, ref: "student" }],
-    subject: [{ type: String, required: true, unique: true }],
+    schoolId: { type: Number, required: true, trim: true, unique: true },
+    role: { type: String, default: "teacher" },
+    subjects: [{ type: String, required: true, unique: true }],
     availabilityByTeacher: [
       {
         type: Schema.Types.ObjectId,
-        ref: "appointment",
+        ref: "availability",
       },
     ],
-    role: { type: String, default: "teacher" },
+    appointmentsByStudents: [
+      { type: Schema.Types.ObjectId, ref: "appointment" },
+    ],
   },
   {
     toJSON: {

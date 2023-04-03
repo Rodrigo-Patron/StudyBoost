@@ -1,4 +1,3 @@
-import { timeStamp } from "console";
 import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
@@ -6,15 +5,10 @@ const { Schema, model } = mongoose;
 // Appointment Schema
 const appointmentSchema = new Schema(
   {
-    teacherID: { type: Schema.Types.ObjectId, ref: "teacher" },
-    date: [String],
-    time: [String],
-    role: {
-      type: String,
-      enum: ["teacher"],
-      default: "teacher",
-    },
-    author: { type: Schema.Types.ObjectId, ref: "teacher" },
+    student: { type: Schema.Types.ObjectId, ref: "student" },
+    teacher: { type: Schema.Types.ObjectId, ref: "teacher" },
+    date: { type: String, required: true },
+    time: { type: String, required: true, unique: true },
   },
   {
     toJSON: {

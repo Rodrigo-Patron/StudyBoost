@@ -9,7 +9,7 @@ export const CheckAuthentication = (req, res, next) => {
       return;
     }
     const token = AuthToken.split(" ")[1];
-    console.log(token);
+    // console.log(token);
     if (!token) {
       next(createError(401, "Access denied"));
       return;
@@ -21,7 +21,7 @@ export const CheckAuthentication = (req, res, next) => {
         return;
       }
       req.userId = payload.id;
-      console.log(req.userId);
+      // console.log(req.userId);
       next();
     });
   } catch (error) {
