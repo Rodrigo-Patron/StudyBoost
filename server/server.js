@@ -6,46 +6,48 @@ import createError from "http-errors";
 import connectDB from "./lib/db.js";
 import StudentRouter from "./routes/StudentRouter.js";
 import TeacherRouter from "./routes/TeacherRouter.js";
-import AppointmentRouter from "./routes/AppointmentRouter.js";
 import { CheckAuthentication } from "./middleware/Authentication.js";
+import AvailabilityRouter from "./routes/AvailabilityRouter.js";
+import AppointmentRouter from "./routes/AppointmentRouter.js";
 
-//Defining server
+// Defining server
 const server = express();
 
-//Making env readable
+// Making env readable
 dotenv.config();
 
-//Defining the port
+// Defining the port
 const port = process.env.PORT || 3500;
 
 //Connecting to DB
 connectDB();
 
-//Middleware
+// Middleware
 server.use(express.json());
 server.use(logger("dev"));
 server.use(express.urlencoded({ extended: false }));
-//REMOVE BEFORE DEPLOY!!
+// REMOVE BEFORE DEPLOY!!
 server.use(cors());
 
-//Routes
+// Routes
 server.use("/api/students", StudentRouter);
 server.use("/api/teachers", TeacherRouter);
+server.use("/api/availabilities", CheckAuthentication, AvailabilityRouter);
 server.use("/api/appointments", CheckAuthentication, AppointmentRouter);
 
-//Page not found middleware
+// Page not found middleware
 server.use("*", (req, res, next) => {
   next(createError(404, "Page not found"));
 });
 
-//Global error handler
+// Global error handler
 server.use((err, req, res, next) => {
   res
     .status(err.status || 500)
     .send({ message: err.message || "Sorry, something went wrong" });
 });
 
-//Starting the server
+// Starting the server
 server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

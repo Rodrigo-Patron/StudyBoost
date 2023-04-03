@@ -1,28 +1,29 @@
 import mongoose from "mongoose";
 
-const { Schema, model } = mongoose
-
+const { Schema, model } = mongoose;
 
 // Student Schema
-const studentSchema = new Schema({
-
+const studentSchema = new Schema(
+  {
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
-    schoolID: { type: Number, required: true, trim: true, unique: true },
+    schoolId: { type: Number, required: true, trim: true, unique: true },
+    role: { type: String, default: "student" },
     appointments: [{ type: Schema.Types.ObjectId, ref: "appointment" }],
-    role: { type: String, default: "student" }
-}, {
+  },
+  {
     toJSON: {
-        transform: function (doc, userObj) {
-            delete userObj.password;
-            delete userObj.__v;
-            return userObj;
-        }
-    }
-})
+      transform: function (doc, userObj) {
+        delete userObj.password;
+        delete userObj.__v;
+        return userObj;
+      },
+    },
+  }
+);
 
 // Student Model
-const Student = model('student', studentSchema)
+const Student = model("student", studentSchema);
 
-export default Student
+export default Student;

@@ -3,9 +3,9 @@ POST http://localhost:6500/api/students/register
 Content-Type: application/json
 
 {
-"name":"banana",
-"email":"banana@banana.com",
-"password":"Bananas24",
+"name":"jon",
+"email":"jon@jon.com",
+"password":"Jon12345",
 "schoolID":1234567
 }
 
@@ -14,19 +14,13 @@ POST http://localhost:6500/api/teachers/register
 Content-Type: application/json
 
 {
-"name":"banana",
-"email":"banana@apple.com",
-"password":"Bananas24",
+"name":"Ana",
+"email":"ana@ana.com",
+"password":"Ana12345",
 "schoolID":123456789,
-"subject":"Mathematics",
-"availability": [
-      {
-        "day": "Monday",
-        "start": "23-03-2023",
-        "end": "23-03-2023"
-      }
-    ]
+"subjects":"Mathematics"
 }
+
 
 ### STUDENTS LOGIN
 POST http://localhost:6500/api/students/login
@@ -34,7 +28,7 @@ Content-Type: application/json
 
 {
 "schoolID":1234567,
-"password":"Bananas24"
+"password":"Jon12345"
 }
 
 ### TEACHERS LOGIN
@@ -43,22 +37,45 @@ Content-Type: application/json
 
 {
     "schoolID":123456789,
-    "password":"Bananas24"
-
+    "password":"Ana12345"
 }
+
+
+### GET INFO OF A SPECIFIC STUDENT (BY ID)
+GET http://localhost:6500/api/students/642ad3ac27349f4e9ca99544
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjMjczNDlmNGU5Y2E5OTU0NCIsImlhdCI6MTY4MDUyODU4NCwiZXhwIjoxNjgwNTM1Nzg0fQ.WTiceFB1B-u4ZGV3v9fmioVevtUTr_edc9dI8DdSNNc
+
+
+### GET INFO OF A SPECIFIC TEACHER (BY ID)
+GET http://localhost:6500/api/teachers/642ad3b027349f4e9ca99546
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwMjczNDlmNGU5Y2E5OTU0NiIsImlhdCI6MTY4MDUyODMyMiwiZXhwIjoxNjgwNTM1NTIyfQ.FWeYSzOGCWWv31uzQ8Ihc_p7MIV2QURN0DUvhsE6nUI
+
 
 ### TEACHER CREATING AVAILABILITY TIME 
-POST http://localhost:6500/api/appointments/6426d16e49698190b186cfdc
+POST http://localhost:6500/api/availabilities/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjZkMTZlNDk2OTgxOTBiMTg2Y2ZkYyIsImlhdCI6MTY4MDI2NTYxNSwiZXhwIjoxNjgwMjcyODE1fQ.LAmVG3RW9ArqptsgCYylmVzq53LKf4l-TFXosF-T0Rg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwMjczNDlmNGU5Y2E5OTU0NiIsImlhdCI6MTY4MDUyODMyMiwiZXhwIjoxNjgwNTM1NTIyfQ.FWeYSzOGCWWv31uzQ8Ihc_p7MIV2QURN0DUvhsE6nUI
 
 {
-"date":"24-03-2023",
-"time":["10:00","11:00","12:00"]
+"date":"27-03-2023",
+"time":["09:00","10:00","12:00"]
 }
 
-### GET ALL TEACHERS AVAILABILITIES
-GET http://localhost:6500/api/appointments/allAvailability
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjZkMTZlNDk2OTgxOTBiMTg2Y2ZkYyIsImlhdCI6MTY4MDI2NTYxNSwiZXhwIjoxNjgwMjcyODE1fQ.LAmVG3RW9ArqptsgCYylmVzq53LKf4l-TFXosF-T0Rg
+### GET AVAILABILITY OF A SPECIFIC TEACHER (BY ID)
+GET http://localhost:6500/api/availabilities/642ad3b027349f4e9ca99546
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwMjczNDlmNGU5Y2E5OTU0NiIsImlhdCI6MTY4MDUyODMyMiwiZXhwIjoxNjgwNTM1NTIyfQ.FWeYSzOGCWWv31uzQ8Ihc_p7MIV2QURN0DUvhsE6nUI
 
+### STUDENT CREATING APPOINTMENT
+POST http://localhost:6500/api/appointments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjMjczNDlmNGU5Y2E5OTU0NCIsImlhdCI6MTY4MDUyODU4NCwiZXhwIjoxNjgwNTM1Nzg0fQ.WTiceFB1B-u4ZGV3v9fmioVevtUTr_edc9dI8DdSNNc
 
+{
+"teacher":"642ad3b027349f4e9ca99546",
+"date":"27-03-2023",
+"time":"12:00"
+}
+
+### GET APPOINTMENTS OF A SPECIFIC STUDENT (BY ID)
+GET http://localhost:6500/api/appointments/642ad3ac27349f4e9ca99544
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjMjczNDlmNGU5Y2E5OTU0NCIsImlhdCI6MTY4MDUyODU4NCwiZXhwIjoxNjgwNTM1Nzg0fQ.WTiceFB1B-u4ZGV3v9fmioVevtUTr_edc9dI8DdSNNc
