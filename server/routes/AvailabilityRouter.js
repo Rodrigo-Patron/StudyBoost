@@ -39,6 +39,21 @@ AvailabilityRouter
     } catch (error) {
       next(createError(400, error.message));
     }
+  })
+
+  // to delete availability
+  .delete("/:id", async (req, res, next) => {
+    try {
+      const deletedOne = await Availability.deleteOne({ _id: req.params.id });
+
+      if (deletedOne.deletedCount) {
+        res.status(200).send({ message: "Availability has been deleted" });
+        return;
+      }
+      next({ status: 404, message: "Availability not found" });
+    } catch (error) {
+      next(createError(500, error.message));
+    }
   });
 
 export default AvailabilityRouter;

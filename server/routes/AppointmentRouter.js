@@ -54,10 +54,28 @@ AppointmentRouter
       const newAppointment = await Appointment.create(req.body);
 
       //TO DELETE THE SELECTED TIME
+
       // if (newAppointment) {
-      //   const findTime = await Availability.findOneAndDelete({
+      //   const removeAvailability = await Availability.findOne({
       //     time: { $elemMatch: { $eq: req.body.time } },
+      //     teacher: req.body.teacher,
+      //     date: req.body.date,
       //   });
+
+      //   const filterTime = removeAvailability.time.filter(
+      //     (x) => x !== newAppointment.time
+      //   );
+      //   const updateAvailability = {
+      //     teacher: req.body.teacher,
+      //     date: req.body.date,
+      //     time: filterTime,
+      //   };
+
+      //   await Availability.findByIdAndUpdate(
+      //     { _id: removeAvailability._id },
+      //     updateAvailability,
+      //     { new: true }
+      //   );
       // }
 
       // to relate the appointment to the teacher
@@ -73,6 +91,21 @@ AppointmentRouter
       res.status(200).send(newAppointment);
     } catch (error) {
       next(createError(400, error.message));
+    }
+  })
+
+  // to delete an appointment
+  .delete("/:id", async (req, res, next) => {
+    try {
+      const deletedOne = await Appointment.deleteOne({ _id: req.params.id });
+
+      if (deletedOne.deletedCount) {
+        res.status(200).send({ message: "Appointment has been deleted" });
+        return;
+      }
+      next({ status: 404, message: "Appointment not found" });
+    } catch (error) {
+      next(createError(500, error.message));
     }
   });
 

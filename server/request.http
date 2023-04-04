@@ -6,7 +6,7 @@ Content-Type: application/json
 "name":"jon",
 "email":"jon@jon.com",
 "password":"Jon12345",
-"schoolID":1234567
+"schoolId":1234567
 }
 
 ### TEACHERS REGISTER
@@ -17,7 +17,7 @@ Content-Type: application/json
 "name":"Ana",
 "email":"ana@ana.com",
 "password":"Ana12345",
-"schoolID":123456789,
+"schoolId":123456789,
 "subjects":"Mathematics"
 }
 
@@ -27,7 +27,7 @@ POST http://localhost:6500/api/students/login
 Content-Type: application/json
 
 {
-"schoolID":1234567,
+"schoolId":1234567,
 "password":"Jon12345"
 }
 
@@ -36,7 +36,7 @@ POST http://localhost:6500/api/teachers/login
 Content-Type: application/json
 
 {
-    "schoolID":123456789,
+    "schoolId":123456789,
     "password":"Ana12345"
 }
 
@@ -52,7 +52,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwM
 
 
 ### TEACHER CREATING AVAILABILITY TIME 
-POST http://localhost:6500/api/availabilities/
+POST http://localhost:6500/api/availability/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwMjczNDlmNGU5Y2E5OTU0NiIsImlhdCI6MTY4MDUyODMyMiwiZXhwIjoxNjgwNTM1NTIyfQ.FWeYSzOGCWWv31uzQ8Ihc_p7MIV2QURN0DUvhsE6nUI
 
@@ -62,7 +62,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwM
 }
 
 ### GET AVAILABILITY OF A SPECIFIC TEACHER (BY ID)
-GET http://localhost:6500/api/availabilities/642ad3b027349f4e9ca99546
+GET http://localhost:6500/api/availability/642ad3b027349f4e9ca99546
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwMjczNDlmNGU5Y2E5OTU0NiIsImlhdCI6MTY4MDUyODMyMiwiZXhwIjoxNjgwNTM1NTIyfQ.FWeYSzOGCWWv31uzQ8Ihc_p7MIV2QURN0DUvhsE6nUI
 
 ### STUDENT CREATING APPOINTMENT
@@ -79,3 +79,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjM
 ### GET APPOINTMENTS OF A SPECIFIC STUDENT (BY ID)
 GET http://localhost:6500/api/appointments/642ad3ac27349f4e9ca99544
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjMjczNDlmNGU5Y2E5OTU0NCIsImlhdCI6MTY4MDUyODU4NCwiZXhwIjoxNjgwNTM1Nzg0fQ.WTiceFB1B-u4ZGV3v9fmioVevtUTr_edc9dI8DdSNNc
+
+
+### TO DELETE AVAILABILITY (BY ID)
+DELETE http://localhost:6500/api/availability/642ca49f1a8471d98c5cf039
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmNhNDc4MWE4NDcxZDk4YzVjZjAzNiIsImlhdCI6MTY4MDY0NzMwOSwiZXhwIjoxNjgwNjU4MTA5fQ.qd2PBw_nsrUNWCe-B6opX99XO6OIESHdaNIn9FOYKhM
+
+
+###TO DELETE APPOINTMENT (BY ID)
+DELETE http://localhost:6500/api/appointments/642ca4d11a8471d98c5cf03f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmNhNDcyMWE4NDcxZDk4YzVjZjAzNCIsImlhdCI6MTY4MDY0NzMzMywiZXhwIjoxNjgwNjU4MTMzfQ.IuRVtY64md3DbVMUB6QYF6A6EAeBNqMhAosWavC6mDQ

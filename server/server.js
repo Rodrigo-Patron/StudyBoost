@@ -32,7 +32,7 @@ server.use(cors());
 // Routes
 server.use("/api/students", StudentRouter);
 server.use("/api/teachers", TeacherRouter);
-server.use("/api/availabilities", CheckAuthentication, AvailabilityRouter);
+server.use("/api/availability", CheckAuthentication, AvailabilityRouter);
 server.use("/api/appointments", CheckAuthentication, AppointmentRouter);
 
 // Page not found middleware
