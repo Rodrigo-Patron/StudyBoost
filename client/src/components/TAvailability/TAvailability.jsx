@@ -28,15 +28,14 @@ function TAvailability() {
       <h1 className="page-title">Teacher Dashboard</h1>
       <div className="container">
         <aside className="side-menu">
-          <div className="profile-card">
-            <img
-              className="profile-img"
-              src="https://via.placeholder.com/80"
-              alt="Profile"
-            />
-            <div className="profile-name">John Doe</div>
-            <div className="profile-subject">Mathematics</div>
-          </div>
+        <div className="profile-card">
+        <img src="https://via.placeholder.com/80" alt="Profile" className="profile-img" />
+  <div className="profile-info">
+    <span className="profile-name">John Doe</span>
+    <span className="profile-subject">Mathematics</span>
+  </div>
+</div>
+
           <nav className="nav-links">
           <ul className="nav-links">
   <li>
