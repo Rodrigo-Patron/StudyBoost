@@ -14,9 +14,11 @@ function Home() {
             </Button>
           </NavLink>
 
-          <Button className="home-btn" variant="outline-dark">
-            Students
-          </Button>
+          <NavLink to="/studentsPage">
+            <Button className="home-btn" variant="outline-dark">
+              Students
+            </Button>
+          </NavLink>
         </div>
       </Row>
 
