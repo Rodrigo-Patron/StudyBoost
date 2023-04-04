@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Teacher from "./Teacher.js";
 
 const { Schema, model } = mongoose;
 
@@ -18,6 +19,22 @@ const availabilitySchema = new Schema(
     },
   }
 );
+
+// this refers to the appointment to be deleted
+// this.getQuery() gives us the id of the appointment deleted
+availabilitySchema.pre("deleteOne", async function () {
+  // console.log(this.getQuery());
+  const id = this.getQuery()._id;
+
+  //to delete the availability from the teacher collection
+  const teacher = await Teacher.findOne({ availabilityByTeacher: id });
+
+  teacher.availabilityByTeacher = teacher.availabilityByTeacher.filter(
+    (x) => x.toString() !== id.toString()
+  );
+
+  await teacher.save();
+});
 
 // Availability Model
 const Availability = model("availability", availabilitySchema);
