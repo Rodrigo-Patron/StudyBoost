@@ -1,17 +1,21 @@
 import "./Home.scss";
+import Header from "../Header/Header";
 import React from "react";
 import { Container, Row, Button, Card, Col, CardGroup } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 function Home() {
   return (
+    
     <div className="home">
+     <Header/>
       <Row className="home-row">
         <div className="background">
           <NavLink to="/teachersPage">
             <Button className="home-btn" variant="outline-dark">
               Teachers
             </Button>
+          
           </NavLink>
 
           <Button className="home-btn" variant="outline-dark">
@@ -97,6 +101,8 @@ function Home() {
           </Card.Body>
         </Card>
       </CardGroup>
+   
+
     </div>
   );
 }

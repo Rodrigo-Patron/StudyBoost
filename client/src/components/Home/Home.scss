@@ -1,8 +1,9 @@
 .home {
+  max-height: 200vh;
   .home-row {
     .background {
       height: 100vh;
-      background-image: url(../../images/homepage.jpg);
+      background-image: url(../../images/school-notebook-background-3d-flying-260nw-1782100640.webp);
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -20,15 +21,16 @@
   }
   .card {
     .card-body {
+      height: 5vh;
       margin: 2rem 0;
       text-align: center;
     }
   }
   .container {
-    background-color: rgb(195, 228, 217);
+    background-color: rgba(124, 63, 255, 0.707);
     border-radius: 2rem;
     .about {
-      height: 600px;
+      height: 42vh;
 
       .about1 {
         padding-top: 1rem;
@@ -45,15 +47,15 @@
     padding: 2rem;
 
     .card {
-      margin: 0 1rem;
+      margin: 0;
       border: none;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
 
       .card-img-top {
-        height: 250px;
-        width: 250px;
+        height: 150px;
+        width: 150px;
         background-image: url(../../images/Ag.jpg);
         background-repeat: no-repeat;
         background-size: cover;
