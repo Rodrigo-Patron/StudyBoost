@@ -1,29 +1,29 @@
 import React from "react";
-import "./TeachersPage.scss";
-import TRegister from "../Register/TRegister";
-import TLogin from "../Register/TLogin";
+import "./StudentsPage.scss";
+import SRegister from "../Register/SRegister";
+import SLogin from "../Register/SLogin";
 import { Row, Col, Card } from "react-bootstrap";
 
-function TeachersPage() {
+function StudentsPage() {
   return (
-    <div className="teachers">
+    <div className="students">
       <Card>
         <Card.Body>
-          <h2>Teachers page</h2>
+          <h2>Students page</h2>
         </Card.Body>
       </Card>
-      <Row className="teacher-row">
+      <Row className="student-row">
         <Col sm={6} className="register-form">
           {/* REGISTER */}
-          <TRegister />
+          <SRegister />
         </Col>
         {/* LOGIN */}
         <Col sm={6} className="login-form">
-          <TLogin />
+          <SLogin />
         </Col>
       </Row>
     </div>
   );
 }
 
-export default TeachersPage;
+export default StudentsPage;
