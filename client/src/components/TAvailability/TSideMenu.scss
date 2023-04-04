@@ -41,16 +41,15 @@
   color: #888;
 }
 
-.nav-link {
+.nav-links {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.nav-link {
   text-decoration: none;
   color: #333;
   margin-bottom: 0.5rem;
-}
-
-.nav-link i {
-  margin-right: 0.5rem;
 }
 
 .nav-link:hover {
@@ -60,10 +59,6 @@
 .upcoming-appointments {
   width: 35%;
   padding: 1rem;
-}
-
-.calendar-container {
-  margin-right: 2rem;
 }
 
 .calendar {
