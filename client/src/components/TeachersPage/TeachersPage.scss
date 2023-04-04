@@ -1,0 +1,14 @@
+.teachers {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .input-container {
+    margin-bottom: 1rem;
+  }
+
+  .login-form {
+    padding-top: 6rem;
+  }
+}

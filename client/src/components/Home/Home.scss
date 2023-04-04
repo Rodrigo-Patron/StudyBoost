@@ -1,0 +1,65 @@
+.home {
+  .home-row {
+    .background {
+      height: 100vh;
+      background-image: url(../../images/homepage.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .home-btn {
+        margin-left: 1rem;
+        padding: 1rem;
+        font-size: 2rem;
+        font-weight: bolder;
+      }
+    }
+  }
+  .card {
+    .card-body {
+      margin: 2rem 0;
+      text-align: center;
+    }
+  }
+  .container {
+    background-color: rgb(195, 228, 217);
+    border-radius: 2rem;
+    .about {
+      height: 600px;
+
+      .about1 {
+        padding-top: 1rem;
+      }
+
+      .about2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .card-group {
+    padding: 2rem;
+
+    .card {
+      margin: 0 1rem;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .card-img-top {
+        height: 250px;
+        width: 250px;
+        background-image: url(../../images/Ag.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+      }
+    }
+  }
+}
