@@ -1,27 +1,55 @@
-import React from 'react';
-import '../TAvailability/TAvailability.scss';
-import '../TAvailability/TSideMenu.scss';
-import '@mobiscroll/react/dist/css/mobiscroll.min.css';
-import { Datepicker, Page, setOptions, localeDe } from '@mobiscroll/react';
+import React, { useState } from "react";
+import "./TAvailability.scss";
+import "@mobiscroll/react/dist/css/mobiscroll.min.css";
+import {
+  Datepicker,
+  Page,
+  setOptions,
+  localeDe,
+} from "@mobiscroll/react";
 import "font-awesome/css/font-awesome.min.css";
 
 setOptions({
   locale: localeDe,
-  theme: 'ios',
-  themeVariant: 'light'
+  theme: "ios",
+  themeVariant: "light",
 });
 
 function TAvailability() {
   const inputProps = {
-    placeholder: 'Please Select...'
+    placeholder: "Please Select...",
   };
 
   const boxInputProps = {
-    label: 'Range',
-    labelStyle: 'stacked',
-    inputStyle: 'outline',
-    placeholder: 'Please Select...'
+    label: "Range",
+    labelStyle: "stacked",
+    inputStyle: "outline",
+    placeholder: "Please Select...",
   };
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
+
+  async function submitAvailability() {
+    // Get the token from local storage using the same key Agatha used to store it in the Login(TeachersPage)
+    const teacherAuthToken = localStorage.getItem("teacherToken");
+
+    // Use the saved token in the API request headers
+    const response = await fetch("http://localhost:6500/api/availability", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${teacherAuthToken}`,
+      },
+      body: JSON.stringify({
+        date: selectedDate,
+        time: [selectedTime], 
+      }),
+    });
+
+    // We have to handle the response 
+    // ...
+  }
 
   return (
     <Page>
@@ -74,13 +102,20 @@ function TAvailability() {
         <section className="calendar">
           <h2>Select Your Availability</h2>
           <div className="calendar-container">
-  <Datepicker controls={['calendar', 'timegrid']} display="inline" />
-</div>
-
-        </section>
-      </div>
-    </Page>
-  );
+          <Datepicker
+          controls={["calendar", "timegrid"]}
+          touchUi={true}
+          inputProps={boxInputProps}
+          display="inline"
+          onSetDate={(event, inst) => setSelectedTime(event.valueText)}
+          />
+          <button className="submit-button" onClick={submitAvailability}>Submit Availability</button>
+         </div>
+    </section>
+    </div>
+   </Page>
+);
 }
 
-export default TAvailability;
+export default TAvailability
+

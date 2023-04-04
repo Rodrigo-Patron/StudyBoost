@@ -65,3 +65,17 @@
   width: 40%;
   padding: 1rem;
 }
+
+@media (min-width: 768px) {
+  .side-menu {
+    width: 20%;
+    border-right: 1px solid #ddd;
+    border-bottom: none;
+  }
+  .upcoming-appointments {
+    width: 35%;
+  }
+  .calendar {
+    width: 40%;
+  }
+}
