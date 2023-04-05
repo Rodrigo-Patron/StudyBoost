@@ -107,9 +107,13 @@ function TAvailability() {
           touchUi={true}
           inputProps={boxInputProps}
           display="inline"
-          onSetDate={(event, inst) => setSelectedTime(event.valueText)}
+          onSetDate={(event, inst) => {
+            setSelectedDate(event.valueText.split(' ')[0]);
+            setSelectedTime(event.valueText.split(' ')[1]);
+          }}
           />
           <button className="submit-button" onClick={submitAvailability}>Submit Availability</button>
+          <p> {selectedTime}</p>
          </div>
     </section>
     </div>
