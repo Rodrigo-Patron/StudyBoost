@@ -4,6 +4,7 @@ import createError from "http-errors";
 import jwt from "jsonwebtoken";
 import Student from "../models/Student.js";
 import { registerValidator } from "../middleware/Validators.js";
+import { CheckAuthentication } from "../middleware/Authentication.js";
 
 // define student router
 const StudentRouter = express.Router();
@@ -11,7 +12,7 @@ const StudentRouter = express.Router();
 StudentRouter
 
   // to get a specific student by id
-  .get("/:id", async (req, res, next) => {
+  .get("/:id", CheckAuthentication, async (req, res, next) => {
     try {
       let findStudent = Student.findOne({ _id: req.params.id });
 
