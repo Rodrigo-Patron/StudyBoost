@@ -44,11 +44,11 @@ function SLogin() {
         localStorage.setItem("student", JSON.stringify(result.student));
         setStudentToken(result.token);
         setStudent(result.student);
+        navigate("/appointment");
       })
       .catch((err) => {
         console.log(err, "coming from catch");
       });
-    navigate("/appointment");
   };
 
   return (

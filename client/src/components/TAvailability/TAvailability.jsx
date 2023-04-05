@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import "./TAvailability.scss";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-import {
-  Datepicker,
-  Page,
-  setOptions,
-  localeDe,
-} from "@mobiscroll/react";
+import { Datepicker, Page, setOptions, localeDe } from "@mobiscroll/react";
 import "font-awesome/css/font-awesome.min.css";
+import { useContext, useRef } from "react";
+import { Context } from "../../Context.jsx";
 
 setOptions({
   locale: localeDe,
@@ -29,25 +26,49 @@ function TAvailability() {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const { setErrors } = useContext(Context);
 
-  async function submitAvailability() {
+  function submitAvailability() {
     // Get the token from local storage using the same key Agatha used to store it in the Login(TeachersPage)
-    const teacherAuthToken = localStorage.getItem("teacherToken");
 
-    // Use the saved token in the API request headers
-    const response = await fetch("http://localhost:6500/api/availability", {
+    const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
+
+    const formData = {
+      date: selectedDate,
+      time: [selectedTime],
+    };
+
+    const config = {
       method: "POST",
+      body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${teacherAuthToken}`,
       },
-      body: JSON.stringify({
-        date: selectedDate,
-        time: [selectedTime], 
-      }),
-    });
+    };
 
-    // We have to handle the response 
+    // Use the saved token in the API request headers
+    fetch("http://localhost:6500/api/availability", config)
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((err) => {
+            // console.log(err);
+            setErrors(err);
+          });
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log("result:", result);
+        // setSelectedDate(result);
+        // setSelectedTime(selectedTime);
+      })
+      .catch((err) => {
+        setErrors(err);
+        console.log(err);
+      });
+
+    // We have to handle the response
     // ...
   }
 
@@ -56,43 +77,46 @@ function TAvailability() {
       <h1 className="page-title">Teacher Dashboard</h1>
       <div className="container">
         <aside className="side-menu">
-        <div className="profile-card">
-        <img src="https://via.placeholder.com/80" alt="Profile" className="profile-img" />
-  <div className="profile-info">
-    <span className="profile-name">John Doe</span>
-    <span className="profile-subject">Mathematics</span>
-  </div>
-</div>
+          <div className="profile-card">
+            <img
+              src="https://via.placeholder.com/80"
+              alt="Profile"
+              className="profile-img"
+            />
+            <div className="profile-info">
+              <span className="profile-name">John Doe</span>
+              <span className="profile-subject">Mathematics</span>
+            </div>
+          </div>
 
           <nav className="nav-links">
-          <ul className="nav-links">
-  <li>
-    <a href="/notifications" className="nav-link">
-      <i className="fa fa-bell"></i> Notifications
-    </a>
-  </li>
-  <li>
-    <a href="/messages" className="nav-link">
-      <i className="fa fa-envelope"></i> Messages
-    </a>
-  </li>
-  <li>
-    <a href="/appointment-history" className="nav-link">
-      <i className="fa fa-calendar-check-o"></i> Appointment History
-    </a>
-  </li>
-  <li>
-    <a href="/resources" className="nav-link">
-      <i className="fa fa-book"></i> Resources and Materials
-    </a>
-  </li>
-  <li>
-    <a href="/settings" className="nav-link">
-      <i className="fa fa-cog"></i> Settings
-    </a>
-  </li>
-</ul>
-
+            <ul className="nav-links">
+              <li>
+                <a href="/notifications" className="nav-link">
+                  <i className="fa fa-bell"></i> Notifications
+                </a>
+              </li>
+              <li>
+                <a href="/messages" className="nav-link">
+                  <i className="fa fa-envelope"></i> Messages
+                </a>
+              </li>
+              <li>
+                <a href="/appointment-history" className="nav-link">
+                  <i className="fa fa-calendar-check-o"></i> Appointment History
+                </a>
+              </li>
+              <li>
+                <a href="/resources" className="nav-link">
+                  <i className="fa fa-book"></i> Resources and Materials
+                </a>
+              </li>
+              <li>
+                <a href="/settings" className="nav-link">
+                  <i className="fa fa-cog"></i> Settings
+                </a>
+              </li>
+            </ul>
           </nav>
         </aside>
         <section className="upcoming-appointments">
@@ -102,24 +126,27 @@ function TAvailability() {
         <section className="calendar">
           <h2>Select Your Availability</h2>
           <div className="calendar-container">
-          <Datepicker
-          controls={["calendar", "timegrid"]}
-          touchUi={true}
-          inputProps={boxInputProps}
-          display="inline"
-          onSetDate={(event, inst) => {
-            setSelectedDate(event.valueText.split(' ')[0]);
-            setSelectedTime(event.valueText.split(' ')[1]);
-          }}
-          />
-          <button className="submit-button" onClick={submitAvailability}>Submit Availability</button>
-          <p> {selectedTime}</p>
-         </div>
-    </section>
-    </div>
-   </Page>
-);
+            <Datepicker
+              onSubmit={submitAvailability}
+              controls={["calendar", "timegrid"]}
+              touchUi={true}
+              inputProps={boxInputProps}
+              display="inline"
+              // onSetDate={(event, inst) => {
+              //   setSelectedDate(event.valueText.split(" ")[0]);
+              //   setSelectedTime(event.valueText.split(" ")[1]);
+              // }}
+            />
+            <button type="submit" className="submit-button">
+              Submit Availability
+            </button>
+          </div>
+        </section>
+      </div>{" "}
+      <p> {selectedTime}</p>
+      <p>{selectedDate}</p>
+    </Page>
+  );
 }
 
-export default TAvailability
-
+export default TAvailability;

@@ -34,7 +34,6 @@ function TLogin() {
         if (res.status === 401) {
           throw Error("credential failed");
         }
-
         return res.json();
       })
       .then((result) => {
@@ -46,11 +45,11 @@ function TLogin() {
         localStorage.setItem("teacher", JSON.stringify(result.teacher));
         setTeacherToken(result.token);
         setTeacher(result.teacher);
+        navigate("/availability");
       })
       .catch((err) => {
         console.log(err, "coming from catch");
       });
-    navigate("/availability");
   };
 
   return (
