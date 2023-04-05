@@ -41,6 +41,17 @@ TeacherRouter
     }
   })
 
+  //^ get all teachers
+  .get("/allTeachers", async (req, res, next) => {
+    try {
+      const teacher = await Teacher.find({});
+      console.log(teacher);
+      res.send(teacher);
+    } catch (error) {
+      next(createError(500, error.message));
+    }
+  })
+
   // new teacher registration endpoint
   .post("/register", registerValidator, async (req, res, next) => {
     try {
