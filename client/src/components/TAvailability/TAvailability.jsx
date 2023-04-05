@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./TAvailability.scss";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-import { Datepicker, Page, setOptions, localeDe } from "@mobiscroll/react";
+import { Datepicker, Page, setOptions, localeDe,  } from "@mobiscroll/react";
 import "font-awesome/css/font-awesome.min.css";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
@@ -28,14 +28,20 @@ function TAvailability() {
   const [selectedTime, setSelectedTime] = useState(null);
   const { setErrors } = useContext(Context);
 
-  function submitAvailability() {
-    // Get the token from local storage using the same key Agatha used to store it in the Login(TeachersPage)
+const calendarInput = useRef()
 
-    const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
+
+  function submitHandler() {
+    const date = calendarInput.current._valueText.split(" ")[0]
+    const time = calendarInput.current._valueText.split(" ")[1]
+
+  //   // Get the token from local storage using the same key Agatha used to store it in the Login(TeachersPage)
+
+  const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
 
     const formData = {
-      date: selectedDate,
-      time: [selectedTime],
+      date: date,
+      time: time,
     };
 
     const config = {
@@ -47,7 +53,7 @@ function TAvailability() {
       },
     };
 
-    // Use the saved token in the API request headers
+  //   // Use the saved token in the API request headers
     fetch("http://localhost:6500/api/availability", config)
       .then((res) => {
         if (!res.ok) {
@@ -60,16 +66,16 @@ function TAvailability() {
       })
       .then((result) => {
         console.log("result:", result);
-        // setSelectedDate(result);
-        // setSelectedTime(selectedTime);
+        setSelectedDate(result.date);
+        setSelectedTime(result.time);
       })
       .catch((err) => {
         setErrors(err);
         console.log(err);
       });
 
-    // We have to handle the response
-    // ...
+  //   // We have to handle the response
+  //   // ...
   }
 
   return (
@@ -127,17 +133,21 @@ function TAvailability() {
           <h2>Select Your Availability</h2>
           <div className="calendar-container">
             <Datepicker
-              onSubmit={submitAvailability}
+              // onSubmit={submitAvailability}
               controls={["calendar", "timegrid"]}
-              touchUi={true}
-              inputProps={boxInputProps}
+              ref = {calendarInput}
+              dateFormat="DD.MM.YYYY"
+              timeFormat="HH:mm"
+              // touchUi={true}
+              // inputProps={boxInputProps}
               display="inline"
+              // inputComponent="input"
               // onSetDate={(event, inst) => {
               //   setSelectedDate(event.valueText.split(" ")[0]);
               //   setSelectedTime(event.valueText.split(" ")[1]);
               // }}
             />
-            <button type="submit" className="submit-button">
+            <button type="submit" className="submit-button" onClick={submitHandler}>
               Submit Availability
             </button>
           </div>
