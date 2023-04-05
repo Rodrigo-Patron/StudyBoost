@@ -1,20 +1,20 @@
 .home {
-  max-height: 200vh;
   .home-row {
     .background {
       height: 100vh;
-      background-image: url(../../images/school-notebook-background-3d-flying-260nw-1782100640.webp);
+      background-image: url(../../images/HomePage.png);
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
       display: flex;
-      justify-content: center;
+      justify-content: right;
       align-items: center;
 
       .home-btn {
-        margin-left: 1rem;
+        margin-right: 6rem;
+        margin-bottom: 25rem;
         padding: 1rem;
-        font-size: 2rem;
+        font-size: 4rem;
         font-weight: bolder;
       }
     }
@@ -27,13 +27,18 @@
     }
   }
   .container {
-    background-color: rgba(124, 63, 255, 0.707);
+    color: rgba(250, 184, 0, 0.924);
+    background-color: rgb(85, 84, 83);
     border-radius: 2rem;
+    font-size: 2.5vh;
     .about {
       height: 42vh;
 
       .about1 {
         padding-top: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .about2 {
@@ -53,10 +58,22 @@
       justify-content: center;
       align-items: flex-end;
 
+      .MohammadCard {
+        background-image: url(../../images/Mo.jpg);
+      }
+      .AgathaCard {
+        background-image: url(../../images/Ag.jpg);
+      }
+      .RodrigoCard {
+        background-image: url(../../images/Ro.jpg);
+      }
+      .DavidCard {
+        background-image: url(../../images/Da.jpg);
+      }
       .card-img-top {
         height: 150px;
         width: 150px;
-        background-image: url(../../images/Ag.jpg);
+        // background-image: url(../../images/Ag.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;

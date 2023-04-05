@@ -67,7 +67,7 @@ function Home() {
 
       <CardGroup>
         <Card>
-          <Card.Img variant="top" />
+          <Card.Img variant="top"  className="RodrigoCard"/>
           <Card.Body>
             <Card.Title>Rodrigo</Card.Title>
             <Card.Text>
@@ -75,8 +75,8 @@ function Home() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <Card>
-          <Card.Img variant="top" />
+        <Card >
+          <Card.Img variant="top" className="MohammadCard"/>
           <Card.Body>
             <Card.Title>Mohammad</Card.Title>
             <Card.Text>
@@ -84,8 +84,8 @@ function Home() {
             </Card.Text>
           </Card.Body>
         </Card>
-        <Card>
-          <Card.Img variant="top" />
+        <Card >
+          <Card.Img variant="top" className="AgathaCard"/>
           <Card.Body>
             <Card.Title>Agatha</Card.Title>
             <Card.Text>
@@ -94,7 +94,7 @@ function Home() {
           </Card.Body>
         </Card>
         <Card>
-          <Card.Img variant="top" />
+          <Card.Img variant="top" className="DavidCard" />
           <Card.Body>
             <Card.Title>David</Card.Title>
             <Card.Text>
