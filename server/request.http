@@ -18,7 +18,7 @@ Content-Type: application/json
 "email":"ana@ana.com",
 "password":"Ana12345",
 "schoolId":123456789,
-"subjects":"Mathematics"
+"subjects":"Math"
 }
 
 
@@ -46,18 +46,24 @@ GET http://localhost:6500/api/students/642ad3ac27349f4e9ca99544
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjMjczNDlmNGU5Y2E5OTU0NCIsImlhdCI6MTY4MDUyODU4NCwiZXhwIjoxNjgwNTM1Nzg0fQ.WTiceFB1B-u4ZGV3v9fmioVevtUTr_edc9dI8DdSNNc
 
 
+###GET INFO OF ALL TEACHERS
+
+GET http://localhost:6500/api/teachers/
+Authorization: Bearer 
+
+
 ### GET INFO OF A SPECIFIC TEACHER (BY ID)
-GET http://localhost:6500/api/teachers/642ad3b027349f4e9ca99546
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwMjczNDlmNGU5Y2E5OTU0NiIsImlhdCI6MTY4MDUyODMyMiwiZXhwIjoxNjgwNTM1NTIyfQ.FWeYSzOGCWWv31uzQ8Ihc_p7MIV2QURN0DUvhsE6nUI
+GET http://localhost:6500/api/teachers/642d7dbc9816672a93a78aa4
+Authorization: Bearer 
 
 
 ### TEACHER CREATING AVAILABILITY TIME 
 POST http://localhost:6500/api/availability/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2IwMjczNDlmNGU5Y2E5OTU0NiIsImlhdCI6MTY4MDUyODMyMiwiZXhwIjoxNjgwNTM1NTIyfQ.FWeYSzOGCWWv31uzQ8Ihc_p7MIV2QURN0DUvhsE6nUI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmQ3ZGU0ZDUwZjhjZjQ5YTQ2MTZlMCIsImlhdCI6MTY4MDcwMjk5MiwiZXhwIjoxNjgwNzEzNzkyfQ.ANky--7VcaKjhjt-hKfscvNjnGHsGrzgm4WC5rxaqus
 
 {
-"date":"27-03-2023",
+"date":"28-03-2023",
 "time":["09:00","10:00","12:00"]
 }
 
