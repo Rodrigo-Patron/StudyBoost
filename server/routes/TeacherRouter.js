@@ -4,6 +4,7 @@ import createError from "http-errors";
 import jwt from "jsonwebtoken";
 import Teacher from "../models/Teacher.js";
 import { registerValidator } from "../middleware/Validators.js";
+import { CheckAuthentication } from "../middleware/Authentication.js";
 
 // define teacher router
 const TeacherRouter = express.Router();
@@ -11,9 +12,40 @@ const TeacherRouter = express.Router();
 TeacherRouter
 
   //to get a specific teacher by id
-  .get("/:id", async (req, res, next) => {
+  .get("/:id", CheckAuthentication, async (req, res, next) => {
     try {
       let findTeacher = Teacher.findOne({ _id: req.params.id });
+
+      //to populate and show availability
+      const query = findTeacher;
+
+      query.populate("availabilityByTeacher", "date time -_id");
+      //to populate and show appointments
+      // query.populate("appointmentsByStudents", "student date time -_id");
+
+      query.populate({
+        path: "appointmentsByStudents",
+        model: "appointment",
+        select: "date time -_id",
+
+        populate: {
+          path: "student",
+          model: "student",
+          select: "name -_id",
+        },
+      });
+
+      findTeacher = await query.exec();
+      res.send(findTeacher);
+    } catch (error) {
+      next(createError(500, error.message));
+    }
+  })
+
+  //to get a all teachers
+  .get("/", CheckAuthentication, async (req, res, next) => {
+    try {
+      let findTeacher = Teacher.find({});
 
       //to populate and show availability
       const query = findTeacher;
