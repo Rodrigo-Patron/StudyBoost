@@ -3,6 +3,7 @@ import "./SDashboard.scss";
 import { useContext, useRef, useEffect } from "react";
 import { Context } from "../../Context.jsx";
 import { Row, Col, Button, ListGroup } from "react-bootstrap";
+import SHeader from "../S-Header/SHeader";
 
 function SDashboard() {
   const { student, teacher, setTeacher, studentToken } = useContext(Context);
@@ -32,6 +33,7 @@ function SDashboard() {
   return (
     <div>
       <Row className="appointment-block">
+        <SHeader />
         <Col sm={4} className="student-dashboard">
           <p>
             Logged in as <span>{student.name}</span>
