@@ -1,9 +1,11 @@
 import React from "react";
 import "./SDashboard.scss";
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../../Context.jsx";
 import { Row, Col, Button, ListGroup } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
+import { Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function SDashboard() {
   const { student, teacher, setTeacher, studentToken } = useContext(Context);
@@ -34,13 +36,7 @@ function SDashboard() {
     <div>
       <Row className="appointment-block">
         <SHeader />
-        <Col sm={4} className="student-dashboard">
-          <p>
-            Logged in as <span>{student.name}</span>
-          </p>
-          <p>My appointments</p>
-          <Button variant="outline-danger">Logout</Button>
-        </Col>
+        <Col sm={4} className="student-dashboard"></Col>
 
         <Col sm={8} className="teachers-list">
           <h3>
@@ -66,8 +62,9 @@ function SDashboard() {
                       <span className="task-input">{appointment.subjects}</span>{" "}
                     </p>
 
-                    <Button variant="outline-dark">Book</Button>
-                    <Button variant="outline-dark">Cancel</Button>
+                    <NavLink to="/teacherId">
+                      <Button variant="outline-dark">Book Appointment</Button>
+                    </NavLink>
 
                     <hr />
                   </div>
@@ -77,7 +74,7 @@ function SDashboard() {
         </Col>
       </Row>
       <hr />
-      <Row className="task-list"></Row>
+      <Outlet />
     </div>
   );
 }

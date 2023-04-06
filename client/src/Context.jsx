@@ -12,6 +12,7 @@ function ContextProvider({ children }) {
   const [teacher, setTeacher] = useState(defaultTeacher);
   const [student, setStudent] = useState(defaultStudent);
   const [errors, setErrors] = useState(null);
+  const [appointment, setAppointment] = useState(null);
   const [teacherToken, setTeacherToken] = useState(defaultTeacherToken);
   const [studentToken, setStudentToken] = useState(defaultStudentToken);
   const [deleteAppointment, setDeleteAppointment] = useState(false);
@@ -34,6 +35,8 @@ function ContextProvider({ children }) {
         setDeleteAppointment,
         show,
         setShow,
+        appointment,
+        setAppointment,
       }}
     >
       {children}
