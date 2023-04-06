@@ -59,6 +59,7 @@ const calendarInput = useRef()
         if (!res.ok) {
           return res.json().then((err) => {
             // console.log(err);
+            alert(err.message); 
             setErrors(err);
           });
         }
