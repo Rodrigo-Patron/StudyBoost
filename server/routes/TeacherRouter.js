@@ -42,7 +42,6 @@ TeacherRouter
     }
   })
 
-
   //to get a all teachers
   .get("/", CheckAuthentication, async (req, res, next) => {
     try {
@@ -69,7 +68,6 @@ TeacherRouter
 
       findTeacher = await query.exec();
       res.send(findTeacher);
-
     } catch (error) {
       next(createError(500, error.message));
     }

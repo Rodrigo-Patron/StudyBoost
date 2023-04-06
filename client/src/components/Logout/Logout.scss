@@ -1,0 +1,14 @@
+.Logout {
+  text-align: center;
+  .logout-btn {
+    font-weight: bold;
+    color: rgb(0, 0, 0, 0.5);
+    background-color: #fece00;
+    border: none;
+    border-radius: 2px;
+    &:hover {
+      color: rgb(0, 0, 0, 0.2);
+      text-decoration: underline;
+    }
+  }
+}
