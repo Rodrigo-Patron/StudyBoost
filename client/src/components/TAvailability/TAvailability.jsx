@@ -5,6 +5,7 @@ import { Datepicker, Page, setOptions, localeDe,  } from "@mobiscroll/react";
 import "font-awesome/css/font-awesome.min.css";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
+import THeader from "../T-Header/THeader";
 
 setOptions({
   locale: localeDe,
@@ -79,8 +80,11 @@ const calendarInput = useRef()
   }
 
   return (
+    
     <Page>
+      <THeader />
       <h1 className="page-title">Teacher Dashboard</h1>
+      
       <div className="container">
         <aside className="side-menu">
           <div className="profile-card">

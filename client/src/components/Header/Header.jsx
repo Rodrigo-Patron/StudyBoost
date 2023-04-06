@@ -9,6 +9,7 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 
+
 //import icons from react icons
 import { FiHome, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
@@ -52,9 +53,11 @@ const Header = () => {
           <SidebarContent>
             <Menu iconShape="square">
               <MenuItem active={true} icon={<FiHome />}>
-                Home
+              <a href="#home">Home</a>
               </MenuItem>
-              <MenuItem icon={<RiPencilLine />}>About Us</MenuItem>
+              <MenuItem icon={<RiPencilLine />}>
+              <a href="#about">About Us</a>
+                </MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>

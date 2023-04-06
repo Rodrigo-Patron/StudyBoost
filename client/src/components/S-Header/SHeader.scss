@@ -73,7 +73,10 @@
   background-image: url(../../images/Logo.png);
   padding: 20px;
 }
-
+#LoggedInAs {
+  font-size: large;
+  margin-top: 20px;
+}
 @media only screen and (max-width: 720px) {
   html {
     overflow: hidden;
