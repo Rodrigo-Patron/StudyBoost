@@ -82,3 +82,114 @@
     }
   }
 }
+// /* styles for screens smaller than 768px */
+// @media (max-width: 767px) {
+//   .home {
+//     /* styles for smaller screens */
+//   }
+// }
+
+// /* styles for screens larger than 768px */
+// @media (min-width: 768px) {
+//   .home {
+//     /* styles for larger screens */
+//   }
+// }
+
+/* default styles */
+// .home {
+//   padding: 20px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+
+// .background {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   margin-bottom: 40px;
+// }
+
+// .home-btn {
+//   margin: 10px;
+//   font-size: 16px;
+// }
+
+// .about {
+//   margin-top: 40px;
+// }
+
+// .about1, .about2 {
+//   width: 50%;
+// }
+
+// .card {
+//   margin-top: 40px;
+// }
+
+// .card-group {
+//   margin-top: 40px;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+// }
+
+// .card-img-top {
+//   height: 200px;
+// }
+
+// .card-title {
+//   text-align: center;
+// }
+
+// .card-text {
+//   text-align: center;
+// }
+
+// /* styles for screens smaller than 768px */
+// @media (max-width: 767px) {
+//   .home {
+//     padding: 10px;
+//   }
+
+//   .background {
+//     flex-direction: column;
+//     align-items: center;
+//   }
+
+//   .home-btn {
+//     font-size: 14px;
+//   }
+
+//   .about1, .about2 {
+//     width: 100%;
+//   }
+
+//   .card-img-top {
+//     height: 150px;
+//   }
+// }
+
+// /* styles for screens larger than 768px */
+// @media (min-width: 768px) {
+//   .background {
+//     margin-bottom: 80px;
+//   }
+
+//   .home-btn {
+//     font-size: 18px;
+//   }
+
+//   .about {
+//     width: 80%;
+//   }
+
+//   .about1, .about2 {
+//     width: 50%;
+//   }
+
+//   .card-img-top {
+//     height: 250px;
+//   }
+// }
