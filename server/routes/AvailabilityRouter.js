@@ -29,6 +29,24 @@ AvailabilityRouter
   .post("/", async (req, res, next) => {
     try {
       req.body.teacher = req.userId;
+
+      // Check for existing availability with the same date, time, and teacher
+      const existingAvailability = await Availability.findOne({
+        teacher: req.userId,
+        date: req.body.date,
+        time: req.body.time,
+      });
+
+      // If an existing availability is found, return an error message
+      if (existingAvailability) {
+        return next(
+          createError(
+            400,
+            "You have already set an availability for this date and time."
+          )
+        );
+      }
+
       const newAvailability = await Availability.create(req.body);
       // after creating the availabilities, teacher is added
       const teacher = await Teacher.findById(req.body.teacher);
