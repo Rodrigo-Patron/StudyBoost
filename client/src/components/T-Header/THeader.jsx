@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useContext, useRef, useEffect } from "react";
 import { Context } from "../../Context.jsx";
 import { Link } from "react-router-dom";
+import Logout from "../Logout/Logout.jsx";
 
 //import react pro sidebar components
 import {
@@ -16,11 +17,7 @@ import {
 
 //import icons from react icons
 import { FaList } from "react-icons/fa";
-import {
-  FiLogOut,
-  FiArrowLeftCircle,
-  FiArrowRightCircle,
-} from "react-icons/fi";
+import { FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
 
 //import sidebar css from react-pro-sidebar module and our custom css
@@ -55,7 +52,7 @@ const THeader = () => {
             </div>
           </SidebarHeader>
           <SidebarContent>
-          <p id="LoggedInAs">
+            <p id="LoggedInAs">
               Logged in as <span>{teacher.name}</span>
             </p>
             <Menu iconShape="square">
@@ -69,7 +66,7 @@ const THeader = () => {
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
+              <Logout />
             </Menu>
           </SidebarFooter>
         </ProSidebar>
