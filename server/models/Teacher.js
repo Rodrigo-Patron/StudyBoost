@@ -9,7 +9,7 @@ const teacherSchema = new Schema(
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
     schoolId: { type: Number, required: true, trim: true, unique: true },
-    role: { type: String, default: "teacher" },
+    role: { type: String, default: "Teacher" },
     subjects: [{ type: String, required: true }],
     availabilityByTeacher: [
       {
@@ -31,6 +31,20 @@ const teacherSchema = new Schema(
     },
   }
 );
+
+teacherSchema.pre("save", function (next) {
+  const words = this.name.split(" ");
+  this.name = words
+    .map((x) => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase())
+    .join(" ");
+  next();
+});
+
+//email to lowercase
+teacherSchema.pre("save", function (next) {
+  this.email = this.email.toLowerCase();
+  next();
+});
 
 // Teacher Model
 const Teacher = model("teacher", teacherSchema);

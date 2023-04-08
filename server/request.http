@@ -3,8 +3,8 @@ POST http://localhost:6500/api/students/register
 Content-Type: application/json
 
 {
-"name":"jon",
-"email":"jon@jon.com",
+"name":"jon pedrO",
+"email":"jOn@jon.com",
 "password":"Jon12345",
 "schoolId":1234567
 }
