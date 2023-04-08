@@ -6,6 +6,7 @@ import TeachersPage from "../TeachersPage/TeachersPage.jsx";
 import TAvailability from "../TAvailability/TAvailability.jsx";
 import StudentsPage from "../StudentsPage/StudentsPage.jsx";
 import SDashboard from "../SDashboard/SDashboard.jsx";
+import About from "../About/About";
 
 function Main() {
   return (
@@ -14,7 +15,9 @@ function Main() {
 
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-
+        <Route path="/about" >
+         <Route index element={<About />} />
+        </Route>
         <Route path="/teachersPage">
           <Route index element={<TeachersPage />} />
         </Route>

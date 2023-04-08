@@ -1,195 +1,74 @@
 .home {
   .home-row {
     .background {
-      height: 100vh;
       background-image: url(../../images/HomePage.png);
+      height: 100vh;
+      margin: 2px;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
       display: flex;
       justify-content: right;
       align-items: center;
+      position: absolute;
 
+      @media (max-width: 576px) {
+        background-image: none;
+        background-color: rgba(250, 184, 0, 0.924);
+      }
+
+      .name {
+        margin-right: 13.5rem;
+        margin-bottom: 50rem;
+        font-size: 5rem;
+        font-weight: bold;
+        position: absolute;
+
+        @media (max-width: 768px) {
+          margin-bottom: 20rem;
+          font-size: 2.5rem;
+        }
+
+        @media (max-width: 576px) {
+          margin-right: 6rem;
+          margin-bottom: 15rem;
+          font-size: 1.5rem;
+        }
+      }
       .home-btn {
-        margin-right: 6rem;
+        margin-right: 4rem;
         margin-bottom: 25rem;
         padding: 1rem;
-        font-size: 4rem;
-        font-weight: bolder;
-      }
-    }
-  }
-  .card {
-    .card-body {
-      height: 5vh;
-      margin: 2rem 0;
-      text-align: center;
-    }
-  }
-  .container {
-    color: rgba(250, 184, 0, 0.924);
-    background-color: rgb(85, 84, 83);
-    border-radius: 2rem;
-    font-size: 2.5vh;
-    .about {
-      height: 42vh;
+        font-size: 3rem;
+        font-weight: bold;
 
-      .about1 {
-        padding-top: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+        @media (max-width: 768px) {
+          margin-bottom: 10rem;
+          font-size: 2.5rem;
+        }
 
-      .about2 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
-  .card-group {
-    padding: 2rem;
-
-    .card {
-      margin: 0;
-      border: none;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-
-      .MohammadCard {
-        background-image: url(../../images/Mo.jpg);
-      }
-      .AgathaCard {
-        background-image: url(../../images/Ag.jpg);
-      }
-      .RodrigoCard {
-        background-image: url(../../images/Ro.jpg);
-      }
-      .DavidCard {
-        background-image: url(../../images/Da.jpg);
-      }
-      .card-img-top {
-        height: 150px;
-        width: 150px;
-        // background-image: url(../../images/Ag.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        border-radius: 50%;
+        @media (max-width: 576px) {
+          margin-right: 2rem;
+          margin-bottom: 5rem;
+          font-size: 1.5rem;
+        }
+        @media (min-width: 768px) {
+          margin-right: 12rem;
+        }
       }
     }
   }
 }
-// /* styles for screens smaller than 768px */
-// @media (max-width: 767px) {
-//   .home {
-//     /* styles for smaller screens */
-//   }
+// // Media Query for screens smaller than 768px
+// @media only screen and (max-width: 768px) {
+//   margin-right: 3rem;
+//   margin-bottom: 10rem;
+//   font-size: 2rem;
 // }
 
-// /* styles for screens larger than 768px */
-// @media (min-width: 768px) {
-//   .home {
-//     /* styles for larger screens */
-//   }
-// }
-
-/* default styles */
-// .home {
-//   padding: 20px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
-
-// .background {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   margin-bottom: 40px;
-// }
-
-// .home-btn {
-//   margin: 10px;
-//   font-size: 16px;
-// }
-
-// .about {
-//   margin-top: 40px;
-// }
-
-// .about1, .about2 {
-//   width: 50%;
-// }
-
-// .card {
-//   margin-top: 40px;
-// }
-
-// .card-group {
-//   margin-top: 40px;
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-// }
-
-// .card-img-top {
-//   height: 200px;
-// }
-
-// .card-title {
-//   text-align: center;
-// }
-
-// .card-text {
-//   text-align: center;
-// }
-
-// /* styles for screens smaller than 768px */
-// @media (max-width: 767px) {
-//   .home {
-//     padding: 10px;
-//   }
-
-//   .background {
-//     flex-direction: column;
-//     align-items: center;
-//   }
-
-//   .home-btn {
-//     font-size: 14px;
-//   }
-
-//   .about1, .about2 {
-//     width: 100%;
-//   }
-
-//   .card-img-top {
-//     height: 150px;
-//   }
-// }
-
-// /* styles for screens larger than 768px */
-// @media (min-width: 768px) {
-//   .background {
-//     margin-bottom: 80px;
-//   }
-
-//   .home-btn {
-//     font-size: 18px;
-//   }
-
-//   .about {
-//     width: 80%;
-//   }
-
-//   .about1, .about2 {
-//     width: 50%;
-//   }
-
-//   .card-img-top {
-//     height: 250px;
-//   }
+// // Media Query for screens smaller than 576px
+// @media only screen and (max-width: 576px) {
+//   margin-right: 1rem;
+//   margin-bottom: 5rem;
+//   font-size: 1.5rem;
 // }

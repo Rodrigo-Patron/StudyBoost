@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
   ProSidebar,
@@ -17,7 +18,7 @@ import { RiPencilLine } from "react-icons/ri";
 
 //import sidebar css from react-pro-sidebar module and our custom css 
 import "react-pro-sidebar/dist/css/styles.css";
-import "./Header.css";
+import "./Header.scss";
 
 
 const Header = () => {
@@ -53,13 +54,14 @@ const Header = () => {
           <SidebarContent>
             <Menu iconShape="square">
               <MenuItem active={true} icon={<FiHome />}>
-              <a href="#home">Home</a>
+              <Link to="/Home">Home</Link>
               </MenuItem>
-              <MenuItem icon={<RiPencilLine />}>
-              <a href="#about">About Us</a>
+              <MenuItem active={true} icon={<RiPencilLine />}>
+              <Link to="/About">About Us</Link>
                 </MenuItem>
             </Menu>
           </SidebarContent>
+
           <SidebarFooter>
             {/* <Menu iconShape="square">
               <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
