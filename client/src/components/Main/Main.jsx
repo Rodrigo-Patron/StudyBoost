@@ -7,12 +7,13 @@ import TAvailability from "../TAvailability/TAvailability.jsx";
 import StudentsPage from "../StudentsPage/StudentsPage.jsx";
 import SDashboard from "../SDashboard/SDashboard.jsx";
 import About from "../About/About";
+import Availabilities from "../Availabilities/Availabilities";
+
 
 function Main() {
   return (
     <div className="Main">
       <Routes>
-
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" >
@@ -29,6 +30,9 @@ function Main() {
         </Route>
         <Route path="/appointment">
           <Route index element={<SDashboard />} />
+        </Route>
+        <Route path="/teacherId">
+          <Route index element={<Availabilities />} />
         </Route>
       </Routes>
     </div>

@@ -101,9 +101,9 @@ function TRegister() {
           <ListGroup.Item variant="dark">
             <FormSelect type="text" ref={subjectsInput} placeholder="subjects">
               <option>Select subjects</option>
-              <option value="1">Maths</option>
-              <option value="2">Physics</option>
-              <option value="3">Business</option>
+              <option value="Maths">Maths</option>
+              <option value="Physics">Physics</option>
+              <option value="Business">Business</option>
             </FormSelect>
           </ListGroup.Item>
         </ListGroup>
