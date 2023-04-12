@@ -62,7 +62,7 @@ function SDashboard() {
                       <span className="task-input">{appointment.subjects}</span>{" "}
                     </p>
 
-                    <NavLink to="/teacherId">
+                    <NavLink to={appointment._id}>
                       <Button variant="outline-dark">Book Appointment</Button>
                     </NavLink>
 
