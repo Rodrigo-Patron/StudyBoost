@@ -38,6 +38,7 @@ const THeader = () => {
 
   return (
     <>
+    <div className="t-header-wrapper">
       <div id="header">
         {/* collapsed props to change menu size using menuCollapse state */}
         <ProSidebar collapsed={menuCollapse}>
@@ -52,9 +53,18 @@ const THeader = () => {
             </div>
           </SidebarHeader>
           <SidebarContent>
-            <p id="LoggedInAs">
-              Logged in as <span>{teacher.name}</span>
-            </p>
+
+          <div className="profile-card">
+    <img
+      src="https://via.placeholder.com/80"
+      alt="Profile"
+      className="profile-img"
+    />
+    <div className="profile-info">
+      <span id="LoggedInAs">{teacher.name}</span>
+      <span className="profile-subject">{teacher.subject}</span>
+    </div>
+  </div>
             <Menu iconShape="square">
               <MenuItem active={true} icon={<FaList />}>
                 <Link to="/appointments">Appointments</Link>
@@ -62,6 +72,21 @@ const THeader = () => {
               <MenuItem active={true} icon={<RiPencilLine />}>
                 <Link to="/availability">Availability</Link>
               </MenuItem>
+              <MenuItem icon={<i className="fa fa-bell"></i>}>
+      <Link to="/notifications">Notifications</Link>
+    </MenuItem>
+    <MenuItem icon={<i className="fa fa-envelope"></i>}>
+      <Link to="/messages">Messages</Link>
+    </MenuItem>
+    <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
+      <Link to="/appointment-history">Appointment History</Link>
+    </MenuItem>
+    <MenuItem icon={<i className="fa fa-book"></i>}>
+      <Link to="/resources">Resources and Materials</Link>
+    </MenuItem>
+    <MenuItem icon={<i className="fa fa-cog"></i>}>
+      <Link to="/settings">Settings</Link>
+      </MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
@@ -70,6 +95,7 @@ const THeader = () => {
             </Menu>
           </SidebarFooter>
         </ProSidebar>
+      </div>
       </div>
     </>
   );
