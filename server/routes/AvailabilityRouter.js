@@ -13,7 +13,7 @@ AvailabilityRouter
     try {
       let findAvailability = Availability.find({
         teacher: req.params.teacherId,
-      });
+      }).sort({ date: 1, time: 1 });
 
       //to populate and show availability
       const query = findAvailability;
