@@ -15,7 +15,7 @@ AppointmentRouter
     try {
       let findAppointment = Appointment.find({
         student: req.params.studentId,
-      });
+      }).sort({ date: 1, time: 1 });
 
       //to populate and show appointments
       const query = findAppointment;
