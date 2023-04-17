@@ -121,14 +121,13 @@ import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import "./TAvailability.scss";
 import Calendar from "react-calendar";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { Button, Form, Row, Col, Card } from "react-bootstrap";
-import Logout from "../Logout/Logout";
 import { Context } from "../../Context.jsx";
 import THeader from "../T-Header/THeader";
 
 function TAvailability() {
-  const { setErrors, teacher } = useContext(Context);
+  const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -142,8 +141,7 @@ function TAvailability() {
     timePicked7: "",
     timePicked8: "",
   });
-  console.log("timeSlot", timeSlot);
-  const calendarInput = useRef();
+  // console.log("timeSlot", timeSlot);
 
   const dateHandler = (date) => {
     setDate(date);
@@ -203,7 +201,7 @@ function TAvailability() {
         return res.json();
       })
       .then((result) => {
-        console.log("result:", result);
+        // console.log("result:", result);
 
         const correctDate = new Date(
           new Date(result.date).getTime() + 86400000
@@ -216,24 +214,19 @@ function TAvailability() {
         setErrors(err);
         console.log(err);
       });
-    console.log(datePicked);
+    // console.log(datePicked);
   }
 
   return (
     <div className="pickdate">
       <Card className="teachers-dashboard">
+        <THeader />
         <Card.Body>
           <h2>Teacher's dashboard</h2>
         </Card.Body>
       </Card>
       <Row className="date-time">
-        <Col sm={3} className="profile-teacher">
-          <p>
-            Logged in as <span>{teacher.name}</span>
-          </p>
-          <Logout />
-        </Col>
-        <Col sm={6}>
+        <Col sm={8}>
           <Form onSubmit={submitHandler}>
             <Calendar
               // ref={calendarInput}
@@ -312,11 +305,10 @@ function TAvailability() {
             <Button type="submit">Submit</Button>
           </Form>
         </Col>
-        <Col sm={3}>
+        <Col sm={4}>
           <h5>Upcoming appointments</h5>
         </Col>
       </Row>
-
       <Row className="selected">
         <h4>Selected date and time</h4>
 
