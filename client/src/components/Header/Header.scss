@@ -81,3 +81,8 @@
     overflow: hidden;
   }
 }
+@media (max-width: 576px) {
+  #header {
+    display: none;
+  }
+}
