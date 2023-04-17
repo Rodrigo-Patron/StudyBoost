@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import { Link, useNavigate } from "react-router-dom";
+import logo from './Logo.png';
+import collapsedLogo from './B.png'
 
 //import react pro sidebar components
 import {
@@ -58,7 +60,8 @@ const THeader = () => {
             <SidebarHeader>
               <div className="logoText">
                 {/* small and big change using menuCollapse state */}
-                <p>{menuCollapse ? "Logo" : "Big Logo"}</p>
+                <p>{menuCollapse ? <img src={collapsedLogo} className= "collapsedLogo" width = "50" height = "50" alt="collapsedLogo" />  
+              : <img src={logo}  className= "logo"  width = "250" height = "150" alt="logo" />}</p>
               </div>
               <div className="closeMenu" onClick={menuIconClick}>
                 {/* changing menu collapse icon on click */}

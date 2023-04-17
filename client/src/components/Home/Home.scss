@@ -15,6 +15,7 @@
       @media (max-width: 576px) {
         background-image: none;
         background-color: rgba(250, 184, 0, 0.924);
+        // background-image: url(../../images/stationery-arrangement-yellow-background-with-empty-notebook.jpg);
       }
 
       .name {
@@ -24,6 +25,10 @@
         font-weight: bold;
         position: absolute;
 
+        @media (max-width: 968px) {
+          margin-bottom: 25rem;
+          font-size: 3rem;
+        }
         @media (max-width: 768px) {
           margin-bottom: 20rem;
           font-size: 2.5rem;
@@ -42,18 +47,29 @@
         font-size: 3rem;
         font-weight: bold;
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
+          margin-right: 12rem;
+        }
+
+        @media (max-width: 1001px) {
           margin-bottom: 10rem;
           font-size: 2.5rem;
+        }
+
+        @media (max-width: 868px) {
+          margin-bottom: 9rem;
+          font-size: 2.5rem;
+        }
+
+        @media (max-width: 668px) {
+          margin-bottom: 7rem;
+          font-size: 2rem;
         }
 
         @media (max-width: 576px) {
           margin-right: 2rem;
           margin-bottom: 5rem;
           font-size: 1.5rem;
-        }
-        @media (min-width: 768px) {
-          margin-right: 12rem;
         }
       }
     }
