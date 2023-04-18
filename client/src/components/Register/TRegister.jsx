@@ -42,13 +42,14 @@ function TRegister() {
         if (!res.ok) {
           return res.json().then((err) => {
             // console.log(err);
+
             setErrors(err);
           });
         }
         return res.json();
       })
       .then((result) => {
-        // console.log("where are you:", result);
+        // console.log(result);
       })
       .catch((err) => {
         setErrors(err);
@@ -57,6 +58,9 @@ function TRegister() {
     emailInput.current.value = "";
     nameInput.current.value = "";
     passwordInput.current.value = "";
+    schoolIdInput.current.value = "";
+    subjectsInput.current.value = "Subjects";
+
     alert("You are registered, please login");
   };
   return (
@@ -87,7 +91,7 @@ function TRegister() {
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
             <FormControl
-              type="number"
+              type="text"
               ref={schoolIdInput}
               placeholder="School Id"
             />

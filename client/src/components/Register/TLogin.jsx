@@ -60,7 +60,7 @@ function TLogin() {
         <ListGroup className="input-container">
           <ListGroup.Item variant="success">
             <FormControl
-              type="number"
+              type="text"
               placeholder="School Id"
               ref={schoolIdInput}
             />

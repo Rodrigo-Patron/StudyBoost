@@ -48,6 +48,8 @@ function SRegister() {
     emailInput.current.value = "";
     nameInput.current.value = "";
     passwordInput.current.value = "";
+    schoolIdInput.current.value = "";
+
     alert("You are registered, please login");
   };
   return (
@@ -76,7 +78,7 @@ function SRegister() {
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
             <FormControl
-              type="number"
+              type="text"
               ref={schoolIdInput}
               placeholder="School Id"
             />
