@@ -15,7 +15,6 @@ function Availabilities() {
     time: "",
     date: "",
   });
-  const [appointment, setAppointment] = useState();
 
   useEffect(() => {
     const config = {
@@ -74,7 +73,6 @@ function Availabilities() {
       })
       .then((result) => {
         // console.log("result:", result);
-        setAppointment(result);
       })
       .catch((err) => {
         setErrors(err);

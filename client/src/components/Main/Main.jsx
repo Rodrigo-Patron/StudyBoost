@@ -8,6 +8,7 @@ import StudentsPage from "../StudentsPage/StudentsPage.jsx";
 import SDashboard from "../SDashboard/SDashboard.jsx";
 import About from "../About/About";
 import Availabilities from "../Availabilities/Availabilities";
+import SAppointment from "../SAppointment/SAppointment";
 
 function Main() {
   return (
@@ -27,10 +28,11 @@ function Main() {
         <Route path="studentsPage">
           <Route index element={<StudentsPage />} />
         </Route>
-        <Route path="appointment">
+        <Route path="studentDashboard">
           <Route index element={<SDashboard />} />{" "}
           <Route path=":teacherId" element={<Availabilities />} />
         </Route>
+        <Route path="studentAppointments" element={<SAppointment />} />
       </Routes>
     </div>
   );

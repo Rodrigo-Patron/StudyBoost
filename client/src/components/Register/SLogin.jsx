@@ -36,7 +36,7 @@ function SLogin() {
         return res.json();
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (!result.token) {
           return;
         }
@@ -44,10 +44,10 @@ function SLogin() {
         localStorage.setItem("student", JSON.stringify(result.student));
         setStudentToken(result.token);
         setStudent(result.student);
-        navigate("/appointment");
+        navigate("/studentDashboard");
       })
       .catch((err) => {
-        console.log(err, "coming from catch");
+        // console.log(err, "coming from catch");
       });
   };
 
@@ -58,7 +58,7 @@ function SLogin() {
         <ListGroup className="input-container">
           <ListGroup.Item variant="success">
             <FormControl
-              type="number"
+              type="text"
               placeholder="School Id"
               ref={schoolIdInput}
             />

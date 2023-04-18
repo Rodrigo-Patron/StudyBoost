@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import logo from './Logo.png';
-import collapsedLogo from './B.png'
+import logo from "./Logo.png";
+import collapsedLogo from "./B.png";
 
 //import react pro sidebar components
 import {
@@ -23,6 +23,7 @@ import {
   FiArrowRightCircle,
   FiLogOut,
 } from "react-icons/fi";
+import { RiPencilLine } from "react-icons/ri";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
@@ -58,8 +59,25 @@ const SHeader = () => {
           <SidebarHeader>
             <div className="logoText">
               {/* small and big change using menuCollapse state */}
-              <p>{menuCollapse ? <img src={collapsedLogo} className= "collapsedLogo" width = "50" height = "50" alt="collapsedLogo" />  
-              : <img src={logo}  className= "logo"  width = "250" height = "150" alt="logo" />}</p>
+              <p>
+                {menuCollapse ? (
+                  <img
+                    src={collapsedLogo}
+                    className="collapsedLogo"
+                    width="50"
+                    height="50"
+                    alt="collapsedLogo"
+                  />
+                ) : (
+                  <img
+                    src={logo}
+                    className="logo"
+                    width="250"
+                    height="150"
+                    alt="logo"
+                  />
+                )}
+              </p>
             </div>
             <div className="closeMenu" onClick={menuIconClick}>
               {/* changing menu collapse icon on click */}
@@ -72,8 +90,11 @@ const SHeader = () => {
               <span>{student.name}</span>
             </p>
             <Menu iconShape="square">
+              <MenuItem active={true} icon={<RiPencilLine />}>
+                <Link to="/studentDashboard">Book appointments</Link>
+              </MenuItem>
               <MenuItem active={true} icon={<FaList />}>
-                <Link to="/availability">Appointments</Link>
+                <Link to="/studentAppointments">Your appointments</Link>
               </MenuItem>
             </Menu>
           </SidebarContent>

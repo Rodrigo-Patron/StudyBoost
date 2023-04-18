@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 function SDashboard() {
   const { student, teacher, setTeacher, studentToken } = useContext(Context);
-  //^ get all teachers
+  //  get all teachers
   useEffect(() => {
     const config = {
       headers: {
@@ -20,13 +20,13 @@ function SDashboard() {
       .then((res) => {
         if (!res.ok) {
           res.json().then((err) => console.log(err));
-          return localStorage.removeItem("student");
+          return;
         }
 
         return res.json();
       })
       .then((result) => {
-        console.log(result.reverse());
+        // console.log(result.reverse());
         //^ new teacher show at the top
         setTeacher(result);
       });
@@ -34,8 +34,8 @@ function SDashboard() {
 
   return (
     <div>
+      <SHeader />
       <Row className="appointment-block">
-        <SHeader />
         <Col sm={4} className="student-dashboard"></Col>
 
         <Col sm={8} className="teachers-list">
