@@ -15,9 +15,9 @@ Content-Type: application/json
 
 {
 "name":"Ana",
-"email":"ana@ana.com",
+"email":"a@a.com",
 "password":"Ana12345",
-"schoolId":123456789,
+"schoolId":123456,
 "subjects":"Math"
 }
 
@@ -36,7 +36,7 @@ POST http://localhost:6500/api/teachers/login
 Content-Type: application/json
 
 {
-    "schoolId":123456789,
+    "schoolId":123456,
     "password":"Ana12345"
 }
 
@@ -88,10 +88,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjM
 
 
 ### TO DELETE AVAILABILITY (BY ID)
-DELETE http://localhost:6500/api/availability/642ca49f1a8471d98c5cf039
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmNhNDc4MWE4NDcxZDk4YzVjZjAzNiIsImlhdCI6MTY4MDY0NzMwOSwiZXhwIjoxNjgwNjU4MTA5fQ.qd2PBw_nsrUNWCe-B6opX99XO6OIESHdaNIn9FOYKhM
-
+DELETE http://localhost:6500/api/availability/643dba8a01d1d98ec8faf41d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2RhMWMyMDFkMWQ5OGVjOGZhZjJlOSIsImlhdCI6MTY4MTc2MTAzNSwiZXhwIjoxNjgxNzcxODM1fQ.wu9cyeaw8H-RPtZxGNCl0TH-PLl2Lx-NGyp-CIrsJJE
 
 ###TO DELETE APPOINTMENT (BY ID)
-DELETE http://localhost:6500/api/appointments/642ca4d11a8471d98c5cf03f
+DELETE http://localhost:6500/api/appointments/643dba8a01d1d98ec8faf41d
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmNhNDcyMWE4NDcxZDk4YzVjZjAzNCIsImlhdCI6MTY4MDY0NzMzMywiZXhwIjoxNjgwNjU4MTMzfQ.IuRVtY64md3DbVMUB6QYF6A6EAeBNqMhAosWavC6mDQ

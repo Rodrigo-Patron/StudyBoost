@@ -1,7 +1,7 @@
 import React from "react";
 import "./Availabilities.scss";
-import { Button, ListGroup } from "react-bootstrap";
-import { useContext, useEffect, useRef } from "react";
+import { Button, ListGroup, Form } from "react-bootstrap";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../Context.jsx";
 import { useParams } from "react-router-dom";
 
@@ -11,6 +11,10 @@ function Availabilities() {
 
   const { teacherId } = useParams();
   // console.log("teacherId", teacherId);
+  const [selectedTime, setSelectedTime] = useState({
+    time: "",
+    date: "",
+  });
 
   useEffect(() => {
     const config = {
@@ -34,19 +38,20 @@ function Availabilities() {
       });
   }, []);
 
-  const timeInput = useRef();
   const dateInput = useRef();
 
   // to create appointments
   const submitHandler = (e) => {
     e.preventDefault();
 
+    //console.log(e.target.value);
+
     const data = {
       teacher: teacherId,
-      date: e.target.value,
-      time: e.target.value,
+      date: selectedTime.date,
+      time: selectedTime.time,
     };
-    console.log(data);
+    // console.log(data);
     const config = {
       method: "POST",
       body: JSON.stringify(data),
@@ -75,6 +80,18 @@ function Availabilities() {
       });
   };
 
+  const t = (e) => {
+    // console.log(
+    //   e.target.parentElement.parentElement.parentElement.parentElement
+    //     .children[3]
+    // );
+    e.target.parentElement.parentElement.parentElement.parentElement.children[3].disabled = false;
+    setSelectedTime({
+      time: e.target.value,
+      date: e.target.getAttribute("data"),
+    });
+  };
+
   return (
     <div>
       <h2>Selected teacher time slots</h2>
@@ -83,28 +100,36 @@ function Availabilities() {
         <ListGroup.Item>
           {availability &&
             availability.map((appointment) => (
-              <div key={appointment._id}>
-                <p ref={dateInput}>
-                  <span>Date:</span> {appointment.date.split("T")[0]}
+              <Form onSubmit={submitHandler} key={appointment._id}>
+                <p>
+                  <span>Date:</span>{" "}
+                  <i ref={dateInput}>
+                    {new Date(appointment.date).toLocaleDateString("de-DE")}
+                  </i>
                 </p>
                 <span>Time slots:</span>
                 <ul>
                   <li>
-                    {appointment.time.map((time) => (
-                      // <li>
-                      <Button ref={timeInput} className="selectedTime">
-                        {time}
-                      </Button>
-                      // </li>
+                    {appointment.time.map((time, index) => (
+                      <Form.Check
+                        onChange={t}
+                        key={index}
+                        type="radio"
+                        label={time}
+                        value={time}
+                        name="time"
+                        inline
+                        data={appointment.date}
+                      />
                     ))}
                   </li>
                 </ul>
-                <Button onClick={submitHandler} className="confirmBtn">
+                <Button disabled type="submit" className="confirmBtn">
                   Confirm
                 </Button>
-                <Button className="cancelBtn">Cancel</Button>
+                {/* <Button className="cancelBtn">Cancel</Button> */}
                 <hr />
-              </div>
+              </Form>
             ))}
         </ListGroup.Item>
       </ListGroup>
