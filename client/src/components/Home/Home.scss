@@ -46,6 +46,18 @@
         padding: 1rem;
         font-size: 3rem;
         font-weight: bold;
+        background-color: black;
+        a {
+          color: rgba(250, 184, 0, 0.924);
+
+          text-decoration: none;
+          &:hover {
+            background-color: green;
+          }
+        }
+        &:hover {
+          background-color: green;
+        }
 
         @media (min-width: 768px) {
           margin-right: 12rem;
