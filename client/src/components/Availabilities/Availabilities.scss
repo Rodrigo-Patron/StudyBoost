@@ -22,4 +22,11 @@ ul {
 }
 .confirmBtn {
   margin-right: 0.5rem;
+  background-color: rgba(250, 184, 0, 0.924);
+  border: none;
+  color: black;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
 }
