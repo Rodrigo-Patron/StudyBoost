@@ -315,7 +315,7 @@ function TAvailability() {
         <p>
           <span>Date </span>:{" "}
           <span className="task-input">
-            {selectedDate && selectedDate.split("T")[0]}
+            {selectedDate && new Date(selectedDate).toLocaleDateString("de-DE")}
           </span>
         </p>
         {selectedTime &&
