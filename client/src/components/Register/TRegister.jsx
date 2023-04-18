@@ -41,23 +41,23 @@ function TRegister() {
       .then((res) => {
         if (!res.ok) {
           return res.json().then((err) => {
-            console.log(err);
+            // console.log(err);
             setErrors(err);
           });
         }
         return res.json();
       })
       .then((result) => {
-        console.log("where are you:", result);
+        // console.log("where are you:", result);
       })
       .catch((err) => {
         setErrors(err);
-        console.log(err);
+        // console.log(err);
       });
     emailInput.current.value = "";
     nameInput.current.value = "";
     passwordInput.current.value = "";
-    alert("You are registered, Please login");
+    alert("You are registered, please login");
   };
   return (
     <div>
@@ -67,16 +67,12 @@ function TRegister() {
         <h5>New here? Please Register!</h5>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
-            <FormControl type="text" ref={nameInput} placeholder="your name" />
+            <FormControl type="text" ref={nameInput} placeholder="Fullname" />
           </ListGroup.Item>
         </ListGroup>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
-            <FormControl
-              type="email"
-              ref={emailInput}
-              placeholder="your email"
-            />
+            <FormControl type="email" ref={emailInput} placeholder="Email" />
           </ListGroup.Item>
         </ListGroup>
         <ListGroup className="input-container">
@@ -84,7 +80,7 @@ function TRegister() {
             <FormControl
               type="password"
               ref={passwordInput}
-              placeholder="password"
+              placeholder="Password"
             />
           </ListGroup.Item>
         </ListGroup>
@@ -99,8 +95,8 @@ function TRegister() {
         </ListGroup>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
-            <FormSelect type="text" ref={subjectsInput} placeholder="subjects">
-              <option>Select subjects</option>
+            <FormSelect type="text" ref={subjectsInput} placeholder="Subjects">
+              <option>Subjects</option>
               <option value="Maths">Maths</option>
               <option value="Physics">Physics</option>
               <option value="Business">Business</option>

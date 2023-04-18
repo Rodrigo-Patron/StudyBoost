@@ -1,0 +1,25 @@
+ul {
+  li {
+    list-style: none;
+    padding: 0.5rem;
+
+    .selectedTime {
+      color: black;
+      margin-right: 0.5rem;
+      background-color: rgba(250, 184, 0, 0.924);
+      border: none;
+
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+      &:focus {
+        background-color: black;
+        color: white;
+      }
+    }
+  }
+}
+.confirmBtn {
+  margin-right: 0.5rem;
+}

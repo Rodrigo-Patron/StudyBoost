@@ -13,12 +13,12 @@ function TeachersPage() {
         </Card.Body>
       </Card>
       <Row className="teacher-row">
-        <Col sm={6} className="register-form">
+        <Col sm={12} md={6} className="register-form">
           {/* REGISTER */}
           <TRegister />
         </Col>
         {/* LOGIN */}
-        <Col sm={6} className="login-form">
+        <Col sm={12} md={6} className="login-form">
           <TLogin />
         </Col>
       </Row>

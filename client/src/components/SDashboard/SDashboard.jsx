@@ -40,7 +40,7 @@ function SDashboard() {
 
         <Col sm={8} className="teachers-list">
           <h3>
-            Hallo <span>{student.name}</span>, find a teacher and book your
+            Hello <span>{student.name}</span>, find a teacher and book your
             appointment
           </h3>
           <hr />
@@ -50,15 +50,15 @@ function SDashboard() {
                 teacher.map((appointment) => (
                   <div key={appointment._id}>
                     <p>
-                      <span>Name </span>:{" "}
+                      <span>Name: </span>{" "}
                       <span className="task-input">{appointment.name}</span>
                     </p>
                     <p>
-                      <span>Role</span>:{" "}
+                      <span>Role:</span>{" "}
                       <span className="task-input">{appointment.role}</span>{" "}
                     </p>
                     <p>
-                      <span>Subjects</span>:{" "}
+                      <span>Subjects:</span>{" "}
                       <span className="task-input">{appointment.subjects}</span>{" "}
                     </p>
 

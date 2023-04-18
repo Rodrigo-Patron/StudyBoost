@@ -59,7 +59,7 @@ function SLogin() {
           <ListGroup.Item variant="success">
             <FormControl
               type="number"
-              placeholder="Your school Id..."
+              placeholder="School Id"
               ref={schoolIdInput}
             />
           </ListGroup.Item>
@@ -68,7 +68,7 @@ function SLogin() {
           <ListGroup.Item variant="success">
             <FormControl
               type="password"
-              placeholder="password"
+              placeholder="Password"
               ref={passwordInput}
             />
           </ListGroup.Item>
