@@ -203,11 +203,11 @@ function TAvailability() {
       .then((result) => {
         // console.log("result:", result);
 
-        const correctDate = new Date(
-          new Date(result.date).getTime() + 86400000
-        ).toISOString();
+        // const correctDate = new Date(
+        //   new Date(result.date).getTime() + 86400000
+        // ).toISOString();
 
-        setSelectedDate(correctDate);
+        setSelectedDate(result.date);
         setSelectedTime(result.time);
       })
       .catch((err) => {
