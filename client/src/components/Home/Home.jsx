@@ -17,8 +17,8 @@ function Home() {
             <NavLink to="/teachersPage"> Teachers</NavLink>
           </Button>
 
-          <Button  className="col-xs-6 home-btn" variant="outline-dark">
-            <NavLink color="#ff5c5c" to="/studentsPage">Students</NavLink>
+          <Button  color="#ff5c5c"  className="col-xs-6 home-btn" variant="outline-dark">
+            <NavLink to="/studentsPage">Students</NavLink>
           </Button>
         </div>
       </Row>

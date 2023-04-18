@@ -24,6 +24,7 @@
         font-size: 5rem;
         font-weight: bold;
         position: absolute;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 
         @media (max-width: 968px) {
           margin-bottom: 25rem;
@@ -47,16 +48,16 @@
         font-size: 3rem;
         font-weight: bold;
         background-color: black;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         a {
           color: rgba(250, 184, 0, 0.924);
-
           text-decoration: none;
           &:hover {
-            background-color: green;
+            color: rgb(255, 255, 255);
           }
         }
         &:hover {
-          background-color: green;
+          background-color: rgba(250, 184, 0, 0.924);
         }
 
         @media (min-width: 768px) {
