@@ -2,6 +2,15 @@
 .login-form {
   .input-container {
     margin-bottom: 1rem;
+    .list-group-item {
+      background-color: rgba(250, 184, 0, 0.924);
+      padding: 0.1rem;
+      width: 35rem;
+    }
+  }
+  .btn {
+    background-color: rgba(250, 184, 0, 0.924);
+    border: none;
   }
 }
 .login-form {

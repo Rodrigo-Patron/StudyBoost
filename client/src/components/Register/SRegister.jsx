@@ -39,16 +39,16 @@ function SRegister() {
         return res.json();
       })
       .then((result) => {
-        console.log("where are you:", result);
+        // console.log("where are you:", result);
       })
       .catch((err) => {
         setErrors(err);
-        console.log(err);
+        // console.log(err);
       });
     emailInput.current.value = "";
     nameInput.current.value = "";
     passwordInput.current.value = "";
-    alert("You are registered, Please login");
+    alert("You are registered, please login");
   };
   return (
     <div>
@@ -56,16 +56,12 @@ function SRegister() {
         <h5>New here? Please Register!</h5>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
-            <FormControl type="text" ref={nameInput} placeholder="your name" />
+            <FormControl type="text" ref={nameInput} placeholder="Fullname" />
           </ListGroup.Item>
         </ListGroup>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
-            <FormControl
-              type="email"
-              ref={emailInput}
-              placeholder="your email"
-            />
+            <FormControl type="email" ref={emailInput} placeholder="Email" />
           </ListGroup.Item>
         </ListGroup>
         <ListGroup className="input-container">
@@ -73,7 +69,7 @@ function SRegister() {
             <FormControl
               type="password"
               ref={passwordInput}
-              placeholder="password"
+              placeholder="Password"
             />
           </ListGroup.Item>
         </ListGroup>

@@ -69,7 +69,7 @@ const SHeader = () => {
 
           <SidebarContent>
             <p id="LoggedInAs">
-              Logged in as <span>{student.name}</span>
+              <span>{student.name}</span>
             </p>
             <Menu iconShape="square">
               <MenuItem active={true} icon={<FaList />}>
