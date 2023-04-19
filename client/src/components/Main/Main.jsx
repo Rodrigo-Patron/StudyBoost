@@ -30,9 +30,9 @@ function Main() {
         </Route>
         <Route path="studentDashboard">
           <Route index element={<SDashboard />} />{" "}
-          <Route path=":teacherId" element={<Availabilities />} />
+          <Route path=":teacherId" element={<Availabilities />} />{" "}
+          <Route path="studentAppointments" element={<SAppointment />} />
         </Route>
-        <Route path="studentAppointments" element={<SAppointment />} />
       </Routes>
     </div>
   );

@@ -94,7 +94,9 @@ const SHeader = () => {
                 <Link to="/studentDashboard">Book appointments</Link>
               </MenuItem>
               <MenuItem active={true} icon={<FaList />}>
-                <Link to="/studentAppointments">Your appointments</Link>
+                <Link to="/studentDashboard/studentAppointments">
+                  Your appointments
+                </Link>
               </MenuItem>
             </Menu>
           </SidebarContent>

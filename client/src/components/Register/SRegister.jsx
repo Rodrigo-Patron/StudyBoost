@@ -36,6 +36,7 @@ function SRegister() {
             setErrors(err);
           });
         }
+
         return res.json();
       })
       .then((result) => {
@@ -43,13 +44,12 @@ function SRegister() {
       })
       .catch((err) => {
         setErrors(err);
-        // console.log(err);
+        console.log(err);
       });
     emailInput.current.value = "";
     nameInput.current.value = "";
     passwordInput.current.value = "";
     schoolIdInput.current.value = "";
-
     alert("You are registered, please login");
   };
   return (
