@@ -1,13 +1,19 @@
 import React from "react";
 import "./SAppointment.scss";
 import SHeader from "../S-Header/SHeader";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup, Button, Form } from "react-bootstrap";
 import { useContext, useEffect } from "react";
 import { Context } from "../../Context.jsx";
+import { FaTrashAlt } from "react-icons/fa";
+import { useState } from "react";
 
 function SAppointment() {
   const { studentToken, appointment, setAppointment, student } =
     useContext(Context);
+
+  const [appointmentId, setAppointmentId] = useState({
+    id: "",
+  });
 
   // get all appointments
   useEffect(() => {
@@ -32,6 +38,29 @@ function SAppointment() {
       });
   }, []);
 
+  //delete appointment
+
+  function deleteHandler(appointment) {
+    const config = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${studentToken}`,
+      },
+    };
+    console.log("id", appointment._id);
+    fetch(`http://localhost:6500/api/appointments/${appointment._id}`, config)
+      .then((res) => {
+        if (!res.ok) {
+          res.json().then((err) => console.log(err));
+          return;
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log("result", result);
+      });
+  }
+
   return (
     <div>
       <SHeader />
@@ -42,7 +71,7 @@ function SAppointment() {
           <ListGroup.Item>
             {appointment &&
               appointment.map((appointment) => (
-                <div key={appointment._id}>
+                <Form key={appointment._id}>
                   <p>
                     <span>Date: </span>
                     <span className="task-input">
@@ -58,10 +87,17 @@ function SAppointment() {
                     <span className="task-input">
                       {appointment.teacher.name}
                     </span>
-                  </p>
-                  <Button>Cancel</Button>
+                  </p>{" "}
+                  <Button
+                    onClick={() => deleteHandler(appointment)}
+                    type="submit"
+                    variant="danger"
+                    size="sm"
+                  >
+                    <FaTrashAlt />
+                  </Button>
                   <hr />
-                </div>
+                </Form>
               ))}
           </ListGroup.Item>
         </ListGroup>

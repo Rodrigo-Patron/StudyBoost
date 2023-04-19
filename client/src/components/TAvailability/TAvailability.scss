@@ -130,30 +130,44 @@
     .react-calendar {
       width: 500px;
       margin: 1rem 0;
+      border-radius: 10px;
 
       .react-calendar__viewContainer {
         text-align: center;
         text-decoration-line: none;
         font-weight: bolder;
       }
-
+      .react-calendar__tile--now {
+        background: rgba(250, 184, 0, 0.4);
+        border-radius: 5px;
+        color: black;
+      }
       .react-calendar__month-view__days__day:hover {
-        background-color: yellow;
+        background-color: rgba(250, 184, 0, 0.924);
+        border-radius: 5px;
+      }
+      .react-calendar__tile--active {
+        background: rgba(250, 184, 0, 0.924);
+        color: black;
+        border-radius: 5px;
+      }
+      .react-calendar__tile--focus {
+        background: rgba(250, 184, 0, 0.924);
+        color: black;
+        border-radius: 5px;
+      }
+
+      .time {
+        width: 150px;
+        margin: 1rem 0;
+      }
+
+      span {
+        font-weight: bolder;
       }
     }
-
-    .time {
-      width: 150px;
-      margin: 1rem 0;
-    }
-
-    span {
-      font-weight: bolder;
-    }
   }
-
   .selected {
-    margin: 2rem 0;
-    padding: 2rem;
+    text-align: center;
   }
 }

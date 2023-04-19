@@ -18,6 +18,18 @@ ul {
         color: white;
       }
     }
+
+    //color of the checked input
+    .form-check-input:checked {
+      background-color: rgba(250, 184, 0, 0.924);
+      border-color: rgba(250, 184, 0, 0.924);
+      box-shadow: none;
+    }
+    .form-check-input:active {
+      background-color: rgba(250, 184, 0, 0.924);
+
+      box-shadow: none;
+    }
   }
 }
 .confirmBtn {
@@ -29,4 +41,9 @@ ul {
     background-color: black;
     color: white;
   }
+  // color for the disabled confirm button
+}
+.btn:disabled {
+  background-color: rgba(250, 184, 0, 0.924);
+  color: black;
 }

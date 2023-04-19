@@ -219,8 +219,8 @@ function TAvailability() {
 
   return (
     <div className="pickdate">
+      <THeader />
       <Card className="teachers-dashboard">
-        <THeader />
         <Card.Body>
           <h2>Teacher's dashboard</h2>
         </Card.Body>
@@ -305,28 +305,27 @@ function TAvailability() {
             <Button type="submit">Submit</Button>
           </Form>
         </Col>
-        <Col sm={4}>
-          <h5>Upcoming appointments</h5>
-        </Col>
       </Row>
-      <Row className="selected">
-        <h4>Selected date and time</h4>
-
-        <p>
-          <span>Date </span>:{" "}
-          <span className="task-input">
-            {selectedDate && new Date(selectedDate).toLocaleDateString("de-DE")}
-          </span>
-        </p>
-        {selectedTime &&
-          selectedTime.map((time) => (
-            <div key={time}>
-              <p>
-                <span>Time </span>: <span className="task-input">{time}</span>
-              </p>
-            </div>
-          ))}
-      </Row>
+      <Col sm={8}>
+        <Row className="selected">
+          <h4>Selected date and time</h4>
+          <p>
+            <span>Date: </span>{" "}
+            <span className="task-input">
+              {selectedDate &&
+                new Date(selectedDate).toLocaleDateString("de-DE")}
+            </span>
+          </p>
+          <span>Time slots: </span>{" "}
+          {selectedTime &&
+            selectedTime.map((time) => (
+              <div key={time}>
+                {" "}
+                <p>{time}</p>
+              </div>
+            ))}
+        </Row>
+      </Col>
     </div>
   );
 }

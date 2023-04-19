@@ -3,7 +3,7 @@ POST http://localhost:6500/api/students/register
 Content-Type: application/json
 
 {
-"name":"jon pedrO",
+"name":"jon ",
 "email":"jOn@jon.com",
 "password":"Jon12345",
 "schoolId":1234567
@@ -16,7 +16,7 @@ Content-Type: application/json
 {
 "name":"Ana",
 "email":"a@a.com",
-"password":"Ana12345",
+"password":"12345",
 "schoolId":123456,
 "subjects":"Math"
 }
@@ -27,8 +27,8 @@ POST http://localhost:6500/api/students/login
 Content-Type: application/json
 
 {
-"schoolId":1234567,
-"password":"Jon12345"
+"schoolId":55555,
+"password":"Sam12345"
 }
 
 ### TEACHERS LOGIN
@@ -83,9 +83,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjM
 }
 
 ### GET APPOINTMENTS OF A SPECIFIC STUDENT (BY ID)
-GET http://localhost:6500/api/appointments/642ad3ac27349f4e9ca99544
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjMjczNDlmNGU5Y2E5OTU0NCIsImlhdCI6MTY4MDUyODU4NCwiZXhwIjoxNjgwNTM1Nzg0fQ.WTiceFB1B-u4ZGV3v9fmioVevtUTr_edc9dI8DdSNNc
-
+GET http://localhost:6500/api/appointments/643fb5994e87a4e39338ac7a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZiNTk5NGU4N2E0ZTM5MzM4YWM3YSIsImlhdCI6MTY4MTg5ODkxNywiZXhwIjoxNjgxOTA5NzE3fQ.eJFGXQdJdefOygQd3nPkAA4YSozFCkK3IsIm-TCMsS4
 
 ### TO DELETE AVAILABILITY (BY ID)
 DELETE http://localhost:6500/api/availability/643dba8a01d1d98ec8faf41d
