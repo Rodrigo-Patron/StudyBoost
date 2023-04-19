@@ -51,32 +51,46 @@ AppointmentRouter
         );
       }
 
+      // to check if appointment already exists
+      const existingAppointment = await Appointment.findOne({
+        time: req.body.time,
+        date: req.body.date,
+      });
+      if (existingAppointment) {
+        return next(
+          createError(
+            400,
+            "Appointment failed, please check availability and try again"
+          )
+        );
+      }
+
       const newAppointment = await Appointment.create(req.body);
 
-      //TO DELETE THE SELECTED TIME
+      //to delete the selected time (appointment made) in the db
 
-      // if (newAppointment) {
-      //   const removeAvailability = await Availability.findOne({
-      //     time: { $elemMatch: { $eq: req.body.time } },
-      //     teacher: req.body.teacher,
-      //     date: req.body.date,
-      //   });
+      if (newAppointment) {
+        const removeAvailability = await Availability.findOne({
+          time: { $elemMatch: { $eq: req.body.time } },
+          teacher: req.body.teacher,
+          date: req.body.date,
+        });
 
-      //   const filterTime = removeAvailability.time.filter(
-      //     (x) => x !== newAppointment.time
-      //   );
-      //   const updateAvailability = {
-      //     teacher: req.body.teacher,
-      //     date: req.body.date,
-      //     time: filterTime,
-      //   };
+        const filterTime = removeAvailability.time.filter(
+          (x) => x !== newAppointment.time
+        );
+        const updateAvailability = {
+          teacher: req.body.teacher,
+          date: req.body.date,
+          time: filterTime,
+        };
 
-      //   await Availability.findByIdAndUpdate(
-      //     { _id: removeAvailability._id },
-      //     updateAvailability,
-      //     { new: true }
-      //   );
-      // }
+        await Availability.findByIdAndUpdate(
+          { _id: removeAvailability._id },
+          updateAvailability,
+          { new: true }
+        );
+      }
 
       // to relate the appointment to the teacher
       const teacher = await Teacher.findById(req.body.teacher);

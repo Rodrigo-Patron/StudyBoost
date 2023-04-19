@@ -1,20 +1,15 @@
 import React from "react";
 import "./SAppointment.scss";
 import SHeader from "../S-Header/SHeader";
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import { useContext, useEffect } from "react";
 import { Context } from "../../Context.jsx";
-import { useParams } from "react-router-dom";
 
 function SAppointment() {
   const { studentToken, appointment, setAppointment, student } =
     useContext(Context);
 
-  const { studentId } = useParams();
-  console.log("studentId", studentId);
-
   // get all appointments
-
   useEffect(() => {
     const config = {
       headers: {
@@ -22,7 +17,7 @@ function SAppointment() {
       },
     };
 
-    fetch(`http://localhost:6500/api/appointments/${studentId}`, config)
+    fetch(`http://localhost:6500/api/appointments/${student._id}`, config)
       .then((res) => {
         if (!res.ok) {
           res.json().then((err) => console.log(err));
@@ -41,7 +36,7 @@ function SAppointment() {
     <div>
       <SHeader />
       <div className="appointments">
-        <h3>Your booked appointments</h3>
+        <h2>Your booked appointments</h2>
 
         <ListGroup>
           <ListGroup.Item>
@@ -50,18 +45,22 @@ function SAppointment() {
                 <div key={appointment._id}>
                   <p>
                     <span>Date: </span>
-                    <span className="task-input">{appointment.date}</span>
+                    <span className="task-input">
+                      {new Date(appointment.date).toLocaleDateString("de-DE")}
+                    </span>
                   </p>
                   <p>
-                    <span>Time:</span>
+                    <span>Time: </span>
                     <span className="task-input">{appointment.time}</span>{" "}
                   </p>
                   <p>
-                    <span>Teacher:</span>
+                    <span>Teacher: </span>
                     <span className="task-input">
-                      {appointment.teacher}
-                    </span>{" "}
+                      {appointment.teacher.name}
+                    </span>
                   </p>
+                  <Button>Cancel</Button>
+                  <hr />
                 </div>
               ))}
           </ListGroup.Item>
