@@ -12,14 +12,20 @@ function Home() {
       <Row className="home-row">
         <div className="background">
           <h1 className="name">Study Boost App</h1>
-
-          <Button className="col-xs-6 home-btn" variant="outline-dark">
-            <NavLink to="/teachersPage"> Teachers</NavLink>
-          </Button>
-
-          <Button  color="#ff5c5c"  className="col-xs-6 home-btn" variant="outline-dark">
-            <NavLink to="/studentsPage">Students</NavLink>
-          </Button>
+          <NavLink to="/teachersPage">
+            <Button className="col-xs-6 home-btn" variant="outline-dark">
+              Teachers
+            </Button>
+          </NavLink>
+          <NavLink to="/studentsPage">
+            <Button
+              color="#ff5c5c"
+              className="col-xs-6 home-btn"
+              variant="outline-dark"
+            >
+              Students
+            </Button>
+          </NavLink>
         </div>
       </Row>
     </div>
