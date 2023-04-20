@@ -124,7 +124,7 @@ function Availabilities() {
                     ))}
                   </li>
                 </ul>
-                <Button disabled type="submit" className="confirmBtn">
+                <Button size="sm" disabled type="submit" className="confirmBtn">
                   Confirm
                 </Button>
                 {/* <Button className="cancelBtn">Cancel</Button> */}
