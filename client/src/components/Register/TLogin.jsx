@@ -4,9 +4,10 @@ import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { useNavigate } from "react-router-dom";
 import { Form, FormControl, Button, ListGroup } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 function TLogin() {
-  const { setTeacher, setTeacherToken } = useContext(Context);
+  const { setTeacher, setTeacherToken, setLoginForm } = useContext(Context);
   //^ INPUTS
   const passwordInput = useRef();
   const schoolIdInput = useRef();
@@ -32,7 +33,10 @@ function TLogin() {
     fetch("http://localhost:6500/api/teachers/login", config)
       .then((res) => {
         if (res.status === 401) {
-          throw Error("credential failed");
+          // throw Error("credential failed");
+          alert("Wrong Id or password");
+        } else if (res.status === 500) {
+          alert("Please write your school Id");
         }
         return res.json();
       })
@@ -51,11 +55,18 @@ function TLogin() {
         console.log(err, "coming from catch");
       });
   };
+  //^ Show register form onclick
+  const registerFormHandler = () => {
+    setLoginForm(false);
+  };
 
   return (
     <div>
       {/* LOGIN */}
-      <h5>Already registered? Please Login!</h5>
+      <h5>
+        No account? Please{" "}
+        <NavLink onClick={registerFormHandler}>Register</NavLink>
+      </h5>
       <Form onSubmit={submitHandler}>
         <ListGroup className="input-container">
           <ListGroup.Item variant="success">

@@ -1,25 +1,24 @@
 .teachers {
-  .card {
-    .card-body {
+  .teachers-card {
+    .teachers-title {
       text-align: center;
     }
   }
-  .teacher-row {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 4rem 2rem;
+  .teacher-page {
+    .teacher-row {
+      background-image: url(../../images/tbackg.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      margin: 2rem 0;
 
-    .register-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      .forms {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }
