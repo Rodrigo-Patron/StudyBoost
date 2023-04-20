@@ -4,11 +4,13 @@ import { Button, ListGroup, Form } from "react-bootstrap";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../Context.jsx";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Availabilities() {
   const { studentToken, setAvailability, availability, setErrors } =
     useContext(Context);
-
+  //^ NAVIGATE
+  const navigate = useNavigate();
   const { teacherId } = useParams();
   // console.log("teacherId", teacherId);
   const [selectedTime, setSelectedTime] = useState({
@@ -78,6 +80,8 @@ function Availabilities() {
         setErrors(err);
         // console.log(err);
       });
+    alert("Appointment booked");
+    navigate("/studentDashboard");
   };
 
   const t = (e) => {
