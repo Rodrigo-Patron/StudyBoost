@@ -18,6 +18,7 @@ function ContextProvider({ children }) {
   const [deleteAppointment, setDeleteAppointment] = useState(false);
   const [show, setShow] = useState(true);
   const [availability, setAvailability] = useState();
+  const [loginForm, setLoginForm] = useState(false);
 
   return (
     <Context.Provider
@@ -40,6 +41,8 @@ function ContextProvider({ children }) {
         setAppointment,
         setAvailability,
         availability,
+        loginForm,
+        setLoginForm,
       }}
     >
       {children}

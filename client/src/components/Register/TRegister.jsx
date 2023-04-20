@@ -2,6 +2,7 @@ import React from "react";
 import "./Register.scss";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
+import { NavLink } from "react-router-dom";
 import {
   Form,
   FormControl,
@@ -11,7 +12,7 @@ import {
 } from "react-bootstrap";
 
 function TRegister() {
-  const { setErrors } = useContext(Context);
+  const { setErrors, setLoginForm } = useContext(Context);
   //^ INPUTS
   const nameInput = useRef();
   const emailInput = useRef();
@@ -62,13 +63,16 @@ function TRegister() {
     subjectsInput.current.value = "Subjects";
 
     alert("You are registered, please login");
+    setLoginForm(true);
   };
   return (
     <div>
       {/* REGISTER */}
-
+      <h5>
+        New here? Please Register!{" "}
+        <NavLink onClick={() => setLoginForm(true)}>Login</NavLink>
+      </h5>
       <Form onSubmit={submitHandler} className="the-form">
-        <h5>New here? Please Register!</h5>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
             <FormControl type="text" ref={nameInput} placeholder="Fullname" />

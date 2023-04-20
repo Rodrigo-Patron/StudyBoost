@@ -3,9 +3,10 @@ import "./Register.scss";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { Form, FormControl, Button, ListGroup } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 function SRegister() {
-  const { setErrors } = useContext(Context);
+  const { setErrors, setLoginForm } = useContext(Context);
   //^ INPUTS
   const nameInput = useRef();
   const emailInput = useRef();
@@ -51,11 +52,15 @@ function SRegister() {
     passwordInput.current.value = "";
     schoolIdInput.current.value = "";
     alert("You are registered, please login");
+    setLoginForm(true);
   };
   return (
     <div>
+      <h5>
+        New here? Please Register!{" "}
+        <NavLink onClick={() => setLoginForm(true)}>Login</NavLink>
+      </h5>
       <Form onSubmit={submitHandler} className="the-form">
-        <h5>New here? Please Register!</h5>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
             <FormControl type="text" ref={nameInput} placeholder="Fullname" />
