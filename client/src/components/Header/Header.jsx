@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import "./Header.scss";
 import { Link } from "react-router-dom";
-import logo from './Logo.png';
-import collapsedLogo from './B.png'
+import logo from './Logo5.png';
+import collapsedLogo from './B0.png'
 
 import {
   ProSidebar,
@@ -18,16 +19,16 @@ import { RiPencilLine } from "react-icons/ri";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 // import "react-pro-sidebar/dist/css/styles.css";
-import "./Header.scss";
+
 
 const Header = () => {
   //create initial menuCollapse state using useState hook
-  const [menuCollapse, setMenuCollapse] = useState(false);
+  const [menuCollapse, setMenuCollapse] = useState(true);
 
   //create a custom function that will change menuCollapse state from false to true and true to false
   const menuIconClick = () => {
     //condition checking to change state from true to false and vice versa
-    menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
+   setMenuCollapse(!menuCollapse)
   };
 
   return (
@@ -39,7 +40,7 @@ const Header = () => {
             <div className="logoText">
               {/* small and big change using menuCollapse state */}
               <p>{menuCollapse ? <img src={collapsedLogo} className= "collapsedLogo" width = "50" height = "50" alt="collapsedLogo" />  
-              : <img src={logo}  className= "logo"  width = "250" height = "150" alt="logo" />}</p>
+              : <img src={logo}  className= "logo"  width = "250" height = "200" alt="logo" />}</p>
             </div>
             <div className="closeMenu" onClick={menuIconClick}>
               {/* changing menu collapse icon on click */}

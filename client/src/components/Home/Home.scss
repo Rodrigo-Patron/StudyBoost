@@ -19,45 +19,47 @@
       }
 
       .name {
-        margin-right: 13.5rem;
-        margin-bottom: 50rem;
-        font-size: 5rem;
+        margin-right: 15rem;
+        margin-bottom: 45rem;
+        font-size: 6rem;
         font-weight: bold;
         position: absolute;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 
         @media (max-width: 968px) {
           margin-bottom: 25rem;
-          font-size: 3rem;
+          font-size: 5rem;
         }
         @media (max-width: 768px) {
+          margin-right: 6rem;
           margin-bottom: 20rem;
-          font-size: 2.5rem;
+          font-size: 4rem;
         }
 
         @media (max-width: 576px) {
           margin-right: 6rem;
           margin-bottom: 15rem;
-          font-size: 1.5rem;
+          font-size: 2rem;
         }
       }
       .home-btn {
         margin-right: 4rem;
         margin-bottom: 25rem;
-        padding: 1rem;
+        padding: 0.5rem;
         font-size: 3rem;
+
         font-weight: bold;
-        background-color: black;
+        // background-color: white;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
         a {
-          color: rgba(250, 184, 0, 0.924);
+          color: white;
           text-decoration: none;
           &:hover {
-            color: rgb(255, 255, 255);
+            color: rgba(250, 184, 0, 0.924);
           }
         }
         &:hover {
-          background-color: rgba(250, 184, 0, 0.924);
+          background-color: black;
         }
 
         @media (min-width: 768px) {

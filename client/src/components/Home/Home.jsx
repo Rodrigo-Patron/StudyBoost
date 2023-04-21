@@ -11,13 +11,13 @@ function Home() {
       <Header />
       <Row className="home-row">
         <div className="background">
-          <h1 className="name">Study Boost App</h1>
+          <h1 className="name">Study Boost</h1>
 
           <Button className="col-xs-6 home-btn" variant="outline-dark">
             <NavLink to="/teachersPage"> Teachers</NavLink>
           </Button>
 
-          <Button  color="#ff5c5c"  className="col-xs-6 home-btn" variant="outline-dark">
+          <Button className="col-xs-6 home-btn" variant="outline-dark">
             <NavLink to="/studentsPage">Students</NavLink>
           </Button>
         </div>
