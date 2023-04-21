@@ -1,27 +1,30 @@
 import React from "react";
 import "./TeachersPage.scss";
-import TRegister from "../Register/TRegister";
+import TRoute from "../Register/TRoute";
 import TLogin from "../Register/TLogin";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Container } from "react-bootstrap";
+import { useContext } from "react";
+import { Context } from "../../Context.jsx";
 
 function TeachersPage() {
+  const { loginForm } = useContext(Context);
   return (
     <div className="teachers">
-      <Card>
-        <Card.Body>
+      <Card className="teachers-card">
+        <Card.Body className="teachers-title">
           <h2>Teachers page</h2>
         </Card.Body>
       </Card>
-      <Row className="teacher-row">
-        <Col sm={12} md={6} className="register-form">
-          {/* REGISTER */}
-          <TRegister />
-        </Col>
-        {/* LOGIN */}
-        <Col sm={12} md={6} className="login-form">
-          <TLogin />
-        </Col>
-      </Row>
+      <Container className="teacher-page">
+        <Row className="teacher-row">
+          <Col sm={6} className="forms">
+            {/* REGISTER AND LOGIN FORM */}
+            {loginForm ? <TLogin /> : <TRoute />}
+          </Col>
+          {/*COLUMN*/}
+          <Col sm={6}></Col>
+        </Row>
+      </Container>
     </div>
   );
 }

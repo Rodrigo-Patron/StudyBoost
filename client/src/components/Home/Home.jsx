@@ -11,15 +11,24 @@ function Home() {
       <Header />
       <Row className="home-row">
         <div className="background">
-          <h1 className="name">Study Boost</h1>
 
-          <Button className="col-xs-6 home-btn" variant="outline-dark">
-            <NavLink to="/teachersPage"> Teachers</NavLink>
-          </Button>
+ 
 
-          <Button className="col-xs-6 home-btn" variant="outline-dark">
-            <NavLink to="/studentsPage">Students</NavLink>
-          </Button>
+          <h1 className="name">Study Boost App</h1>
+          <NavLink to="/teachersPage">
+            <Button className="col-xs-6 home-btn" variant="outline-dark">
+              Teachers
+            </Button>
+          </NavLink>
+          <NavLink to="/studentsPage">
+            <Button
+                          className="col-xs-6 home-btn"
+              variant="outline-dark"
+            >
+              Students
+            </Button>
+          </NavLink>
+
         </div>
       </Row>
     </div>

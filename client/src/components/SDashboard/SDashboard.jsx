@@ -2,9 +2,8 @@ import React from "react";
 import "./SDashboard.scss";
 import { useContext, useEffect } from "react";
 import { Context } from "../../Context.jsx";
-import { Row, Col, Button, ListGroup } from "react-bootstrap";
+import { Row, Button, ListGroup, Container } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
-import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 function SDashboard() {
@@ -33,48 +32,46 @@ function SDashboard() {
   }, []);
 
   return (
-    <div>
+    <div className="student-dashboard">
       <SHeader />
-      <Row className="appointment-block">
-        <Col sm={4} className="student-dashboard"></Col>
-
-        <Col sm={8} className="teachers-list">
-          <h3>
-            Hello <span>{student.name}</span>, find a teacher and book your
-            appointment
-          </h3>
+      <Container className="appointment-container">
+        <Row className="appointment-row">
+          <p className="title">
+            Hello <span className="student-name">{student.name}</span>, find a
+            teacher and book your appointment
+          </p>
           <hr />
-          <ListGroup>
-            <ListGroup.Item variant="warning">
+          <ListGroup className="teacher-details">
+            <ListGroup.Item variant="light">
               {teacher &&
                 teacher.map((appointment) => (
                   <div key={appointment._id}>
                     <p>
-                      <span>Name: </span>{" "}
-                      <span className="task-input">{appointment.name}</span>
+                      <span>NAME: </span>{" "}
+                      <span className="teacher-input">{appointment.name}</span>
                     </p>
                     <p>
-                      <span>Role:</span>{" "}
-                      <span className="task-input">{appointment.role}</span>{" "}
+                      <span>ROLE:</span>{" "}
+                      <span className="teacher-input">{appointment.role}</span>{" "}
                     </p>
                     <p>
-                      <span>Subjects:</span>{" "}
-                      <span className="task-input">{appointment.subjects}</span>{" "}
+                      <span>SUBJECTS:</span>{" "}
+                      <span className="teacher-input">
+                        {appointment.subjects}
+                      </span>{" "}
                     </p>
-
                     <NavLink to={appointment._id}>
-                      <Button variant="outline-dark">Book Appointment</Button>
+                      <Button className="appointment-btn">
+                        Book Appointment
+                      </Button>
                     </NavLink>
-
                     <hr />
                   </div>
                 ))}
             </ListGroup.Item>
           </ListGroup>
-        </Col>
-      </Row>
-      <hr />
-      <Outlet />
+        </Row>
+      </Container>
     </div>
   );
 }

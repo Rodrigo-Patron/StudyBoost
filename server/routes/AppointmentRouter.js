@@ -15,7 +15,7 @@ AppointmentRouter
     try {
       let findAppointment = Appointment.find({
         student: req.params.studentId,
-      }).sort({ date: 1 });
+      }).sort({ date: 1, time: 1 });
 
       //to populate and show appointments
       const query = findAppointment;
@@ -42,7 +42,7 @@ AppointmentRouter
 
       // console.log("findTeacher", findTeacher);
 
-      if (!findTeacher.length) {
+      if (!findTeacher) {
         return next(
           createError(
             400,
@@ -91,6 +91,12 @@ AppointmentRouter
           { new: true }
         );
       }
+
+      //to delete availability once is empty/ no more that day
+      const findAvailability = await Availability.findOneAndDelete({
+        time: [],
+      });
+      // console.log(findAvailability);
 
       // to relate the appointment to the teacher
       const teacher = await Teacher.findById(req.body.teacher);

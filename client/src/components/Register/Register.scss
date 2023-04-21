@@ -1,12 +1,18 @@
-.register-form,
-.login-form {
+.forms {
+  h5 {
+    a {
+      text-decoration-line: none;
+    }
+    a:active {
+      color: red;
+    }
+  }
   .input-container {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    width: 450px;
 
     .list-group-item {
       background-color: rgba(250, 184, 0, 0.924);
-      padding: 0.1rem;
-      width: 35rem;
     }
   }
 
@@ -14,7 +20,4 @@
     background-color: rgba(250, 184, 0, 0.924);
     border: none;
   }
-}
-.login-form {
-  padding-top: 5rem;
 }

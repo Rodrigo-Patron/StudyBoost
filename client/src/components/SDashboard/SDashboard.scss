@@ -1,22 +1,33 @@
-.appointment-block {
-  // margin: 2rem;
+.student-dashboard {
+  .appointment-container {
+    .appointment-row {
+      margin: 2rem 0;
+      .title {
+        font-size: 1.6rem;
+      }
 
-  span {
-    font-weight: bolder;
-  }
-  .student-dashboard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+      .student-name {
+        font-weight: bolder;
+      }
 
-  .teachers-list {
-    h3 {
-      padding: 2rem 0;
-    }
-    .task-input {
-      color: red;
+      .teacher-details {
+        .teacher-input {
+          font-weight: bolder;
+        }
+        .appointment-btn {
+          background-color: rgba(250, 184, 0, 0.924);
+          color: black;
+
+          &:hover {
+            background-color: black;
+            color: white;
+          }
+          &:focus {
+            background-color: black;
+            color: white;
+          }
+        }
+      }
     }
   }
 }
