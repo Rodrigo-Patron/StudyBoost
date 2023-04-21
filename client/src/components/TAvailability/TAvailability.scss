@@ -131,6 +131,7 @@
       width: 500px;
       margin: 1rem 0;
       border-radius: 10px;
+      padding: 1rem;
 
       .react-calendar__viewContainer {
         text-align: center;
@@ -155,6 +156,9 @@
         background: rgba(250, 184, 0, 0.924);
         color: black;
         border-radius: 5px;
+      }
+      .react-calendar__month-view__days__day--weekend {
+        color: #757575;
       }
 
       .time {
