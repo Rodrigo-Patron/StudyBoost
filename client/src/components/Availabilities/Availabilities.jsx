@@ -96,14 +96,14 @@ function Availabilities() {
     });
   };
 
-  return (
-    <div>
-      <h2>Selected teacher time slots</h2>
-      <ListGroup>
-        {availability && availability[0].teacher.name}
-        <ListGroup.Item>
-          {availability &&
-            availability.map((appointment) => (
+  const timeList = () => {
+    return (
+      <div>
+        <h2>Selected teacher time slots</h2>
+        <ListGroup>
+          {availability[0].teacher?.name}
+          <ListGroup.Item>
+            {availability.map((appointment) => (
               <Form onSubmit={submitHandler} key={appointment._id}>
                 <p>
                   <span>Date:</span>{" "}
@@ -135,10 +135,16 @@ function Availabilities() {
                 <hr />
               </Form>
             ))}
-        </ListGroup.Item>
-      </ListGroup>
-    </div>
-  );
+          </ListGroup.Item>
+        </ListGroup>
+      </div>
+    );
+  };
+
+  const slotsAvailable = availability && availability.length;
+  const display = slotsAvailable ? timeList() : "No slots available";
+
+  return display;
 }
 
 export default Availabilities;

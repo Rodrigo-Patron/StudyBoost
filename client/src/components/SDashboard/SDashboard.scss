@@ -1,7 +1,7 @@
 .student-dashboard {
   .appointment-container {
     .appointment-row {
-      margin: 2rem 0;
+      margin: 2rem 3rem;
       .title {
         font-size: 1.6rem;
       }
@@ -16,6 +16,7 @@
         }
         .appointment-btn {
           background-color: rgba(250, 184, 0, 0.924);
+          border: none;
           color: black;
 
           &:hover {

@@ -7,7 +7,8 @@ import SHeader from "../S-Header/SHeader";
 import { NavLink } from "react-router-dom";
 
 function SDashboard() {
-  const { student, teacher, setTeacher, studentToken } = useContext(Context);
+  const { student, teacher, setTeacher, studentToken, availability } =
+    useContext(Context);
   //  get all teachers
   useEffect(() => {
     const config = {
@@ -30,6 +31,8 @@ function SDashboard() {
         setTeacher(result);
       });
   }, []);
+
+  const slotsAvailable = availability && availability.length;
 
   return (
     <div className="student-dashboard">
@@ -61,8 +64,13 @@ function SDashboard() {
                       </span>{" "}
                     </p>
                     <NavLink to={appointment._id}>
-                      <Button className="appointment-btn">
-                        Book Appointment
+                      <Button
+                        className="appointment-btn"
+                        disabled={!slotsAvailable}
+                      >
+                        {slotsAvailable
+                          ? "Book Appointment"
+                          : "No availability"}
                       </Button>
                     </NavLink>
                     <hr />

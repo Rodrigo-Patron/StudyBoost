@@ -106,7 +106,7 @@ function SAppointment() {
                     centered
                   >
                     <Modal.Body>
-                      Are you sure to delete appointment?{" "}
+                      Are you sure to delete this appointment?{" "}
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>
