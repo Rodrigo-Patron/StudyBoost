@@ -11,6 +11,9 @@ function Home() {
       <Header />
       <Row className="home-row">
         <div className="background">
+
+ 
+
           <h1 className="name">Study Boost App</h1>
           <NavLink to="/teachersPage">
             <Button className="col-xs-6 home-btn" variant="outline-dark">
@@ -19,13 +22,13 @@ function Home() {
           </NavLink>
           <NavLink to="/studentsPage">
             <Button
-              color="#ff5c5c"
-              className="col-xs-6 home-btn"
+                          className="col-xs-6 home-btn"
               variant="outline-dark"
             >
               Students
             </Button>
           </NavLink>
+
         </div>
       </Row>
     </div>

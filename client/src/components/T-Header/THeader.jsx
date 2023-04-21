@@ -54,7 +54,7 @@ const THeader = () => {
   return (
     <>
       <div className="t-header-wrapper">
-        <div id="header">
+        <div id="header2">
           {/* collapsed props to change menu size using menuCollapse state */}
           <ProSidebar collapsed={menuCollapse}>
             <SidebarHeader>
@@ -70,11 +70,11 @@ const THeader = () => {
             </SidebarHeader>
             <SidebarContent>
               <div className="profile-card">
-                <img
+                {/* <img
                   src="https://via.placeholder.com/80"
                   alt="Profile"
                   className="profile-img"
-                />
+                /> */}
                 <div className="profile-info">
                   <span id="LoggedInAs">{teacher.name}</span>
                   <span className="profile-subject">{teacher.subject}</span>
@@ -90,7 +90,7 @@ const THeader = () => {
                 <MenuItem icon={<i className="fa fa-bell"></i>}>
                   <Link to="/notifications">Notifications</Link>
                 </MenuItem>
-                <MenuItem icon={<i className="fa fa-envelope"></i>}>
+                {/* <MenuItem icon={<i className="fa fa-envelope"></i>}>
                   <Link to="/messages">Messages</Link>
                 </MenuItem>
                 <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
@@ -101,7 +101,7 @@ const THeader = () => {
                 </MenuItem>
                 <MenuItem icon={<i className="fa fa-cog"></i>}>
                   <Link to="/settings">Settings</Link>
-                </MenuItem>
+                </MenuItem> */}
               </Menu>
             </SidebarContent>
             <SidebarFooter>

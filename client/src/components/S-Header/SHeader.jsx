@@ -1,5 +1,7 @@
 //import useState hook to create menu collapse state
+
 import React, { useState } from "react";
+import "./SHeader.scss";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,7 +29,7 @@ import { RiPencilLine } from "react-icons/ri";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
-import "./SHeader.scss";
+
 
 const SHeader = () => {
   const { student, setStudent, setStudentToken } = useContext(Context);
@@ -53,7 +55,7 @@ const SHeader = () => {
 
   return (
     <>
-      <div id="header">
+      <div id="header1">
         {/* collapsed props to change menu size using menuCollapse state */}
         <ProSidebar collapsed={menuCollapse}>
           <SidebarHeader>
