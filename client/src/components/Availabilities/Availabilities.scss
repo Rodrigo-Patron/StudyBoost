@@ -18,22 +18,6 @@ ul {
     list-style: none;
     padding: 0.5rem;
 
-    .selectedTime {
-      color: black;
-      margin-right: 0.5rem;
-      background-color: rgba(250, 184, 0, 0.924);
-      border: none;
-
-      &:hover {
-        background-color: black;
-        color: white;
-      }
-      &:focus {
-        background-color: black;
-        color: white;
-      }
-    }
-
     //color of the checked input
     .form-check-input:checked {
       background-color: rgba(250, 184, 0, 0.924);
@@ -50,16 +34,20 @@ ul {
 
 .confirm-btn {
   margin-right: 0.5rem;
-  background-color: rgba(250, 184, 0, 0.924);
+  background-color: rgba(250, 184, 0, 0.624);
   border: none;
   color: black;
   &:hover {
-    background-color: black;
-    color: white;
+    background-color: rgba(250, 184, 0, 0.924);
+    color: black;
   }
-  // color for the disabled confirm button
+  &:focus {
+    background-color: rgba(250, 184, 0, 0.924);
+    color: black;
+  }
 }
+// color for the disabled confirm button
 .btn:disabled {
-  background-color: rgba(250, 184, 0, 0.924);
+  background-color: rgba(250, 184, 0, 0.724);
   color: black;
 }

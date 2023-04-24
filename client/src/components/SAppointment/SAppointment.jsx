@@ -109,10 +109,15 @@ function SAppointment() {
                       Are you sure to delete this appointment?{" "}
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        onClick={handleClose}
+                      >
                         Close
                       </Button>
                       <Button
+                        size="sm"
                         className="btn-confirm"
                         variant="primary"
                         onClick={() => deleteHandler(appointment)}
