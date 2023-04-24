@@ -3,5 +3,17 @@
   .btn {
     background-color: rgb(241, 129, 129);
     border: none;
+    &:hover {
+      background-color: rgb(228, 104, 104);
+    }
+  }
+}
+.modal-footer {
+  .btn-confirm {
+    background-color: rgb(241, 129, 129);
+    border: rgb(241, 129, 129);
+    &:hover {
+      background-color: rgb(228, 104, 104);
+    }
   }
 }

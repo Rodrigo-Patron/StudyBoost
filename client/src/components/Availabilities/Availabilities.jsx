@@ -98,11 +98,22 @@ function Availabilities() {
 
   const timeList = () => {
     return (
-      <div>
-        <h2>Selected teacher time slots</h2>
+      <div className="availabilities">
+        <div className="av-header">
+          <h3>Book your appointment with {availability[0].teacher?.name}</h3>{" "}
+          <Button
+            className="back-btn"
+            size="sm"
+            onClick={(e) => {
+              navigate("/studentDashboard");
+            }}
+          >
+            Back to dashboard
+          </Button>
+        </div>
         <ListGroup>
-          {availability[0].teacher?.name}
           <ListGroup.Item>
+            {" "}
             {availability.map((appointment) => (
               <Form onSubmit={submitHandler} key={appointment._id}>
                 <p>
@@ -128,10 +139,14 @@ function Availabilities() {
                     ))}
                   </li>
                 </ul>
-                <Button size="sm" disabled type="submit" className="confirmBtn">
+                <Button
+                  size="sm"
+                  disabled
+                  type="submit"
+                  className="confirm-btn"
+                >
                   Confirm
                 </Button>
-                {/* <Button className="cancelBtn">Cancel</Button> */}
                 <hr />
               </Form>
             ))}
