@@ -4,6 +4,7 @@ import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { Form, FormControl, Button, ListGroup } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function SRegister() {
   const { setErrors, setLoginForm } = useContext(Context);
@@ -51,13 +52,14 @@ function SRegister() {
     nameInput.current.value = "";
     passwordInput.current.value = "";
     schoolIdInput.current.value = "";
-    alert("You are registered, please login");
+    // alert("You are registered, please login");
+    Swal.fire("You are registered, please log in!", "success");
     setLoginForm(true);
   };
   return (
     <div>
       <h5>
-        New here? Please Register!{" "}
+        New here? Please Register! /
         <NavLink onClick={() => setLoginForm(true)}>Login</NavLink>
       </h5>
       <Form onSubmit={submitHandler} className="the-form">

@@ -5,6 +5,7 @@ import { Context } from "../../Context.jsx";
 import { useNavigate } from "react-router-dom";
 import { Form, FormControl, Button, ListGroup } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function TLogin() {
   const { setTeacher, setTeacherToken, setLoginForm } = useContext(Context);
@@ -34,9 +35,15 @@ function TLogin() {
       .then((res) => {
         if (res.status === 401) {
           // throw Error("credential failed");
-          alert("Wrong Id or password");
+          // alert("Wrong Id or password");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Wrong school Id or Password!",
+          });
         } else if (res.status === 500) {
-          alert("Please write your school Id");
+          // alert("Please write your school Id");
+          Swal.fire("Please write your school Id");
         }
         return res.json();
       })
