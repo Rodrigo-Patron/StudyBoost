@@ -36,6 +36,21 @@ availabilitySchema.pre("deleteOne", async function () {
   await teacher.save();
 });
 
+availabilitySchema.pre("findOneAndDelete", async function () {
+  // console.log(this.getQuery());
+  const id = this.getQuery()._id;
+  console.log(id);
+
+  //to delete the availability from the teacher collection
+  const teacher = await Teacher.findOne({ availabilityByTeacher: id });
+
+  teacher.availabilityByTeacher = teacher.availabilityByTeacher.filter(
+    (x) => x.toString() !== id.toString()
+  );
+
+  await teacher.save();
+});
+
 // Availability Model
 const Availability = model("availability", availabilitySchema);
 
