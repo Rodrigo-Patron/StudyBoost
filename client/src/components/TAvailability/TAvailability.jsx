@@ -305,27 +305,27 @@ function TAvailability() {
             <Button type="submit">Submit</Button>
           </Form>
         </Col>
+        <Col sm={4}> {/* Add this new Col component */}
+          <Row className="selected">
+            <h4>Selected date and time</h4>
+            <p>
+              <span>Date: </span>{" "}
+              <span className="task-input">
+                {selectedDate &&
+                  new Date(selectedDate).toLocaleDateString("de-DE")}
+              </span>
+            </p>
+            <span>Time slots: </span>{" "}
+            {selectedTime &&
+              selectedTime.map((time) => (
+                <div key={time}>
+                  {" "}
+                  <p>{time}</p>
+                </div>
+              ))}
+          </Row>
+        </Col>
       </Row>
-      <Col sm={8}>
-        <Row className="selected">
-          <h4>Selected date and time</h4>
-          <p>
-            <span>Date: </span>{" "}
-            <span className="task-input">
-              {selectedDate &&
-                new Date(selectedDate).toLocaleDateString("de-DE")}
-            </span>
-          </p>
-          <span>Time slots: </span>{" "}
-          {selectedTime &&
-            selectedTime.map((time) => (
-              <div key={time}>
-                {" "}
-                <p>{time}</p>
-              </div>
-            ))}
-        </Row>
-      </Col>
     </div>
   );
 }
