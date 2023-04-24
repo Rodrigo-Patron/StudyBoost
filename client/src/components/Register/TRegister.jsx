@@ -10,6 +10,7 @@ import {
   ListGroup,
   FormSelect,
 } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 function TRegister() {
   const { setErrors, setLoginForm } = useContext(Context);
@@ -62,14 +63,15 @@ function TRegister() {
     schoolIdInput.current.value = "";
     subjectsInput.current.value = "Subjects";
 
-    alert("You are registered, please login");
+    // alert("You are registered, please login");
+    Swal.fire("You are registered, please log in!", "success");
     setLoginForm(true);
   };
   return (
     <div>
       {/* REGISTER */}
       <h5>
-        New here? Please Register!{" "}
+        New here? Please Register! /
         <NavLink onClick={() => setLoginForm(true)}>Login</NavLink>
       </h5>
       <Form onSubmit={submitHandler} className="the-form">

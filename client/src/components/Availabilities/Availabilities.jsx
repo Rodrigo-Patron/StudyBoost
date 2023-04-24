@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../Context.jsx";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Availabilities() {
   const { studentToken, setAvailability, availability, setErrors } =
@@ -80,7 +81,8 @@ function Availabilities() {
         setErrors(err);
         // console.log(err);
       });
-    alert("Appointment booked");
+    // alert("Appointment booked");
+    Swal.fire("Good job!", "You have booked an appointment!", "success");
     navigate("/studentDashboard");
   };
 
