@@ -129,8 +129,8 @@ import THeader from "../T-Header/THeader";
 function TAvailability() {
   const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [upcomingDates, setUpcomingDates] = useState([]);
+const [lastSelected, setLastSelected] = useState(null);
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -157,65 +157,72 @@ function TAvailability() {
   };
 
   function submitHandler(e) {
-    e.preventDefault();
-    // const datePicked = calendarInput.current.value;
-    const datePicked = date;
-    console.log(datePicked);
-    if (!datePicked) {
-      alert("Please select the date");
-      return;
-    }
+  e.preventDefault();
+  const datePicked = date;
 
-    const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
-
-    const timeArr = [];
-    for (const key in timeSlot) {
-      console.log(timeSlot[key]);
-      if (timeSlot[key]) {
-        timeArr.push(timeSlot[key]);
-      }
-    }
-    const formData = {
-      date: datePicked,
-      time: timeArr,
-    };
-
-    const config = {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${teacherAuthToken}`,
-      },
-    };
-
-    fetch("http://localhost:6500/api/availability", config)
-      .then((res) => {
-        if (!res.ok) {
-          return res.json().then((err) => {
-            // console.log(err);
-            alert(err.message);
-            setErrors(err);
-          });
-        }
-        return res.json();
-      })
-      .then((result) => {
-        // console.log("result:", result);
-
-        // const correctDate = new Date(
-        //   new Date(result.date).getTime() + 86400000
-        // ).toISOString();
-
-        setSelectedDate(result.date);
-        setSelectedTime(result.time);
-      })
-      .catch((err) => {
-        setErrors(err);
-        console.log(err);
-      });
-    // console.log(datePicked);
+  if (!datePicked) {
+    alert("Please select the date");
+    return;
   }
+
+  const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
+
+const timeArr = [];
+for (const key in timeSlot) {
+  if (timeSlot[key]) {
+    timeArr.push(timeSlot[key]);
+  }
+}
+const formData = {
+  date: datePicked,
+  time: timeArr.length === 1 ? timeArr[0] : timeArr,
+};
+
+  const config = {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${teacherAuthToken}`,
+    },
+  };
+
+  fetch("http://localhost:6500/api/availability", config)
+    .then((res) => {
+      if (!res.ok) {
+        return res.json().then((err) => {
+          alert(err.message);
+          setErrors(err);
+        });
+      }
+      return res.json();
+    })
+    .then((result) => {
+      setLastSelected({ date: result.date, time: result.time });
+      setUpcomingDates((prevUpcomingDates) => [
+        ...prevUpcomingDates,
+        { date: result.date, time: result.time },
+      ]);
+
+      // Clear the timeSlot state after a successful submission
+      setTimeSlot({
+        timePicked1: "",
+        timePicked2: "",
+        timePicked3: "",
+        timePicked4: "",
+        timePicked5: "",
+        timePicked6: "",
+        timePicked7: "",
+        timePicked8: "",
+      });
+    })
+    .catch((err) => {
+      setErrors(err);
+      console.log(err);
+    });
+}
+
+  
 
   return (
     <div className="pickdate">
@@ -305,27 +312,47 @@ function TAvailability() {
             <Button type="submit">Submit</Button>
           </Form>
         </Col>
+        <Col sm={4}>
+  <Row className="selected">
+    <h4>Last selected date and time</h4>
+    {lastSelected && (
+      <>
+        <p>
+          <span>Date: </span>
+          <span className="task-input">
+            {new Date(lastSelected.date).toLocaleDateString("de-DE")}
+          </span>
+        </p>
+        <span>Time slots: </span>
+        {lastSelected.time.map((time) => (
+          <div key={time}>
+            <p>{time}</p>
+          </div>
+        ))}
+      </>
+    )}
+  </Row>
+  <Row className="upcoming-dates">
+    <h4>Upcoming dates and times</h4>
+    {upcomingDates.map((upcomingDate, index) => (
+      <div key={index}>
+        <p>
+          <span>Date: </span>
+          <span className="task-input">
+            {new Date(upcomingDate.date).toLocaleDateString("de-DE")}
+          </span>
+        </p>
+        <span>Time slots: </span>
+        {upcomingDate.time.map((time) => (
+          <div key={time}>
+            <p>{time}</p>
+          </div>
+        ))}
+      </div>
+    ))}
+  </Row>
+</Col>
       </Row>
-      <Col sm={8}>
-        <Row className="selected">
-          <h4>Selected date and time</h4>
-          <p>
-            <span>Date: </span>{" "}
-            <span className="task-input">
-              {selectedDate &&
-                new Date(selectedDate).toLocaleDateString("de-DE")}
-            </span>
-          </p>
-          <span>Time slots: </span>{" "}
-          {selectedTime &&
-            selectedTime.map((time) => (
-              <div key={time}>
-                {" "}
-                <p>{time}</p>
-              </div>
-            ))}
-        </Row>
-      </Col>
     </div>
   );
 }
