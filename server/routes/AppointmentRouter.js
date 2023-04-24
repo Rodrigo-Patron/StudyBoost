@@ -98,6 +98,14 @@ AppointmentRouter
       });
       // console.log(findAvailability);
 
+      const deleteAv = await Teacher.findById(findAvailability.teacher);
+      console.log(deleteAv);
+
+      deleteAv.availabilityByTeacher = deleteAv.availabilityByTeacher.filter(
+        (x) => x.toString() !== findAvailability._id.toString()
+      );
+      await deleteAv.save();
+
       // to relate the appointment to the teacher
       const teacher = await Teacher.findById(req.body.teacher);
       teacher.appointmentsByStudents.push(newAppointment._id);
