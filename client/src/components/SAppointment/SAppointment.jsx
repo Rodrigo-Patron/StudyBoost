@@ -68,7 +68,7 @@ function SAppointment() {
     <div>
       <SHeader />
       <div className="appointments">
-        <h2>Your booked appointments</h2>
+        <h2>Your booked appointments:</h2>
 
         <ListGroup>
           <ListGroup.Item>
@@ -113,6 +113,7 @@ function SAppointment() {
                         Close
                       </Button>
                       <Button
+                        className="btn-confirm"
                         variant="primary"
                         onClick={() => deleteHandler(appointment)}
                       >

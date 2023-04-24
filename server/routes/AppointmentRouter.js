@@ -67,7 +67,7 @@ AppointmentRouter
 
       const newAppointment = await Appointment.create(req.body);
 
-      //to delete the selected time (appointment made) in the db
+      // to delete the selected time (appointment made) in the db
 
       if (newAppointment) {
         const removeAvailability = await Availability.findOne({

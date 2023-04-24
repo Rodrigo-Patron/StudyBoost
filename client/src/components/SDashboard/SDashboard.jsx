@@ -4,11 +4,12 @@ import { useContext, useEffect } from "react";
 import { Context } from "../../Context.jsx";
 import { Row, Button, ListGroup, Container } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SDashboard() {
-  const { student, teacher, setTeacher, studentToken, availability } =
-    useContext(Context);
+  const navigate = useNavigate();
+  const { student, teacher, setTeacher, studentToken } = useContext(Context);
+
   //  get all teachers
   useEffect(() => {
     const config = {
@@ -31,8 +32,6 @@ function SDashboard() {
         setTeacher(result);
       });
   }, []);
-
-  const slotsAvailable = availability && availability.length;
 
   return (
     <div className="student-dashboard">
@@ -63,16 +62,22 @@ function SDashboard() {
                         {appointment.subjects}
                       </span>{" "}
                     </p>
-                    <NavLink to={appointment._id}>
-                      <Button
-                        className="appointment-btn"
-                        disabled={!slotsAvailable}
-                      >
-                        {slotsAvailable
-                          ? "Book Appointment"
-                          : "No availability"}
-                      </Button>
-                    </NavLink>
+
+                    <Button
+                      size="sm"
+                      className="appointment-btn"
+                      disabled={
+                        !appointment.availabilityByTeacher.length ? true : false
+                      }
+                      onClick={(e) => {
+                        navigate(`/studentDashboard/${appointment._id}`);
+                      }}
+                    >
+                      {!appointment.availabilityByTeacher.length
+                        ? "No availability"
+                        : "Book appointment"}
+                    </Button>
+
                     <hr />
                   </div>
                 ))}
