@@ -1,5 +1,6 @@
 import React from "react";
 import "./Register.scss";
+import "./SweetAlert.scss";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { useNavigate } from "react-router-dom";
@@ -34,15 +35,12 @@ function TLogin() {
     fetch("http://localhost:6500/api/teachers/login", config)
       .then((res) => {
         if (res.status === 401) {
-          // throw Error("credential failed");
-          // alert("Wrong Id or password");
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Wrong school Id or Password!",
           });
         } else if (res.status === 500) {
-          // alert("Please write your school Id");
           Swal.fire("Please write your school Id");
         }
         return res.json();
