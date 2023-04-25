@@ -130,7 +130,7 @@ function TAvailability() {
   const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
   const [upcomingDates, setUpcomingDates] = useState([]);
-const [lastSelected, setLastSelected] = useState(null);
+  const [lastSelected, setLastSelected] = useState(null);
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -157,73 +157,71 @@ const [lastSelected, setLastSelected] = useState(null);
   };
 
   function submitHandler(e) {
-  e.preventDefault();
-  const datePicked = date;
+    e.preventDefault();
+    const datePicked = date;
 
-  if (!datePicked) {
-    alert("Please select the date");
-    return;
-  }
+    if (!datePicked) {
+      alert("Please select the date");
+      return;
+    }
 
-  const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
+    const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
 
-const timeArr = [];
-for (const key in timeSlot) {
-  if (timeSlot[key] && timeSlot[key] !== "") {
-    timeArr.push(timeSlot[key]);
-  }
-}
-const formData = {
-  date: datePicked,
-  time: timeArr.length === 1 ? timeArr[0] : timeArr,
-};
-
-  const config = {
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${teacherAuthToken}`,
-    },
-  };
-
-  fetch("http://localhost:6500/api/availability", config)
-    .then((res) => {
-      if (!res.ok) {
-        return res.json().then((err) => {
-          alert(err.message);
-          setErrors(err);
-        });
+    const timeArr = [];
+    for (const key in timeSlot) {
+      if (timeSlot[key] && timeSlot[key] !== "") {
+        timeArr.push(timeSlot[key]);
       }
-      return res.json();
-    })
-    .then((result) => {
-      console.log(result)
-      setLastSelected({ date: result.date, time: result.time });
-      setUpcomingDates((prevUpcomingDates) => [
-        ...prevUpcomingDates,
-        { date: result.date, time: result.time },
-      ]);
+    }
+    const formData = {
+      date: datePicked,
+      time: timeArr.length === 1 ? timeArr[0] : timeArr,
+    };
 
-      // Clear the timeSlot state after a successful submission
-      setTimeSlot({
-        timePicked1: "",
-        timePicked2: "",
-        timePicked3: "",
-        timePicked4: "",
-        timePicked5: "",
-        timePicked6: "",
-        timePicked7: "",
-        timePicked8: "",
+    const config = {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${teacherAuthToken}`,
+      },
+    };
+
+    fetch("http://localhost:6500/api/availability", config)
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((err) => {
+            alert(err.message);
+            setErrors(err);
+          });
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
+        setLastSelected({ date: result.date, time: result.time });
+        setUpcomingDates((prevUpcomingDates) => [
+          ...prevUpcomingDates,
+          { date: result.date, time: result.time },
+        ]);
+
+        // Clear the timeSlot state after a successful submission
+        setTimeSlot({
+          timePicked1: "",
+          timePicked2: "",
+          timePicked3: "",
+          timePicked4: "",
+          timePicked5: "",
+          timePicked6: "",
+          timePicked7: "",
+          timePicked8: "",
+        });
+      })
+      .catch((err) => {
+        setErrors(err);
+        console.log(err);
       });
-    })
-    .catch((err) => {
-      setErrors(err);
-      console.log(err);
-    });
-}
-
-  
+  }
 
   return (
     <div className="pickdate">
@@ -251,7 +249,7 @@ const formData = {
                   label="10:00 - 10:30"
                   value="10:00 - 10:30"
                   name="timePicked1"
-                  checked={timeSlot.timePicked1===""?false:true}
+                  checked={timeSlot.timePicked1 === "" ? false : true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -260,7 +258,7 @@ const formData = {
                   label="10:30 - 11:00"
                   value="10:30 - 11:00"
                   name="timePicked2"
-                  checked={timeSlot.timePicked2===""?false:true}
+                  checked={timeSlot.timePicked2 === "" ? false : true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -269,7 +267,7 @@ const formData = {
                   label="11:00 - 11:30"
                   value="11:00 - 11:30"
                   name="timePicked3"
-                  checked={timeSlot.timePicked3===""?false:true}
+                  checked={timeSlot.timePicked3 === "" ? false : true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -278,7 +276,7 @@ const formData = {
                   label="11:30 - 12:00"
                   value="11:30 - 12:00"
                   name="timePicked4"
-                  checked={timeSlot.timePicked4===""?false:true}
+                  checked={timeSlot.timePicked4 === "" ? false : true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -287,7 +285,7 @@ const formData = {
                   label="13:00 - 13:30"
                   value="13:00 - 13:30"
                   name="timePicked5"
-                  checked={timeSlot.timePicked5===""?false:true}
+                  checked={timeSlot.timePicked5 === "" ? false : true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -296,7 +294,7 @@ const formData = {
                   label="13:30 - 14:00"
                   value="13:30 - 14:00"
                   name="timePicked6"
-                  checked={timeSlot.timePicked6===""?false:true}
+                  checked={timeSlot.timePicked6 === "" ? false : true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -305,7 +303,7 @@ const formData = {
                   label="14:00 - 14:30"
                   value="14:00 - 14:30"
                   name="timePicked7"
-                  checked={timeSlot.timePicked7===""?false:true}
+                  checked={timeSlot.timePicked7 === "" ? false : true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -314,7 +312,7 @@ const formData = {
                   label="14:30 - 15:00"
                   value="14:30 - 15:00"
                   name="timePicked8"
-                  checked={timeSlot.timePicked8===""?false:true}
+                  checked={timeSlot.timePicked8 === "" ? false : true}
                 />
               </div>
             ))}
@@ -322,45 +320,49 @@ const formData = {
           </Form>
         </Col>
         <Col sm={4}>
-  <Row className="selected">
-    <h4>Last selected date and time</h4>
-    {lastSelected && (
-      <>
-        <p>
-          <span>Date: </span>
-          <span className="task-input">
-            {new Date(lastSelected.date).toLocaleDateString("de-DE")}
-          </span>
-        </p>
-        <span>Time slots: </span>
-        {lastSelected.time.map((time) => (
-          <div key={time}>
-            <p>{time}</p>
-          </div>
-        ))}
-      </>
-    )}
-  </Row>
-  <Row className="upcoming-dates">
-    <h4>Upcoming dates and times</h4>
-    {upcomingDates.map((upcomingDate, index) => (
-      <div key={index}>
-        <p>
-          <span>Date: </span>
-          <span className="task-input">
-            {new Date(upcomingDate.date).toLocaleDateString("de-DE")}
-          </span>
-        </p>
-        <span>Time slots: </span>
-        {upcomingDate.time.map((time) => (
-          <div key={time}>
-            <p>{time}</p>
-          </div>
-        ))}
-      </div>
-    ))}
-  </Row>
-</Col>
+          <Row className="selected">
+            <h4>Last selected date and time</h4>
+            {lastSelected && (
+              <>
+                <p>
+                  <span>Date: </span>
+                  <span className="task-input">
+                    {new Date(lastSelected.date).toLocaleDateString(
+                      navigator.language
+                    )}
+                  </span>
+                </p>
+                <span>Time slots: </span>
+                {lastSelected.time.map((time) => (
+                  <div key={time}>
+                    <p>{time}</p>
+                  </div>
+                ))}
+              </>
+            )}
+          </Row>
+          <Row className="upcoming-dates">
+            <h4>Upcoming dates and times</h4>
+            {upcomingDates.map((upcomingDate, index) => (
+              <div key={index}>
+                <p>
+                  <span>Date: </span>
+                  <span className="task-input">
+                    {new Date(upcomingDate.date).toLocaleDateString(
+                      navigator.language
+                    )}
+                  </span>
+                </p>
+                <span>Time slots: </span>
+                {upcomingDate.time.map((time) => (
+                  <div key={time}>
+                    <p>{time}</p>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </Row>
+        </Col>
       </Row>
     </div>
   );

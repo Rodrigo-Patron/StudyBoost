@@ -93,8 +93,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDc5MjcwN
 
 
 ### TO DELETE AVAILABILITY (BY ID)
-DELETE http://localhost:6500/api/availability/643dba8a01d1d98ec8faf41d
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2RhMWMyMDFkMWQ5OGVjOGZhZjJlOSIsImlhdCI6MTY4MTc2MTAzNSwiZXhwIjoxNjgxNzcxODM1fQ.wu9cyeaw8H-RPtZxGNCl0TH-PLl2Lx-NGyp-CIrsJJE
+DELETE http://localhost:6500/api/availability/64479f483c813667cf8e98b1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDc5MjcwNTUyMWI4MmY1ZWFlNzA2MCIsImlhdCI6MTY4MjQxMjQ3MCwiZXhwIjoxNjgyNDIzMjcwfQ.YmftyxVld2d9yuPSKf20FBQ-3KY2sAj7PLDsPcJNSh8
 
 ###TO DELETE APPOINTMENT (BY ID)
 DELETE http://localhost:6500/api/appointments/643dba8a01d1d98ec8faf41d
