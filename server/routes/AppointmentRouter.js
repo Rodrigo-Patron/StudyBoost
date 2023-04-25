@@ -27,6 +27,23 @@ AppointmentRouter
       next(createError(500, error.message));
     }
   })
+  // get appointments of a specific teacher
+  .get("/teacher/:teacherId", async (req, res, next) => {
+    try {
+      let findAppointment = Appointment.find({
+        teacher: req.params.teacherId,
+      }).sort({ date: 1, time: 1 });
+
+      //to populate and show appointments
+      const query = findAppointment;
+      query.populate("teacher", "name -_id");
+      query.populate("student", "name -_id");
+      findAppointment = await query.exec();
+      res.send(findAppointment);
+    } catch (error) {
+      next(createError(500, error.message));
+    }
+  })
 
   // creating appointment by student
   .post("/", async (req, res, next) => {
