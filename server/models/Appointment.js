@@ -10,7 +10,7 @@ const appointmentSchema = new Schema(
     student: { type: Schema.Types.ObjectId, ref: "student" },
     teacher: { type: Schema.Types.ObjectId, ref: "teacher" },
     date: { type: String, required: true },
-    time: { type: String, required: true, unique: true },
+    time: { type: String, required: true },
   },
   {
     toJSON: {
