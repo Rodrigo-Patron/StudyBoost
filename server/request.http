@@ -36,7 +36,7 @@ POST http://localhost:6500/api/teachers/login
 Content-Type: application/json
 
 {
-    "schoolId":123456,
+    "schoolId":12345,
     "password":"Ana12345"
 }
 
@@ -83,8 +83,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmFkM2FjM
 }
 
 ### GET APPOINTMENTS OF A SPECIFIC STUDENT (BY ID)
-GET http://localhost:6500/api/appointments/643fb5994e87a4e39338ac7a
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2ZiNTk5NGU4N2E0ZTM5MzM4YWM3YSIsImlhdCI6MTY4MTg5ODkxNywiZXhwIjoxNjgxOTA5NzE3fQ.eJFGXQdJdefOygQd3nPkAA4YSozFCkK3IsIm-TCMsS4
+GET http://localhost:6500/api/appointments/644792705521b82f5eae7060
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDc5MjcwNTUyMWI4MmY1ZWFlNzA2MCIsImlhdCI6MTY4MjQxMjQ3MCwiZXhwIjoxNjgyNDIzMjcwfQ.YmftyxVld2d9yuPSKf20FBQ-3KY2sAj7PLDsPcJNSh8
+
+
+### GET APPOINTMENTS OF A SPECIFIC TEACHER(BY ID)
+GET http://localhost:6500/api/appointments/teacher/644792705521b82f5eae7060
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDc5MjcwNTUyMWI4MmY1ZWFlNzA2MCIsImlhdCI6MTY4MjQxMjQ3MCwiZXhwIjoxNjgyNDIzMjcwfQ.YmftyxVld2d9yuPSKf20FBQ-3KY2sAj7PLDsPcJNSh8
+
 
 ### TO DELETE AVAILABILITY (BY ID)
 DELETE http://localhost:6500/api/availability/643dba8a01d1d98ec8faf41d
