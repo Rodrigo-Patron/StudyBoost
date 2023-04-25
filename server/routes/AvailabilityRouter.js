@@ -2,6 +2,7 @@ import express from "express";
 import createError from "http-errors";
 import Availability from "../models/Availability.js";
 import Teacher from "../models/Teacher.js";
+import Mongoose from "mongoose";
 
 // define availability router
 const AvailabilityRouter = express.Router();
@@ -50,10 +51,16 @@ AvailabilityRouter
       const newAvailability = await Availability.create(req.body);
       // after creating the availabilities, teacher is added
       const teacher = await Teacher.findById(req.body.teacher);
+      // const teacher = await Teacher.find({
+      //   _id: req.body.teacher,
+      //   // date: req.body.date,
+      // });
+      console.log(req.body);
       teacher.availabilityByTeacher.push(newAvailability._id);
       teacher.save();
 
       res.status(200).send(newAvailability);
+      // res.status(200).json(req.body);
     } catch (error) {
       next(createError(400, error.message));
     }
