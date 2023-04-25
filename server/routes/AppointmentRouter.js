@@ -64,11 +64,21 @@ AppointmentRouter
           )
         );
       }
-
       const newAppointment = await Appointment.create(req.body);
 
-      // to delete the selected time (appointment made) in the db
+      // to relate the appointment to the teacher
+      const teacher = await Teacher.findById(req.body.teacher);
+      teacher.appointmentsByStudents.push(newAppointment._id);
+      teacher.save();
 
+      //to relate the appointment to the student
+      const student = await Student.findById(req.userId);
+      student.appointments.push(newAppointment._id);
+      student.save();
+
+      res.status(200).send(newAppointment);
+
+      // to delete the selected time (appointment made) in the db
       if (newAppointment) {
         const removeAvailability = await Availability.findOne({
           time: { $elemMatch: { $eq: req.body.time } },
@@ -105,18 +115,6 @@ AppointmentRouter
         (x) => x.toString() !== findAvailability._id.toString()
       );
       await deleteAv.save();
-
-      // to relate the appointment to the teacher
-      const teacher = await Teacher.findById(req.body.teacher);
-      teacher.appointmentsByStudents.push(newAppointment._id);
-      teacher.save();
-
-      //to relate the appointment to the student
-      const student = await Student.findById(req.userId);
-      student.appointments.push(newAppointment._id);
-      student.save();
-
-      res.status(200).send(newAppointment);
     } catch (error) {
       next(createError(400, error.message));
     }
