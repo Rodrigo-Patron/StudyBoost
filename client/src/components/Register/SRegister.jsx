@@ -1,5 +1,6 @@
 import React from "react";
 import "./Register.scss";
+import "./SweetAlert.scss";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { Form, FormControl, Button, ListGroup } from "react-bootstrap";
@@ -52,8 +53,11 @@ function SRegister() {
     nameInput.current.value = "";
     passwordInput.current.value = "";
     schoolIdInput.current.value = "";
-    // alert("You are registered, please login");
-    Swal.fire("You are registered, please log in!", "success");
+    Swal.fire({
+      icon: "success",
+      title: "You are registered",
+      text: "Please log in!",
+    });
     setLoginForm(true);
   };
   return (

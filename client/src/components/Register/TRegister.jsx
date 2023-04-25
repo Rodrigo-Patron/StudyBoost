@@ -1,5 +1,6 @@
 import React from "react";
 import "./Register.scss";
+import "./SweetAlert.scss";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { NavLink } from "react-router-dom";
@@ -62,9 +63,11 @@ function TRegister() {
     passwordInput.current.value = "";
     schoolIdInput.current.value = "";
     subjectsInput.current.value = "Subjects";
-
-    // alert("You are registered, please login");
-    Swal.fire("You are registered, please log in!", "success");
+    Swal.fire({
+      icon: "success",
+      title: "You are registered",
+      text: "Please log in!",
+    });
     setLoginForm(true);
   };
   return (

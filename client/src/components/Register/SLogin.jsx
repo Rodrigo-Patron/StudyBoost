@@ -1,5 +1,6 @@
 import React from "react";
 import "./Register.scss";
+import "./SweetAlert.scss";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { useNavigate } from "react-router-dom";
