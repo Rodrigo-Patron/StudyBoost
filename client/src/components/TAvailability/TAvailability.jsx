@@ -169,7 +169,7 @@ const [lastSelected, setLastSelected] = useState(null);
 
 const timeArr = [];
 for (const key in timeSlot) {
-  if (timeSlot[key]) {
+  if (timeSlot[key] && timeSlot[key] !== "") {
     timeArr.push(timeSlot[key]);
   }
 }
@@ -198,6 +198,7 @@ const formData = {
       return res.json();
     })
     .then((result) => {
+      console.log(result)
       setLastSelected({ date: result.date, time: result.time });
       setUpcomingDates((prevUpcomingDates) => [
         ...prevUpcomingDates,
@@ -250,6 +251,7 @@ const formData = {
                   label="10:00 - 10:30"
                   value="10:00 - 10:30"
                   name="timePicked1"
+                  checked={timeSlot.timePicked1===""?false:true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -258,6 +260,7 @@ const formData = {
                   label="10:30 - 11:00"
                   value="10:30 - 11:00"
                   name="timePicked2"
+                  checked={timeSlot.timePicked2===""?false:true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -266,6 +269,7 @@ const formData = {
                   label="11:00 - 11:30"
                   value="11:00 - 11:30"
                   name="timePicked3"
+                  checked={timeSlot.timePicked3===""?false:true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -274,6 +278,7 @@ const formData = {
                   label="11:30 - 12:00"
                   value="11:30 - 12:00"
                   name="timePicked4"
+                  checked={timeSlot.timePicked4===""?false:true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -282,6 +287,7 @@ const formData = {
                   label="13:00 - 13:30"
                   value="13:00 - 13:30"
                   name="timePicked5"
+                  checked={timeSlot.timePicked5===""?false:true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -290,6 +296,7 @@ const formData = {
                   label="13:30 - 14:00"
                   value="13:30 - 14:00"
                   name="timePicked6"
+                  checked={timeSlot.timePicked6===""?false:true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -298,6 +305,7 @@ const formData = {
                   label="14:00 - 14:30"
                   value="14:00 - 14:30"
                   name="timePicked7"
+                  checked={timeSlot.timePicked7===""?false:true}
                 />
                 <Form.Check
                   onChange={checkHandler}
@@ -306,6 +314,7 @@ const formData = {
                   label="14:30 - 15:00"
                   value="14:30 - 15:00"
                   name="timePicked8"
+                  checked={timeSlot.timePicked8===""?false:true}
                 />
               </div>
             ))}
