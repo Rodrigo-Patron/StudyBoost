@@ -1,15 +1,17 @@
-.av-header {
+h3 {
   margin: 1rem;
-  display: flex;
-  justify-content: space-between;
-  .back-btn {
-    background-color: rgba(218, 215, 208, 0.924);
-    border: none;
+}
+.search-bar {
+  margin: 1rem;
+}
+.back-btn {
+  margin: 1rem;
+  background-color: rgba(218, 215, 208, 0.924);
+  border: none;
+  color: black;
+  &:hover {
+    background-color: rgba(179, 178, 176, 0.924);
     color: black;
-    &:hover {
-      background-color: rgba(179, 178, 176, 0.924);
-      color: black;
-    }
   }
 }
 

@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 function Availabilities() {
   const { studentToken, setAvailability, availability, setErrors } =
     useContext(Context);
+  const [query, setQuery] = useState("");
+
   //^ NAVIGATE
   const navigate = useNavigate();
   const { teacherId } = useParams();
@@ -101,59 +103,76 @@ function Availabilities() {
   const timeList = () => {
     return (
       <div className="availabilities">
-        <div className="av-header">
-          <h3>Book your appointment with {availability[0].teacher?.name}</h3>{" "}
-          <Button
-            className="back-btn"
-            size="sm"
-            onClick={(e) => {
-              navigate("/studentDashboard");
-            }}
-          >
-            Back to dashboard
-          </Button>
+        <h3>Book your appointment with {availability[0].teacher?.name}</h3>{" "}
+        <div className="search-bar">
+          <label>Search date: </label>{" "}
+          <input
+            placeholder="Search date:"
+            type="date"
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
         <ListGroup>
           <ListGroup.Item>
-            {" "}
-            {availability.map((appointment) => (
-              <Form onSubmit={submitHandler} key={appointment._id}>
-                <p>
-                  <span>Date:</span>{" "}
-                  <i ref={dateInput}>
-                    {new Date(appointment.date).toLocaleDateString("de-DE")}
-                  </i>
-                </p>
-                <span>Time slots:</span>
-                <ul>
-                  <li>
-                    {appointment.time.map((time, index) => (
-                      <Form.Check
-                        onChange={t}
-                        key={index}
-                        type="radio"
-                        label={time}
-                        value={time}
-                        name="time"
-                        inline
-                        data={appointment.date}
-                      />
-                    ))}
-                  </li>
-                </ul>
-                <Button
-                  size="sm"
-                  disabled
-                  type="submit"
-                  className="confirm-btn"
-                >
-                  Confirm
-                </Button>
-                <hr />
-              </Form>
-            ))}
+            {availability
+              .filter((appointment) => {
+                if (query === "") {
+                  return appointment;
+                } else if (
+                  appointment.date.toLowerCase().includes(query.toLowerCase())
+                ) {
+                  return appointment;
+                }
+              })
+              .map((appointment) => (
+                <Form onSubmit={submitHandler} key={appointment._id}>
+                  <p>
+                    <span>Date:</span>{" "}
+                    <i ref={dateInput}>
+                      {new Date(appointment.date).toLocaleDateString(
+                        navigator.language
+                      )}
+                    </i>
+                  </p>
+                  <span>Time slots:</span>
+                  <ul>
+                    <li>
+                      {appointment.time.map((time, index) => (
+                        <Form.Check
+                          onChange={t}
+                          key={index}
+                          type="radio"
+                          label={time}
+                          value={time}
+                          name="time"
+                          inline
+                          data={appointment.date}
+                        />
+                      ))}
+                    </li>
+                  </ul>
+                  <Button
+                    size="sm"
+                    disabled
+                    type="submit"
+                    className="confirm-btn"
+                  >
+                    Confirm
+                  </Button>
+                  <hr />
+                </Form>
+              ))}
           </ListGroup.Item>
         </ListGroup>
+        <Button
+          className="back-btn"
+          size="sm"
+          onClick={(e) => {
+            navigate("/studentDashboard");
+          }}
+        >
+          Back to dashboard
+        </Button>
       </div>
     );
   };
