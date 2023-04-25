@@ -78,7 +78,9 @@ function SAppointment() {
                   <p>
                     <span>Date: </span>
                     <span className="task-input">
-                      {new Date(appointment.date).toLocaleDateString("de-DE")}
+                      {new Date(appointment.date).toLocaleDateString(
+                        navigator.language
+                      )}
                     </span>
                   </p>
                   <p>
