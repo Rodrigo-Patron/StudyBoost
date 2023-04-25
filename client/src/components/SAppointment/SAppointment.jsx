@@ -1,7 +1,14 @@
 import React from "react";
 import "./SAppointment.scss";
 import SHeader from "../S-Header/SHeader";
-import { ListGroup, Button, Form, Modal } from "react-bootstrap";
+import {
+  ListGroup,
+  Button,
+  Form,
+  Modal,
+  Row,
+  Container,
+} from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../Context.jsx";
 // import { FaTrashAlt } from "react-icons/fa";
@@ -11,6 +18,7 @@ function SAppointment() {
     useContext(Context);
   const [show, setShow] = useState(false);
   const [counter, setCounter] = useState(0);
+  const [query, setQuery] = useState("");
 
   // get all appointments
   useEffect(() => {
@@ -52,7 +60,7 @@ function SAppointment() {
         return res.json();
       })
       .then((result) => {
-        // everytime an appointment its deleted the counter changes
+        //everytime an appointment its deleted the counter changes
         setCounter(counter + 1);
         setAppointment(result);
       })
@@ -67,73 +75,97 @@ function SAppointment() {
   return (
     <div>
       <SHeader />
-      <div className="appointments">
-        <h2>Your booked appointments:</h2>
-
-        <ListGroup>
-          <ListGroup.Item>
-            {appointment &&
-              Array.from(appointment).map((appointment) => (
-                <Form key={appointment._id}>
-                  <p>
-                    <span>Date: </span>
-                    <span className="task-input">
-                      {new Date(appointment.date).toLocaleDateString(
-                        navigator.language
-                      )}
-                    </span>
-                  </p>
-                  <p>
-                    <span>Time: </span>
-                    <span className="task-input">{appointment.time}</span>{" "}
-                  </p>
-                  <p>
-                    <span>Teacher: </span>
-                    <span className="task-input">
-                      {appointment.teacher.name}
-                    </span>
-                  </p>{" "}
-                  <Button
-                    onClick={() => setShow(true)}
-                    variant="danger"
-                    size="sm"
-                  >
-                    Cancel
-                    {/* <FaTrashAlt /> */}
-                  </Button>
-                  <Modal
-                    show={show}
-                    backdrop="static"
-                    keyboard={false}
-                    centered
-                  >
-                    <Modal.Body>
-                      Are you sure to delete this appointment?{" "}
-                    </Modal.Body>
-                    <Modal.Footer>
+      <Container className="appointments">
+        <Row className="appointment-row">
+          <h2>Your booked appointments:</h2>
+          <div className="search-bar">
+            <input
+              placeholder="Search..."
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+          <ListGroup>
+            <ListGroup.Item>
+              {appointment &&
+                appointment
+                  .filter((appointment) => {
+                    if (query === "") {
+                      return appointment;
+                    } else if (
+                      appointment.teacher.name
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      appointment.date
+                        .toLowerCase()
+                        .includes(query.toLowerCase())
+                    ) {
+                      return appointment;
+                    }
+                  })
+                  .map((appointment) => (
+                    <Form key={appointment._id}>
+                      <p>
+                        <span>Date: </span>
+                        <span className="task-input">
+                          {new Date(appointment.date).toLocaleDateString(
+                            navigator.language
+                          )}
+                        </span>
+                      </p>
+                      <p>
+                        <span>Time: </span>
+                        <span className="task-input">
+                          {appointment.time}
+                        </span>{" "}
+                      </p>
+                      <p>
+                        <span>Teacher: </span>
+                        <span className="task-input">
+                          {appointment.teacher.name}
+                        </span>
+                      </p>{" "}
                       <Button
+                        onClick={() => setShow(true)}
+                        variant="danger"
                         size="sm"
-                        variant="secondary"
-                        onClick={handleClose}
                       >
-                        Close
+                        Cancel
+                        {/* <FaTrashAlt /> */}
                       </Button>
-                      <Button
-                        size="sm"
-                        className="btn-confirm"
-                        variant="primary"
-                        onClick={() => deleteHandler(appointment)}
+                      <Modal
+                        show={show}
+                        backdrop="static"
+                        keyboard={false}
+                        centered
                       >
-                        Confirm
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                  <hr />
-                </Form>
-              ))}
-          </ListGroup.Item>
-        </ListGroup>
-      </div>
+                        <Modal.Body>
+                          Are you sure to delete this appointment?{" "}
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            onClick={handleClose}
+                          >
+                            Close
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="btn-confirm"
+                            variant="primary"
+                            onClick={() => deleteHandler(appointment)}
+                          >
+                            Confirm
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                      <hr />
+                    </Form>
+                  ))}
+            </ListGroup.Item>
+          </ListGroup>
+        </Row>
+      </Container>
     </div>
   );
 }

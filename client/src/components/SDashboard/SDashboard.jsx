@@ -1,6 +1,6 @@
 import React from "react";
 import "./SDashboard.scss";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../../Context.jsx";
 import { Row, Button, ListGroup, Container } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function SDashboard() {
   const navigate = useNavigate();
   const { student, teacher, setTeacher, studentToken } = useContext(Context);
+  const [query, setQuery] = useState("");
 
   //  get all teachers
   useEffect(() => {
@@ -42,45 +43,66 @@ function SDashboard() {
             Hello <span className="student-name">{student.name}</span>, find a
             teacher and book your appointment
           </p>
-          <hr />
+          <div className="search-bar">
+            <input
+              placeholder="Search..."
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
           <ListGroup className="teacher-details">
             <ListGroup.Item variant="light">
               {teacher &&
-                teacher.map((appointment) => (
-                  <div key={appointment._id}>
-                    <p>
-                      <span>NAME: </span>{" "}
-                      <span className="teacher-input">{appointment.name}</span>
-                    </p>
-                    <p>
-                      <span>ROLE:</span>{" "}
-                      <span className="teacher-input">{appointment.role}</span>{" "}
-                    </p>
-                    <p>
-                      <span>SUBJECTS:</span>{" "}
-                      <span className="teacher-input">
-                        {appointment.subjects}
-                      </span>{" "}
-                    </p>
+                teacher
+                  .filter((appointment) => {
+                    if (query === "") {
+                      return appointment;
+                    } else if (
+                      appointment.name
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      appointment.subjects
+                        .toLowerCase()
+                        .includes(query.toLowerCase())
+                    ) {
+                      return appointment;
+                    }
+                  })
+                  .map((appointment) => (
+                    <div key={appointment._id}>
+                      <p>
+                        <span>Name: </span>{" "}
+                        <span className="teacher-input">
+                          {appointment.name}
+                        </span>
+                      </p>
 
-                    <Button
-                      size="sm"
-                      className="appointment-btn"
-                      disabled={
-                        !appointment.availabilityByTeacher.length ? true : false
-                      }
-                      onClick={(e) => {
-                        navigate(`/studentDashboard/${appointment._id}`);
-                      }}
-                    >
-                      {!appointment.availabilityByTeacher.length
-                        ? "No availability"
-                        : "Book appointment"}
-                    </Button>
+                      <p>
+                        <span>Subject:</span>{" "}
+                        <span className="teacher-input">
+                          {appointment.subjects}
+                        </span>{" "}
+                      </p>
 
-                    <hr />
-                  </div>
-                ))}
+                      <Button
+                        size="sm"
+                        className="appointment-btn"
+                        disabled={
+                          !appointment.availabilityByTeacher.length
+                            ? true
+                            : false
+                        }
+                        onClick={(e) => {
+                          navigate(`/studentDashboard/${appointment._id}`);
+                        }}
+                      >
+                        {!appointment.availabilityByTeacher.length
+                          ? "No availability"
+                          : "Book appointment"}
+                      </Button>
+
+                      <hr />
+                    </div>
+                  ))}
             </ListGroup.Item>
           </ListGroup>
         </Row>

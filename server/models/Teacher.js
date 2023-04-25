@@ -10,7 +10,7 @@ const teacherSchema = new Schema(
     password: { type: String, required: true },
     schoolId: { type: Number, required: true, trim: true, unique: true },
     role: { type: String, default: "Teacher" },
-    subjects: [{ type: String, required: true }],
+    subjects: { type: String, required: true },
     availabilityByTeacher: [
       {
         type: Schema.Types.ObjectId,
