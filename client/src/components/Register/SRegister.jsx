@@ -35,30 +35,44 @@ function SRegister() {
       .then((res) => {
         if (!res.ok) {
           return res.json().then((err) => {
-            console.log(err);
-            setErrors(err);
+            const alertText = err.message.map((error) => {
+              if (error.param === "name") {
+                return Swal.fire({
+                  icon: "error",
+                  title: "Registration failed",
+                  text: "Please write your full names",
+                });
+              } else if (error.param === "email") {
+                return Swal.fire({
+                  icon: "error",
+                  title: "Registration failed",
+                  text: "Please write a correct email address",
+                });
+              } else if (error.param === "password") {
+                return Swal.fire({
+                  icon: "error",
+                  title: "Registration failed",
+                  text: "Password must contain capital letter, small letter, number and not less than 8 char",
+                });
+              }
+            });
+            return;
           });
         }
 
-        return res.json();
+        Swal.fire({
+          icon: "success",
+          title: "You are registered",
+          text: "Please log in!",
+        });
+        emailInput.current.value = "";
+        nameInput.current.value = "";
+        passwordInput.current.value = "";
+        schoolIdInput.current.value = "";
+        setLoginForm(true);
       })
-      .then((result) => {
-        // console.log("where are you:", result);
-      })
-      .catch((err) => {
-        setErrors(err);
-        console.log(err);
-      });
-    emailInput.current.value = "";
-    nameInput.current.value = "";
-    passwordInput.current.value = "";
-    schoolIdInput.current.value = "";
-    Swal.fire({
-      icon: "success",
-      title: "You are registered",
-      text: "Please log in!",
-    });
-    setLoginForm(true);
+      .then((result) => {})
+      .catch((err) => {});
   };
   return (
     <div>

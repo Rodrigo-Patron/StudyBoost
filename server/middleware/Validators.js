@@ -20,6 +20,7 @@ export const registerValidator = [
     .withMessage("Password must contain a number"),
   (req, res, next) => {
     const errors = validationResult(req);
+    console.log(errors);
     if (!errors.isEmpty()) {
       next({
         status: 422,
