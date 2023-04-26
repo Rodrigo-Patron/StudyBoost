@@ -129,8 +129,7 @@ import THeader from "../T-Header/THeader";
 function TAvailability() {
   const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
-  const [upcomingDates, setUpcomingDates] = useState([]);
-  const [lastSelected, setLastSelected] = useState(null);
+  const [lastSelectedDate, setLastSelectedDate] = useState(null);
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -199,11 +198,8 @@ function TAvailability() {
       })
       .then((result) => {
         console.log(result);
-        setLastSelected({ date: result.date, time: result.time });
-        setUpcomingDates((prevUpcomingDates) => [
-          ...prevUpcomingDates,
-          { date: result.date, time: result.time },
-        ]);
+        setLastSelectedDate({ date: result.date, time: result.time });
+      
 
         // Clear the timeSlot state after a successful submission
         setTimeSlot({
@@ -321,46 +317,25 @@ function TAvailability() {
         </Col>
         <Col sm={4}>
           <Row className="selected">
-            <h4>Last selected date and time</h4>
-            {lastSelected && (
+            <h4>Last date and time selected</h4>
+            {lastSelectedDate && (
               <>
                 <p>
                   <span>Date: </span>
                   <span className="task-input">
-                    {new Date(lastSelected.date).toLocaleDateString(
+                    {new Date(lastSelectedDate.date).toLocaleDateString(
                       navigator.language
                     )}
                   </span>
                 </p>
                 <span>Time slots: </span>
-                {lastSelected.time.map((time) => (
+                {lastSelectedDate.time.map((time) => (
                   <div key={time}>
                     <p>{time}</p>
                   </div>
                 ))}
               </>
             )}
-          </Row>
-          <Row className="upcoming-dates">
-            <h4>Upcoming dates and times</h4>
-            {upcomingDates.map((upcomingDate, index) => (
-              <div key={index}>
-                <p>
-                  <span>Date: </span>
-                  <span className="task-input">
-                    {new Date(upcomingDate.date).toLocaleDateString(
-                      navigator.language
-                    )}
-                  </span>
-                </p>
-                <span>Time slots: </span>
-                {upcomingDate.time.map((time) => (
-                  <div key={time}>
-                    <p>{time}</p>
-                  </div>
-                ))}
-              </div>
-            ))}
           </Row>
         </Col>
       </Row>
