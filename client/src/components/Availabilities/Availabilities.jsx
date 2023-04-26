@@ -1,6 +1,6 @@
 import React from "react";
 import "./Availabilities.scss";
-import { Button, ListGroup, Form } from "react-bootstrap";
+import { Button, ListGroup, Form, Container, Row } from "react-bootstrap";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../Context.jsx";
 import { useParams } from "react-router-dom";
@@ -102,15 +102,13 @@ function Availabilities() {
 
   const timeList = () => {
     return (
-      <div className="availabilities">
-        <h3>Book your appointment with {availability[0].teacher?.name}</h3>{" "}
-        <div className="search-bar">
-          <label>Search date: </label>{" "}
-          <input
-            placeholder="Search date:"
-            type="date"
-            onChange={(e) => setQuery(e.target.value)}
-          />
+      <Container className="availabilities">
+        <div className="top-header">
+          <h3>Book your appointment with {availability[0].teacher?.name}</h3>{" "}
+          <div className="search-bar">
+            <label>Search date: </label>{" "}
+            <input type="date" onChange={(e) => setQuery(e.target.value)} />
+          </div>
         </div>
         <ListGroup>
           <ListGroup.Item>
@@ -119,7 +117,12 @@ function Availabilities() {
                 if (query === "") {
                   return appointment;
                 } else if (
-                  appointment.date.toLowerCase().includes(query.toLowerCase())
+                  new Date(appointment.date)
+                    .toLocaleDateString(navigator.language)
+
+                    .includes(
+                      new Date(query).toLocaleDateString(navigator.language)
+                    )
                 ) {
                   return appointment;
                 }
@@ -173,7 +176,7 @@ function Availabilities() {
         >
           Back to dashboard
         </Button>
-      </div>
+      </Container>
     );
   };
 

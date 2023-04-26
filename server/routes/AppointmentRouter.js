@@ -68,19 +68,20 @@ AppointmentRouter
         );
       }
 
-      // // to check if appointment already exists
-      // const existingAppointment = await Appointment.findOne({
-      //   time: req.body.time,
-      //   date: req.body.date,
-      // });
-      // if (existingAppointment) {
-      //   return next(
-      //     createError(
-      //       400,
-      //       "Appointment failed, please check availability and try again"
-      //     )
-      //   );
-      // }
+      // to check if appointment already exists
+      const existingAppointment = await Appointment.findOne({
+        student: req.userId,
+        time: req.body.time,
+        date: req.body.date,
+      });
+      if (existingAppointment) {
+        return next(
+          createError(
+            400,
+            "Appointment failed, please check availability and try again"
+          )
+        );
+      }
       const newAppointment = await Appointment.create(req.body);
 
       // to relate the appointment to the teacher

@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../Context.jsx";
+
 // import { FaTrashAlt } from "react-icons/fa";
 
 function SAppointment() {
@@ -18,7 +19,7 @@ function SAppointment() {
     useContext(Context);
   const [show, setShow] = useState(false);
   const [counter, setCounter] = useState(0);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(null);
 
   // get all appointments
   useEffect(() => {
@@ -40,7 +41,7 @@ function SAppointment() {
         console.log("result", result);
         setAppointment(result);
       });
-  }, [counter]);
+  }, [counter, query]);
 
   //delete appointment
   function deleteHandler(appointment) {
@@ -62,7 +63,8 @@ function SAppointment() {
       .then((result) => {
         //everytime an appointment its deleted the counter changes
         setCounter(counter + 1);
-        setAppointment(result);
+
+        console.log("RESULT:", result);
       })
       .catch((error) => console.log(error));
 
@@ -72,37 +74,104 @@ function SAppointment() {
   // modal - popup
   const handleClose = () => setShow(false);
 
+  const filterHandler = (e) => {
+    const filteredAppointment = appointment.filter((appointment) => {
+      if (
+        new Date(appointment.date)
+          .toLocaleDateString(navigator.language)
+          .includes(e.target.value) ||
+        appointment.teacher.name
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return appointment;
+      }
+    });
+    if (filteredAppointment.length === 0) {
+      setQuery("Appointment not found");
+    } else {
+      setQuery(filteredAppointment);
+    }
+  };
+
   return (
     <div>
       <SHeader />
       <Container className="appointments">
         <Row className="appointment-row">
-          <h2>Your booked appointments:</h2>
-          <div className="search-bar">
-            <input
-              placeholder="Search..."
-              onChange={(e) => setQuery(e.target.value)}
-            />
+          <div className="top-header">
+            <h2>Your booked appointments:</h2>
+            <div className="search-bar">
+              <input placeholder="Search..." onChange={filterHandler} />
+            </div>
           </div>
           <ListGroup>
             <ListGroup.Item>
-              {appointment &&
-                appointment
-                  .filter((appointment) => {
-                    if (query === "") {
-                      return appointment;
-                    } else if (
-                      appointment.teacher.name
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      appointment.date
-                        .toLowerCase()
-                        .includes(query.toLowerCase())
-                    ) {
-                      return appointment;
-                    }
-                  })
-                  .map((appointment) => (
+              {query === "Appointment not found"
+                ? "Appointment not found"
+                : query
+                ? query.map((appointment) => (
+                    <Form key={appointment._id}>
+                      <p>
+                        <span>Date: </span>
+                        <span className="task-input">
+                          {new Date(appointment.date).toLocaleDateString(
+                            navigator.language
+                          )}
+                        </span>
+                      </p>
+                      <p>
+                        <span>Time: </span>
+                        <span className="task-input">
+                          {appointment.time}
+                        </span>{" "}
+                      </p>
+                      <p>
+                        <span>Teacher: </span>
+                        <span className="task-input">
+                          {appointment.teacher.name}
+                        </span>
+                      </p>{" "}
+                      <Button
+                        onClick={() => setShow(true)}
+                        variant="danger"
+                        size="sm"
+                      >
+                        Cancel
+                        {/* <FaTrashAlt /> */}
+                      </Button>
+                      <Modal
+                        show={show}
+                        backdrop="static"
+                        keyboard={false}
+                        centered
+                      >
+                        <Modal.Body>
+                          Are you sure to delete this appointment?{" "}
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            onClick={handleClose}
+                          >
+                            Close
+                          </Button>
+                          <Button
+                            size="sm"
+                            className="btn-confirm"
+                            variant="primary"
+                            onClick={() => deleteHandler(appointment)}
+                          >
+                            Confirm
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                      <hr />
+                    </Form>
+                  ))
+                : appointment &&
+                  appointment.map((appointment) => (
                     <Form key={appointment._id}>
                       <p>
                         <span>Date: </span>
