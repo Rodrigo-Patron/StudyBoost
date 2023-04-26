@@ -70,7 +70,7 @@ function SLogin() {
   return (
     <div>
       <h5>
-        No account? Please{" "}
+        No account? Please
         <NavLink onClick={registerFormHandler}>Register</NavLink>
       </h5>
       <Form onSubmit={submitHandler}>

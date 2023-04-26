@@ -108,11 +108,19 @@ function TRegister() {
         </ListGroup>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
-            <FormSelect type="text" ref={subjectsInput} placeholder="Subjects">
-              <option>Subjects</option>
-              <option value="Maths">Maths</option>
-              <option value="Physics">Physics</option>
+            <FormSelect type="text" ref={subjectsInput} required>
+              <option value="" disabled selected hidden>
+                Subject
+              </option>
+              <option value="Biology">Biology</option>
               <option value="Business">Business</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="English">English</option>
+              <option value="German">German</option>
+              <option value="Literature">Literature</option>
+              <option value="Physics">Physics</option>
+              <option value="Politics">Politics</option>
+              <option value="Maths">Maths</option>
             </FormSelect>
           </ListGroup.Item>
         </ListGroup>

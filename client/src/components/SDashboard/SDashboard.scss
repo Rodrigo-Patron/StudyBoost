@@ -2,12 +2,31 @@
   .appointment-container {
     .appointment-row {
       margin: 2rem 3rem;
-      .title {
-        font-size: 1.6rem;
-      }
 
-      .student-name {
-        font-weight: bolder;
+      .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1rem;
+
+        .student-name {
+          font-weight: bolder;
+        }
+
+        .search-bar {
+          input {
+            border: 1.5px solid rgb(212, 212, 212);
+            border-radius: 5px;
+            padding: 0.3rem;
+
+            &:active {
+              outline: none;
+            }
+            &:focus {
+              outline: none;
+            }
+          }
+        }
       }
 
       .teacher-details {

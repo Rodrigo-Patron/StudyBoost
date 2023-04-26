@@ -1,55 +1,79 @@
-h3 {
-  margin: 1rem;
-}
-.search-bar {
-  margin: 1rem;
-}
-.back-btn {
-  margin: 1rem;
-  background-color: rgba(218, 215, 208, 0.924);
-  border: none;
-  color: black;
-  &:hover {
-    background-color: rgba(179, 178, 176, 0.924);
-    color: black;
-  }
-}
+.availabilities {
+  margin-top: 2rem;
 
-ul {
-  li {
-    list-style: none;
-    padding: 0.5rem;
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
 
-    //color of the checked input
-    .form-check-input:checked {
-      background-color: rgba(250, 184, 0, 0.924);
-      border-color: rgba(250, 184, 0, 0.924);
-      box-shadow: none;
-    }
-    .form-check-input:active {
-      background-color: rgba(250, 184, 0, 0.924);
+    .search-bar {
+      label {
+        color: rgb(107, 107, 107);
+      }
+      input {
+        color: rgb(107, 107, 107);
+        border: 1.5px solid rgb(212, 212, 212);
+        border-radius: 5px;
+        padding: 0.3rem;
 
-      box-shadow: none;
+        &:active {
+          outline: none;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
     }
   }
-}
 
-.confirm-btn {
-  margin-right: 0.5rem;
-  background-color: rgba(250, 184, 0, 0.624);
-  border: none;
-  color: black;
-  &:hover {
-    background-color: rgba(250, 184, 0, 0.924);
+  .back-btn {
+    margin: 1rem;
+    background-color: rgba(218, 215, 208, 0.924);
+    border: none;
+    color: black;
+    &:hover {
+      background-color: rgba(179, 178, 176, 0.924);
+      color: black;
+    }
+  }
+
+  ul {
+    li {
+      list-style: none;
+      padding: 0.5rem;
+
+      //color of the checked input
+      .form-check-input:checked {
+        background-color: rgba(250, 184, 0, 0.924);
+        border-color: rgba(250, 184, 0, 0.924);
+        box-shadow: none;
+      }
+      .form-check-input:active {
+        background-color: rgba(250, 184, 0, 0.924);
+
+        box-shadow: none;
+      }
+    }
+  }
+
+  .confirm-btn {
+    margin-right: 0.5rem;
+    background-color: rgba(250, 184, 0, 0.624);
+    border: none;
+    color: black;
+    &:hover {
+      background-color: rgba(250, 184, 0, 0.924);
+      color: black;
+    }
+    &:focus {
+      background-color: rgba(250, 184, 0, 0.924);
+      color: black;
+    }
+  }
+  // color for the disabled confirm button
+  .btn:disabled {
+    background-color: rgba(250, 184, 0, 0.724);
     color: black;
   }
-  &:focus {
-    background-color: rgba(250, 184, 0, 0.924);
-    color: black;
-  }
-}
-// color for the disabled confirm button
-.btn:disabled {
-  background-color: rgba(250, 184, 0, 0.724);
-  color: black;
 }

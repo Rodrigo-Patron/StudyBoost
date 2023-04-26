@@ -39,15 +39,17 @@ function SDashboard() {
       <SHeader />
       <Container className="appointment-container">
         <Row className="appointment-row">
-          <p className="title">
-            Hello <span className="student-name">{student.name}</span>, find a
-            teacher and book your appointment
-          </p>
-          <div className="search-bar">
-            <input
-              placeholder="Search..."
-              onChange={(e) => setQuery(e.target.value)}
-            />
+          <div className="top-header">
+            <h3 className="title">
+              Hello <span className="student-name">{student.name}</span>, find a
+              teacher and book your appointment
+            </h3>
+            <div className="search-bar">
+              <input
+                placeholder="Search..."
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </div>
           </div>
           <ListGroup className="teacher-details">
             <ListGroup.Item variant="light">
