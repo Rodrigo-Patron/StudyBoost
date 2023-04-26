@@ -31,14 +31,14 @@
         background-color: rgb(236, 96, 96);
       }
     }
-    .modal-footer {
-      .btn-confirm {
-        background-color: rgb(241, 129, 129);
-        border: rgb(241, 129, 129);
-        &:hover {
-          background-color: rgb(236, 96, 96);
-        }
-      }
+  }
+}
+.modal-footer {
+  .btn-confirm {
+    background-color: rgb(241, 129, 129);
+    border: rgb(241, 129, 129);
+    &:hover {
+      background-color: rgb(236, 96, 96);
     }
   }
 }
