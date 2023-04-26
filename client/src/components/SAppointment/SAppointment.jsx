@@ -170,8 +170,9 @@ function SAppointment() {
                       <hr />
                     </Form>
                   ))
-                : appointment &&
-                  appointment.map((appointment) => (
+                : appointment.length === 0
+                ? "You have no appointments"
+                : appointment.map((appointment) => (
                     <Form key={appointment._id}>
                       <p>
                         <span>Date: </span>
