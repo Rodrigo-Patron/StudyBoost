@@ -19,6 +19,7 @@ function ContextProvider({ children }) {
   const [show, setShow] = useState(true);
   const [availability, setAvailability] = useState();
   const [loginForm, setLoginForm] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <Context.Provider
@@ -43,6 +44,8 @@ function ContextProvider({ children }) {
         availability,
         loginForm,
         setLoginForm,
+        isCollapsed, 
+        setIsCollapsed,
       }}
     >
       {children}

@@ -5,10 +5,11 @@ import { Context } from "../../Context.jsx";
 import { Row, Button, ListGroup, Container } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
 import { useNavigate } from "react-router-dom";
+import { CContainer, CCol, CRow } from '@coreui/bootstrap-react'
 
 function SDashboard() {
   const navigate = useNavigate();
-  const { student, teacher, setTeacher, studentToken } = useContext(Context);
+  const { student, teacher, setTeacher, studentToken, isCollapsed, setIsCollapsed } = useContext(Context);
   const [query, setQuery] = useState("");
 
   //  get all teachers
@@ -34,11 +35,23 @@ function SDashboard() {
       });
   }, []);
 
+  const headerWidth = isCollapsed ? 3 : 1
+  const remainingWidth = 12 - headerWidth
+  
   return (
-    <div className="student-dashboard">
-      <SHeader />
-      <Container className="appointment-container">
-        <Row className="appointment-row">
+  
+//     <div class="d-flex bd-highlight">
+//   <div class="p-2 w-100 bd-highlight">Flex item</div>
+//   <div class="p-2 flex-shrink-1 bd-highlight">Flex item</div>
+// </div>
+
+  // <div className="student-dashboard">
+     
+      <CContainer fluid={true} className="appointment-container" >
+      <CRow>
+    <CCol xs="12" md={headerWidth}> <SHeader/></CCol>
+    <CCol xs="12" md={remainingWidth}>
+    <div className="appointment-row">
           <p className="title">
             Hello <span className="student-name">{student.name}</span>, find a
             teacher and book your appointment
@@ -105,9 +118,13 @@ function SDashboard() {
                   ))}
             </ListGroup.Item>
           </ListGroup>
-        </Row>
-      </Container>
-    </div>
+        </div>
+      
+    </CCol>
+  </CRow>
+        
+      </CContainer>
+    // </div>
   );
 }
 

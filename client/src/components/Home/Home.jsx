@@ -14,7 +14,7 @@ function Home() {
 
  
 
-          <h1 className="name">Study Boost App</h1>
+          <h1 className="name">Study Boost</h1>
           <NavLink to="/teachersPage">
             <Button className="col-xs-6 home-btn" variant="outline-dark">
               Teachers
