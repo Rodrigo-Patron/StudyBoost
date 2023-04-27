@@ -32,16 +32,17 @@ import "react-pro-sidebar/dist/css/styles.css";
 
 
 const SHeader = () => {
-  const { student, setStudent, setStudentToken } = useContext(Context);
+  const { student, setStudent, setStudentToken, isCollapsed, setIsCollapsed } = useContext(Context);
   const navigate = useNavigate();
 
   //create initial menuCollapse state using useState hook
-  const [menuCollapse, setMenuCollapse] = useState(false);
+  const [menuCollapse, setMenuCollapse] = useState(true);
 
   //create a custom function that will change menuCollapse state from false to true and true to false
   const menuIconClick = () => {
     //condition checking to change state from true to false and vice versa
-    menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
+    setMenuCollapse(!menuCollapse);
+    setIsCollapsed(menuCollapse)
   };
 
   function logoutHandler() {
@@ -66,15 +67,15 @@ const SHeader = () => {
                   <img
                     src={collapsedLogo}
                     className="collapsedLogo"
-                    width="50"
-                    height="50"
+                    width="70"
+                    height="70"
                     alt="collapsedLogo"
                   />
                 ) : (
                   <img
                     src={logo}
                     className="logo"
-                    width="250"
+                    width="300"
                     height="150"
                     alt="logo"
                   />
@@ -105,7 +106,7 @@ const SHeader = () => {
           <SidebarFooter>
             <Menu iconShape="square">
               {/* <Logout /> */}
-              <MenuItem onClick={logoutHandler} icon={<FiLogOut />}>
+              <MenuItem active={true} onClick={logoutHandler} icon={<FiLogOut />}>
                 Logout
               </MenuItem>
             </Menu>

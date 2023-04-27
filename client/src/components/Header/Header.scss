@@ -1,7 +1,8 @@
 #header {
   position: fixed;
   z-index: 2;
-  width: 300px;
+  width: 20%;
+  // margin-right: 10vw;
 }
 #header .pro-sidebar {
   height: 100vh;
@@ -81,6 +82,16 @@
     overflow: hidden;
   }
 }
+
+// @media (max-width: 1070px) {
+//   #header {
+//     position: fixed;
+//   z-index: 2;
+//   width: 10%;
+//   margin-right: 10vw;
+//   }
+// }
+
 // @media (max-width: 576px) {
 //   #header {
 //     display: none;
