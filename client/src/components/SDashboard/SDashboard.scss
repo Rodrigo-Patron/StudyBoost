@@ -1,9 +1,8 @@
-.student-dashboard {
-  .appointment-container {
-    width: 50rem;
-    .appointment-row {
-      margin: 2rem 3rem;
-
+.dashboard-container {
+  .dashboard-row {
+    .appointment-container {
+      margin: 2rem auto;
+      width: 70%;
       .top-header {
         display: flex;
         justify-content: space-between;
