@@ -9,10 +9,9 @@ import {
   Row,
   Container,
 } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Context } from "../../Context.jsx";
-
-// import { FaTrashAlt } from "react-icons/fa";
+import { CListGroup } from "@coreui/bootstrap-react";
 
 function SAppointment() {
   const { studentToken, appointment, setAppointment, student } =
@@ -20,6 +19,9 @@ function SAppointment() {
   const [show, setShow] = useState(false);
   const [counter, setCounter] = useState(0);
   const [query, setQuery] = useState(null);
+  const [id, setId] = useState();
+
+  const inputValue = useRef();
 
   // get all appointments
   useEffect(() => {
@@ -43,8 +45,14 @@ function SAppointment() {
       });
   }, [counter, query]);
 
+  //this helps us to grab the id of the appointment
+  const cancelHandler = (appointment) => {
+    setShow(true);
+    setId(appointment._id);
+  };
+
   //delete appointment
-  function deleteHandler(appointment) {
+  function deleteHandler() {
     const config = {
       method: "DELETE",
       headers: {
@@ -52,7 +60,7 @@ function SAppointment() {
       },
     };
 
-    fetch(`http://localhost:6500/api/appointments/${appointment._id}`, config)
+    fetch(`http://localhost:6500/api/appointments/${id}`, config)
       .then((res) => {
         if (!res.ok) {
           res.json().then((err) => console.log(err));
@@ -61,8 +69,10 @@ function SAppointment() {
         return res.json();
       })
       .then((result) => {
-        //everytime an appointment its deleted the counter changes
+        //every time an appointment is deleted the counter changes
         setCounter(counter + 1);
+        setQuery(null);
+        inputValue.current.value = "";
 
         console.log("RESULT:", result);
       })
@@ -102,7 +112,11 @@ function SAppointment() {
           <div className="top-header">
             <h2>Your booked appointments:</h2>
             <div className="search-bar">
-              <input placeholder="Search..." onChange={filterHandler} />
+              <input
+                placeholder="Search..."
+                onChange={filterHandler}
+                ref={inputValue}
+              />
             </div>
           </div>
           <ListGroup>
@@ -133,12 +147,11 @@ function SAppointment() {
                         </span>
                       </p>{" "}
                       <Button
-                        onClick={() => setShow(true)}
                         variant="danger"
                         size="sm"
+                        onClick={() => cancelHandler(appointment)}
                       >
                         Cancel
-                        {/* <FaTrashAlt /> */}
                       </Button>
                       <Modal
                         show={show}
@@ -161,7 +174,7 @@ function SAppointment() {
                             size="sm"
                             className="btn-confirm"
                             variant="primary"
-                            onClick={() => deleteHandler(appointment)}
+                            onClick={deleteHandler}
                           >
                             Confirm
                           </Button>
@@ -195,12 +208,11 @@ function SAppointment() {
                         </span>
                       </p>{" "}
                       <Button
-                        onClick={() => setShow(true)}
+                        onClick={() => cancelHandler(appointment)}
                         variant="danger"
                         size="sm"
                       >
                         Cancel
-                        {/* <FaTrashAlt /> */}
                       </Button>
                       <Modal
                         show={show}
