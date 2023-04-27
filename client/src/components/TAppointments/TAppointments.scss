@@ -1,0 +1,44 @@
+.appointments {
+  .appointment-row {
+    margin: 2rem 3rem;
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+
+      .search-bar {
+        input {
+          border: 1.5px solid rgb(212, 212, 212);
+          border-radius: 5px;
+          padding: 0.3rem;
+
+          &:active {
+            outline: none;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .btn {
+      background-color: rgb(241, 129, 129);
+      border: none;
+      &:hover {
+        background-color: rgb(236, 96, 96);
+      }
+    }
+  }
+}
+.modal-footer {
+  .btn-confirm {
+    background-color: rgb(241, 129, 129);
+    border: rgb(241, 129, 129);
+    &:hover {
+      background-color: rgb(236, 96, 96);
+    }
+  }
+}
