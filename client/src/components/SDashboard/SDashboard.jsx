@@ -56,7 +56,7 @@ function SDashboard() {
           <h3 className="title">
             Hello <span className="student-name">{student.name}</span>, find a
             teacher and book your appointment
-          </>
+          </h3>
           <div className="search-bar">
             <input
               placeholder="Search..."
