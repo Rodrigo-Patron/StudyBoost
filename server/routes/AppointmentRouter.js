@@ -28,7 +28,7 @@ AppointmentRouter
     }
   })
   // get appointments of a specific teacher
-  .get("/teacher/:teacherId/", async (req, res, next) => {
+  .get("/teacher/:teacherId", async (req, res, next) => {
     try {
       let findAppointment = Appointment.find({
         teacher: req.params.teacherId,
