@@ -68,24 +68,28 @@ function Availabilities() {
 
     fetch("http://localhost:6500/api/appointments", config)
       .then((res) => {
-        if (!res.ok) {
-          return res.json().then((err) => {
-            console.log(err);
-            setErrors(err);
+        if (res.status === 400) {
+          return Swal.fire({
+            icon: "error",
+            title: "Booking failed",
+            text: "Time already booked",
+          });
+        } else if (res.status === 200) {
+          return Swal.fire({
+            icon: "success",
+            title: "Good job",
+            text: "Appointment booked",
           });
         }
         return res.json();
       })
       .then((result) => {
-        // console.log("result:", result);
+        navigate("/studentDashboard");
+        // console.log(result);
       })
       .catch((err) => {
-        setErrors(err);
-        // console.log(err);
+        // console.log(err, "coming from catch");
       });
-    // alert("Appointment booked");
-    Swal.fire("Good job!", "You have booked an appointment!", "success");
-    navigate("/studentDashboard");
   };
 
   const t = (e) => {
