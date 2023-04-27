@@ -52,8 +52,6 @@ function SDashboard() {
     //   <div class="p-2 flex-shrink-1 bd-highlight">Flex item</div>
     // </div>
 
-    // <div className="student-dashboard">
-
     <CContainer fluid={true} className="dashboard-container">
       <CRow className="dashboard-row">
         <CCol xs="12" md={headerWidth}>
@@ -132,7 +130,6 @@ function SDashboard() {
         </CCol>
       </CRow>
     </CContainer>
-    // </div>
   );
 }
 
