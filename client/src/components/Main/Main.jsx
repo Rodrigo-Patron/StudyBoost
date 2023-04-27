@@ -9,6 +9,7 @@ import SDashboard from "../SDashboard/SDashboard.jsx";
 import About from "../About/About";
 import Availabilities from "../Availabilities/Availabilities";
 import SAppointment from "../SAppointment/SAppointment";
+import TAppointments from "../TAppointments/TAppointments";
 
 function Main() {
   return (
@@ -24,6 +25,7 @@ function Main() {
         </Route>
         <Route path="availability">
           <Route index element={<TAvailability />} />
+          <Route path="teacherAppointments" element={<TAppointments />} />
         </Route>
         <Route path="studentsPage">
           <Route index element={<StudentsPage />} />

@@ -1,6 +1,6 @@
 import React from "react";
-import "./SAppointment.scss";
-import SHeader from "../S-Header/SHeader";
+import "./TAppointments.scss";
+import THeader from "../T-Header/THeader";
 import {
   ListGroup,
   Button,
@@ -14,8 +14,8 @@ import { Context } from "../../Context.jsx";
 
 // import { FaTrashAlt } from "react-icons/fa";
 
-function SAppointment() {
-  const { studentToken, appointment, setAppointment, student } =
+function TAppointments() {
+  const { teacherToken, appointment, setAppointment, teacher } =
     useContext(Context);
   const [show, setShow] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -25,11 +25,11 @@ function SAppointment() {
   useEffect(() => {
     const config = {
       headers: {
-        Authorization: `Bearer ${studentToken}`,
+        Authorization: `Bearer ${teacherToken}`,
       },
     };
 
-    fetch(`http://localhost:6500/api/appointments/${student._id}`, config)
+    fetch(`http://localhost:6500/api/appointments/teacher/${teacher._id}`, config)
       .then((res) => {
         if (!res.ok) {
           res.json().then((err) => console.log(err));
@@ -41,14 +41,14 @@ function SAppointment() {
         console.log("result", result);
         setAppointment(result);
       });
-  }, [counter, query]);
+  }, [counter, query, setAppointment, teacher._id, teacherToken]);
 
   //delete appointment
   function deleteHandler(appointment) {
     const config = {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${studentToken}`,
+        Authorization: `Bearer ${teacherToken}`,
       },
     };
 
@@ -61,7 +61,7 @@ function SAppointment() {
         return res.json();
       })
       .then((result) => {
-        //everytime an appointment its deleted the counter changes
+        //every time an appointment its deleted the counter changes
         setCounter(counter + 1);
 
         console.log("RESULT:", result);
@@ -80,12 +80,13 @@ function SAppointment() {
         new Date(appointment.date)
           .toLocaleDateString(navigator.language)
           .includes(e.target.value) ||
-        appointment.teacher.name
+        appointment.student.name
           .toLowerCase()
           .includes(e.target.value.toLowerCase())
       ) {
         return appointment;
       }
+      return false
     });
     if (filteredAppointment.length === 0) {
       setQuery("Appointment not found");
@@ -96,7 +97,7 @@ function SAppointment() {
 
   return (
     <div>
-      <SHeader />
+      <THeader />
       <Container className="appointments">
         <Row className="appointment-row">
           <div className="top-header">
@@ -127,9 +128,9 @@ function SAppointment() {
                         </span>{" "}
                       </p>
                       <p>
-                        <span>Teacher: </span>
+                        <span>Student: </span>
                         <span className="task-input">
-                          {appointment.teacher.name}
+                          {appointment.student.name}
                         </span>
                       </p>{" "}
                       <Button
@@ -189,9 +190,9 @@ function SAppointment() {
                         </span>{" "}
                       </p>
                       <p>
-                        <span>Teacher: </span>
+                        <span>Student: </span>
                         <span className="task-input">
-                          {appointment.teacher.name}
+                          {appointment.student.name}
                         </span>
                       </p>{" "}
                       <Button
@@ -240,4 +241,4 @@ function SAppointment() {
   );
 }
 
-export default SAppointment;
+export default TAppointments;

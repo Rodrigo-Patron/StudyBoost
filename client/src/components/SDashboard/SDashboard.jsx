@@ -52,15 +52,22 @@ function SDashboard() {
     <CCol xs="12" md={headerWidth}> <SHeader/></CCol>
     <CCol xs="12" md={remainingWidth}>
     <div className="appointment-row">
-          <p className="title">
+    <div className="top-header">
+          <h3 className="title">
             Hello <span className="student-name">{student.name}</span>, find a
             teacher and book your appointment
-          </p>
+          </>
           <div className="search-bar">
             <input
               placeholder="Search..."
-              onChange={(e) => setQuery(e.target.value)}
+        
+       onChange={(e) => setQuery(e.target.value)}
+       
+      
             />
+            </div>   
+
+
           </div>
           <ListGroup className="teacher-details">
             <ListGroup.Item variant="light">

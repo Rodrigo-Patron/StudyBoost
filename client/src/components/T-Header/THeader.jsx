@@ -81,11 +81,11 @@ const THeader = () => {
                 </div>
               </div>
               <Menu iconShape="square">
-                <MenuItem active={true} icon={<FaList />}>
-                  <Link to="/appointments">Appointments</Link>
-                </MenuItem>
                 <MenuItem active={true} icon={<RiPencilLine />}>
-                  <Link to="/availability">Availability</Link>
+                  <Link to="/availability">Set Availability</Link>
+                </MenuItem>
+                <MenuItem active={true} icon={<FaList/>}>
+                  <Link to="/availability/teacherAppointments">Appointments</Link>
                 </MenuItem>
                 <MenuItem icon={<i className="fa fa-bell"></i>}>
                   <Link to="/notifications">Notifications</Link>
