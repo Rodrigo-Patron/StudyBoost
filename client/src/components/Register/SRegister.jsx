@@ -88,7 +88,7 @@ function SRegister() {
         </ListGroup>
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
-            <FormControl type="email" ref={emailInput} placeholder="Email" />
+            <FormControl type="text" ref={emailInput} placeholder="Email" />
           </ListGroup.Item>
         </ListGroup>
         <ListGroup className="input-container">
