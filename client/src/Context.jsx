@@ -4,7 +4,7 @@ export const Context = createContext(null);
 
 const defaultTeacherToken =
   JSON.parse(localStorage.getItem("teacherToken")) || null;
-const defaultTeacher = JSON.parse(localStorage.getItem("teacher")) || null;
+const defaultTeacher = JSON.parse(localStorage.getItem("teacher")) || [];
 const defaultStudentToken =
   JSON.parse(localStorage.getItem("studentToken")) || null;
 const defaultStudent = JSON.parse(localStorage.getItem("student")) || null;
@@ -44,7 +44,7 @@ function ContextProvider({ children }) {
         availability,
         loginForm,
         setLoginForm,
-        isCollapsed, 
+        isCollapsed,
         setIsCollapsed,
       }}
     >

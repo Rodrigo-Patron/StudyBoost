@@ -2,7 +2,7 @@ import React from "react";
 import "./SDashboard.scss";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../Context.jsx";
-import { Row, Button, ListGroup, Container } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
 import { useNavigate } from "react-router-dom";
 import { CContainer, CCol, CRow } from "@coreui/bootstrap-react";
@@ -17,7 +17,7 @@ function SDashboard() {
     isCollapsed,
     setIsCollapsed,
   } = useContext(Context);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(null);
 
   //  get all teachers
   useEffect(() => {
@@ -43,6 +43,22 @@ function SDashboard() {
       });
   }, []);
 
+  const filterHandler = (e) => {
+    const filteredTeacher = teacher.filter((teacher) => {
+      if (
+        teacher.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        teacher.subjects.toLowerCase().includes(e.target.value.toLowerCase())
+      ) {
+        return teacher;
+      }
+    });
+    if (filteredTeacher.length === 0) {
+      setQuery("Teacher not found");
+    } else {
+      setQuery(filteredTeacher);
+    }
+  };
+
   const headerWidth = isCollapsed ? 3 : 1;
   const remainingWidth = 12 - headerWidth;
 
@@ -65,43 +81,25 @@ function SDashboard() {
               teacher and book your appointment
             </h3>
             <div className="search-bar">
-              <input
-                placeholder="Search..."
-                onChange={(e) => setQuery(e.target.value)}
-              />
+              <input placeholder="Search..." onChange={filterHandler} />
             </div>
           </div>
           <ListGroup className="teacher-details">
             <ListGroup.Item variant="light">
-              {teacher &&
-                teacher
-                  .filter((appointment) => {
-                    if (query === "") {
-                      return appointment;
-                    } else if (
-                      appointment.name
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      appointment.subjects
-                        .toLowerCase()
-                        .includes(query.toLowerCase())
-                    ) {
-                      return appointment;
-                    }
-                  })
-                  .map((appointment) => (
-                    <div key={appointment._id}>
+              {query === "Teacher not found"
+                ? "Teacher not found"
+                : query
+                ? query.map((teacher) => (
+                    <div key={teacher._id}>
                       <p>
                         <span>Name: </span>{" "}
-                        <span className="teacher-input">
-                          {appointment.name}
-                        </span>
+                        <span className="teacher-input">{teacher.name}</span>
                       </p>
 
                       <p>
                         <span>Subject:</span>{" "}
                         <span className="teacher-input">
-                          {appointment.subjects}
+                          {teacher.subjects}
                         </span>{" "}
                       </p>
 
@@ -109,15 +107,47 @@ function SDashboard() {
                         size="sm"
                         className="appointment-btn"
                         disabled={
-                          !appointment.availabilityByTeacher.length
-                            ? true
-                            : false
+                          !teacher.availabilityByTeacher.length ? true : false
                         }
                         onClick={(e) => {
-                          navigate(`/studentDashboard/${appointment._id}`);
+                          navigate(`/studentDashboard/${teacher._id}`);
                         }}
                       >
-                        {!appointment.availabilityByTeacher.length
+                        {!teacher.availabilityByTeacher.length
+                          ? "No availability"
+                          : "Book appointment"}
+                      </Button>
+
+                      <hr />
+                    </div>
+                  ))
+                : teacher.length === 0
+                ? "There is no teacher available"
+                : teacher.map((teacher) => (
+                    <div key={teacher._id}>
+                      <p>
+                        <span>Name: </span>{" "}
+                        <span className="teacher-input">{teacher.name}</span>
+                      </p>
+
+                      <p>
+                        <span>Subject:</span>{" "}
+                        <span className="teacher-input">
+                          {teacher.subjects}
+                        </span>{" "}
+                      </p>
+
+                      <Button
+                        size="sm"
+                        className="appointment-btn"
+                        disabled={
+                          !teacher.availabilityByTeacher.length ? true : false
+                        }
+                        onClick={(e) => {
+                          navigate(`/studentDashboard/${teacher._id}`);
+                        }}
+                      >
+                        {!teacher.availabilityByTeacher.length
                           ? "No availability"
                           : "Book appointment"}
                       </Button>
