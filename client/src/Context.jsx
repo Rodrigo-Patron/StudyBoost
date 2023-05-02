@@ -7,7 +7,7 @@ const defaultTeacherToken =
 const defaultTeacher = JSON.parse(localStorage.getItem("teacher")) || [];
 const defaultStudentToken =
   JSON.parse(localStorage.getItem("studentToken")) || null;
-const defaultStudent = JSON.parse(localStorage.getItem("student")) || null;
+const defaultStudent = JSON.parse(localStorage.getItem("student")) || [];
 function ContextProvider({ children }) {
   const [teacher, setTeacher] = useState(defaultTeacher);
   const [student, setStudent] = useState(defaultStudent);
