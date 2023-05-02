@@ -173,7 +173,7 @@ function TAvailability() {
       }
     }
     const formData = {
-      date: datePicked,
+      date: new Date(datePicked).toLocaleDateString(navigator.language),
       time: timeArr.length === 1 ? timeArr[0] : timeArr,
     };
 
@@ -199,7 +199,6 @@ function TAvailability() {
       .then((result) => {
         console.log(result);
         setLastSelectedDate({ date: result.date, time: result.time });
-      
 
         // Clear the timeSlot state after a successful submission
         setTimeSlot({

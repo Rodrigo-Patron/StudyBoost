@@ -41,7 +41,7 @@ function SDashboard() {
         //^ new teacher show at the top
         setTeacher(result);
       });
-  }, []);
+  }, [query]);
 
   const filterHandler = (e) => {
     const filteredTeacher = teacher.filter((teacher) => {
@@ -52,6 +52,7 @@ function SDashboard() {
         return teacher;
       }
     });
+
     if (filteredTeacher.length === 0) {
       setQuery("Teacher not found");
     } else {
@@ -121,40 +122,42 @@ function SDashboard() {
                       <hr />
                     </div>
                   ))
-                : teacher.length === 0
-                ? "There is no teacher available"
-                : teacher.map((teacher) => (
-                    <div key={teacher._id}>
-                      <p>
-                        <span>Name: </span>{" "}
-                        <span className="teacher-input">{teacher.name}</span>
-                      </p>
+                : teacher
+                ? teacher.length === 0
+                  ? "There is no teacher available"
+                  : teacher.map((teacher) => (
+                      <div key={teacher._id}>
+                        <p>
+                          <span>Name: </span>{" "}
+                          <span className="teacher-input">{teacher.name}</span>
+                        </p>
 
-                      <p>
-                        <span>Subject:</span>{" "}
-                        <span className="teacher-input">
-                          {teacher.subjects}
-                        </span>{" "}
-                      </p>
+                        <p>
+                          <span>Subject:</span>{" "}
+                          <span className="teacher-input">
+                            {teacher.subjects}
+                          </span>{" "}
+                        </p>
 
-                      <Button
-                        size="sm"
-                        className="appointment-btn"
-                        disabled={
-                          !teacher.availabilityByTeacher.length ? true : false
-                        }
-                        onClick={(e) => {
-                          navigate(`/studentDashboard/${teacher._id}`);
-                        }}
-                      >
-                        {!teacher.availabilityByTeacher.length
-                          ? "No availability"
-                          : "Book appointment"}
-                      </Button>
+                        <Button
+                          size="sm"
+                          className="appointment-btn"
+                          disabled={
+                            !teacher.availabilityByTeacher.length ? true : false
+                          }
+                          onClick={(e) => {
+                            navigate(`/studentDashboard/${teacher._id}`);
+                          }}
+                        >
+                          {!teacher.availabilityByTeacher.length
+                            ? "No availability"
+                            : "Book appointment"}
+                        </Button>
 
-                      <hr />
-                    </div>
-                  ))}
+                        <hr />
+                      </div>
+                    ))
+                : null}
             </ListGroup.Item>
           </ListGroup>
         </CCol>

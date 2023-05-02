@@ -2,7 +2,6 @@ import express from "express";
 import createError from "http-errors";
 import Availability from "../models/Availability.js";
 import Teacher from "../models/Teacher.js";
-import Mongoose from "mongoose";
 
 // define availability router
 const AvailabilityRouter = express.Router();
@@ -20,7 +19,61 @@ AvailabilityRouter
       const query = findAvailability;
       query.populate("teacher", "name -_id");
       findAvailability = await query.exec();
-      res.send(findAvailability);
+
+      // delete all past times
+      (await findAvailability).map((av) => {
+        // let currentDate = new Date();
+        // let currentYear = currentDate.getFullYear();
+        // let currentDay = currentDate.getDay();
+        // let currentMonth = currentDate.getMonth() + 1;
+        // let currentHour = currentDate.getHours();
+        // let currentMinutes = currentDate.getMinutes();
+
+        let yearFromDB = av.date.split("/")[av.date.split("/").length - 1];
+        let dayFromDB = av.date.split("/")[1];
+        let monthFromDB = av.date.split("/")[0];
+        av.time.forEach((t) => {
+          let dateFromDb = new Date(
+            `${monthFromDB}/${dayFromDB}/${yearFromDB} :${t
+              .split("-")[0]
+              .trim()}`
+          );
+          let currentDate = new Date();
+          console.log(dateFromDb < currentDate);
+          if (dateFromDb < currentDate) {
+            // delete time from database
+            Availability.findByIdAndUpdate(
+              av._id,
+              {
+                $pull: { time: t },
+              },
+              { new: true }
+            ).then((dr) => {
+              console.log(dr);
+            });
+          }
+        });
+      });
+      ///////////////
+
+      //to delete availability once is empty/ no more that day
+      const findAv = await Availability.findOneAndDelete({
+        time: [],
+      });
+      // console.log(findAvailability);
+      if (findAv) {
+        const deleteAv = await Teacher.findById(findAv.teacher);
+        // console.log(deleteAv);
+
+        deleteAv.availabilityByTeacher = deleteAv.availabilityByTeacher.filter(
+          (x) => x.toString() !== findAv._id.toString()
+        );
+        await deleteAv.save();
+      }
+      let findAvailability1 = await Availability.find({
+        teacher: req.params.teacherId,
+      }).sort({ date: 1, time: 1 });
+      res.send(findAvailability1);
     } catch (error) {
       next(createError(500, error.message));
     }
