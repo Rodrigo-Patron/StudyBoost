@@ -173,7 +173,6 @@ function Availabilities() {
         </ListGroup>
         <Button
           className="back-btn"
-          size="sm"
           onClick={(e) => {
             navigate("/studentDashboard");
           }}
