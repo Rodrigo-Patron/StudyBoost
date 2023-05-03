@@ -11,6 +11,7 @@ function Availabilities() {
   const { studentToken, setAvailability, availability, setErrors } =
     useContext(Context);
   const [query, setQuery] = useState("");
+  const [reqAgain, setReqAgain] = useState(false);
 
   //^ NAVIGATE
   const navigate = useNavigate();
@@ -38,10 +39,16 @@ function Availabilities() {
         return res.json();
       })
       .then((result) => {
-        // console.log("result:", result);
-        setAvailability(result);
+        console.log(result);
+
+        if (result.requestAgain) {
+          setAvailability(result.findAvailability1);
+          setReqAgain(!reqAgain);
+        } else {
+          setAvailability(result);
+        }
       });
-  }, []);
+  }, [reqAgain]);
 
   const dateInput = useRef();
 

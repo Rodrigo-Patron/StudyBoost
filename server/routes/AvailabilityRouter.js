@@ -15,20 +15,8 @@ AvailabilityRouter
         teacher: req.params.teacherId,
       }).sort({ date: 1, time: 1 });
 
-      //to populate and show availability
-      const query = findAvailability;
-      query.populate("teacher", "name -_id");
-      findAvailability = await query.exec();
-
       // delete all past times
-      (await findAvailability).map((av) => {
-        // let currentDate = new Date();
-        // let currentYear = currentDate.getFullYear();
-        // let currentDay = currentDate.getDay();
-        // let currentMonth = currentDate.getMonth() + 1;
-        // let currentHour = currentDate.getHours();
-        // let currentMinutes = currentDate.getMinutes();
-
+      const av = (await findAvailability).map((av) => {
         let yearFromDB = av.date.split("/")[av.date.split("/").length - 1];
         let dayFromDB = av.date.split("/")[1];
         let monthFromDB = av.date.split("/")[0];
@@ -39,7 +27,7 @@ AvailabilityRouter
               .trim()}`
           );
           let currentDate = new Date();
-          console.log(dateFromDb < currentDate);
+          // console.log(dateFromDb < currentDate);
           if (dateFromDb < currentDate) {
             // delete time from database
             Availability.findByIdAndUpdate(
@@ -48,12 +36,13 @@ AvailabilityRouter
                 $pull: { time: t },
               },
               { new: true }
-            ).then((dr) => {
-              console.log(dr);
+            ).then((deletedAv) => {
+              console.log("deleteAv", deletedAv);
             });
           }
         });
       });
+
       ///////////////
 
       //to delete availability once is empty/ no more that day
@@ -70,9 +59,21 @@ AvailabilityRouter
         );
         await deleteAv.save();
       }
-      let findAvailability1 = await Availability.find({
+      let findAvailability1 = Availability.find({
         teacher: req.params.teacherId,
       }).sort({ date: 1, time: 1 });
+
+      //to populate and show availability
+      const query = findAvailability1;
+      query.populate("teacher", "name -_id");
+      findAvailability1 = await query.exec();
+      console.log("FIND:", findAvailability1);
+
+      if (av.length > (await findAvailability1).length) {
+        res.send({ findAvailability1, requestAgain: true });
+        return;
+      }
+
       res.send(findAvailability1);
     } catch (error) {
       next(createError(500, error.message));

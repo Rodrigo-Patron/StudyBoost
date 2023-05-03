@@ -22,11 +22,39 @@ AppointmentRouter
       query.populate("teacher", "name -_id");
       query.populate("student", "name -_id");
       findAppointment = await query.exec();
+
+      // delete all past appointments
+
+      (await findAppointment).map((ap) => {
+        let yearFromDB = ap.date.split("/")[ap.date.split("/").length - 1];
+        let dayFromDB = ap.date.split("/")[1];
+        let monthFromDB = ap.date.split("/")[0];
+        let dateFromDb = new Date(
+          `${monthFromDB}/${dayFromDB}/${yearFromDB} :${ap.time
+            .split("-")[0]
+            .trim()}`
+        );
+
+        let currentDate = new Date();
+        // console.log(dateFromDb < currentDate);
+        if (dateFromDb < currentDate) {
+          // delete appointment from database
+          Appointment.findByIdAndDelete(ap._id).then((de) => {
+            console.log(de);
+          });
+        }
+      });
+
+      // let findAppointment1 = await Appointment.find({
+      //   student: req.params.studentId,
+      // }).sort({ date: 1, time: 1 });
+
       res.send(findAppointment);
     } catch (error) {
       next(createError(500, error.message));
     }
   })
+
   // get appointments of a specific teacher
   .get("/teacher/:teacherId", async (req, res, next) => {
     try {

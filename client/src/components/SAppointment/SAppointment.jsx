@@ -12,7 +12,6 @@ import {
 import { useContext, useEffect, useState, useRef } from "react";
 import { Context } from "../../Context.jsx";
 
-
 function SAppointment() {
   const { studentToken, appointment, setAppointment, student } =
     useContext(Context);
@@ -183,67 +182,69 @@ function SAppointment() {
                       <hr />
                     </Form>
                   ))
-                : appointment.length === 0
-                ? "You have no appointments"
-                : appointment.map((appointment) => (
-                    <Form key={appointment._id}>
-                      <p>
-                        <span>Date: </span>
-                        <span className="task-input">
-                          {new Date(appointment.date).toLocaleDateString(
-                            navigator.language
-                          )}
-                        </span>
-                      </p>
-                      <p>
-                        <span>Time: </span>
-                        <span className="task-input">
-                          {appointment.time}
-                        </span>{" "}
-                      </p>
-                      <p>
-                        <span>Teacher: </span>
-                        <span className="task-input">
-                          {appointment.teacher.name}
-                        </span>
-                      </p>{" "}
-                      <Button
-                        onClick={() => cancelHandler(appointment)}
-                        variant="danger"
-                        size="sm"
-                      >
-                        Cancel
-                      </Button>
-                      <Modal
-                        show={show}
-                        backdrop="static"
-                        keyboard={false}
-                        centered
-                      >
-                        <Modal.Body>
-                          Are you sure to delete this appointment?{" "}
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={handleClose}
-                          >
-                            Close
-                          </Button>
-                          <Button
-                            size="sm"
-                            className="btn-confirm"
-                            variant="primary"
-                            onClick={() => deleteHandler(appointment)}
-                          >
-                            Confirm
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                      <hr />
-                    </Form>
-                  ))}
+                : appointment
+                ? appointment.length === 0
+                  ? "You have no appointments"
+                  : appointment.map((appointment) => (
+                      <Form key={appointment._id}>
+                        <p>
+                          <span>Date: </span>
+                          <span className="task-input">
+                            {new Date(appointment.date).toLocaleDateString(
+                              navigator.language
+                            )}
+                          </span>
+                        </p>
+                        <p>
+                          <span>Time: </span>
+                          <span className="task-input">
+                            {appointment.time}
+                          </span>{" "}
+                        </p>
+                        <p>
+                          <span>Teacher: </span>
+                          <span className="task-input">
+                            {appointment.teacher.name}
+                          </span>
+                        </p>{" "}
+                        <Button
+                          onClick={() => cancelHandler(appointment)}
+                          variant="danger"
+                          size="sm"
+                        >
+                          Cancel
+                        </Button>
+                        <Modal
+                          show={show}
+                          backdrop="static"
+                          keyboard={false}
+                          centered
+                        >
+                          <Modal.Body>
+                            Are you sure to delete this appointment?{" "}
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              onClick={handleClose}
+                            >
+                              Close
+                            </Button>
+                            <Button
+                              size="sm"
+                              className="btn-confirm"
+                              variant="primary"
+                              onClick={() => deleteHandler(appointment)}
+                            >
+                              Confirm
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
+                        <hr />
+                      </Form>
+                    ))
+                : null}
             </ListGroup.Item>
           </ListGroup>
         </Row>

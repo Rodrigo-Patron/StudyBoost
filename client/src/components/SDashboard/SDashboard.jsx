@@ -5,21 +5,14 @@ import { Context } from "../../Context.jsx";
 import { Button, ListGroup } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
 import { useNavigate } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function SDashboard() {
   const navigate = useNavigate();
-  const {
-    student,
-    teacher,
-    setTeacher,
-    studentToken,
-    isCollapsed,
-    setIsCollapsed,
-  } = useContext(Context);
+  const { student, teacher, setTeacher, studentToken, isCollapsed } =
+    useContext(Context);
   const [query, setQuery] = useState(null);
 
   //  get all teachers
