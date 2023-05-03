@@ -5,7 +5,10 @@ import { Context } from "../../Context.jsx";
 import { Button, ListGroup } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
 import { useNavigate } from "react-router-dom";
-import { CContainer, CCol, CRow } from "@coreui/bootstrap-react";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 function SDashboard() {
   const navigate = useNavigate();
@@ -69,13 +72,13 @@ function SDashboard() {
     //   <div class="p-2 flex-shrink-1 bd-highlight">Flex item</div>
     // </div>
 
-    <CContainer fluid={true} className="dashboard-container">
-      <CRow className="dashboard-row">
-        <CCol xs="12" md={headerWidth}>
+    <Container fluid={true} className="dashboard-container">
+      <Row className="dashboard-row">
+        <Col xs="12" md={headerWidth}>
           {" "}
           <SHeader />
-        </CCol>
-        <CCol className="appointment-container" xs="12" md={remainingWidth}>
+        </Col>
+        <Col className="appointment-container" xs="12" md={remainingWidth}>
           <div className="top-header">
             <h3 className="title">
               Hello <span className="student-name">{student.name}</span>, find a
@@ -160,9 +163,9 @@ function SDashboard() {
                 : null}
             </ListGroup.Item>
           </ListGroup>
-        </CCol>
-      </CRow>
-    </CContainer>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
