@@ -99,6 +99,13 @@
   margin-top: 20px;
 }
 
+.pro-sidebar .pro-menu li:hover {
+  background-color: rgba(250, 184, 0, 0.924);
+}
+.pro-sidebar .pro-menu li:hover * {
+  color: black;
+}
+
 @media only screen and (max-width: 720px) {
   html {
     overflow: hidden;

@@ -54,7 +54,7 @@ function TLogin() {
         localStorage.setItem("teacher", JSON.stringify(result.teacher));
         setTeacherToken(result.token);
         setTeacher(result.teacher);
-        navigate("/availability");
+        navigate("/teacherDashboard");
       })
       .catch((err) => {
         console.log(err, "coming from catch");

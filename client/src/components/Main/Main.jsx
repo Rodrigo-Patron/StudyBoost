@@ -3,13 +3,14 @@ import "./Main.scss";
 import React from "react";
 import Home from "../Home/Home";
 import TeachersPage from "../TeachersPage/TeachersPage.jsx";
-import TAvailability from "../TAvailability/TAvailability.jsx";
+import TDashboard from "../TDashboard/TDashboard.jsx";
 import StudentsPage from "../StudentsPage/StudentsPage.jsx";
 import SDashboard from "../SDashboard/SDashboard.jsx";
 import About from "../About/About";
 import Availabilities from "../Availabilities/Availabilities";
 import SAppointment from "../SAppointment/SAppointment";
 import TAppointments from "../TAppointments/TAppointments";
+import TAvailability from "../TAvailability/TAvailability.jsx";
 
 function Main() {
   return (
@@ -23,8 +24,9 @@ function Main() {
         <Route path="/teachersPage">
           <Route index element={<TeachersPage />} />
         </Route>
-        <Route path="availability">
-          <Route index element={<TAvailability />} />
+        <Route path="teacherDashboard">
+          <Route index element={<TDashboard />} />
+          <Route path="availability" element={<TAvailability />} />
           <Route path="teacherAppointments" element={<TAppointments />} />
         </Route>
         <Route path="studentsPage">

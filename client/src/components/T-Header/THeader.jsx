@@ -24,6 +24,7 @@ import {
   FiLogOut,
 } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
+import {BsCalendar3} from "react-icons/bs"
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
@@ -81,15 +82,20 @@ const THeader = () => {
                 </div>
               </div>
               <Menu iconShape="square">
-                <MenuItem active={true} icon={<RiPencilLine />}>
-                  <Link to="/availability">Set Availability</Link>
+                <MenuItem icon={<RiPencilLine />}>
+                  <Link to="/teacherDashboard">Set Availability</Link>
                 </MenuItem>
-                <MenuItem active={true} icon={<FaList/>}>
-                  <Link to="/availability/teacherAppointments">Appointments</Link>
+                <MenuItem icon={<BsCalendar3 /> }>
+                  <Link to="/teacherDashboard/availability">Your Availability</Link>
                 </MenuItem>
-                <MenuItem icon={<i className="fa fa-bell"></i>}>
+                <MenuItem  icon={<FaList/>}>
+                  <Link to="/teacherDashboard/teacherAppointments">Appointments</Link>
+                </MenuItem>
+              
+                {/* <MenuItem icon={<i className="fa fa-bell"></i>}>
                   <Link to="/notifications">Notifications</Link>
-                </MenuItem>
+                </MenuItem> */}
+
                 {/* <MenuItem icon={<i className="fa fa-envelope"></i>}>
                   <Link to="/messages">Messages</Link>
                 </MenuItem>
