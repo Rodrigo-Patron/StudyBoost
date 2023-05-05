@@ -2,12 +2,15 @@ import React from "react";
 import "./TeachersPage.scss";
 import TRoute from "../Register/TRoute";
 import TLogin from "../Register/TLogin";
-import { Row, Col, Card, Container } from "react-bootstrap";
+import { Row, Col, Card, Container, Button } from "react-bootstrap";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
+import { useNavigate } from "react-router-dom";
 
 function TeachersPage() {
   const { loginForm } = useContext(Context);
+  //^ NAVIGATE
+  const navigate = useNavigate();
   return (
     <div className="teachers">
       <Card className="teachers-card">
@@ -24,6 +27,14 @@ function TeachersPage() {
           {/*COLUMN*/}
           <Col sm={6}></Col>
         </Row>
+        <Button
+          className="back-btn"
+          onClick={(e) => {
+            navigate("/home");
+          }}
+        >
+          Back to homepage
+        </Button>
       </Container>
     </div>
   );
