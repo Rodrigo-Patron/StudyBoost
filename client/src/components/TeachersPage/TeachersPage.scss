@@ -20,5 +20,14 @@
         align-items: center;
       }
     }
+    .back-btn {
+      background-color: rgba(218, 215, 208, 0.924);
+      border: none;
+      color: black;
+      &:hover {
+        background-color: rgba(179, 178, 176);
+        color: black;
+      }
+    }
   }
 }
