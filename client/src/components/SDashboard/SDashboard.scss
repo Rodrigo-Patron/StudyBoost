@@ -7,7 +7,7 @@
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
 
         .student-name {
           font-weight: bolder;
@@ -26,6 +26,19 @@
               outline: none;
             }
           }
+        }
+      }
+
+      .list-group-item {
+        border: none;
+        padding: 0;
+
+        div {
+          border: 1px solid rgb(233, 233, 233);
+          box-shadow: 0 0 1px rgb(66, 66, 66);
+          border-radius: 5px;
+          padding: 2rem;
+          margin-bottom: 1rem;
         }
       }
 

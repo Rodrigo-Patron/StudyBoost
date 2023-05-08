@@ -172,9 +172,12 @@ function TDashboard() {
         timeArr.push(timeSlot[key]);
       }
     }
+    const dateToSort = new Date(datePicked);
+
     const formData = {
       date: new Date(datePicked).toLocaleDateString(navigator.language),
       time: timeArr.length === 1 ? timeArr[0] : timeArr,
+      dateInMil: Date.parse(dateToSort),
     };
 
     const config = {

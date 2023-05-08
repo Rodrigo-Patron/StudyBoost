@@ -37,43 +37,58 @@
       color: black;
     }
   }
-
-  ul {
-    li {
-      list-style: none;
-      padding: 0.5rem;
-
-      //color of the checked input
-      .form-check-input:checked {
-        background-color: rgba(250, 184, 0, 0.924);
-        border-color: rgba(250, 184, 0, 0.924);
-        box-shadow: none;
-      }
-      .form-check-input:active {
-        background-color: rgba(250, 184, 0, 0.924);
-
-        box-shadow: none;
-      }
-    }
-  }
-
-  .confirm-btn {
-    margin-right: 0.5rem;
-    background-color: rgba(250, 184, 0, 0.624);
+  .list-group-item {
+    color: #636464;
     border: none;
-    color: black;
-    &:hover {
-      background-color: rgba(250, 184, 0, 0.924);
+    padding: 0;
+
+    form {
+      border: 1px solid rgb(233, 233, 233);
+      box-shadow: 0 0 1px rgb(66, 66, 66);
+      border-radius: 5px;
+      padding: 2rem;
+      margin-bottom: 1rem;
+    }
+    .date-output {
+      font-weight: bolder;
+    }
+    ul {
+      li {
+        list-style: none;
+        padding: 0.5rem;
+
+        //color of the checked input
+        .form-check-input:checked {
+          background-color: rgba(250, 184, 0, 0.924);
+          border-color: rgba(250, 184, 0, 0.924);
+          box-shadow: none;
+        }
+        .form-check-input:active {
+          background-color: rgba(250, 184, 0, 0.924);
+
+          box-shadow: none;
+        }
+      }
+    }
+
+    .confirm-btn {
+      margin-right: 0.5rem;
+      background-color: rgba(250, 184, 0, 0.624);
+      border: none;
+      color: black;
+      &:hover {
+        background-color: rgba(250, 184, 0, 0.924);
+        color: black;
+      }
+      &:focus {
+        background-color: rgba(250, 184, 0, 0.924);
+        color: black;
+      }
+    }
+    // color for the disabled confirm button
+    .btn:disabled {
+      background-color: rgba(250, 184, 0, 0.724);
       color: black;
     }
-    &:focus {
-      background-color: rgba(250, 184, 0, 0.924);
-      color: black;
-    }
-  }
-  // color for the disabled confirm button
-  .btn:disabled {
-    background-color: rgba(250, 184, 0, 0.724);
-    color: black;
   }
 }

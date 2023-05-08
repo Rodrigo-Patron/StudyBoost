@@ -19,7 +19,6 @@ function SDashboard() {
   useEffect(() => {
     const config = {
       headers: {
-        // <div className="student-dashboard">
         Authorization: `Bearer ${studentToken}`,
       },
     };
@@ -33,8 +32,6 @@ function SDashboard() {
         return res.json();
       })
       .then((result) => {
-        // console.log(result.reverse());
-        //^ new teacher show at the top
         setTeacher(result);
       });
   }, [query]);
@@ -114,8 +111,6 @@ function SDashboard() {
                           ? "No availability"
                           : "Book appointment"}
                       </Button>
-
-                      <hr />
                     </div>
                   ))
                 : teacher
@@ -149,8 +144,6 @@ function SDashboard() {
                             ? "No availability"
                             : "Book appointment"}
                         </Button>
-
-                        <hr />
                       </div>
                     ))
                 : null}
