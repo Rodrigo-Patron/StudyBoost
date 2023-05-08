@@ -142,7 +142,7 @@ function Availabilities() {
                 <Form onSubmit={submitHandler} key={appointment._id}>
                   <p>
                     <span>Date:</span>{" "}
-                    <i ref={dateInput}>
+                    <i ref={dateInput} className="date-output">
                       {new Date(appointment.date).toLocaleDateString(
                         navigator.language
                       )}
@@ -173,7 +173,7 @@ function Availabilities() {
                   >
                     Confirm
                   </Button>
-                  <hr />
+                  {/* <hr /> */}
                 </Form>
               ))}
           </ListGroup.Item>

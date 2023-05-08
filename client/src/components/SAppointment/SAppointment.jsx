@@ -179,7 +179,6 @@ function SAppointment() {
                           </Button>
                         </Modal.Footer>
                       </Modal>
-                      <hr />
                     </Form>
                   ))
                 : appointment
@@ -241,7 +240,6 @@ function SAppointment() {
                             </Button>
                           </Modal.Footer>
                         </Modal>
-                        <hr />
                       </Form>
                     ))
                 : null}

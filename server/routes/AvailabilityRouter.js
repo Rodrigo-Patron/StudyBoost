@@ -13,7 +13,7 @@ AvailabilityRouter
     try {
       let findAvailability = Availability.find({
         teacher: req.params.teacherId,
-      }).sort({ date: 1, time: 1 });
+      }).sort({ dateInMil: 1, time: 1 });
 
       // delete all past times
       const av = (await findAvailability).map((av) => {
@@ -61,7 +61,7 @@ AvailabilityRouter
       }
       let findAvailability1 = Availability.find({
         teacher: req.params.teacherId,
-      }).sort({ date: 1, time: 1 });
+      }).sort({ dateInMil: 1, time: 1 });
 
       //to populate and show availability
       const query = findAvailability1;

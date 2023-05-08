@@ -25,7 +25,7 @@ AppointmentRouter
 
       // delete all past appointments
 
-      (await findAppointment).map((ap) => {
+      (await findAppointment).map(async (ap) => {
         let yearFromDB = ap.date.split("/")[ap.date.split("/").length - 1];
         let dayFromDB = ap.date.split("/")[1];
         let monthFromDB = ap.date.split("/")[0];
@@ -34,20 +34,38 @@ AppointmentRouter
             .split("-")[0]
             .trim()}`
         );
+        try {
+          let currentDate = new Date();
+          // console.log(dateFromDb < currentDate);
+          if (dateFromDb < currentDate) {
+            //to delete the appointment from the student collection
+            const student = await Student.findOne({
+              _id: req.params.studentId,
+            });
+            // console.log("Student", student);
+            student.appointments = student.appointments.filter(
+              (x) => x.toString() !== ap._id.toString()
+            );
+            await student.save();
 
-        let currentDate = new Date();
-        // console.log(dateFromDb < currentDate);
-        if (dateFromDb < currentDate) {
-          // delete appointment from database
-          Appointment.findByIdAndDelete(ap._id).then((de) => {
-            console.log(de);
-          });
+            //to delete the appointment from the teacher collection finding by name of teacher
+            const teacher = await Teacher.findOne(ap.teacher);
+            // console.log(teacher);
+            // console.log(ap.teacher);
+            teacher.appointmentsByStudents =
+              teacher.appointmentsByStudents.filter(
+                (x) => x.toString() !== ap._id.toString()
+              );
+
+            await teacher.save();
+
+            // delete appointment from database
+            await Appointment.findByIdAndDelete(ap._id);
+          }
+        } catch (error) {
+          next(createError(500, error.message));
         }
       });
-
-      // let findAppointment1 = await Appointment.find({
-      //   student: req.params.studentId,
-      // }).sort({ date: 1, time: 1 });
 
       res.send(findAppointment);
     } catch (error) {
@@ -67,6 +85,48 @@ AppointmentRouter
       query.populate("teacher", "name -_id");
       query.populate("student", "name -_id");
       findAppointment = await query.exec();
+
+      // delete all past appointments
+
+      (await findAppointment).map(async (ap) => {
+        let yearFromDB = ap.date.split("/")[ap.date.split("/").length - 1];
+        let dayFromDB = ap.date.split("/")[1];
+        let monthFromDB = ap.date.split("/")[0];
+        let dateFromDb = new Date(
+          `${monthFromDB}/${dayFromDB}/${yearFromDB} :${ap.time
+            .split("-")[0]
+            .trim()}`
+        );
+        try {
+          let currentDate = new Date();
+          // console.log(dateFromDb < currentDate);
+          if (dateFromDb < currentDate) {
+            // to delete the appointment from the student collection
+            const student = await Student.findOne(ap.student);
+            // console.log("Student", student);
+            student.appointments = student.appointments.filter(
+              (x) => x.toString() !== ap._id.toString()
+            );
+            await student.save();
+
+            //to delete the appointment from the teacher collection
+            const teacher = await Teacher.findOne({
+              _id: req.params.teacherId,
+            });
+            teacher.appointmentsByStudents =
+              teacher.appointmentsByStudents.filter(
+                (x) => x.toString() !== ap._id.toString()
+              );
+            await teacher.save();
+
+            // delete appointment from database
+            Appointment.findByIdAndDelete(ap._id);
+          }
+        } catch (error) {
+          next(createError(500, error.message));
+        }
+      });
+
       res.send(findAppointment);
     } catch (error) {
       next(createError(500, error.message));

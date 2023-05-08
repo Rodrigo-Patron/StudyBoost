@@ -24,6 +24,21 @@
       }
     }
 
+    .list-group-item {
+      color: #636464;
+      border: none;
+      .task-input {
+        font-weight: bolder;
+      }
+      form {
+        border: 1px solid rgb(233, 233, 233);
+        box-shadow: 0 0 1px rgb(66, 66, 66);
+        border-radius: 5px;
+        padding: 2rem;
+        margin-bottom: 1rem;
+      }
+    }
+
     .btn {
       background-color: rgb(241, 129, 129);
       border: none;

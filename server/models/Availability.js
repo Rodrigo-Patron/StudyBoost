@@ -9,6 +9,7 @@ const availabilitySchema = new Schema(
     teacher: { type: Schema.Types.ObjectId, ref: "teacher" },
     date: { type: String },
     time: [{ type: String }],
+    dateInMil: { type: Number },
   },
   {
     toJSON: {
