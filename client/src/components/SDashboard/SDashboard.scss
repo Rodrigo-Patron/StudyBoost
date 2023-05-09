@@ -33,12 +33,15 @@
         border: none;
         padding: 0;
 
-        div {
+        form {
           border: 1px solid rgb(233, 233, 233);
           box-shadow: 0 0 1px rgb(66, 66, 66);
           border-radius: 5px;
           padding: 2rem;
           margin-bottom: 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
       }
 
@@ -57,6 +60,18 @@
           }
         }
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .list-group-item {
+    margin: 1rem 3rem;
+    form {
+      padding: 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

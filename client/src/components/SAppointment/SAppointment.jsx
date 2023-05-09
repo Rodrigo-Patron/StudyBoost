@@ -39,7 +39,6 @@ function SAppointment() {
         return res.json();
       })
       .then((result) => {
-        console.log("result", result);
         setAppointment(result);
       });
   }, [counter, query]);
@@ -73,7 +72,7 @@ function SAppointment() {
         setQuery(null);
         inputValue.current.value = "";
 
-        console.log("RESULT:", result);
+        // console.log("RESULT:", result);
       })
       .catch((error) => console.log(error));
 
@@ -125,33 +124,37 @@ function SAppointment() {
                 : query
                 ? query.map((appointment) => (
                     <Form key={appointment._id}>
-                      <p>
-                        <span>Date: </span>
-                        <span className="task-input">
-                          {new Date(appointment.date).toLocaleDateString(
-                            navigator.language
-                          )}
-                        </span>
-                      </p>
-                      <p>
-                        <span>Time: </span>
-                        <span className="task-input">
-                          {appointment.time}
-                        </span>{" "}
-                      </p>
-                      <p>
-                        <span>Teacher: </span>
-                        <span className="task-input">
-                          {appointment.teacher.name}
-                        </span>
-                      </p>{" "}
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => cancelHandler(appointment)}
-                      >
-                        Cancel
-                      </Button>
+                      <div className="ap-info">
+                        <p>
+                          <span>Date: </span>
+                          <span className="task-input">
+                            {new Date(appointment.date).toLocaleDateString(
+                              navigator.language
+                            )}
+                          </span>
+                        </p>
+                        <p>
+                          <span>Time: </span>
+                          <span className="task-input">
+                            {appointment.time}
+                          </span>{" "}
+                        </p>
+                        <p>
+                          <span>Teacher: </span>
+                          <span className="task-input">
+                            {appointment.teacher.name}
+                          </span>
+                        </p>{" "}
+                      </div>
+                      <div className="cancel-btn">
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => cancelHandler(appointment)}
+                        >
+                          Cancel
+                        </Button>
+                      </div>
                       <Modal
                         show={show}
                         backdrop="static"
@@ -186,33 +189,37 @@ function SAppointment() {
                   ? "You have no appointments"
                   : appointment.map((appointment) => (
                       <Form key={appointment._id}>
-                        <p>
-                          <span>Date: </span>
-                          <span className="task-input">
-                            {new Date(appointment.date).toLocaleDateString(
-                              navigator.language
-                            )}
-                          </span>
-                        </p>
-                        <p>
-                          <span>Time: </span>
-                          <span className="task-input">
-                            {appointment.time}
-                          </span>{" "}
-                        </p>
-                        <p>
-                          <span>Teacher: </span>
-                          <span className="task-input">
-                            {appointment.teacher.name}
-                          </span>
-                        </p>{" "}
-                        <Button
-                          onClick={() => cancelHandler(appointment)}
-                          variant="danger"
-                          size="sm"
-                        >
-                          Cancel
-                        </Button>
+                        <div className="ap-info">
+                          <p>
+                            <span>Date: </span>
+                            <span className="task-input">
+                              {new Date(appointment.date).toLocaleDateString(
+                                navigator.language
+                              )}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Time: </span>
+                            <span className="task-input">
+                              {appointment.time}
+                            </span>{" "}
+                          </p>
+                          <p>
+                            <span>Teacher: </span>
+                            <span className="task-input">
+                              {appointment.teacher.name}
+                            </span>
+                          </p>{" "}
+                        </div>
+                        <div className="cancel-btn">
+                          <Button
+                            onClick={() => cancelHandler(appointment)}
+                            variant="danger"
+                            size="sm"
+                          >
+                            Cancel
+                          </Button>
+                        </div>
                         <Modal
                           show={show}
                           backdrop="static"

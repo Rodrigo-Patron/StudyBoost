@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import logo from './Logo.png';
-import collapsedLogo from './B.png'
+import logo from "./Logo.png";
+import collapsedLogo from "./B.png";
 
 //import react pro sidebar components
 import {
@@ -24,7 +24,7 @@ import {
   FiLogOut,
 } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
-import {BsCalendar3} from "react-icons/bs"
+import { BsCalendar3 } from "react-icons/bs";
 
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
@@ -61,8 +61,25 @@ const THeader = () => {
             <SidebarHeader>
               <div className="logoText">
                 {/* small and big change using menuCollapse state */}
-                <p>{menuCollapse ? <img src={collapsedLogo} className= "collapsedLogo" width = "50" height = "50" alt="collapsedLogo" />  
-              : <img src={logo}  className= "logo"  width = "250" height = "150" alt="logo" />}</p>
+                <p>
+                  {menuCollapse ? (
+                    <img
+                      src={collapsedLogo}
+                      className="collapsedLogo"
+                      width="50"
+                      height="50"
+                      alt="collapsedLogo"
+                    />
+                  ) : (
+                    <img
+                      src={logo}
+                      className="logo"
+                      width="250"
+                      height="150"
+                      alt="logo"
+                    />
+                  )}
+                </p>
               </div>
               <div className="closeMenu" onClick={menuIconClick}>
                 {/* changing menu collapse icon on click */}
@@ -77,18 +94,20 @@ const THeader = () => {
                   className="profile-img"
                 /> */}
                 <div className="profile-info">
-                  <span id="LoggedInAs">{teacher.name}</span>
-                  <span className="profile-subject">{teacher.subject}</span>
+                  <p id="LoggedInAs">{teacher.name}</p>
+                  <p>Subject: {teacher.subjects}</p>
                 </div>
               </div>
               <Menu iconShape="square">
                 <MenuItem icon={<RiPencilLine />}>
                   <Link to="/teacherDashboard">Set Availability</Link>
                 </MenuItem>
-                <MenuItem  icon={<FaList/>}>
-                  <Link to="/teacherDashboard/teacherAppointments">Appointments</Link>
+                <MenuItem icon={<FaList />}>
+                  <Link to="/teacherDashboard/teacherAppointments">
+                    Appointments
+                  </Link>
                 </MenuItem>
-              
+
                 {/* <MenuItem icon={<i className="fa fa-bell"></i>}>
                   <Link to="/notifications">Notifications</Link>
                 </MenuItem> */}

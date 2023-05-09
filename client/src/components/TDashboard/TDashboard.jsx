@@ -129,7 +129,7 @@ function TDashboard() {
   const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
   const [lastSelectedDate, setLastSelectedDate] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);  // New state for selected date
+  const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -145,8 +145,10 @@ function TDashboard() {
   const dateHandler = (date) => {
     setDate(date);
     const formattedDate = date.toLocaleDateString(navigator.language);
-    const foundDate = submittedDates.find(submittedDate => submittedDate.date === formattedDate);
-    setSelectedDate(foundDate);  // Set the selected date with its corresponding time slots
+    const foundDate = submittedDates.find(
+      (submittedDate) => submittedDate.date === formattedDate
+    );
+    setSelectedDate(foundDate); // Set the selected date with its corresponding time slots
   };
 
   const checkHandler = (e) => {
@@ -167,7 +169,9 @@ function TDashboard() {
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
       const formattedDate = date.toLocaleDateString(navigator.language);
-      const foundDate = submittedDates.find(submittedDate => submittedDate.date === formattedDate);
+      const foundDate = submittedDates.find(
+        (submittedDate) => submittedDate.date === formattedDate
+      );
       if (foundDate) {
         return "submitted-date";
       }
@@ -192,9 +196,13 @@ function TDashboard() {
         timeArr.push(timeSlot[key]);
       }
     }
+    //to sort by date in frontend
+    const dateToSort = new Date(datePicked);
+
     const formData = {
       date: new Date(datePicked).toLocaleDateString(navigator.language),
       time: timeArr.length === 1 ? timeArr[0] : timeArr,
+      dateInMil: Date.parse(dateToSort),
     };
 
     const config = {
@@ -221,7 +229,10 @@ function TDashboard() {
         setLastSelectedDate({ date: result.date, time: result.time });
 
         // Add the submitted date to submittedDates state
-        setSubmittedDates([...submittedDates, { date: result.date, timeSlots: result.time }]);  // Changed this line
+        setSubmittedDates([
+          ...submittedDates,
+          { date: result.date, timeSlots: result.time },
+        ]); // Changed this line
 
         // Clear the timeSlot state after a successful submission
         setTimeSlot({
@@ -252,11 +263,11 @@ function TDashboard() {
       <Row className="date-time">
         <Col sm={8}>
           <Form onSubmit={submitHandler}>
-           <Calendar
-  onChange={dateHandler}
-  value={date.toString()}
-  tileClassName={tileClassName}
-/>
+            <Calendar
+              onChange={dateHandler}
+              value={date.toString()}
+              tileClassName={tileClassName}
+            />
             <h6>Please select your available time slots here</h6>
             {["checkbox"].map((type) => (
               <div key={`default-${type}`} className="mb-3">

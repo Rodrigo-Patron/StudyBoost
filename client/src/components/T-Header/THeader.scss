@@ -24,7 +24,7 @@
   border-radius: 50%;
   font-weight: bold;
   font-size: 25px;
-  top: 150px;
+  top: 50%;
   cursor: pointer;
 }
 #header2 .pro-sidebar {
@@ -94,18 +94,17 @@
 //   padding: 20px;
 // }
 
-#LoggedInAs {
-  font-size: large;
-  margin-top: 20px;
-}
-
 .pro-sidebar .pro-menu li:hover {
   background-color: rgba(250, 184, 0, 0.924);
 }
 .pro-sidebar .pro-menu li:hover * {
   color: black;
 }
-
+.profile-card {
+  text-align: center;
+  font-size: large;
+  margin-top: 20px;
+}
 @media only screen and (max-width: 720px) {
   html {
     overflow: hidden;

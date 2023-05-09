@@ -11,6 +11,7 @@ const appointmentSchema = new Schema(
     teacher: { type: Schema.Types.ObjectId, ref: "teacher" },
     date: { type: String, required: true },
     time: { type: String, required: true },
+    dateInMil: { type: Number },
   },
   {
     toJSON: {

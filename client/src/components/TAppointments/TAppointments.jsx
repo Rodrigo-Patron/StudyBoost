@@ -9,7 +9,7 @@ import {
   Row,
   Container,
 } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Context } from "../../Context.jsx";
 
 // import { FaTrashAlt } from "react-icons/fa";
@@ -20,6 +20,9 @@ function TAppointments() {
   const [show, setShow] = useState(false);
   const [counter, setCounter] = useState(0);
   const [query, setQuery] = useState(null);
+  const [id, setId] = useState();
+
+  const inputValue = useRef();
 
   // get all appointments
   useEffect(() => {
@@ -29,7 +32,10 @@ function TAppointments() {
       },
     };
 
-    fetch(`http://localhost:6500/api/appointments/teacher/${teacher._id}`, config)
+    fetch(
+      `http://localhost:6500/api/appointments/teacher/${teacher._id}`,
+      config
+    )
       .then((res) => {
         if (!res.ok) {
           res.json().then((err) => console.log(err));
@@ -38,13 +44,18 @@ function TAppointments() {
         return res.json();
       })
       .then((result) => {
-        console.log("result", result);
         setAppointment(result);
       });
-  }, [counter, query, setAppointment, teacher._id, teacherToken]);
+  }, [counter, query]);
+
+  //this helps us to grab the id of the appointment
+  const cancelHandler = (appointment) => {
+    setShow(true);
+    setId(appointment._id);
+  };
 
   //delete appointment
-  function deleteHandler(appointment) {
+  function deleteHandler() {
     const config = {
       method: "DELETE",
       headers: {
@@ -52,7 +63,7 @@ function TAppointments() {
       },
     };
 
-    fetch(`http://localhost:6500/api/appointments/${appointment._id}`, config)
+    fetch(`http://localhost:6500/api/appointments/${id}`, config)
       .then((res) => {
         if (!res.ok) {
           res.json().then((err) => console.log(err));
@@ -63,8 +74,10 @@ function TAppointments() {
       .then((result) => {
         //every time an appointment its deleted the counter changes
         setCounter(counter + 1);
+        setQuery(null);
+        inputValue.current.value = "";
 
-        console.log("RESULT:", result);
+        // console.log("RESULT:", result);
       })
       .catch((error) => console.log(error));
 
@@ -86,7 +99,6 @@ function TAppointments() {
       ) {
         return appointment;
       }
-      return false
     });
     if (filteredAppointment.length === 0) {
       setQuery("Appointment not found");
@@ -101,9 +113,13 @@ function TAppointments() {
       <Container className="appointments">
         <Row className="appointment-row">
           <div className="top-header">
-            <h2>Your booked appointments:</h2>
+            <h3>Your booked appointments:</h3>
             <div className="search-bar">
-              <input placeholder="Search..." onChange={filterHandler} />
+              <input
+                placeholder="Search..."
+                onChange={filterHandler}
+                ref={inputValue}
+              />
             </div>
           </div>
           <ListGroup>
@@ -113,34 +129,37 @@ function TAppointments() {
                 : query
                 ? query.map((appointment) => (
                     <Form key={appointment._id}>
-                      <p>
-                        <span>Date: </span>
-                        <span className="task-input">
-                          {new Date(appointment.date).toLocaleDateString(
-                            navigator.language
-                          )}
-                        </span>
-                      </p>
-                      <p>
-                        <span>Time: </span>
-                        <span className="task-input">
-                          {appointment.time}
-                        </span>{" "}
-                      </p>
-                      <p>
-                        <span>Student: </span>
-                        <span className="task-input">
-                          {appointment.student.name}
-                        </span>
-                      </p>{" "}
-                      <Button
-                        onClick={() => setShow(true)}
-                        variant="danger"
-                        size="sm"
-                      >
-                        Cancel
-                        {/* <FaTrashAlt /> */}
-                      </Button>
+                      <div className="ap-info">
+                        <p>
+                          <span>Date: </span>
+                          <span className="task-input">
+                            {new Date(appointment.date).toLocaleDateString(
+                              navigator.language
+                            )}
+                          </span>
+                        </p>
+                        <p>
+                          <span>Time: </span>
+                          <span className="task-input">
+                            {appointment.time}
+                          </span>{" "}
+                        </p>
+                        <p>
+                          <span>Student: </span>
+                          <span className="task-input">
+                            {appointment.student.name}
+                          </span>
+                        </p>{" "}
+                      </div>
+                      <div className="cancel-btn">
+                        <Button
+                          onClick={() => cancelHandler(appointment)}
+                          variant="danger"
+                          size="sm"
+                        >
+                          Cancel
+                        </Button>
+                      </div>
                       <Modal
                         show={show}
                         backdrop="static"
@@ -168,41 +187,43 @@ function TAppointments() {
                           </Button>
                         </Modal.Footer>
                       </Modal>
-                      <hr />
                     </Form>
                   ))
                 : appointment.length === 0
                 ? "You have no appointments"
                 : appointment.map((appointment) => (
                     <Form key={appointment._id}>
-                      <p>
-                        <span>Date: </span>
-                        <span className="task-input">
-                          {new Date(appointment.date).toLocaleDateString(
-                            navigator.language
-                          )}
-                        </span>
-                      </p>
-                      <p>
-                        <span>Time: </span>
-                        <span className="task-input">
-                          {appointment.time}
-                        </span>{" "}
-                      </p>
-                      <p>
-                        <span>Student: </span>
-                        <span className="task-input">
-                          {appointment.student.name}
-                        </span>
-                      </p>{" "}
-                      <Button
-                        onClick={() => setShow(true)}
-                        variant="danger"
-                        size="sm"
-                      >
-                        Cancel
-                        {/* <FaTrashAlt /> */}
-                      </Button>
+                      <div className="ap-info">
+                        <p>
+                          <span>Date: </span>
+                          <span className="task-input">
+                            {new Date(appointment.date).toLocaleDateString(
+                              navigator.language
+                            )}
+                          </span>
+                        </p>
+                        <p>
+                          <span>Time: </span>
+                          <span className="task-input">
+                            {appointment.time}
+                          </span>{" "}
+                        </p>
+                        <p>
+                          <span>Student: </span>
+                          <span className="task-input">
+                            {appointment.student.name}
+                          </span>
+                        </p>{" "}
+                      </div>
+                      <div className="cancel-btn">
+                        <Button
+                          onClick={() => cancelHandler(appointment)}
+                          variant="danger"
+                          size="sm"
+                        >
+                          Cancel
+                        </Button>
+                      </div>
                       <Modal
                         show={show}
                         backdrop="static"
@@ -230,7 +251,6 @@ function TAppointments() {
                           </Button>
                         </Modal.Footer>
                       </Modal>
-                      <hr />
                     </Form>
                   ))}
             </ListGroup.Item>

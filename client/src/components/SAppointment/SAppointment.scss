@@ -36,6 +36,9 @@
         border-radius: 5px;
         padding: 2rem;
         margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     }
 
@@ -76,6 +79,8 @@
       form {
         padding: 1rem;
         text-align: center;
+        display: flex;
+        flex-direction: column;
       }
     }
   }
