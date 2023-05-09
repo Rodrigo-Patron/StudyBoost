@@ -109,7 +109,7 @@ function SAppointment() {
       <Container className="appointments">
         <Row className="appointment-row">
           <div className="top-header">
-            <h2>Your booked appointments:</h2>
+            <h3>Your booked appointments:</h3>
             <div className="search-bar">
               <input
                 placeholder="Search..."

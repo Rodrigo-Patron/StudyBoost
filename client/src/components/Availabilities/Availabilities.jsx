@@ -115,7 +115,10 @@ function Availabilities() {
     return (
       <Container className="availabilities">
         <div className="top-header">
-          <h3>Book your appointment with {availability[0].teacher?.name}</h3>{" "}
+          <h4>
+            Book your appointment with{" "}
+            <span>{availability[0].teacher?.name}</span>
+          </h4>{" "}
           <div className="search-bar">
             <label>Search date: </label>{" "}
             <input type="date" onChange={(e) => setQuery(e.target.value)} />

@@ -6,6 +6,9 @@
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 1rem;
+    span {
+      font-weight: bold;
+    }
 
     .search-bar {
       label {
@@ -89,6 +92,24 @@
     .btn:disabled {
       background-color: rgba(250, 184, 0, 0.724);
       color: black;
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .top-header {
+    margin: 1rem 3rem;
+    gap: 5rem;
+
+    input {
+      width: 8rem;
+    }
+  }
+  .list-group-item {
+    margin: 1rem 3rem;
+
+    form {
+      padding: 1rem;
     }
   }
 }
