@@ -116,7 +116,6 @@
 // }
 
 // export default TAvailability;
-
 import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import "./TDashboard.scss";
@@ -130,6 +129,7 @@ function TDashboard() {
   const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
   const [lastSelectedDate, setLastSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);  // New state for selected date
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -140,19 +140,39 @@ function TDashboard() {
     timePicked7: "",
     timePicked8: "",
   });
-  // console.log("timeSlot", timeSlot);
+  const [submittedDates, setSubmittedDates] = useState([]);
 
   const dateHandler = (date) => {
     setDate(date);
+    const formattedDate = date.toLocaleDateString(navigator.language);
+    const foundDate = submittedDates.find(submittedDate => submittedDate.date === formattedDate);
+    setSelectedDate(foundDate);  // Set the selected date with its corresponding time slots
   };
 
   const checkHandler = (e) => {
     console.log(e.target.name);
-    const value = e.target.value;
-    setTimeSlot({
-      ...timeSlot,
-      [e.target.name]: value,
-    });
+    if (e.target.checked) {
+      setTimeSlot({
+        ...timeSlot,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setTimeSlot({
+        ...timeSlot,
+        [e.target.name]: "",
+      });
+    }
+  };
+
+  const tileClassName = ({ date, view }) => {
+    if (view === "month") {
+      const formattedDate = date.toLocaleDateString(navigator.language);
+      const foundDate = submittedDates.find(submittedDate => submittedDate.date === formattedDate);
+      if (foundDate) {
+        return "submitted-date";
+      }
+    }
+    return null;
   };
 
   function submitHandler(e) {
@@ -172,12 +192,9 @@ function TDashboard() {
         timeArr.push(timeSlot[key]);
       }
     }
-    const dateToSort = new Date(datePicked);
-
     const formData = {
       date: new Date(datePicked).toLocaleDateString(navigator.language),
       time: timeArr.length === 1 ? timeArr[0] : timeArr,
-      dateInMil: Date.parse(dateToSort),
     };
 
     const config = {
@@ -202,6 +219,9 @@ function TDashboard() {
       .then((result) => {
         console.log(result);
         setLastSelectedDate({ date: result.date, time: result.time });
+
+        // Add the submitted date to submittedDates state
+        setSubmittedDates([...submittedDates, { date: result.date, timeSlots: result.time }]);  // Changed this line
 
         // Clear the timeSlot state after a successful submission
         setTimeSlot({
@@ -232,11 +252,11 @@ function TDashboard() {
       <Row className="date-time">
         <Col sm={8}>
           <Form onSubmit={submitHandler}>
-            <Calendar
-              // ref={calendarInput}
-              onChange={dateHandler}
-              value={date.toString()}
-            />
+           <Calendar
+  onChange={dateHandler}
+  value={date.toString()}
+  tileClassName={tileClassName}
+/>
             <h6>Please select your available time slots here</h6>
             {["checkbox"].map((type) => (
               <div key={`default-${type}`} className="mb-3">
@@ -319,19 +339,19 @@ function TDashboard() {
         </Col>
         <Col sm={4}>
           <Row className="selected">
-            <h4>Last date and time selected</h4>
-            {lastSelectedDate && (
+            <h4>Availability on Selected Date</h4>
+            {selectedDate && (
               <>
                 <p>
                   <span>Date: </span>
                   <span className="task-input">
-                    {new Date(lastSelectedDate.date).toLocaleDateString(
+                    {new Date(selectedDate.date).toLocaleDateString(
                       navigator.language
                     )}
                   </span>
                 </p>
                 <span>Time slots: </span>
-                {lastSelectedDate.time.map((time) => (
+                {selectedDate.timeSlots.map((time) => (
                   <div key={time}>
                     <p>{time}</p>
                   </div>
