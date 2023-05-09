@@ -10,7 +10,7 @@ import About from "../About/About";
 import Availabilities from "../Availabilities/Availabilities";
 import SAppointment from "../SAppointment/SAppointment";
 import TAppointments from "../TAppointments/TAppointments";
-import TAvailability from "../TAvailability/TAvailability.jsx";
+
 
 function Main() {
   return (
@@ -26,7 +26,7 @@ function Main() {
         </Route>
         <Route path="teacherDashboard">
           <Route index element={<TDashboard />} />
-          <Route path="availability" element={<TAvailability />} />
+
           <Route path="teacherAppointments" element={<TAppointments />} />
         </Route>
         <Route path="studentsPage">

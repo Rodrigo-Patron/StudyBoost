@@ -85,9 +85,6 @@ const THeader = () => {
                 <MenuItem icon={<RiPencilLine />}>
                   <Link to="/teacherDashboard">Set Availability</Link>
                 </MenuItem>
-                <MenuItem icon={<BsCalendar3 /> }>
-                  <Link to="/teacherDashboard/availability">Your Availability</Link>
-                </MenuItem>
                 <MenuItem  icon={<FaList/>}>
                   <Link to="/teacherDashboard/teacherAppointments">Appointments</Link>
                 </MenuItem>
