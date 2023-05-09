@@ -57,3 +57,26 @@
     }
   }
 }
+
+@media only screen and (max-width: 720px) {
+  .appointments {
+    margin: 3rem;
+    .top-header {
+      // margin: 1rem 3rem;
+      // gap: 5rem;
+      .search-bar {
+        input {
+          width: 7rem;
+        }
+      }
+    }
+    .list-group-item {
+      margin: 1rem 3rem;
+
+      form {
+        padding: 1rem;
+        text-align: center;
+      }
+    }
+  }
+}

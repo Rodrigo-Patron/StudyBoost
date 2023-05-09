@@ -70,10 +70,10 @@ function SDashboard() {
         </Col>
         <Col className="appointment-container" xs="12" md={remainingWidth}>
           <div className="top-header">
-            <h3 className="title">
+            <h4 className="title">
               Hello <span className="student-name">{student.name}</span>, find a
               teacher and book your appointment
-            </h3>
+            </h4>
             <div className="search-bar">
               <input placeholder="Search..." onChange={filterHandler} />
             </div>
