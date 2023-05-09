@@ -56,12 +56,14 @@ function Availabilities() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    //console.log(e.target.value);
+    //to sort by date in frontend
+    const dateToSort = new Date(selectedTime.date);
 
     const data = {
       teacher: teacherId,
       date: selectedTime.date,
       time: selectedTime.time,
+      dateInMil: Date.parse(dateToSort),
     };
     // console.log(data);
     const config = {

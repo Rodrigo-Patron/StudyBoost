@@ -30,9 +30,9 @@ import { RiPencilLine } from "react-icons/ri";
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
 
-
 const SHeader = () => {
-  const { student, setStudent, setStudentToken, isCollapsed, setIsCollapsed } = useContext(Context);
+  const { student, setStudent, setStudentToken, setIsCollapsed } =
+    useContext(Context);
   const navigate = useNavigate();
 
   //create initial menuCollapse state using useState hook
@@ -42,7 +42,7 @@ const SHeader = () => {
   const menuIconClick = () => {
     //condition checking to change state from true to false and vice versa
     setMenuCollapse(!menuCollapse);
-    setIsCollapsed(menuCollapse)
+    setIsCollapsed(menuCollapse);
   };
 
   function logoutHandler() {
@@ -106,7 +106,11 @@ const SHeader = () => {
           <SidebarFooter>
             <Menu iconShape="square">
               {/* <Logout /> */}
-              <MenuItem active={true} onClick={logoutHandler} icon={<FiLogOut />}>
+              <MenuItem
+                active={true}
+                onClick={logoutHandler}
+                icon={<FiLogOut />}
+              >
                 Logout
               </MenuItem>
             </Menu>

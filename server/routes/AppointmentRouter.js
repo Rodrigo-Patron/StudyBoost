@@ -15,7 +15,7 @@ AppointmentRouter
     try {
       let findAppointment = Appointment.find({
         student: req.params.studentId,
-      }).sort({ date: 1, time: 1 });
+      }).sort({ dateInMil: 1, time: 1 });
 
       //to populate and show appointments
       const query = findAppointment;
@@ -78,7 +78,7 @@ AppointmentRouter
     try {
       let findAppointment = Appointment.find({
         teacher: req.params.teacherId,
-      }).sort({ date: 1, time: 1 });
+      }).sort({ dateInMil: 1, time: 1 });
 
       //to populate and show appointments
       const query = findAppointment;
@@ -120,7 +120,7 @@ AppointmentRouter
             await teacher.save();
 
             // delete appointment from database
-            Appointment.findByIdAndDelete(ap._id);
+            await Appointment.findByIdAndDelete(ap._id);
           }
         } catch (error) {
           next(createError(500, error.message));

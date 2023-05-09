@@ -11,7 +11,6 @@ import Availabilities from "../Availabilities/Availabilities";
 import SAppointment from "../SAppointment/SAppointment";
 import TAppointments from "../TAppointments/TAppointments";
 
-
 function Main() {
   return (
     <div className="Main">

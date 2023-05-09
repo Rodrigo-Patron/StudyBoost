@@ -2,7 +2,7 @@ import React from "react";
 import "./SDashboard.scss";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../Context.jsx";
-import { Button, ListGroup } from "react-bootstrap";
+import { Button, ListGroup, Form } from "react-bootstrap";
 import SHeader from "../S-Header/SHeader";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
@@ -84,19 +84,20 @@ function SDashboard() {
                 ? "Teacher not found"
                 : query
                 ? query.map((teacher) => (
-                    <div key={teacher._id}>
-                      <p>
-                        <span>Name: </span>{" "}
-                        <span className="teacher-input">{teacher.name}</span>
-                      </p>
+                    <Form key={teacher._id}>
+                      <div className="form-info">
+                        <p>
+                          <span>Name: </span>{" "}
+                          <span className="teacher-input">{teacher.name}</span>
+                        </p>
 
-                      <p>
-                        <span>Subject:</span>{" "}
-                        <span className="teacher-input">
-                          {teacher.subjects}
-                        </span>{" "}
-                      </p>
-
+                        <p>
+                          <span>Subject:</span>{" "}
+                          <span className="teacher-input">
+                            {teacher.subjects}
+                          </span>{" "}
+                        </p>
+                      </div>
                       <Button
                         size="sm"
                         className="appointment-btn"
@@ -111,40 +112,47 @@ function SDashboard() {
                           ? "No availability"
                           : "Book appointment"}
                       </Button>
-                    </div>
+                    </Form>
                   ))
                 : teacher
                 ? teacher.length === 0
                   ? "There is no teacher available"
                   : teacher.map((teacher) => (
-                      <div key={teacher._id}>
-                        <p>
-                          <span>Name: </span>{" "}
-                          <span className="teacher-input">{teacher.name}</span>
-                        </p>
+                      <Form key={teacher._id}>
+                        <div className="form-info">
+                          <p>
+                            <span>Name: </span>{" "}
+                            <span className="teacher-input">
+                              {teacher.name}
+                            </span>
+                          </p>
 
-                        <p>
-                          <span>Subject:</span>{" "}
-                          <span className="teacher-input">
-                            {teacher.subjects}
-                          </span>{" "}
-                        </p>
-
-                        <Button
-                          size="sm"
-                          className="appointment-btn"
-                          disabled={
-                            !teacher.availabilityByTeacher.length ? true : false
-                          }
-                          onClick={(e) => {
-                            navigate(`/studentDashboard/${teacher._id}`);
-                          }}
-                        >
-                          {!teacher.availabilityByTeacher.length
-                            ? "No availability"
-                            : "Book appointment"}
-                        </Button>
-                      </div>
+                          <p>
+                            <span>Subject:</span>{" "}
+                            <span className="teacher-input">
+                              {teacher.subjects}
+                            </span>{" "}
+                          </p>
+                        </div>
+                        <div className="ap-btn">
+                          <Button
+                            size="sm"
+                            className="appointment-btn"
+                            disabled={
+                              !teacher.availabilityByTeacher.length
+                                ? true
+                                : false
+                            }
+                            onClick={(e) => {
+                              navigate(`/studentDashboard/${teacher._id}`);
+                            }}
+                          >
+                            {!teacher.availabilityByTeacher.length
+                              ? "No availability"
+                              : "Book appointment"}
+                          </Button>
+                        </div>
+                      </Form>
                     ))
                 : null}
             </ListGroup.Item>

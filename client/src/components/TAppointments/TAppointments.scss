@@ -24,6 +24,24 @@
       }
     }
 
+    .list-group-item {
+      color: #636464;
+      border: none;
+      .task-input {
+        font-weight: bolder;
+      }
+      form {
+        border: 1px solid rgb(233, 233, 233);
+        box-shadow: 0 0 1px rgb(66, 66, 66);
+        border-radius: 5px;
+        padding: 2rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
     .btn {
       background-color: rgb(241, 129, 129);
       border: none;
@@ -39,6 +57,31 @@
     border: rgb(241, 129, 129);
     &:hover {
       background-color: rgb(236, 96, 96);
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .appointments {
+    margin: 3rem;
+    .top-header {
+      // margin: 1rem 3rem;
+      // gap: 5rem;
+      .search-bar {
+        input {
+          width: 7rem;
+        }
+      }
+    }
+    .list-group-item {
+      margin: 1rem 3rem;
+
+      form {
+        padding: 1rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 }
