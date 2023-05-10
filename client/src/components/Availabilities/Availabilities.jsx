@@ -1,6 +1,6 @@
 import React from "react";
 import "./Availabilities.scss";
-import { Button, ListGroup, Form, Container, Row } from "react-bootstrap";
+import { Button, ListGroup, Form, Container } from "react-bootstrap";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../Context.jsx";
 import { useParams } from "react-router-dom";
@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function Availabilities() {
-  const { studentToken, setAvailability, availability, setErrors } =
-    useContext(Context);
+  const { studentToken, setAvailability, availability } = useContext(Context);
   const [query, setQuery] = useState("");
   const [reqAgain, setReqAgain] = useState(false);
 
@@ -178,12 +177,12 @@ function Availabilities() {
                   >
                     Confirm
                   </Button>
-                  {/* <hr /> */}
                 </Form>
               ))}
           </ListGroup.Item>
         </ListGroup>
         <Button
+          size="sm"
           className="back-btn"
           onClick={(e) => {
             navigate("/studentDashboard");

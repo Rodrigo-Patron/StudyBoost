@@ -1,5 +1,4 @@
 import React from "react";
-import "./SAppointment.scss";
 import SHeader from "../S-Header/SHeader";
 import {
   ListGroup,
@@ -8,12 +7,14 @@ import {
   Modal,
   Row,
   Container,
+  Col,
 } from "react-bootstrap";
 import { useContext, useEffect, useState, useRef } from "react";
+import "./SAppointment.scss";
 import { Context } from "../../Context.jsx";
 
 function SAppointment() {
-  const { studentToken, appointment, setAppointment, student } =
+  const { studentToken, appointment, setAppointment, student, isCollapsed } =
     useContext(Context);
   const [show, setShow] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -102,11 +103,16 @@ function SAppointment() {
     }
   };
 
+  const headerWidth = isCollapsed ? 3 : 1;
+  const remainingWidth = 12 - headerWidth;
+
   return (
-    <div>
-      <SHeader />
-      <Container className="appointments">
-        <Row className="appointment-row">
+    <Container fluid={true} className="dashboard-container">
+      <Row className="dashboard-row">
+        <Col xs="12" md={headerWidth}>
+          <SHeader />
+        </Col>
+        <Col className="appointments" xs="12" md={remainingWidth}>
           <div className="top-header">
             <h3>Your booked appointments:</h3>
             <div className="search-bar">
@@ -252,9 +258,9 @@ function SAppointment() {
                 : null}
             </ListGroup.Item>
           </ListGroup>
-        </Row>
-      </Container>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
