@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import createError from "http-errors";
 import Availability from "../models/Availability.js";
 import Teacher from "../models/Teacher.js";
@@ -130,6 +131,42 @@ AvailabilityRouter
         return;
       }
       next({ status: 404, message: "Availability not found" });
+    } catch (error) {
+      next(createError(500, error.message));
+    }
+  })
+
+  // to update time slots
+  .patch("/:teacherId/:date", async (req, res, next) => {
+    try {
+      // Parse the date from the request parameters
+      const date = req.params.date;
+
+      // Parse the teacherId from the request parameters
+      const teacherId = req.params.teacherId;
+
+      // Get the new time slots from the request body
+      const newTimeSlots = req.body.time;
+
+      // Find the availability for the given teacher and date
+      const availability = await Availability.findOne({
+        teacher: teacherId,
+        date: date,
+      });
+
+      // If no availability was found, return an error
+      if (!availability) {
+        return next(createError(404, "Availability not found"));
+      }
+
+      // Update the time slots
+      availability.time = newTimeSlots;
+
+      // Save the updated availability
+      await availability.save();
+
+      // Send the updated availability as the response
+      res.status(200).send(availability);
     } catch (error) {
       next(createError(500, error.message));
     }
