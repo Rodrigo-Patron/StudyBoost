@@ -32,6 +32,7 @@
       .list-group-item {
         border: none;
         padding: 0;
+        color: #535353;
 
         form {
           border: 1px solid rgb(233, 233, 233);
@@ -42,12 +43,16 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          p {
+            margin: 0.5rem;
+          }
         }
       }
 
       .teacher-details {
+        font-weight: 500;
         .teacher-input {
-          font-weight: bolder;
+          font-weight: 400;
         }
         .appointment-btn {
           background-color: rgba(250, 184, 0, 0.624);
@@ -64,14 +69,26 @@
   }
 }
 
-@media only screen and (max-width: 720px) {
-  .list-group-item {
-    margin: 1rem 3rem;
-    form {
-      padding: 1rem;
+@media screen and (max-width: 720px) {
+  .top-header {
+    margin-bottom: 2rem;
+    h3 {
       text-align: center;
-      display: flex;
-      flex-direction: column;
+      padding-bottom: 1rem;
+    }
+  }
+  .list-group {
+    .list-group-item {
+      form {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        .ap-btn {
+          padding-top: 0.4rem;
+          padding-bottom: 0.7rem;
+        }
+      }
     }
   }
 }

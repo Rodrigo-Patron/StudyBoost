@@ -1,56 +1,66 @@
-.appointments {
-  .appointment-row {
-    margin: 2rem 3rem;
+.dashboard-container {
+  .dashboard-row {
+    .appointments {
+      margin: 2rem auto;
+      width: 70%;
 
-    .top-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 1rem;
+      .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 3rem;
 
-      .search-bar {
-        input {
-          border: 1.5px solid rgb(212, 212, 212);
-          border-radius: 5px;
-          padding: 0.3rem;
+        .search-bar {
+          input {
+            border: 1.5px solid rgb(212, 212, 212);
+            border-radius: 5px;
+            padding: 0.3rem;
 
-          &:active {
-            outline: none;
-          }
-          &:focus {
-            outline: none;
+            &:active {
+              outline: none;
+            }
+            &:focus {
+              outline: none;
+            }
           }
         }
       }
-    }
 
-    .list-group-item {
-      color: #636464;
-      border: none;
-      .task-input {
-        font-weight: bolder;
-      }
-      form {
-        border: 1px solid rgb(233, 233, 233);
-        box-shadow: 0 0 1px rgb(66, 66, 66);
-        border-radius: 5px;
-        padding: 2rem;
-        margin-bottom: 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-    }
+      .list-group-item {
+        color: #535353;
+        font-weight: 500;
+        border: none;
+        padding: 0;
+        .task-input {
+          font-weight: 400;
+        }
+        form {
+          border: 1px solid rgb(233, 233, 233);
+          box-shadow: 0 0 1px rgb(66, 66, 66);
+          border-radius: 5px;
+          padding: 1rem 2rem;
+          margin-bottom: 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
 
-    .btn {
-      background-color: rgb(241, 129, 129);
-      border: none;
-      &:hover {
-        background-color: rgb(236, 96, 96);
+          p {
+            margin: 0.5rem;
+          }
+        }
+      }
+
+      .btn {
+        background-color: rgb(241, 129, 129);
+        border: none;
+        &:hover {
+          background-color: rgb(236, 96, 96);
+        }
       }
     }
   }
 }
+
 .modal-footer {
   .btn-confirm {
     background-color: rgb(241, 129, 129);
@@ -61,26 +71,25 @@
   }
 }
 
-@media only screen and (max-width: 720px) {
-  .appointments {
-    margin: 3rem;
-    .top-header {
-      // margin: 1rem 3rem;
-      // gap: 5rem;
-      .search-bar {
-        input {
-          width: 7rem;
-        }
-      }
+@media screen and (max-width: 720px) {
+  .top-header {
+    h3 {
+      margin: auto;
+      padding-bottom: 1rem;
     }
+  }
+  .list-group {
     .list-group-item {
-      margin: 1rem 3rem;
-
       form {
         padding: 1rem;
         text-align: center;
         display: flex;
         flex-direction: column;
+
+        .cancel-btn {
+          padding-top: 0.4rem;
+          padding-bottom: 0.7rem;
+        }
       }
     }
   }
