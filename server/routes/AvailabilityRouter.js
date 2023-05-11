@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import createError from "http-errors";
 import Availability from "../models/Availability.js";
 import Teacher from "../models/Teacher.js";
+import { CheckAuthentication } from "../middleware/Authentication.js";
 
 // define availability router
 const AvailabilityRouter = express.Router();
@@ -137,6 +138,7 @@ AvailabilityRouter
   })
 
   // to update time slots
+
   .patch("/:teacherId/:date", async (req, res, next) => {
     try {
       // Parse the date from the request parameters
@@ -145,12 +147,15 @@ AvailabilityRouter
       // Parse the teacherId from the request parameters
       const teacherId = req.params.teacherId;
 
+      // Convert the teacherId to a valid ObjectId
+      const validTeacherId = teacherId;
+
       // Get the new time slots from the request body
       const newTimeSlots = req.body.time;
 
       // Find the availability for the given teacher and date
       const availability = await Availability.findOne({
-        teacher: teacherId,
+        teacher: validTeacherId,
         date: date,
       });
 
@@ -171,5 +176,4 @@ AvailabilityRouter
       next(createError(500, error.message));
     }
   });
-
 export default AvailabilityRouter;

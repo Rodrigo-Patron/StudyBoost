@@ -141,6 +141,7 @@ function TDashboard() {
     timePicked8: "",
   });
   const [submittedDates, setSubmittedDates] = useState([]);
+  const [submittedDates, setSubmittedDates] = useState([]);
 
   const dateHandler = (date) => {
     setDate(date);
