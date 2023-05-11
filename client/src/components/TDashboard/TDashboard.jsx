@@ -313,34 +313,14 @@ const handleDeleteChecked = () => {
     })
     .then((result) => {
       console.log(result);
-    
-      // Assuming result is the updated availability object
-      setSelectedDate({
-        date: result.date,
-        timeSlots: result.time.map(time => ({ time, checked: false })),
-      });
-    
-      // Also update your submittedDates state
-      setSubmittedDates((prevState) => {
-        // Find the index of the updated date
-        const index = prevState.findIndex(
-          (submittedDate) => submittedDate.date === result.date
-        );
-    
-        // Create a new copy of your state
-        const newState = [...prevState];
-    
-        // Replace the old date with the new one
-        newState[index] = { date: result.date, timeSlots: result.time };
-    
-        return newState;
-      });
+      // TODO: Update state with the new availability
     })
     .catch((err) => {
       setErrors(err);
       console.log(err);
     });
 };
+
 
 
   return (
