@@ -3,6 +3,14 @@ import Teacher from "./Teacher.js";
 
 const { Schema, model } = mongoose;
 
+// Time Slot Schema
+const timeSlotSchema = new Schema(
+  {
+    time: { type: String },
+  },
+  { timestamps: false, _id: true }
+);
+
 // Availability Schema
 const availabilitySchema = new Schema(
   {

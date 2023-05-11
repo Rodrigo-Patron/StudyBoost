@@ -121,7 +121,7 @@ import "react-calendar/dist/Calendar.css";
 import "./TDashboard.scss";
 import Calendar from "react-calendar";
 import { useContext } from "react";
-import { Button, Form, Row, Col, Card } from "react-bootstrap";
+import { Button, Form, Row, Col, Card} from "react-bootstrap";
 import { Context } from "../../Context.jsx";
 import THeader from "../T-Header/THeader";
 
@@ -148,7 +148,18 @@ function TDashboard() {
     const foundDate = submittedDates.find(
       (submittedDate) => submittedDate.date === formattedDate
     );
-    setSelectedDate(foundDate); // Set the selected date with its corresponding time slots
+    if (foundDate) {
+      const timeSlotsWithChecked = foundDate.timeSlots.map((timeSlot) => ({
+        time: timeSlot,
+        checked: false,
+      }));
+      setSelectedDate({
+        date: foundDate.date,
+        timeSlots: timeSlotsWithChecked,
+      });
+    } else {
+      setSelectedDate(null);
+    }
   };
 
   const checkHandler = (e) => {
@@ -252,6 +263,66 @@ function TDashboard() {
       });
   }
 
+  // Function to handle checkbox changes for selected time slots
+const handleTimeSlotCheck = (index) => {
+  setSelectedDate((prevState) => {
+    const newTimeSlots = [...prevState.timeSlots];
+    newTimeSlots[index].checked = !newTimeSlots[index].checked;
+    return { ...prevState, timeSlots: newTimeSlots };
+  });
+};
+
+// Function to handle the delete button click
+const handleDeleteChecked = () => {
+  setSelectedDate((prevState) => {
+    const newTimeSlots = prevState.timeSlots.filter(
+      (timeSlot) => !timeSlot.checked
+    );
+    return { ...prevState, timeSlots: newTimeSlots };
+  });
+
+  const remainingTimeSlots = selectedDate.timeSlots
+    .filter((timeSlot) => !timeSlot.checked)
+    .map((timeSlot) => timeSlot.time);
+
+  const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
+
+  const formData = {
+    date: selectedDate.date,
+    time: remainingTimeSlots,
+  };
+
+  const config = {
+    method: "PATCH",
+    body: JSON.stringify(formData),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${teacherAuthToken}`,
+    },
+  };
+
+  fetch("http://localhost:6500/api/availability/:teacherId/:date", config)
+    .then((res) => {
+      if (!res.ok) {
+        return res.json().then((err) => {
+          alert(err.message);
+          setErrors(err);
+        });
+      }
+      return res.json();
+    })
+    .then((result) => {
+      console.log(result);
+      // TODO: Update state with the new availability
+    })
+    .catch((err) => {
+      setErrors(err);
+      console.log(err);
+    });
+};
+
+
+
   return (
     <div className="pickdate">
       <THeader />
@@ -352,23 +423,28 @@ function TDashboard() {
           <Row className="selected">
             <h4>Availability on Selected Date</h4>
             {selectedDate && (
-              <>
-                <p>
-                  <span>Date: </span>
-                  <span className="task-input">
-                    {new Date(selectedDate.date).toLocaleDateString(
-                      navigator.language
-                    )}
-                  </span>
-                </p>
-                <span>Time slots: </span>
-                {selectedDate.timeSlots.map((time) => (
-                  <div key={time}>
-                    <p>{time}</p>
-                  </div>
-                ))}
-              </>
-            )}
+  <>
+    <p>
+      <span>Date: </span>
+      <span className="task-input">
+        {new Date(selectedDate.date).toLocaleDateString(navigator.language)}
+      </span>
+    </p>
+    <span>Time slots: </span>
+    {selectedDate.timeSlots.map((timeSlot, index) => (
+      <div key={timeSlot.time}>
+        <Form.Check
+          type="checkbox"
+          id={`selected-${index}`}
+          label={timeSlot.time}
+          checked={timeSlot.checked}
+          onChange={() => handleTimeSlotCheck(index)}
+        />
+      </div>
+    ))}
+    <Button onClick={handleDeleteChecked}>Delete Checked</Button>
+  </>
+)}
           </Row>
         </Col>
       </Row>
