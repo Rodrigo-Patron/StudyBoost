@@ -36,8 +36,9 @@
         @media (max-width: 576px) {
           display: block;
           // position: absolute;
-          margin-left: 1rem;
-          margin-bottom: 40rem;
+          align-self: center;
+
+          // margin-bottom: 40rem;
         }
       }
       .name {
@@ -59,9 +60,10 @@
         }
 
         @media (max-width: 576px) {
-          margin-right: 4rem;
-          margin-bottom: 15rem;
-          font-size: 4rem;
+          // margin-right: 4rem;
+          // margin-bottom: 15rem;
+          // font-size: 4rem;
+          display: none;
         }
       }
       .home-btn {
