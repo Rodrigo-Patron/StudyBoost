@@ -1,12 +1,14 @@
 import "./About.scss";
 import Header from "../Header/Header";
+import Navbar from "../Navbar/Navbar";
 import React from "react";
 import { Container, Row, Card, Col, CardGroup } from "react-bootstrap";
 
 function About() {
   return (
     <div className="aboutUs">
-      <Header />
+       <Navbar />
+      <Header />  
       <div className="background"></div>
       <Card>
         <Card.Body>
