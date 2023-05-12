@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Header.scss";
+import { useContext } from "react";
+import { Context } from "../../Context.jsx";
 import { Link } from "react-router-dom";
-import logo from './Logo5.png';
+import logo from './Logo1.png';
 import collapsedLogo from './B0.png'
 
 import {
@@ -22,17 +24,23 @@ import { RiPencilLine } from "react-icons/ri";
 
 
 const Header = () => {
+
+  const { isCollapsed, setIsCollapsed } = useContext(Context);
   //create initial menuCollapse state using useState hook
   const [menuCollapse, setMenuCollapse] = useState(true);
 
   //create a custom function that will change menuCollapse state from false to true and true to false
   const menuIconClick = () => {
     //condition checking to change state from true to false and vice versa
-   setMenuCollapse(!menuCollapse)
+   setMenuCollapse(!menuCollapse);
+   setIsCollapsed(menuCollapse)
   };
 
   return (
     <>
+
+
+
       <div id="header">
         {/* collapsed props to change menu size using menuCollapse state */}
         <ProSidebar collapsed={menuCollapse}>

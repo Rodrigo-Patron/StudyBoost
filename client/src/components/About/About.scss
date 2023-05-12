@@ -1,69 +1,87 @@
 .aboutUs {
-  background-color: rgba(250, 184, 0, 0.924);
-}
+  width: 100%;
 
-.card {
-  background-color: rgba(250, 184, 0, 0.924);
-  .card-body {
-    // height: 5vh;
-    // margin: 2rem 0;
-    text-align: center;
-  }
-}
-
-.about-container {
-  color: rgba(250, 184, 0, 0.924);
-  background-color: rgb(85, 84, 83);
-  border-radius: 2rem;
-  font-size: 2.5vh;
-
-  .about {
-    height: 42vh;
-
-    .about1 {
-      padding-top: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .about2 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-}
-
-.card-group {
-  padding: 2rem;
-
-  .card {
-    margin: 0;
-    border: none;
+  .background {
+    background-color: white;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
 
-    .MohammadCard {
-      background-image: url(../../images/Mo.jpg);
+    .navbarCol {
+      display: none;
+      @media (max-width: 600px) {
+        display: block;
+      }
     }
-    .AgathaCard {
-      background-image: url(../../images/Ag.jpg);
+    .headerCol {
+      @media (max-width: 600px) {
+        display: none;
+      }
     }
-    .RodrigoCard {
-      background-image: url(../../images/Ro.jpg);
+
+    .card {
+      background-color: rgba(250, 184, 0, 0.924);
+      .card-body {
+        // height: 5vh;
+        // margin: 2rem 0;
+        text-align: center;
+      }
     }
-    .DavidCard {
-      background-image: url(../../images/Da.jpg);
+
+    .about-container {
+      color: rgba(250, 184, 0, 0.924);
+      background-color: rgb(85, 84, 83);
+      border-radius: 2rem;
+      font-size: 2.5vh;
+
+      .about {
+        height: 42vh;
+
+        .about1 {
+          padding-top: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .about2 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
-    .card-img-top {
-      height: 150px;
-      width: 150px;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      border-radius: 50%;
+
+    .card-group {
+      padding: 6rem;
+
+      .card {
+        margin: 0;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        background-color: white;
+
+        .MohammadCard {
+          background-image: url(../../images/Mo.jpg);
+        }
+        .AgathaCard {
+          background-image: url(../../images/Ag.jpg);
+        }
+        .RodrigoCard {
+          background-image: url(../../images/Ro.jpg);
+        }
+        .DavidCard {
+          background-image: url(../../images/Da.jpg);
+        }
+        .card-img-top {
+          height: 150px;
+          width: 150px;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          border-radius: 50%;
+        }
+      }
     }
   }
 }
