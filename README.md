@@ -1,4 +1,4 @@
-# StudyBoost
+# StudyBoost - Course Project
 
 1. User Profiles: We will need to create user profiles for students and teachers that allow them to manage their personal information and view their appointment history.
 
