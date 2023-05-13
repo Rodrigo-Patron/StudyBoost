@@ -121,6 +121,55 @@ AvailabilityRouter
     }
   })
 
+  // to delete/update availability time slots in teacher page
+  .post("/deleteAvailability", async (req, res, next) => {
+    req.body.teacher = req.userId;
+    const time = req.body.time;
+    try {
+      const removeAvailability = await Availability.findOne({
+        time: { $elemMatch: { $eq: req.body.time } },
+        teacher: req.body.teacher,
+        date: req.body.date,
+      });
+
+      const filterTime = removeAvailability.time.filter(
+        (x) => x !== req.body.time
+      );
+      const updateAvailability = {
+        teacher: req.body.teacher,
+        date: req.body.date,
+        time: filterTime,
+      };
+
+      await Availability.findByIdAndUpdate(
+        { _id: removeAvailability._id },
+        updateAvailability,
+        { new: true }
+      );
+
+      //to delete availability once is empty/ no more that day
+      const findAvailability = await Availability.findOneAndDelete({
+        time: [],
+      });
+      // console.log(findAvailability);
+
+      //to delete relation in teacher
+      if (findAvailability) {
+        const deleteAv = await Teacher.findById(findAvailability.teacher);
+        console.log(deleteAv);
+
+        deleteAv.availabilityByTeacher = deleteAv.availabilityByTeacher.filter(
+          (x) => x.toString() !== findAvailability._id.toString()
+        );
+        await deleteAv.save();
+      }
+
+      res.status(205).send("");
+    } catch (error) {
+      next(createError(400, error.message));
+    }
+  })
+
   // to delete availability
   .delete("/:id", async (req, res, next) => {
     try {

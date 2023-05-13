@@ -25,10 +25,12 @@
     }
 
     .list-group-item {
-      color: #636464;
+      color: #535353;
+      font-weight: 500;
       border: none;
+      padding: 0;
       .task-input {
-        font-weight: bolder;
+        font-weight: 400;
       }
       form {
         border: 1px solid rgb(233, 233, 233);
@@ -39,6 +41,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        p {
+          margin: 0.5rem;
+        }
       }
     }
 
@@ -73,14 +78,16 @@
         }
       }
     }
-    .list-group-item {
-      margin: 1rem 3rem;
+    .list-group {
+      .list-group-item {
+        margin: 1rem 3rem;
 
-      form {
-        padding: 1rem;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
+        form {
+          padding: 1rem;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+        }
       }
     }
   }
