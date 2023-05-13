@@ -108,22 +108,11 @@ const THeader = () => {
                   </Link>
                 </MenuItem>
 
-                {/* <MenuItem icon={<i className="fa fa-bell"></i>}>
-                  <Link to="/notifications">Notifications</Link>
-                </MenuItem> */}
-
-                {/* <MenuItem icon={<i className="fa fa-envelope"></i>}>
-                  <Link to="/messages">Messages</Link>
-                </MenuItem>
                 <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
-                  <Link to="/appointment-history">Appointment History</Link>
+                  <Link to="/teacherDashboard/teacherAvailabilities">
+                    Availability
+                  </Link>
                 </MenuItem>
-                <MenuItem icon={<i className="fa fa-book"></i>}>
-                  <Link to="/resources">Resources and Materials</Link>
-                </MenuItem>
-                <MenuItem icon={<i className="fa fa-cog"></i>}>
-                  <Link to="/settings">Settings</Link>
-                </MenuItem> */}
               </Menu>
             </SidebarContent>
             <SidebarFooter>
