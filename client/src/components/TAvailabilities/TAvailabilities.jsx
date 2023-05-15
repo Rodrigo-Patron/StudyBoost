@@ -12,12 +12,9 @@ function TAvailabilities() {
   const [query, setQuery] = useState("");
   const [reqAgain, setReqAgain] = useState(false);
   const [counter, setCounter] = useState(0);
+  const [selectedTime, setSelectedTime] = useState([]);
 
-  // console.log("teacherId", teacherId);
-  const [selectedTime, setSelectedTime] = useState({
-    date: "",
-    time: "",
-  });
+  const dateInput = useRef();
 
   useEffect(() => {
     const config = {
@@ -47,62 +44,100 @@ function TAvailabilities() {
       });
   }, [reqAgain, counter]);
 
-  const dateInput = useRef();
-
   // to delete availability
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const data = {
-      teacher: teacher._id,
-      date: selectedTime.date,
-      time: selectedTime.time,
-    };
-    console.log("DATA", data);
-    const config = {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${teacherToken}`,
-      },
-    };
+    selectedTime.forEach((selected) => {
+      const data = {
+        teacher: teacher._id,
+        date: selected.date,
+        time: selected.time,
+      };
+      console.log("DATA", data);
 
-    fetch("http://localhost:6500/api/availability/deleteAvailability", config)
-      .then((res) => {
-        if (res.ok) {
-          return Swal.fire({
-            icon: "success",
-            title: "Good job",
-            text: "Availability removed",
-          });
-        }
-        return res.json();
-      })
-      .then((result) => {
-        // console.log(result);
-        setCounter(counter + 1);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      const config = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${teacherToken}`,
+        },
+      };
+      fetch("http://localhost:6500/api/availability/deleteAvailability", config)
+        .then((res) => {
+          if (res.ok) {
+            return Swal.fire({
+              icon: "success",
+              title: "Good job",
+              text: "Availability removed",
+            });
+          }
+          return res.json();
+        })
+        .then((result) => {
+          setCounter(counter + 1);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   };
 
   const t = (e) => {
-    // console.log(
-    //   e.target.parentElement.parentElement.parentElement.parentElement
-    //     .children[3]
-    // );
     e.target.parentElement.parentElement.parentElement.parentElement.children[3].disabled = false;
 
+    const selectedDate = e.target.getAttribute("data");
+    const selectedTimeSlot = e.target.value;
+    const existingSelectedDateIndex = selectedTime.findIndex(
+      (date) => date.date === selectedDate
+    );
     if (e.target.checked) {
-      setSelectedTime({
-        time: e.target.value,
-        date: e.target.getAttribute("data"),
-      });
-      console.log("TIME", selectedTime.time);
+      // Add the selected time slot to the selected date
+      if (existingSelectedDateIndex === -1) {
+        setSelectedTime([
+          ...selectedTime,
+          {
+            date: selectedDate,
+            time: [selectedTimeSlot],
+          },
+        ]);
+      } else {
+        const existingSelectedTimeSlots =
+          selectedTime[existingSelectedDateIndex].time;
+        setSelectedTime([
+          ...selectedTime.slice(0, existingSelectedDateIndex),
+          {
+            ...selectedTime[existingSelectedDateIndex],
+            time: [...existingSelectedTimeSlots, selectedTimeSlot],
+          },
+          ...selectedTime.slice(existingSelectedDateIndex + 1),
+        ]);
+      }
+    } else {
+      // Remove the selected time slot from the selected date
+      const existingSelectedTimeSlots =
+        selectedTime[existingSelectedDateIndex].time;
+      if (existingSelectedTimeSlots.length === 1) {
+        setSelectedTime([
+          ...selectedTime.slice(0, existingSelectedDateIndex),
+          ...selectedTime.slice(existingSelectedDateIndex + 1),
+        ]);
+      } else {
+        setSelectedTime([
+          ...selectedTime.slice(0, existingSelectedDateIndex),
+          {
+            ...selectedTime[existingSelectedDateIndex],
+            time: existingSelectedTimeSlots.filter(
+              (time) => time !== selectedTimeSlot
+            ),
+          },
+          ...selectedTime.slice(existingSelectedDateIndex + 1),
+        ]);
+      }
     }
   };
+
   const timeList = () => {
     return (
       <div>

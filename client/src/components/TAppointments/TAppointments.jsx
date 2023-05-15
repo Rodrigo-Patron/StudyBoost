@@ -8,14 +8,13 @@ import {
   Modal,
   Row,
   Container,
+  Col,
 } from "react-bootstrap";
 import { useContext, useEffect, useState, useRef } from "react";
 import { Context } from "../../Context.jsx";
 
-// import { FaTrashAlt } from "react-icons/fa";
-
 function TAppointments() {
-  const { teacherToken, appointment, setAppointment, teacher } =
+  const { teacherToken, appointment, setAppointment, teacher, isCollapsed } =
     useContext(Context);
   const [show, setShow] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -107,11 +106,16 @@ function TAppointments() {
     }
   };
 
+  const headerWidth = isCollapsed ? 3 : 1;
+  const remainingWidth = 12 - headerWidth;
+
   return (
-    <div>
-      <THeader />
-      <Container className="appointments">
-        <Row className="appointment-row">
+    <Container fluid={true} className="dashboard-container">
+      <Row className="dashboard-row">
+        <Col xs="12" md={headerWidth}>
+          <THeader />
+        </Col>
+        <Col className="appointments" xs="12" md={remainingWidth}>
           <div className="top-header">
             <h3>Your booked appointments:</h3>
             <div className="search-bar">
@@ -255,9 +259,9 @@ function TAppointments() {
                   ))}
             </ListGroup.Item>
           </ListGroup>
-        </Row>
-      </Container>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

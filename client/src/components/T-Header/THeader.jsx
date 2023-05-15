@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "./Logo.png";
+import logo from "./Logo1.png";
 import collapsedLogo from "./B.png";
 
 //import react pro sidebar components
@@ -54,77 +54,69 @@ const THeader = () => {
 
   return (
     <>
-      <div className="t-header-wrapper">
-        <div id="header2">
-          {/* collapsed props to change menu size using menuCollapse state */}
-          <ProSidebar collapsed={menuCollapse}>
-            <SidebarHeader>
-              <div className="logoText">
-                {/* small and big change using menuCollapse state */}
-                <p>
-                  {menuCollapse ? (
-                    <img
-                      src={collapsedLogo}
-                      className="collapsedLogo"
-                      width="50"
-                      height="50"
-                      alt="collapsedLogo"
-                    />
-                  ) : (
-                    <img
-                      src={logo}
-                      className="logo"
-                      width="250"
-                      height="150"
-                      alt="logo"
-                    />
-                  )}
-                </p>
+      <div id="header2">
+        {/* collapsed props to change menu size using menuCollapse state */}
+        <ProSidebar collapsed={menuCollapse}>
+          <SidebarHeader>
+            <div className="logoText">
+              {/* small and big change using menuCollapse state */}
+              <p>
+                {menuCollapse ? (
+                  <img
+                    src={collapsedLogo}
+                    className="collapsedLogo"
+                    width="50"
+                    height="50"
+                    alt="collapsedLogo"
+                  />
+                ) : (
+                  <img
+                    src={logo}
+                    className="logo"
+                    width="200"
+                    height="120"
+                    alt="logo"
+                  />
+                )}
+              </p>
+            </div>
+            <div className="closeMenu" onClick={menuIconClick}>
+              {/* changing menu collapse icon on click */}
+              {menuCollapse ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
+            </div>
+          </SidebarHeader>
+          <SidebarContent>
+            <div className="profile-card">
+              <div className="profile-info">
+                <p id="LoggedInAs">{teacher.name}</p>
+                <p>Subject: {teacher.subjects}</p>
               </div>
-              <div className="closeMenu" onClick={menuIconClick}>
-                {/* changing menu collapse icon on click */}
-                {menuCollapse ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
-              </div>
-            </SidebarHeader>
-            <SidebarContent>
-              <div className="profile-card">
-                {/* <img
-                  src="https://via.placeholder.com/80"
-                  alt="Profile"
-                  className="profile-img"
-                /> */}
-                <div className="profile-info">
-                  <p id="LoggedInAs">{teacher.name}</p>
-                  <p>Subject: {teacher.subjects}</p>
-                </div>
-              </div>
-              <Menu iconShape="square">
-                <MenuItem icon={<RiPencilLine />}>
-                  <Link to="/teacherDashboard">Set Availability</Link>
-                </MenuItem>
-                <MenuItem icon={<FaList />}>
-                  <Link to="/teacherDashboard/teacherAppointments">
-                    Appointments
-                  </Link>
-                </MenuItem>
+            </div>
+            <Menu iconShape="square">
+              <MenuItem icon={<RiPencilLine />}>
+                <Link to="/teacherDashboard">Set Availability</Link>
+              </MenuItem>
+              <MenuItem icon={<FaList />}>
+                <Link to="/teacherDashboard/teacherAppointments">
+                  Appointments
+                </Link>
+              </MenuItem>
 
-                <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
-                  <Link to="/teacherDashboard/teacherAvailabilities">
-                    Availability
-                  </Link>
-                </MenuItem>
-              </Menu>
-            </SidebarContent>
-            <SidebarFooter>
-              <Menu iconShape="square">
-                {/* <Logout /> */}
-                <MenuItem onClick={logoutHandler} icon={<FiLogOut />}>
-                  Logout
-                </MenuItem>
-              </Menu>
-            </SidebarFooter>
-          </ProSidebar>
-        </div>
+              <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
+                <Link to="/teacherDashboard/teacherAvailabilities">
+                  Availability
+                </Link>
+              </MenuItem>
+            </Menu>
+          </SidebarContent>
+          <SidebarFooter>
+            <Menu iconShape="square">
+              <MenuItem onClick={logoutHandler} icon={<FiLogOut />}>
+                Logout
+              </MenuItem>
+            </Menu>
+          </SidebarFooter>
+        </ProSidebar>
       </div>
     </>
   );
