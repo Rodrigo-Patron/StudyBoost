@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .aboutUs {
   .background {
     background-color: white;
@@ -49,59 +50,163 @@
       }
     }
 
-    .card-group {
-      padding: 6rem;
+=======
+// .aboutUs {
+//   width: 100%;
 
+//   .background {
+//     background-color: white;
+//     display: flex;
+
+//     .navbarCol {
+//       display: none;
+//       @media (max-width: 600px) {
+//         display: block;
+//       }
+//     }
+//     .headerCol {
+//       @media (max-width: 600px) {
+//         display: none;
+//       }
+//     }
+
+//     .card {
+//       background-color: rgba(250, 184, 0, 0.924);
+//       .card-body {
+//         // height: 5vh;
+//         // margin: 2rem 0;
+//         text-align: center;
+//       }
+//     }
+
+//     .about-container {
+//       color: rgba(250, 184, 0, 0.924);
+//       background-color: rgb(85, 84, 83);
+//       border-radius: 2rem;
+//       font-size: 2.5vh;
+
+//       .about {
+//         height: 42vh;
+
+//         .about1 {
+//           padding-top: 1rem;
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//         }
+
+//         .about2 {
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//         }
+//       }
+//     }
+
+//     .card-group {
+//       padding: 6rem;
+
+//       .card {
+//         margin: 0;
+//         border: none;
+//         display: flex;
+//         justify-content: center;
+//         align-items: flex-end;
+//         background-color: white;
+
+//         .MohammadCard {
+//           background-image: url(../../images/Mo.jpg);
+//         }
+//         .AgathaCard {
+//           background-image: url(../../images/Ag.jpg);
+//         }
+//         .RodrigoCard {
+//           background-image: url(../../images/Ro.jpg);
+//         }
+//         .DavidCard {
+//           background-image: url(../../images/Da.jpg);
+//         }
+//         .card-img-top {
+//           height: 150px;
+//           width: 150px;
+//           background-repeat: no-repeat;
+//           background-size: cover;
+//           background-position: center;
+//           border-radius: 50%;
+//         }
+//       }
+//     }
+//   }
+// }
+// // // Media queries for mobile screens
+// // @media (max-width: 767px) {
+// //   .card {
+// //     flex-direction: column;
+// //     align-items: center;
+// //     text-align: center;
+
+// //     .card-img-top {
+// //       margin-bottom: 1rem;
+// //     }
+// //   }
+// // }
+
+// // // Media queries for desktop screens
+// // @media (min-width: 768px) {
+// //   .card-group {
+// //     display: grid;
+// //     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+// //     grid-gap: 2rem;
+// //   }
+// // }
+
+.container {
+  min-height: 100vh;
+  .heading {
+    text-align: center;
+    background-color: rgba(250, 184, 0, 0.924);
+    margin: 2rem 0;
+  }
+  .row {
+    min-height: 30vh;
+    padding: 2rem;
+    text-align: justify;
+    .about2 {
+      padding-top: 2rem;
+    }
+  }
+  .pics {
+    height: auto;
+    border: none;
+>>>>>>> dbcf35a (About us page modified)
+    .card-group {
+      gap: 1rem;
       .card {
-        margin: 0;
-        border: none;
+        height: 400px;
         display: flex;
         justify-content: center;
-        align-items: flex-end;
-        background-color: white;
-
-        .MohammadCard {
-          background-image: url(../../images/Mo.jpg);
-        }
-        .AgathaCard {
-          background-image: url(../../images/Ag.jpg);
-        }
-        .RodrigoCard {
-          background-image: url(../../images/Ro.jpg);
-        }
-        .DavidCard {
-          background-image: url(../../images/Da.jpg);
+        align-items: center;
+        padding-top: 2rem;
+        .card-body {
+          text-align: center;
         }
         .card-img-top {
-          height: 150px;
-          width: 150px;
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: center;
+          height: 200px;
+          width: 200px;
           border-radius: 50%;
+          box-shadow: 0 0 0 4px rgba(250, 184, 0, 0.924);
         }
       }
     }
   }
+  .back-btn {
+    background-color: rgba(218, 215, 208, 0.924);
+    margin-bottom: 1rem;
+    border: none;
+    color: black;
+    &:hover {
+      background-color: rgba(179, 178, 176);
+      color: black;
+    }
+  }
 }
-// // Media queries for mobile screens
-// @media (max-width: 767px) {
-//   .card {
-//     flex-direction: column;
-//     align-items: center;
-//     text-align: center;
-
-//     .card-img-top {
-//       margin-bottom: 1rem;
-//     }
-//   }
-// }
-
-// // Media queries for desktop screens
-// @media (min-width: 768px) {
-//   .card-group {
-//     display: grid;
-//     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-//     grid-gap: 2rem;
-//   }
-// }
