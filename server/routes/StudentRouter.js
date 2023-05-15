@@ -41,6 +41,13 @@ StudentRouter
   // new student registration endpoint
   .post("/register", registerValidator, async (req, res, next) => {
     try {
+      // Check if student's email address exists
+      const studentEmail = await Student.findOne({ email: req.body.email });
+      if (studentEmail) {
+        console.log("already registered");
+        next(createError(409, "Email already registered"));
+        return;
+      }
       // hashing password
       const hashed = await hash(req.body.password, 10);
       // reassigning the password to hashed password

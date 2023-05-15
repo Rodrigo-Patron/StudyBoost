@@ -14,7 +14,7 @@ import {
 import Swal from "sweetalert2";
 
 function TRegister() {
-  const { setErrors, setLoginForm } = useContext(Context);
+  const { setLoginForm } = useContext(Context);
   //^ INPUTS
   const nameInput = useRef();
   const emailInput = useRef();
@@ -44,7 +44,7 @@ function TRegister() {
       .then((res) => {
         if (!res.ok) {
           return res.json().then((err) => {
-            const alertText = err.message.map((error) => {
+            err.message.forEach((error) => {
               if (error.param === "name") {
                 return Swal.fire({
                   icon: "error",
@@ -123,9 +123,9 @@ function TRegister() {
         <ListGroup className="input-container">
           <ListGroup.Item variant="dark">
             <FormSelect type="text" ref={subjectsInput} required>
-              <option value="" disabled selected hidden>
+              {/* <option value="" disabled selected hidden>
                 Subject
-              </option>
+              </option> */}
               <option value="Biology">Biology</option>
               <option value="Business">Business</option>
               <option value="Chemistry">Chemistry</option>
@@ -139,7 +139,7 @@ function TRegister() {
           </ListGroup.Item>
         </ListGroup>
         <br />
-        <Button variant="outline-dark" type="submit">
+        <Button className="register-btn" variant="outline-dark" type="submit">
           Register
         </Button>
       </Form>

@@ -33,9 +33,16 @@ function SRegister() {
 
     fetch("http://localhost:6500/api/students/register", config)
       .then((res) => {
+        if (res.status === 409) {
+          return Swal.fire({
+            icon: "error",
+            title: "Registration failed",
+            text: "Email registered!",
+          });
+        }
         if (!res.ok) {
           return res.json().then((err) => {
-            const alertText = err.message.map((error) => {
+            err.message.map((error) => {
               if (error.param === "name") {
                 return Swal.fire({
                   icon: "error",

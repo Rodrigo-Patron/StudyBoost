@@ -1,6 +1,7 @@
 .students {
   .students-card {
     .students-title {
+      background-color: rgba(250, 184, 0, 0.924);
       text-align: center;
     }
   }
@@ -10,7 +11,7 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-      height: 80vh;
+      height: 70vh;
       margin: 2rem 0;
 
       .forms {
