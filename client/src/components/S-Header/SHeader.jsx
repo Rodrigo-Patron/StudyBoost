@@ -1,12 +1,10 @@
 //import useState hook to create menu collapse state
-
-
 import React, { useState } from "react";
 import "./SHeader.scss";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "./Logo.png";
+import logo from "./Logo1.png";
 import collapsedLogo from "./B.png";
 
 //import react pro sidebar components
@@ -68,16 +66,16 @@ const SHeader = () => {
                   <img
                     src={collapsedLogo}
                     className="collapsedLogo"
-                    width="70"
-                    height="70"
+                    width="50"
+                    height="50"
                     alt="collapsedLogo"
                   />
                 ) : (
                   <img
                     src={logo}
                     className="logo"
-                    width="300"
-                    height="150"
+                    width="200"
+                    height="120"
                     alt="logo"
                   />
                 )}
@@ -106,7 +104,6 @@ const SHeader = () => {
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              {/* <Logout /> */}
               <MenuItem
                 active={true}
                 onClick={logoutHandler}

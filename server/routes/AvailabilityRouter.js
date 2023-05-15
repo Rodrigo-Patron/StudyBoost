@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import createError from "http-errors";
 import Availability from "../models/Availability.js";
 import Teacher from "../models/Teacher.js";
@@ -44,8 +43,6 @@ AvailabilityRouter
         });
       });
 
-      ///////////////
-
       //to delete availability once is empty/ no more that day
       const findAv = await Availability.findOneAndDelete({
         time: [],
@@ -68,7 +65,7 @@ AvailabilityRouter
       const query = findAvailability1;
       query.populate("teacher", "name -_id");
       findAvailability1 = await query.exec();
-      console.log("FIND:", findAvailability1);
+      // console.log("FIND:", findAvailability1);
 
       if (av.length > (await findAvailability1).length) {
         res.send({ findAvailability1, requestAgain: true });
@@ -124,29 +121,32 @@ AvailabilityRouter
   // to delete/update availability time slots in teacher page
   .post("/deleteAvailability", async (req, res, next) => {
     req.body.teacher = req.userId;
-    const time = req.body.time;
+
     try {
       const removeAvailability = await Availability.findOne({
-        time: { $elemMatch: { $eq: req.body.time } },
         teacher: req.body.teacher,
         date: req.body.date,
       });
+      console.log("REM-AV", removeAvailability);
+      console.log("REQ", req.body.time);
 
-      const filterTime = removeAvailability.time.filter(
-        (x) => x !== req.body.time
-      );
-      const updateAvailability = {
-        teacher: req.body.teacher,
-        date: req.body.date,
-        time: filterTime,
-      };
+      if (removeAvailability) {
+        const filterTime = removeAvailability.time.filter(
+          (x) => !req.body.time.includes(x)
+        );
 
-      await Availability.findByIdAndUpdate(
-        { _id: removeAvailability._id },
-        updateAvailability,
-        { new: true }
-      );
+        console.log("FILTER", filterTime);
 
+        await Availability.findByIdAndUpdate(
+          { _id: removeAvailability._id },
+          {
+            teacher: req.body.teacher,
+            date: req.body.date,
+            time: filterTime,
+          },
+          { new: true }
+        );
+      }
       //to delete availability once is empty/ no more that day
       const findAvailability = await Availability.findOneAndDelete({
         time: [],
@@ -156,7 +156,7 @@ AvailabilityRouter
       //to delete relation in teacher
       if (findAvailability) {
         const deleteAv = await Teacher.findById(findAvailability.teacher);
-        console.log(deleteAv);
+        // console.log(deleteAv);
 
         deleteAv.availabilityByTeacher = deleteAv.availabilityByTeacher.filter(
           (x) => x.toString() !== findAvailability._id.toString()
@@ -180,42 +180,6 @@ AvailabilityRouter
         return;
       }
       next({ status: 404, message: "Availability not found" });
-    } catch (error) {
-      next(createError(500, error.message));
-    }
-  })
-
-  // to update time slots
-  .patch("/:teacherId/:date", async (req, res, next) => {
-    try {
-      // Parse the date from the request parameters
-      const date = req.params.date;
-
-      // Parse the teacherId from the request parameters
-      const teacherId = req.params.teacherId;
-
-      // Get the new time slots from the request body
-      const newTimeSlots = req.body.time;
-
-      // Find the availability for the given teacher and date
-      const availability = await Availability.findOne({
-        teacher: teacherId,
-        date: date,
-      });
-
-      // If no availability was found, return an error
-      if (!availability) {
-        return next(createError(404, "Availability not found"));
-      }
-
-      // Update the time slots
-      availability.time = newTimeSlots;
-
-      // Save the updated availability
-      await availability.save();
-
-      // Send the updated availability as the response
-      res.status(200).send(availability);
     } catch (error) {
       next(createError(500, error.message));
     }
