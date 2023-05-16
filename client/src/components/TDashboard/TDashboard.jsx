@@ -1,122 +1,4 @@
-// import React, { useState } from "react";
-// import "./TAvailability.scss";
-// import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-// import { Datepicker, Page, setOptions, localeDe } from "@mobiscroll/react";
-// import "font-awesome/css/font-awesome.min.css";
-// import { useContext, useRef } from "react";
-// import { Context } from "../../Context.jsx";
-// import THeader from "../T-Header/THeader";
-
-// setOptions({
-//   locale: localeDe,
-//   theme: "ios",
-//   themeVariant: "light",
-// });
-
-// function TAvailability({ menuCollapse }) {
-//   const inputProps = {
-//     placeholder: "Please Select...",
-//   };
-
-//   const boxInputProps = {
-//     label: "Range",
-//     labelStyle: "stacked",
-//     inputStyle: "outline",
-//     placeholder: "Please Select...",
-//   };
-
-//   const [selectedDate, setSelectedDate] = useState(null);
-//   const [selectedTime, setSelectedTime] = useState(null);
-//   const { setErrors } = useContext(Context);
-
-//   const calendarInput = useRef();
-
-//   function submitHandler() {
-//     const date = calendarInput.current._valueText.split(" ")[0];
-//     const time = calendarInput.current._valueText.split(" ")[1];
-
-//     const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
-
-//     const formData = {
-//       date: date,
-//       time: time,
-//     };
-
-//     const config = {
-//       method: "POST",
-//       body: JSON.stringify(formData),
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${teacherAuthToken}`,
-//       },
-//     };
-
-//     fetch("http://localhost:6500/api/availability", config)
-//       .then((res) => {
-//         if (!res.ok) {
-//           return res.json().then((err) => {
-//             alert(err.message);
-//             setErrors(err);
-//           });
-//         }
-//         return res.json();
-//       })
-//       .then((result) => {
-//         console.log("result:", result);
-//         setSelectedDate(result.date);
-//         setSelectedTime(result.time);
-//       })
-//       .catch((err) => {
-//         setErrors(err);
-//         console.log(err);
-//       });
-//   }
-
-//   return (
-//     <>
-//       <THeader />
-//       <Page>
-//         <h1 className="page-title">Teacher Dashboard</h1>
-
-//         <div
-//           className="container"
-//           style={{
-//             marginLeft: menuCollapse ? "80px" : "300px",
-//             transition: "margin-left 0.3s",
-//           }}
-//         >
-//           <section className="upcoming-appointments">
-//             <h2>Upcoming Appointments</h2>
-//           </section>
-//           <section className="calendar">
-//             <h2>Select Your Availability</h2>
-//             <div className="calendar-container">
-//               <Datepicker
-//                 controls={["calendar", "timegrid"]}
-//                 ref={calendarInput}
-//                 dateFormat="DD.MM.YYYY"
-//                 timeFormat="HH:mm"
-//                 display="inline"
-//               />
-//               <button
-//                 type="submit"
-//                 className="submit-button"
-//                 onClick={submitHandler}
-//               >
-//                 Submit Availability
-//               </button>
-//             </div>
-//           </section>
-//         </div>{" "}
-//         <p> {selectedTime}</p>
-//         <p>{selectedDate}</p>
-//       </Page>
-//     </>
-//   );
-// }
-
-// export default TAvailability;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-calendar/dist/Calendar.css";
 import "./TDashboard.scss";
 import Calendar from "react-calendar";
@@ -128,8 +10,8 @@ import THeader from "../T-Header/THeader";
 function TDashboard() {
   const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
-  const [lastSelectedDate, setLastSelectedDate] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
+  const setLastSelectedDate = useState(null);
+  const setSelectedDate = useState(null)[1];
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -140,7 +22,43 @@ function TDashboard() {
     timePicked7: "",
     timePicked8: "",
   });
-  const [submittedDates, setSubmittedDates] = useState([]);
+  const [submittedDates, setSubmittedDates] = useState(() => {
+    const localData = localStorage.getItem('submittedDates');
+    return localData ? JSON.parse(localData) : [];
+  });
+  
+
+    // Fetch the teacher object and its token from the localStorage
+    const teacher = JSON.parse(localStorage.getItem("teacher"));
+    const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
+    // Extract teacherId from the teacher object
+    const teacherId = teacher._id;
+
+    useEffect(() => {
+      const fetchSubmittedDates = async () => {
+        try {
+          const response = await fetch(`http://localhost:6500/api/availability/${teacherId}`, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${teacherAuthToken}`,
+            },
+          });
+          if (!response.ok) {
+            throw new Error('Failed to fetch submitted dates');
+          }
+          const data = await response.json();
+          setSubmittedDates(data);
+          localStorage.setItem('submittedDates', JSON.stringify(data));
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+    
+      fetchSubmittedDates();
+    },  [teacherAuthToken, teacherId]);
+    
+    
+
 
   const dateHandler = (date) => {
     setDate(date);
@@ -148,11 +66,13 @@ function TDashboard() {
     const foundDate = submittedDates.find(
       (submittedDate) => submittedDate.date === formattedDate
     );
-    if (foundDate) {
+  
+    if (foundDate && foundDate.timeSlots) {
       const timeSlotsWithChecked = foundDate.timeSlots.map((timeSlot) => ({
         time: timeSlot,
         checked: false,
       }));
+  
       setSelectedDate({
         date: foundDate.date,
         timeSlots: timeSlotsWithChecked,
@@ -161,13 +81,16 @@ function TDashboard() {
       setSelectedDate(null);
     }
   };
+  
 
   const checkHandler = (e) => {
-    console.log(e.target.name);
-    if (e.target.checked) {
+    const time = e.target.value;
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
       setTimeSlot({
         ...timeSlot,
-        [e.target.name]: e.target.value,
+        [e.target.name]: time,
       });
     } else {
       setTimeSlot({
@@ -175,7 +98,44 @@ function TDashboard() {
         [e.target.name]: "",
       });
     }
-  };
+
+    // Check if the time slot was previously submitted
+    const isSubmitted = submittedDates.some(submittedDate =>
+      submittedDate.timeSlots && submittedDate.timeSlots.includes(time)
+    );
+
+    if (isChecked && isSubmitted) {
+      alert('This timeslot was previously submitted.');
+    }
+};
+
+  
+  
+  // const getAvailabilityIfSubmitted = (time, isChecked) => {
+  //   const isSubmitted = submittedDates.some(submittedDate =>
+  //     submittedDate.timeSlots && submittedDate.timeSlots.includes(time)
+  //   );
+  
+  //   if (isChecked && isSubmitted) {
+  //     alert('This timeslot was previously submitted.');
+  
+  //     // Make a GET request to the backend
+  //     fetch(`http://localhost:6500/api/availability/${teacherId}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `Bearer ${teacherAuthToken}`,
+  //       },
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       // Handle the data from the backend
+  //     })
+  //     .catch(error => console.error('Error:', error));
+  //   }
+  // };
+  
+  
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
@@ -198,8 +158,6 @@ function TDashboard() {
       alert("Please select the date");
       return;
     }
-
-    const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
 
     const timeArr = [];
     for (const key in timeSlot) {
@@ -226,100 +184,46 @@ function TDashboard() {
     };
 
     fetch("http://localhost:6500/api/availability", config)
-      .then((res) => {
-        if (!res.ok) {
-          return res.json().then((err) => {
-            alert(err.message);
-            setErrors(err);
-          });
-        }
-        return res.json();
-      })
-      .then((result) => {
-        console.log(result);
-        setLastSelectedDate({ date: result.date, time: result.time });
-
-        // Add the submitted date to submittedDates state
-        setSubmittedDates([
-          ...submittedDates,
-          { date: result.date, timeSlots: result.time },
-        ]); // Changed this line
-
-        // Clear the timeSlot state after a successful submission
-        setTimeSlot({
-          timePicked1: "",
-          timePicked2: "",
-          timePicked3: "",
-          timePicked4: "",
-          timePicked5: "",
-          timePicked6: "",
-          timePicked7: "",
-          timePicked8: "",
+    .then((res) => {
+      if (!res.ok) {
+        return res.json().then((err) => {
+          alert(err.message);
+          setErrors(err);
         });
-      })
-      .catch((err) => {
-        setErrors(err);
-        console.log(err);
+      }
+      return res.json();
+    })
+    .then((result) => {
+      console.log(result);
+      setLastSelectedDate({ date: result.date, time: result.time });
+
+      // Add the submitted date to submittedDates state
+      const updatedSubmittedDates = [
+        ...submittedDates,
+        { date: result.date, timeSlots: result.time },
+      ];
+      setSubmittedDates(updatedSubmittedDates);
+
+      // Update the localStorage with the updated submittedDates
+      localStorage.setItem('submittedDates', JSON.stringify(updatedSubmittedDates));
+
+      // Clear the timeSlot state after a successful submission
+      setTimeSlot({
+        timePicked1: "",
+        timePicked2: "",
+        timePicked3: "",
+        timePicked4: "",
+        timePicked5: "",
+        timePicked6: "",
+        timePicked7: "",
+        timePicked8: "",
       });
-  }
-
-  // Function to handle checkbox changes for selected time slots
-  const handleTimeSlotCheck = (index) => {
-    setSelectedDate((prevState) => {
-      const newTimeSlots = [...prevState.timeSlots];
-      newTimeSlots[index].checked = !newTimeSlots[index].checked;
-      return { ...prevState, timeSlots: newTimeSlots };
+    })
+    .catch((err) => {
+      setErrors(err);
+      console.log(err);
     });
-  };
-
-  // Function to handle the delete button click
-  const handleDeleteChecked = () => {
-    setSelectedDate((prevState) => {
-      const newTimeSlots = prevState.timeSlots.filter(
-        (timeSlot) => !timeSlot.checked
-      );
-      return { ...prevState, timeSlots: newTimeSlots };
-    });
-
-    const remainingTimeSlots = selectedDate.timeSlots
-      .filter((timeSlot) => !timeSlot.checked)
-      .map((timeSlot) => timeSlot.time);
-
-    const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
-
-    const formData = {
-      date: selectedDate.date,
-      time: remainingTimeSlots,
-    };
-
-    const config = {
-      method: "PATCH",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${teacherAuthToken}`,
-      },
-    };
-
-    fetch("http://localhost:6500/api/availability/:teacherId/:date", config)
-      .then((res) => {
-        if (!res.ok) {
-          return res.json().then((err) => {
-            alert(err.message);
-            setErrors(err);
-          });
-        }
-        return res.json();
-      })
-      .then((result) => {
-        console.log(result);
-        // TODO: Update state with the new availability
-      })
-      .catch((err) => {
-        setErrors(err);
-        console.log(err);
-      });
-  };
+}
 
   return (
     <div className="pickdate">
@@ -342,6 +246,7 @@ function TDashboard() {
               <div key={`default-${type}`} className="mb-3">
                 <Form.Check
                   onChange={checkHandler}
+                  
                   type={type}
                   id={`default-${type}`}
                   label="10:00 - 10:30"
@@ -351,6 +256,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
+                 
                   type={type}
                   id={`default-${type}`}
                   label="10:30 - 11:00"
@@ -360,6 +266,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
+                 
                   type={type}
                   id={`default-${type}`}
                   label="11:00 - 11:30"
@@ -369,6 +276,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
+                  
                   type={type}
                   id={`default-${type}`}
                   label="11:30 - 12:00"
@@ -378,6 +286,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
+                 
                   type={type}
                   id={`default-${type}`}
                   label="13:00 - 13:30"
@@ -387,6 +296,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
+                 
                   type={type}
                   id={`default-${type}`}
                   label="13:30 - 14:00"
@@ -396,6 +306,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
+                  
                   type={type}
                   id={`default-${type}`}
                   label="14:00 - 14:30"
@@ -405,6 +316,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
+                  
                   type={type}
                   id={`default-${type}`}
                   label="14:30 - 15:00"
@@ -417,7 +329,7 @@ function TDashboard() {
             <Button type="submit">Submit</Button>
           </Form>
         </Col>
-        <Col sm={4}>
+        {/* <Col sm={4}>
           <Row className="selected">
             <h4>Availability on Selected Date</h4>
             {selectedDate && (
@@ -446,7 +358,7 @@ function TDashboard() {
               </>
             )}
           </Row>
-        </Col>
+        </Col> */}
       </Row>
     </div>
   );

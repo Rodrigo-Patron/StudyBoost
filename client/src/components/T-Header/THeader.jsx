@@ -96,17 +96,18 @@ const THeader = () => {
               <MenuItem icon={<RiPencilLine />}>
                 <Link to="/teacherDashboard">Set Availability</Link>
               </MenuItem>
+              <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
+                <Link to="/teacherDashboard/teacherAvailabilities">
+                  Your availability
+                </Link>
+              </MenuItem>
               <MenuItem icon={<FaList />}>
                 <Link to="/teacherDashboard/teacherAppointments">
-                  Appointments
+                  Your appointments
                 </Link>
               </MenuItem>
 
-              <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
-                <Link to="/teacherDashboard/teacherAvailabilities">
-                  Availability
-                </Link>
-              </MenuItem>
+              
             </Menu>
           </SidebarContent>
           <SidebarFooter>
