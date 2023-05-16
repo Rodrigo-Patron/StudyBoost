@@ -9,6 +9,7 @@
     .headerCol {
       @media (max-width: 600px) {
         display: none;
+        padding: 0;
       }
     }
     .background {
@@ -34,11 +35,14 @@
         display: none;
 
         @media (max-width: 576px) {
-          display: block;
+          display: flex;
           // position: absolute;
-          align-self: center;
-
-          // margin-bottom: 40rem;
+          // align-self: center;
+          // align-items: center;
+          margin-bottom: 30rem;
+          margin-right: -16rem;
+          text-align: center;
+          margin: 1rem, 5rem;
         }
       }
       .name {
