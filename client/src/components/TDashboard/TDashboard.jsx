@@ -105,29 +105,15 @@ function TDashboard() {
 
   
 
-  const getAvailabilityIfSubmitted = (time, isChecked) => {
-    const isSubmitted = submittedDates.some(submittedDate =>
-      submittedDate.timeSlots && submittedDate.timeSlots.includes(time)
-    );
-  
-    if (isChecked && isSubmitted) {
-      alert('This timeslot was previously submitted.');
-  
-      // Make a GET request to the backend
-      fetch(`http://localhost:6500/api/availability/${teacherId}`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${teacherAuthToken}`,
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        // Handle the data from the backend
-      })
-      .catch(error => console.error('Error:', error));
-    }
-  };
+const submittedTimeSlots = {};
+submittedDates.forEach(submittedDate => {
+  if (submittedDate.timeSlots) {
+    submittedDate.timeSlots.forEach(timeSlot => {
+      submittedTimeSlots[timeSlot] = true;
+    });
+  }
+});
+
   
   
 
@@ -247,10 +233,11 @@ function TDashboard() {
                   value="10:00 - 10:30"
                   name="timePicked1"
                   checked={timeSlot.timePicked1 === "" ? false : true}
+                  disabled={submittedTimeSlots["10:00 - 10:30"]}
                 />
                 <Form.Check
                   onChange={checkHandler}
-                 
+                  disabled={submittedTimeSlots["10:30 - 11:00"]}
                   type={type}
                   id={`default-${type}`}
                   label="10:30 - 11:00"
@@ -260,7 +247,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
-                 
+                  disabled={submittedTimeSlots["11:00 - 11:30"]}
                   type={type}
                   id={`default-${type}`}
                   label="11:00 - 11:30"
@@ -270,7 +257,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
-                  
+                  disabled={submittedTimeSlots["11:30 - 12:00"]}
                   type={type}
                   id={`default-${type}`}
                   label="11:30 - 12:00"
@@ -280,7 +267,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
-                 
+                  disabled={submittedTimeSlots["13:00 - 13:30"]}
                   type={type}
                   id={`default-${type}`}
                   label="13:00 - 13:30"
@@ -290,7 +277,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
-                 
+                  disabled={submittedTimeSlots["13:30 - 14:00"]}
                   type={type}
                   id={`default-${type}`}
                   label="13:30 - 14:00"
@@ -300,7 +287,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
-                  
+                  disabled={submittedTimeSlots["14:00 - 14:30"]}
                   type={type}
                   id={`default-${type}`}
                   label="14:00 - 14:30"
@@ -310,7 +297,7 @@ function TDashboard() {
                 />
                 <Form.Check
                   onChange={checkHandler}
-                  
+                  disabled={submittedTimeSlots["14:30 - 15:00"]}
                   type={type}
                   id={`default-${type}`}
                   label="14:30 - 15:00"
