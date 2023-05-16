@@ -1,57 +1,4 @@
 // .aboutUs {
-//   .background {
-//     background-color: white;
-
-//     .navbarCol {
-//       display: none;
-//       position: sticky;
-//       @media (max-width: 600px) {
-//         display: block;
-//       }
-//     }
-//     .headerCol {
-//       padding: 0;
-//       @media (max-width: 600px) {
-//         display: none;
-//       }
-//     }
-
-//     .card {
-//       background-color: rgba(250, 184, 0, 0.924);
-//       .card-body {
-//         // height: 5vh;
-//         // margin: 2rem 0;
-//         text-align: center;
-//       }
-//     }
-
-//     .about-container {
-//       color: rgba(250, 184, 0, 0.924);
-//       background-color: rgb(85, 84, 83);
-//       border-radius: 2rem;
-//       font-size: 2.5vh;
-
-//       .about {
-//         height: 42vh;
-
-//         .about1 {
-//           padding-top: 1rem;
-//           display: flex;
-//           justify-content: center;
-//           align-items: center;
-//         }
-
-//         .about2 {
-//           display: flex;
-//           justify-content: center;
-//           align-items: center;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// .aboutUs {
 //   width: 100%;
 
 //   .background {
@@ -178,9 +125,8 @@
   .pics {
     height: auto;
     border: none;
-    /*Change*/
     .card-group {
-      gap: 2rem;
+      gap: 1rem;
       .card {
         height: 400px;
         display: flex;
