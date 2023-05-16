@@ -1,56 +1,56 @@
-<<<<<<< HEAD
-.aboutUs {
-  .background {
-    background-color: white;
+// .aboutUs {
+//   .background {
+//     background-color: white;
 
-    .navbarCol {
-      display: none;
-      position: sticky;
-      @media (max-width: 600px) {
-        display: block;
-      }
-    }
-    .headerCol {
-      padding: 0;
-      @media (max-width: 600px) {
-        display: none;
-      }
-    }
+//     .navbarCol {
+//       display: none;
+//       position: sticky;
+//       @media (max-width: 600px) {
+//         display: block;
+//       }
+//     }
+//     .headerCol {
+//       padding: 0;
+//       @media (max-width: 600px) {
+//         display: none;
+//       }
+//     }
 
-    .card {
-      background-color: rgba(250, 184, 0, 0.924);
-      .card-body {
-        // height: 5vh;
-        // margin: 2rem 0;
-        text-align: center;
-      }
-    }
+//     .card {
+//       background-color: rgba(250, 184, 0, 0.924);
+//       .card-body {
+//         // height: 5vh;
+//         // margin: 2rem 0;
+//         text-align: center;
+//       }
+//     }
 
-    .about-container {
-      color: rgba(250, 184, 0, 0.924);
-      background-color: rgb(85, 84, 83);
-      border-radius: 2rem;
-      font-size: 2.5vh;
+//     .about-container {
+//       color: rgba(250, 184, 0, 0.924);
+//       background-color: rgb(85, 84, 83);
+//       border-radius: 2rem;
+//       font-size: 2.5vh;
 
-      .about {
-        height: 42vh;
+//       .about {
+//         height: 42vh;
 
-        .about1 {
-          padding-top: 1rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+//         .about1 {
+//           padding-top: 1rem;
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//         }
 
-        .about2 {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-      }
-    }
+//         .about2 {
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//         }
+//       }
+//     }
+//   }
+// }
 
-=======
 // .aboutUs {
 //   width: 100%;
 
@@ -178,11 +178,7 @@
   .pics {
     height: auto;
     border: none;
-<<<<<<< HEAD
->>>>>>> dbcf35a (About us page modified)
-=======
 
->>>>>>> 50e6a19 (debuging2)
     .card-group {
       gap: 1rem;
       .card {
