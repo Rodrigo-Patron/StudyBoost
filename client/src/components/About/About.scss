@@ -1,17 +1,16 @@
 .aboutUs {
-  width: 100%;
-
   .background {
     background-color: white;
-    display: flex;
 
     .navbarCol {
       display: none;
+      position: sticky;
       @media (max-width: 600px) {
         display: block;
       }
     }
     .headerCol {
+      padding: 0;
       @media (max-width: 600px) {
         display: none;
       }

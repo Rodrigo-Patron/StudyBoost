@@ -36,10 +36,10 @@ export default function Navbar() {
 
       <MDBCollapse show={showNavExternal3}>
         <div className='bg-light shadow-3 p-4'>
-          <MDBBtn block className='border-bottom m-0' color='link'>
+          <MDBBtn  active={true} block className='border-bottom m-0' color='link'>
           <Link to="/Home">Home</Link>
           </MDBBtn>
-          <MDBBtn block className='border-bottom m-0' color='link'>
+          <MDBBtn active={true} block className='border-bottom m-0' color='link'>
           <Link to="/About">About Us</Link>
           </MDBBtn>
         </div>

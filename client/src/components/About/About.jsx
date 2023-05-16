@@ -31,26 +31,32 @@ function About() {
             <Row className="about">
               <Col xs={12} md={6} className="about1">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Voluptatum, eum. Corporis aspernatur laborum qui dignissimos
-                  sit, vero vitae eos, labore consequatur dolores illum!
-                  Perspiciatis, deleniti magnam. Nesciunt doloribus ipsa ex!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-                  molestiae ex cum, modi non quas nobis ab aliquid aperiam,
-                  consequatur, laudantium impedit sint rem. Obcaecati qui animi
-                  eius sunt reprehenderit?
+                  <strong>"Our Story:</strong> As students ourselves, we
+                  understand the struggle of balancing academic and personal
+                  responsibilities. That's why we came together to create Study
+                  Boost, to simplifies the study process and helps students and
+                  teachers make the most of their time. <br />
+                  <strong>Our Mission:</strong> Our mission is to empower
+                  students and teachers to achieve their academic goals through
+                  effective organization and collaboration. We believe that
+                  everyone deserves the opportunity to succeed, and that Study
+                  Boost can help make that a reality.
                 </p>
               </Col>
               <Col xs={12} md={6} className="about2">
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Distinctio sit, quasi fugiat, adipisci veritatis cupiditate
-                  iste quia officiis itaque corporis, voluptatum ipsa possimus
-                  exercitationem perferendis error amet omnis impedit esse!
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Optio repellat sapiente eveniet mollitia nulla beatae magni
-                  similique dolorem earum repudiandae, ullam dolores saepe
-                  consectetur dolor! A ipsam molestias at provident.
+                  <strong>Our Values:</strong>We value
+                  simplicity and accessibility.We
+                  constantly explore new ideas and to enhance
+                  user experience and make learning more
+                  interactive. We believe that studying should be
+                  stress-free, and everyone should have the opportunity to
+                  learn and grow. <br />
+                  <strong>Our Future:</strong> We are committed to continuously
+                  improving and expanding Study Boost to meet the needs of
+                  students and teachers everywhere. We have exciting plans for
+                  future features and updates, and we can't wait to share them
+                  with you."
                 </p>
               </Col>
             </Row>
