@@ -20,6 +20,7 @@ function About() {
   // const remainingWidth = 12 - headerWidth;
 
   return (
+
     // <Container fluid={true} className="aboutUs">
     //   <Row className="background">
     //     <Col className="navbarCol">
@@ -62,6 +63,7 @@ function About() {
     //           </Col>
     //         </Row>
     //       </Container>
+
 
     //       <Card>
     //         <Card.Body>
@@ -119,20 +121,34 @@ function About() {
       </Card>
       <Row>
         <Col sm={6} className="about1">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-            doloremque beatae, tenetur error labore maxime similique pariatur
-            sit reprehenderit quaerat porro. Assumenda quibusdam facere amet.
-          </p>
-        </Col>
-        {/*COLUMN*/}
-        <Col sm={6} className="about2">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            itaque reprehenderit, possimus consequatur rerum animi obcaecati,
-            fugit blanditiis consequuntur voluptatum quas exercitationem
-            repellat, tempore corporis.
-          </p>
+        <p>
+                  <strong>"Our Story:</strong> As students ourselves, we
+                  understand the struggle of balancing academic and personal
+                  responsibilities. That's why we came together to create Study
+                  Boost, to simplifies the study process and helps students and
+                  teachers make the most of their time. <br />
+                  <strong>Our Mission:</strong> Our mission is to empower
+                  students and teachers to achieve their academic goals through
+                  effective organization and collaboration. We believe that
+                  everyone deserves the opportunity to succeed, and that Study
+                  Boost can help make that a reality.
+                </p>
+              </Col>
+              <Col xs={12} md={6} className="about2">
+                <p>
+                  <strong>Our Values:</strong>We value
+                  simplicity and accessibility.We
+                  constantly explore new ideas and to enhance
+                  user experience and make learning more
+                  interactive. We believe that studying should be
+                  stress-free, and everyone should have the opportunity to
+                  learn and grow. <br />
+                  <strong>Our Future:</strong> We are committed to continuously
+                  improving and expanding Study Boost to meet the needs of
+                  students and teachers everywhere. We have exciting plans for
+                  future features and updates, and we can't wait to share them
+                  with you."
+                </p>
         </Col>
       </Row>
       <Card className="heading">
