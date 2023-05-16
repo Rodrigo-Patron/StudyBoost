@@ -42,49 +42,69 @@ function TAvailabilities() {
           setAvailability(result);
         }
       });
-  }, [reqAgain, counter]);
+  }, [reqAgain, counter, selectedTime]);
 
+  const resetCheckBoxes = (e) => {
+    console.log(e.children[2][0]);
+    Array.from(e.children[2]).forEach((it) => {
+      console.log("UnChecking", it);
+      it.children[0].children[0].children[0].checked = false;
+    });
+  };
   // to delete availability
   const submitHandler = (e) => {
+    const date = e.target.getAttribute("data");
     e.preventDefault();
+    console.log(date);
 
-    selectedTime.forEach((selected) => {
-      const data = {
-        teacher: teacher._id,
-        date: selected.date,
-        time: selected.time,
-      };
-      console.log("DATA", data);
+    //selectedTime.forEach((selected) => {
+    // const data = {
+    //   teacher: teacher._id,
+    //   date: selected.date,
+    //   time: selected.time,
+    // };
+    const data = selectedTime.filter((t) => t.date === date)[0];
+    // console.log("DATA", data);
 
-      const config = {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${teacherToken}`,
-        },
-      };
-      fetch("http://localhost:6500/api/availability/deleteAvailability", config)
-        .then((res) => {
-          if (res.ok) {
-            return Swal.fire({
-              icon: "success",
-              title: "Good job",
-              text: "Availability removed",
-            });
-          }
-          return res.json();
-        })
-        .then((result) => {
+    const config = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${teacherToken}`,
+      },
+    };
+
+    setSelectedTime(selectedTime.filter((t) => t.date !== date));
+    fetch("http://localhost:6500/api/availability/deleteAvailability", config)
+      .then((res) => {
+        if (res.ok) {
           setCounter(counter + 1);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+          return Swal.fire({
+            icon: "success",
+            title: "Good job",
+            text: "Availability removed",
+          }).then(() => {
+            console.log("After fetch: ", selectedTime);
+            setSelectedTime(selectedTime.filter((t) => t.date !== date));
+            setTimeout(() => {
+              resetCheckBoxes(e.target);
+            }, 1000);
+          });
+        }
+        return res.json();
+      })
+      .then((result) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+    //});
+    //console.log("DELETE ORDER: ", data);
+    //setSelectedTime(selectedTime.filter((t) => t.date !== data.date));
   };
 
   const t = (e) => {
+    // e.target.checked = !e.target.checked;
     e.target.parentElement.parentElement.parentElement.parentElement.children[3].disabled = false;
 
     const selectedDate = e.target.getAttribute("data");
@@ -116,26 +136,29 @@ function TAvailabilities() {
       }
     } else {
       // Remove the selected time slot from the selected date
-      const existingSelectedTimeSlots =
-        selectedTime[existingSelectedDateIndex].time;
-      if (existingSelectedTimeSlots.length === 1) {
-        setSelectedTime([
-          ...selectedTime.slice(0, existingSelectedDateIndex),
-          ...selectedTime.slice(existingSelectedDateIndex + 1),
-        ]);
-      } else {
-        setSelectedTime([
-          ...selectedTime.slice(0, existingSelectedDateIndex),
-          {
-            ...selectedTime[existingSelectedDateIndex],
-            time: existingSelectedTimeSlots.filter(
-              (time) => time !== selectedTimeSlot
-            ),
-          },
-          ...selectedTime.slice(existingSelectedDateIndex + 1),
-        ]);
+      if (selectedTime[existingSelectedDateIndex]) {
+        const existingSelectedTimeSlots =
+          selectedTime[existingSelectedDateIndex].time;
+        if (existingSelectedTimeSlots.length === 1) {
+          setSelectedTime([
+            ...selectedTime.slice(0, existingSelectedDateIndex),
+            ...selectedTime.slice(existingSelectedDateIndex + 1),
+          ]);
+        } else {
+          setSelectedTime([
+            ...selectedTime.slice(0, existingSelectedDateIndex),
+            {
+              ...selectedTime[existingSelectedDateIndex],
+              time: existingSelectedTimeSlots.filter(
+                (time) => time !== selectedTimeSlot
+              ),
+            },
+            ...selectedTime.slice(existingSelectedDateIndex + 1),
+          ]);
+        }
       }
     }
+    console.log("SelectedTime: ", selectedTime);
   };
 
   const timeList = () => {
@@ -166,7 +189,11 @@ function TAvailabilities() {
                   }
                 })
                 .map((appointment) => (
-                  <Form onSubmit={submitHandler} key={appointment._id}>
+                  <Form
+                    onSubmit={submitHandler}
+                    data={appointment.date}
+                    key={appointment._id}
+                  >
                     <p>
                       <span>Date:</span>{" "}
                       <i ref={dateInput} className="date-output">
@@ -181,6 +208,7 @@ function TAvailabilities() {
                         {appointment.time.map((time, index) => (
                           <Form.Check
                             onChange={t}
+                            // checked={false}
                             key={index}
                             type="checkbox"
                             label={time}
