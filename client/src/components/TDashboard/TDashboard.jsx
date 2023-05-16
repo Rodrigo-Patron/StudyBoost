@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import "react-calendar/dist/Calendar.css";
 import "./TDashboard.scss";
 import Calendar from "react-calendar";
@@ -10,8 +11,8 @@ import THeader from "../T-Header/THeader";
 function TDashboard() {
   const { setErrors } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
-  const setLastSelectedDate = useState(null);
-  const setSelectedDate = useState(null)[1];
+  const [lastSelectedDate, setLastSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -22,12 +23,8 @@ function TDashboard() {
     timePicked7: "",
     timePicked8: "",
   });
-  const [submittedDates, setSubmittedDates] = useState(() => {
-    const localData = localStorage.getItem('submittedDates');
-    return localData ? JSON.parse(localData) : [];
-  });
+  const [submittedDates, setSubmittedDates] = useState([]);
   
-
     // Fetch the teacher object and its token from the localStorage
     const teacher = JSON.parse(localStorage.getItem("teacher"));
     const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
@@ -55,11 +52,9 @@ function TDashboard() {
       };
     
       fetchSubmittedDates();
-    },  [teacherAuthToken, teacherId]);
+    }, []);
+   
     
-    
-
-
   const dateHandler = (date) => {
     setDate(date);
     const formattedDate = date.toLocaleDateString(navigator.language);
@@ -82,7 +77,6 @@ function TDashboard() {
     }
   };
   
-
   const checkHandler = (e) => {
     const time = e.target.value;
     const isChecked = e.target.checked;
@@ -110,30 +104,30 @@ function TDashboard() {
 };
 
   
+
+  const getAvailabilityIfSubmitted = (time, isChecked) => {
+    const isSubmitted = submittedDates.some(submittedDate =>
+      submittedDate.timeSlots && submittedDate.timeSlots.includes(time)
+    );
   
-  // const getAvailabilityIfSubmitted = (time, isChecked) => {
-  //   const isSubmitted = submittedDates.some(submittedDate =>
-  //     submittedDate.timeSlots && submittedDate.timeSlots.includes(time)
-  //   );
+    if (isChecked && isSubmitted) {
+      alert('This timeslot was previously submitted.');
   
-  //   if (isChecked && isSubmitted) {
-  //     alert('This timeslot was previously submitted.');
-  
-  //     // Make a GET request to the backend
-  //     fetch(`http://localhost:6500/api/availability/${teacherId}`, {
-  //       method: 'GET',
-  //       headers: {
-  //         Authorization: `Bearer ${teacherAuthToken}`,
-  //       },
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       // Handle the data from the backend
-  //     })
-  //     .catch(error => console.error('Error:', error));
-  //   }
-  // };
+      // Make a GET request to the backend
+      fetch(`http://localhost:6500/api/availability/${teacherId}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${teacherAuthToken}`,
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // Handle the data from the backend
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  };
   
   
 
