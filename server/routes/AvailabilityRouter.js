@@ -2,6 +2,7 @@ import express from "express";
 import createError from "http-errors";
 import Availability from "../models/Availability.js";
 import Teacher from "../models/Teacher.js";
+import { CheckAuthentication } from "../middleware/Authentication.js";
 
 // define availability router
 const AvailabilityRouter = express.Router();
@@ -184,5 +185,4 @@ AvailabilityRouter
       next(createError(500, error.message));
     }
   });
-
 export default AvailabilityRouter;
