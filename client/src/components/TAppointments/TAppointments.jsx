@@ -1,6 +1,8 @@
 import React from "react";
 import "./TAppointments.scss";
 import THeader from "../T-Header/THeader";
+import TNavbar from "../TNavbar/TNavbar";
+
 import {
   ListGroup,
   Button,
@@ -106,13 +108,16 @@ function TAppointments() {
     }
   };
 
-  const headerWidth = isCollapsed ? 3 : 1;
+  const headerWidth = isCollapsed ? 2 : 1;
   const remainingWidth = 12 - headerWidth;
 
   return (
     <Container fluid={true} className="dashboard-container">
       <Row className="dashboard-row">
-        <Col xs="12" md={headerWidth}>
+      <Col className="navbarCol">
+        <TNavbar />
+        </Col>
+        <Col className="headerCol" xs="12" md={headerWidth}>
           <THeader />
         </Col>
         <Col className="appointments" xs="12" md={remainingWidth}>

@@ -4,12 +4,13 @@ import "react-calendar/dist/Calendar.css";
 import "./TDashboard.scss";
 import Calendar from "react-calendar";
 import { useContext } from "react";
-import { Button, Form, Row, Col, Card } from "react-bootstrap";
+import { Button, Form, Row, Col, Card, Container } from "react-bootstrap";
 import { Context } from "../../Context.jsx";
 import THeader from "../T-Header/THeader";
+import TNavbar from "../TNavbar/TNavbar";
 
 function TDashboard() {
-  const { setErrors } = useContext(Context);
+  const { setErrors, isCollapsed } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
   const [lastSelectedDate, setLastSelectedDate] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
@@ -205,14 +206,32 @@ submittedDates.forEach(submittedDate => {
     });
 }
 
+const headerWidth = isCollapsed ? 2 : 1;
+const remainingWidth = 12 - headerWidth;
   return (
+
+
+    <Container fluid={true} className="Dashboard-container">
+    <Row className="Dashboard-row">
+    <Col className="navbarCol">
+      <TNavbar />
+      </Col>
+      <Col className="headerCol" xs="12" md={headerWidth}>
+        <THeader />
+      </Col>
+      <Col className="appointments" xs="12" md={remainingWidth}>
+        
+        
+
+
     <div className="pickdate">
-      <THeader />
+      
       <Card className="teachers-dashboard">
         <Card.Body>
           <h2>Teacher's dashboard</h2>
         </Card.Body>
       </Card>
+      <Container>
       <Row className="date-time">
         <Col sm={8}>
           <Form onSubmit={submitHandler}>
@@ -341,7 +360,12 @@ submittedDates.forEach(submittedDate => {
           </Row>
         </Col> */}
       </Row>
+      </Container>
     </div>
+    </Col>
+  
+    </Row>
+  </Container>
   );
 }
 
