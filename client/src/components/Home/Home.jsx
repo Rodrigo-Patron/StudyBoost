@@ -7,7 +7,7 @@ import { Context } from "../../Context.jsx";
 import { Button, Row, Container, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from './Logo1.png';
+import logo from './Logo0.png';
 
 function Home() {
   const { isCollapsed } = useContext(Context);
@@ -28,8 +28,8 @@ function Home() {
           <div className="background">
           <div className="logoText">
               {/* small and big change using menuCollapse state */}
-              <p>
-               <img src={logo}  className= "logo"  width = "250" height = "200" alt="logo" /></p>
+              <div className="logoP">
+               <img src={logo}  className= "logo"  width = "250" height = "200" alt="logo" /></div>
             </div>
           <h1 className="name">Study Boost</h1>
           <NavLink to="/teachersPage">

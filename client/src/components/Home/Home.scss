@@ -1,5 +1,7 @@
 .home {
   .home-row {
+    background-image: linear-gradient(0deg, #feb200 0%, #fac039 100%);
+
     .navbarCol {
       display: none;
       @media (max-width: 600px) {
@@ -9,14 +11,15 @@
     .headerCol {
       @media (max-width: 600px) {
         display: none;
-        padding: 0;
+        // padding-left: 0;
       }
+      // @media (min-width: 600px) {
+      // background-size: contain;
+      // }
     }
     .background {
       background-image: url(../../images/HomePage.png);
       height: 100vh;
-
-      width: 100%;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -28,21 +31,33 @@
       @media (max-width: 576px) {
         background-image: none;
         background-color: white;
-        // background-image: url(../../images/stationery-arrangement-yellow-background-with-empty-notebook.jpg);
+        background-image: url(../../images/stationery-arrangement-yellow-background-with-empty-notebook.jpg);
       }
 
-      .logo {
+      .logoP {
         display: none;
 
         @media (max-width: 576px) {
-          display: flex;
+          // display: flex;
+          // display: grid;
+          // flex-direction: row;
           // position: absolute;
           // align-self: center;
           // align-items: center;
-          margin-bottom: 30rem;
-          margin-right: -16rem;
-          text-align: center;
-          margin: 1rem, 5rem;
+          // text-align: center;
+          margin-bottom: 13rem;
+          margin-right: -22rem;
+          // display: flex;
+          // justify-content: center;
+          // margin: 0;
+          // position: absolute;
+          // top: 50%;
+          // left: 50%;
+          height: 200px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #b7bcc0c5;
         }
       }
       .name {
@@ -52,6 +67,7 @@
         font-weight: bold;
         position: absolute;
         font-family: cursive;
+        color: rgb(25, 25, 25);
 
         @media (max-width: 968px) {
           margin-bottom: 25rem;
@@ -72,22 +88,25 @@
       }
       .home-btn {
         margin-right: 2rem;
-        margin-bottom: 25rem;
+        margin-bottom: 18rem;
         padding: 0.5rem;
         font-size: 3rem;
         font-weight: bold;
-        // background-color: white;
+        font-family: "Arial Narrow Bold";
         // font-family: cursive;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-        a {
-          color: white;
-          text-decoration: none;
-          &:hover {
-            color: rgba(250, 184, 0, 0.924);
-          }
-        }
+        background-image: linear-gradient(0deg, #feb600 0%, #f5cd3c 100%);
+        border-radius: 6%;
+        box-shadow: 0 0 0 4px rgba(250, 184, 0, 0.924);
+
+        // a {
+        //   text-decoration: none;
+        //   &:hover {
+        //     color: rgba(250, 184, 0, 0.924);
+        //   }
+        // }
+
         &:hover {
-          background-color: black;
+          background-image: linear-gradient(0deg, #f7cb09 0%, #f5e0b0 100%);
         }
 
         @media (min-width: 768px) {
@@ -110,11 +129,14 @@
         }
 
         @media (max-width: 576px) {
-          margin-right: 4rem;
-          margin-bottom: 1rem;
+          margin-right: 3.6rem;
+          margin-top: 23rem;
           font-size: 1.5rem;
+          background-image: linear-gradient(0deg, #f8f8f8 0%, #fdfdfd 100%);
+          box-shadow: none;
+
           &:hover {
-            background-color: rgba(250, 184, 0, 0.924);
+            background-image: linear-gradient(0deg, #feae00 0%, #ffe172 100%);
           }
         }
       }

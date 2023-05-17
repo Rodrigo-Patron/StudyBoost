@@ -3,7 +3,7 @@ import "./Header.scss";
 import { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import { Link } from "react-router-dom";
-import logo from './Logo1.png';
+import logo from './Logo.png';
 import collapsedLogo from './B0.png'
 
 import {
@@ -47,8 +47,8 @@ const Header = () => {
           <SidebarHeader>
             <div className="logoText">
               {/* small and big change using menuCollapse state */}
-              <p>{menuCollapse ? <img src={collapsedLogo} className= "collapsedLogo" width = "50" height = "50" alt="collapsedLogo" />  
-              : <img src={logo}  className= "logo"  width = "250" height = "200" alt="logo" />}</p>
+              <p>{menuCollapse ? <img src={collapsedLogo} className= "collapsedLogo" width = "100" height = "100" alt="collapsedLogo" />  
+              : <img src={logo}  className= "logo"  width = "250" height = "180" alt="logo" />}</p>
             </div>
             <div className="closeMenu" onClick={menuIconClick}>
               {/* changing menu collapse icon on click */}
