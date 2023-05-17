@@ -1,11 +1,11 @@
 #header1 {
-  position: fixed;
+  // position: fixed;
   z-index: 2;
-  width: 20%;
+  // width: 20%;
 }
 
 #header1 .closeMenu {
-  // color: #000;
+  color: #000;
   position: absolute;
   right: 0;
   z-index: 9999;
@@ -13,17 +13,17 @@
   border-radius: 50%;
   font-weight: bold;
   font-size: 25px;
-  top: 50%;
+  top: 500px;
   cursor: pointer;
 }
 #header1 .pro-sidebar {
+  height: 100vh;
   width: 100%;
   min-width: 100%;
-  height: 100vh;
 }
 #header1 .pro-sidebar.collapsed {
-  width: 80px;
-  min-width: 80px;
+  width: 100%;
+  min-width: 100%;
 }
 #header1 .pro-sidebar-inner {
   background-color: white;
@@ -33,18 +33,18 @@
   overflow-y: hidden;
 }
 #header1 .pro-sidebar-inner .pro-sidebar-layout .logoText p {
-  font-size: 20px;
+  // font-size: 20px;
   padding: 0 20px;
   color: #000;
   font-weight: bold;
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 #header1 .pro-sidebar-inner .pro-sidebar-layout ul {
   padding: 0 5px;
 }
 #header1 .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
   color: #000;
-  margin: 10px 0px;
+  margin: 10px 20px;
   font-weight: bold;
 }
 #header1
@@ -69,11 +69,11 @@
 #header1 .pro-sidebar-inner .pro-sidebar-layout .active {
   background-image: linear-gradient(0deg, #fece00 0%, #ffe172 100%);
 }
-#LoggedInAs {
-  font-size: large;
-  margin-top: 20px;
-  text-align: center;
-}
+// #LoggedInAs {
+//   font-size: large;
+//   margin-top: 20px;
+//   text-align: center;
+// }
 
 .pro-sidebar .pro-menu li:hover {
   background-color: rgba(250, 184, 0, 0.924);

@@ -4,9 +4,7 @@
   // width: 20%;
   // margin-right: 10vw;
 }
-#header .pro-sidebar {
-  height: 100vh;
-}
+
 #header .closeMenu {
   color: #000;
   position: absolute;
@@ -20,6 +18,7 @@
   cursor: pointer;
 }
 #header .pro-sidebar {
+  height: 100vh;
   width: 100%;
   min-width: 100%;
 }
