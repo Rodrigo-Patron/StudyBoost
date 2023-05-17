@@ -65,16 +65,16 @@ const THeader = () => {
                   <img
                     src={collapsedLogo}
                     className="collapsedLogo"
-                    width="50"
-                    height="50"
+                    width="100"
+                    height="100"
                     alt="collapsedLogo"
                   />
                 ) : (
                   <img
                     src={logo}
                     className="logo"
-                    width="200"
-                    height="120"
+                    width="250"
+                    height="180"
                     alt="logo"
                   />
                 )}

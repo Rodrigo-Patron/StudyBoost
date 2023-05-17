@@ -15,7 +15,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 
-export default function SNavbar() {
+export default function TNavbar() {
   const {showNavExternal3, setShowNavExternal3} = useContext(Context);
 
   return (
@@ -41,12 +41,18 @@ export default function SNavbar() {
         <div className="bg-yellow shadow-3 p-8">
           <MDBBtn block className="border-bottom m-0" color="link">
           <MDBNavbarLink color="black" active aria-current='page' href='#Home'>
-          <Link color="black" to="/studentDashboard">Book appointments</Link>
+          <Link color="black" to="/teacherDashboard">Set availability</Link>
               </MDBNavbarLink>
           </MDBBtn>
           <MDBBtn block className="border-bottom m-0" color="link">
           <MDBNavbarLink color="black" active aria-current='page' href='#About'>
-          <Link color="black" to="/studentDashboard/studentAppointments">Your appointments</Link>
+          <Link color="black" to="/teacherDashboard/teacherAvailabilities"> Your availability</Link>
+              </MDBNavbarLink>
+            
+          </MDBBtn>
+          <MDBBtn block className="border-bottom m-0" color="link">
+          <MDBNavbarLink color="black" active aria-current='page' href='#About'>
+          <Link color="black" to="/teacherDashboard/teacherAppointments"> Your appointments</Link>
               </MDBNavbarLink>
             
           </MDBBtn>

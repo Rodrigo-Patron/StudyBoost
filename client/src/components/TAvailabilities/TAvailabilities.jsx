@@ -1,13 +1,15 @@
 import React from "react";
 import "./TAvailabilities.scss";
-import { Button, ListGroup, Form, Container, Col } from "react-bootstrap";
+import { Button, ListGroup, Form, Container, Col, Row } from "react-bootstrap";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../../Context.jsx";
 import Swal from "sweetalert2";
 import THeader from "../T-Header/THeader";
+import TNavbar from "../TNavbar/TNavbar";
+
 
 function TAvailabilities() {
-  const { setAvailability, availability, teacherToken, teacher } =
+  const { setAvailability, availability, teacherToken, teacher, isCollapsed } =
     useContext(Context);
   const [query, setQuery] = useState("");
   const [reqAgain, setReqAgain] = useState(false);
@@ -248,13 +250,24 @@ function TAvailabilities() {
   const slotsAvailable = availability && availability.length;
   const display = slotsAvailable ? timeList() : noSlots();
 
+  const headerWidth = isCollapsed ? 2 : 1;
+  const remainingWidth = 12 - headerWidth;
   return (
-    <div>
-      <Col>
-        <THeader />
-      </Col>
-      {display}
-    </div>
+
+    <Container fluid={true} className="availabilities-container">
+      <Row className="availabilities-row">
+      <Col className="navbarCol">
+        <TNavbar />
+        </Col>
+        <Col className="headerCol" xs="12" md={headerWidth}>
+          <THeader />
+        </Col>
+        <Col className="appointments" xs="12" md={remainingWidth}>
+           {display}
+          </Col>
+    
+      </Row>
+    </Container>
   );
 }
 
