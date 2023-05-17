@@ -106,33 +106,69 @@
 // //     grid-gap: 2rem;
 // //   }
 // // }
-
+.aboutUs {
+  .about-row {
+    .navbarCol {
+      display: none;
+      @media (max-width: 600px) {
+        display: block;
+      }
+    }
+    .headerCol {
+      @media (max-width: 600px) {
+        display: none;
+        // padding-left: 0;
+      }
+    }
+    // .bodyCol {
+    //   padding: 0;
+    //   height: 100vh;
+    // }
+  }
+}
 .container {
-  min-height: 100vh;
+  height: 100vh;
+  margin-top: 0;
   .heading {
     text-align: center;
     background-color: rgba(250, 184, 0, 0.924);
-    margin: 2rem 0;
+    margin: 1rem 0;
   }
   .row {
     min-height: 30vh;
     padding: 2rem;
     text-align: justify;
-    .about2 {
-      padding-top: 2rem;
-    }
+    font-size: large;
   }
+  .aboutText {
+    color: rgba(255, 255, 255, 0.924);
+    background-color: rgba(88, 87, 85, 0.744);
+    border-radius: 1rem;
+    font-size: 1.2rem;
+  }
+  // .about1 {
+  //   color: rgba(250, 184, 0, 0.924);
+  //   background-color: rgb(85, 84, 83);
+  //   border-radius: 0.5rem;
+  // }
+  // .about2 {
+  //   color: rgba(250, 184, 0, 0.924);
+  //   background-color: rgb(85, 84, 83);
+  //   border-radius: 0.5rem;
+  // }
+
   .pics {
     height: auto;
     border: none;
     .card-group {
       gap: 1rem;
       .card {
-        height: 400px;
+        height: 370px;
         display: flex;
         justify-content: center;
         align-items: center;
         padding-top: 2rem;
+        background-color: rgba(202, 199, 194, 0.179);
         .card-body {
           text-align: center;
         }
@@ -145,14 +181,14 @@
       }
     }
   }
-  .back-btn {
-    background-color: rgba(218, 215, 208, 0.924);
-    margin-bottom: 1rem;
-    border: none;
-    color: black;
-    &:hover {
-      background-color: rgba(179, 178, 176);
-      color: black;
-    }
-  }
+  // .back-btn {
+  //   background-color: rgba(218, 215, 208, 0.924);
+  //   margin-bottom: 1rem;
+  //   border: none;
+  //   color: black;
+  //   &:hover {
+  //     background-color: rgba(179, 178, 176);
+  //     color: black;
+  //   }
+  // }
 }

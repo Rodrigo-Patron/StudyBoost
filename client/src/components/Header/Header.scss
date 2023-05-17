@@ -24,8 +24,8 @@
   min-width: 100%;
 }
 #header .pro-sidebar.collapsed {
-  width: 80px;
-  min-width: 80px;
+  width: 100%;
+  min-width: 100%;
 }
 #header .pro-sidebar-inner {
   background-color: white;
@@ -35,7 +35,7 @@
   overflow-y: hidden;
 }
 #header .pro-sidebar-inner .pro-sidebar-layout .logoText p {
-  font-size: 20px;
+  // font-size: 20px;
   padding: 0 20px;
   color: #000;
   font-weight: bold;
@@ -45,7 +45,7 @@
 }
 #header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
   color: #000;
-  margin: 10px 0px;
+  margin: 10px 20px;
   font-weight: bold;
 }
 #header
