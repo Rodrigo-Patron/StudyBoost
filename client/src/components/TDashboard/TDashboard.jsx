@@ -9,7 +9,6 @@ import THeader from "../T-Header/THeader";
 import Swal from "sweetalert2";
 import TNavbar from "../TNavbar/TNavbar";
 
-
 function TDashboard() {
   const { setErrors, isCollapsed } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
@@ -56,7 +55,6 @@ function TDashboard() {
         console.error("Error:", error);
         setSubmittedDates([]); // Set submittedDates to an empty array on error
       }
-      
     };
     fetchSubmittedDates();
   }, []);
@@ -109,15 +107,15 @@ function TDashboard() {
     }
   };
   const submittedTimeSlots = {};
-if (Array.isArray(submittedDates)) {
-  submittedDates.forEach((submittedDate) => {
-    if (submittedDate.timeSlots) {
-      submittedDate.timeSlots.forEach((timeSlot) => {
-        submittedTimeSlots[timeSlot] = true;
-      });
-    }
-  });
-}
+  if (Array.isArray(submittedDates)) {
+    submittedDates.forEach((submittedDate) => {
+      if (submittedDate.timeSlots) {
+        submittedDate.timeSlots.forEach((timeSlot) => {
+          submittedTimeSlots[timeSlot] = true;
+        });
+      }
+    });
+  }
 
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
@@ -142,15 +140,14 @@ if (Array.isArray(submittedDates)) {
     for (const key in timeSlot) {
       if (timeSlot[key] && timeSlot[key] !== "") {
         timeArr.push(timeSlot[key]);
-      } else {
         Swal.fire({
-          icon: "error",
-          title: "Availability not created",
-          text: "Please select your available time!",
+          icon: "success",
+          title: "Availability created",
+          text: "Your availability was created successfully!",
         });
       }
-      return;
     }
+
     //to sort by date in frontend
     const dateToSort = new Date(datePicked);
     const formData = {
@@ -158,6 +155,13 @@ if (Array.isArray(submittedDates)) {
       time: timeArr.length === 1 ? timeArr[0] : timeArr,
       dateInMil: Date.parse(dateToSort),
     };
+    if (timeArr.length === 0) {
+      return Swal.fire({
+        icon: "error",
+        title: "Availability not created",
+        text: "Please select your available time!",
+      });
+    }
     const config = {
       method: "POST",
       body: JSON.stringify(formData),
@@ -206,152 +210,136 @@ if (Array.isArray(submittedDates)) {
         setErrors(err);
         console.log(err);
       });
-
-      
   }
 
-
-const headerWidth = isCollapsed ? 2 : 1;
-const remainingWidth = 12 - headerWidth;
+  const headerWidth = isCollapsed ? 2 : 1;
+  const remainingWidth = 12 - headerWidth;
 
   return (
-
-
     <Container fluid={true} className="Dashboard-container">
-    <Row className="Dashboard-row">
-    <Col className="navbarCol">
-      <TNavbar />
-      </Col>
-      <Col className="headerCol" xs="12" md={headerWidth}>
-        <THeader />
-      </Col>
-      <Col className="appointments" xs="12" md={remainingWidth}>
-        
-        
-
-
-    <div className="pickdate">
-      
-      <Card className="teachers-dashboard">
-        <Card.Body>
-          <h2>Teacher's dashboard</h2>
-        </Card.Body>
-      </Card>
-      <Container>
-
-        <Row className="date-time">
-          {/* column for the date */}
-          <Col sm={6}>
-            <Form onSubmit={submitHandler}>
-              <Calendar
-                onChange={dateHandler}
-                value={date.toString()}
-                tileClassName={tileClassName}
-              />
-            </Form>
-          </Col>
-          {/* column for the time slot */}
-          <Col sm={6}>
-            <h6>Please select your available time slots here</h6>
-            <Form onSubmit={submitHandler}>
-              {["checkbox"].map((type) => (
-                <div key={`default-${type}`} className="mb-3">
-                  <Form.Check
-                    onChange={checkHandler}
-                    type={type}
-                    id={`default-${type}`}
-                    label="10:00 - 10:30"
-                    value="10:00 - 10:30"
-                    name="timePicked1"
-                    checked={timeSlot.timePicked1 === "" ? false : true}
-                    disabled={submittedTimeSlots["10:00 - 10:30"]}
-                  />
-                  <Form.Check
-                    onChange={checkHandler}
-                    disabled={submittedTimeSlots["10:30 - 11:00"]}
-                    type={type}
-                    id={`default-${type}`}
-                    label="10:30 - 11:00"
-                    value="10:30 - 11:00"
-                    name="timePicked2"
-                    checked={timeSlot.timePicked2 === "" ? false : true}
-                  />
-                  <Form.Check
-                    onChange={checkHandler}
-                    disabled={submittedTimeSlots["11:00 - 11:30"]}
-                    type={type}
-                    id={`default-${type}`}
-                    label="11:00 - 11:30"
-                    value="11:00 - 11:30"
-                    name="timePicked3"
-                    checked={timeSlot.timePicked3 === "" ? false : true}
-                  />
-                  <Form.Check
-                    onChange={checkHandler}
-                    disabled={submittedTimeSlots["11:30 - 12:00"]}
-                    type={type}
-                    id={`default-${type}`}
-                    label="11:30 - 12:00"
-                    value="11:30 - 12:00"
-                    name="timePicked4"
-                    checked={timeSlot.timePicked4 === "" ? false : true}
-                  />
-                  <Form.Check
-                    onChange={checkHandler}
-                    disabled={submittedTimeSlots["13:00 - 13:30"]}
-                    type={type}
-                    id={`default-${type}`}
-                    label="13:00 - 13:30"
-                    value="13:00 - 13:30"
-                    name="timePicked5"
-                    checked={timeSlot.timePicked5 === "" ? false : true}
-                  />
-                  <Form.Check
-                    onChange={checkHandler}
-                    disabled={submittedTimeSlots["13:30 - 14:00"]}
-                    type={type}
-                    id={`default-${type}`}
-                    label="13:30 - 14:00"
-                    value="13:30 - 14:00"
-                    name="timePicked6"
-                    checked={timeSlot.timePicked6 === "" ? false : true}
-                  />
-                  <Form.Check
-                    onChange={checkHandler}
-                    disabled={submittedTimeSlots["14:00 - 14:30"]}
-                    type={type}
-                    id={`default-${type}`}
-                    label="14:00 - 14:30"
-                    value="14:00 - 14:30"
-                    name="timePicked7"
-                    checked={timeSlot.timePicked7 === "" ? false : true}
-                  />
-                  <Form.Check
-                    onChange={checkHandler}
-                    disabled={submittedTimeSlots["14:30 - 15:00"]}
-                    type={type}
-                    id={`default-${type}`}
-                    label="14:30 - 15:00"
-                    value="14:30 - 15:00"
-                    name="timePicked8"
-                    checked={timeSlot.timePicked8 === "" ? false : true}
-                  />
-                </div>
-              ))}
-              <Button type="submit">Submit</Button>
-            </Form>
-          </Col>
-        </Row>
-
-      </Container>
-    </div>
-    </Col>
-  
-    </Row>
-  </Container>
+      <Row className="Dashboard-row">
+        <Col className="navbarCol">
+          <TNavbar />
+        </Col>
+        <Col className="headerCol" xs="12" md={headerWidth}>
+          <THeader />
+        </Col>
+        <Col className="appointments" xs="12" md={remainingWidth}>
+          <div className="pickdate">
+            <Card className="teachers-dashboard">
+              <Card.Body>
+                <h2>Teacher's dashboard</h2>
+              </Card.Body>
+            </Card>
+            <Container>
+              <Row className="date-time">
+                {/* column for the date */}
+                <Col sm={6}>
+                  <Form onSubmit={submitHandler}>
+                    <Calendar
+                      onChange={dateHandler}
+                      value={date.toString()}
+                      tileClassName={tileClassName}
+                    />
+                  </Form>
+                </Col>
+                {/* column for the time slot */}
+                <Col sm={6}>
+                  <h6>Please select your available time slots here</h6>
+                  <Form onSubmit={submitHandler}>
+                    {["checkbox"].map((type) => (
+                      <div key={`default-${type}`} className="mb-3">
+                        <Form.Check
+                          onChange={checkHandler}
+                          type={type}
+                          id={`default-${type}`}
+                          label="10:00 - 10:30"
+                          value="10:00 - 10:30"
+                          name="timePicked1"
+                          checked={timeSlot.timePicked1 === "" ? false : true}
+                          disabled={submittedTimeSlots["10:00 - 10:30"]}
+                        />
+                        <Form.Check
+                          onChange={checkHandler}
+                          disabled={submittedTimeSlots["10:30 - 11:00"]}
+                          type={type}
+                          id={`default-${type}`}
+                          label="10:30 - 11:00"
+                          value="10:30 - 11:00"
+                          name="timePicked2"
+                          checked={timeSlot.timePicked2 === "" ? false : true}
+                        />
+                        <Form.Check
+                          onChange={checkHandler}
+                          disabled={submittedTimeSlots["11:00 - 11:30"]}
+                          type={type}
+                          id={`default-${type}`}
+                          label="11:00 - 11:30"
+                          value="11:00 - 11:30"
+                          name="timePicked3"
+                          checked={timeSlot.timePicked3 === "" ? false : true}
+                        />
+                        <Form.Check
+                          onChange={checkHandler}
+                          disabled={submittedTimeSlots["11:30 - 12:00"]}
+                          type={type}
+                          id={`default-${type}`}
+                          label="11:30 - 12:00"
+                          value="11:30 - 12:00"
+                          name="timePicked4"
+                          checked={timeSlot.timePicked4 === "" ? false : true}
+                        />
+                        <Form.Check
+                          onChange={checkHandler}
+                          disabled={submittedTimeSlots["13:00 - 13:30"]}
+                          type={type}
+                          id={`default-${type}`}
+                          label="13:00 - 13:30"
+                          value="13:00 - 13:30"
+                          name="timePicked5"
+                          checked={timeSlot.timePicked5 === "" ? false : true}
+                        />
+                        <Form.Check
+                          onChange={checkHandler}
+                          disabled={submittedTimeSlots["13:30 - 14:00"]}
+                          type={type}
+                          id={`default-${type}`}
+                          label="13:30 - 14:00"
+                          value="13:30 - 14:00"
+                          name="timePicked6"
+                          checked={timeSlot.timePicked6 === "" ? false : true}
+                        />
+                        <Form.Check
+                          onChange={checkHandler}
+                          disabled={submittedTimeSlots["14:00 - 14:30"]}
+                          type={type}
+                          id={`default-${type}`}
+                          label="14:00 - 14:30"
+                          value="14:00 - 14:30"
+                          name="timePicked7"
+                          checked={timeSlot.timePicked7 === "" ? false : true}
+                        />
+                        <Form.Check
+                          onChange={checkHandler}
+                          disabled={submittedTimeSlots["14:30 - 15:00"]}
+                          type={type}
+                          id={`default-${type}`}
+                          label="14:30 - 15:00"
+                          value="14:30 - 15:00"
+                          name="timePicked8"
+                          checked={timeSlot.timePicked8 === "" ? false : true}
+                        />
+                      </div>
+                    ))}
+                    <Button type="submit">Submit</Button>
+                  </Form>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 export default TDashboard;
-
-
-
