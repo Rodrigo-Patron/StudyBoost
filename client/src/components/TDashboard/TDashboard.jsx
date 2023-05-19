@@ -7,10 +7,11 @@ import { Button, Form, Row, Col, Card, Container } from "react-bootstrap";
 import { Context } from "../../Context.jsx";
 import THeader from "../T-Header/THeader";
 import Swal from "sweetalert2";
-// SWal is for alert
+import TNavbar from "../TNavbar/TNavbar";
+
 
 function TDashboard() {
-  const { setErrors } = useContext(Context);
+  const { setErrors, isCollapsed } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
   const [lastSelectedDate, setLastSelectedDate] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
@@ -205,17 +206,39 @@ if (Array.isArray(submittedDates)) {
         setErrors(err);
         console.log(err);
       });
+
       
   }
+
+
+const headerWidth = isCollapsed ? 2 : 1;
+const remainingWidth = 12 - headerWidth;
+
   return (
+
+
+    <Container fluid={true} className="Dashboard-container">
+    <Row className="Dashboard-row">
+    <Col className="navbarCol">
+      <TNavbar />
+      </Col>
+      <Col className="headerCol" xs="12" md={headerWidth}>
+        <THeader />
+      </Col>
+      <Col className="appointments" xs="12" md={remainingWidth}>
+        
+        
+
+
     <div className="pickdate">
-      <THeader />
+      
       <Card className="teachers-dashboard">
         <Card.Body>
           <h2>Teacher's dashboard</h2>
         </Card.Body>
       </Card>
       <Container>
+
         <Row className="date-time">
           {/* column for the date */}
           <Col sm={6}>
@@ -319,8 +342,13 @@ if (Array.isArray(submittedDates)) {
             </Form>
           </Col>
         </Row>
+
       </Container>
     </div>
+    </Col>
+  
+    </Row>
+  </Container>
   );
 }
 export default TDashboard;

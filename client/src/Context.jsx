@@ -20,6 +20,7 @@ function ContextProvider({ children }) {
   const [availability, setAvailability] = useState();
   const [loginForm, setLoginForm] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [showNavExternal3, setShowNavExternal3] = useState(false);
 
   return (
     <Context.Provider
@@ -46,6 +47,8 @@ function ContextProvider({ children }) {
         setLoginForm,
         isCollapsed,
         setIsCollapsed,
+        showNavExternal3, 
+        setShowNavExternal3,
       }}
     >
       {children}

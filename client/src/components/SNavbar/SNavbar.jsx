@@ -15,7 +15,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 
-export default function Navbar() {
+export default function SNavbar() {
   const {showNavExternal3, setShowNavExternal3} = useContext(Context);
 
   return (
@@ -39,14 +39,14 @@ export default function Navbar() {
 
       <MDBCollapse show={showNavExternal3}>
         <div className="bg-yellow shadow-3 p-8">
-          <MDBBtn block className="border-bottom m-0" color="black">
-          <MDBNavbarLink active aria-current='page' href='#Home'>
-          <Link color="black" to="/Home">Home</Link>
+          <MDBBtn block className="border-bottom m-0" color="link">
+          <MDBNavbarLink color="black" active aria-current='page' href='#Home'>
+          <Link color="black" to="/studentDashboard">Book appointments</Link>
               </MDBNavbarLink>
           </MDBBtn>
-          <MDBBtn block className="border-bottom m-0" color="black">
-          <MDBNavbarLink active aria-current='page' href='#About'>
-          <Link color="black" to="/About">About Us</Link>
+          <MDBBtn block className="border-bottom m-0" color="link">
+          <MDBNavbarLink color="black" active aria-current='page' href='#About'>
+          <Link color="black" to="/studentDashboard/studentAppointments">Your appointments</Link>
               </MDBNavbarLink>
             
           </MDBBtn>

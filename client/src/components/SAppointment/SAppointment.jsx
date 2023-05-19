@@ -1,5 +1,7 @@
 import React from "react";
 import SHeader from "../S-Header/SHeader";
+import SNavbar from "../SNavbar/SNavbar";
+import { Context } from "../../Context.jsx";
 import {
   ListGroup,
   Button,
@@ -11,7 +13,7 @@ import {
 } from "react-bootstrap";
 import { useContext, useEffect, useState, useRef } from "react";
 import "./SAppointment.scss";
-import { Context } from "../../Context.jsx";
+
 
 function SAppointment() {
   const { studentToken, appointment, setAppointment, student, isCollapsed } =
@@ -103,13 +105,16 @@ function SAppointment() {
     }
   };
 
-  const headerWidth = isCollapsed ? 3 : 1;
+  const headerWidth = isCollapsed ? 2 : 1;
   const remainingWidth = 12 - headerWidth;
 
   return (
     <Container fluid={true} className="dashboard-container">
       <Row className="dashboard-row">
-        <Col xs="12" md={headerWidth}>
+      <Col className="navbarCol">
+        <SNavbar />
+        </Col>
+        <Col className="headerCol" xs="12" md={headerWidth}>
           <SHeader />
         </Col>
         <Col className="appointments" xs="12" md={remainingWidth}>

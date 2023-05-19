@@ -122,7 +122,7 @@ AvailabilityRouter
   // to delete/update availability time slots in teacher page
   .post("/deleteAvailability", async (req, res, next) => {
     req.body.teacher = req.userId;
-
+    console.log("Getting DELETE ORDER: ", req.body);
     try {
       const removeAvailability = await Availability.findOne({
         teacher: req.body.teacher,
