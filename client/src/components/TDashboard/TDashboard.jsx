@@ -25,6 +25,7 @@ function TDashboard() {
     timePicked8: "",
   });
   const [submittedDates, setSubmittedDates] = useState([]);
+
   // Fetch the teacher object and its token from the localStorage
   const teacher = JSON.parse(localStorage.getItem("teacher"));
   const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
@@ -52,12 +53,11 @@ function TDashboard() {
         setSubmittedDates(data);
         localStorage.setItem("submittedDates", JSON.stringify(data));
       } catch (error) {
-        console.error("Error:", error);
         setSubmittedDates([]); // Set submittedDates to an empty array on error
       }
     };
     fetchSubmittedDates();
-  }, []);
+  }, [date]);
   const dateHandler = (date) => {
     setDate(date);
     const formattedDate = date.toLocaleDateString(navigator.language);
@@ -69,16 +69,21 @@ function TDashboard() {
       icon: "success",
       title: "Date selected",
       text: "Please select your available time!",
+    }).then(()=>{
+
+      console.log(submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && d.time.includes("10:00 - 10:30") ))
     });
     if (foundDate && foundDate.timeSlots) {
       const timeSlotsWithChecked = foundDate.timeSlots.map((timeSlot) => ({
         time: timeSlot,
         checked: false,
+        disabled:true
       }));
       setSelectedDate({
         date: foundDate.date,
         timeSlots: timeSlotsWithChecked,
       });
+      
     } else {
       setSelectedDate(null);
     }
@@ -181,7 +186,6 @@ function TDashboard() {
         return res.json();
       })
       .then((result) => {
-        console.log(result);
         setLastSelectedDate({ date: result.date, time: result.time });
         // Add the submitted date to submittedDates state
         const updatedSubmittedDates = [
@@ -208,7 +212,6 @@ function TDashboard() {
       })
       .catch((err) => {
         setErrors(err);
-        console.log(err);
       });
   }
 
@@ -247,7 +250,7 @@ function TDashboard() {
                 <Col sm={6}>
                   <h6>Please select your available time slots here</h6>
                   <Form onSubmit={submitHandler}>
-                    {["checkbox"].map((type) => (
+                    {["checkbox" ].map((type) => (
                       <div key={`default-${type}`} className="mb-3">
                         <Form.Check
                           onChange={checkHandler}
@@ -257,77 +260,77 @@ function TDashboard() {
                           value="10:00 - 10:30"
                           name="timePicked1"
                           checked={timeSlot.timePicked1 === "" ? false : true}
-                          disabled={submittedTimeSlots["10:00 - 10:30"]}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("10:00 - 10:30"):false) )?true:false}
                         />
                         <Form.Check
                           onChange={checkHandler}
-                          disabled={submittedTimeSlots["10:30 - 11:00"]}
                           type={type}
                           id={`default-${type}`}
                           label="10:30 - 11:00"
                           value="10:30 - 11:00"
                           name="timePicked2"
                           checked={timeSlot.timePicked2 === "" ? false : true}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("10:30 - 11:00"):false) )?true:false}
                         />
                         <Form.Check
                           onChange={checkHandler}
-                          disabled={submittedTimeSlots["11:00 - 11:30"]}
                           type={type}
                           id={`default-${type}`}
                           label="11:00 - 11:30"
                           value="11:00 - 11:30"
                           name="timePicked3"
                           checked={timeSlot.timePicked3 === "" ? false : true}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("11:00 - 11:30"):false) )?true:false}
                         />
                         <Form.Check
                           onChange={checkHandler}
-                          disabled={submittedTimeSlots["11:30 - 12:00"]}
                           type={type}
                           id={`default-${type}`}
                           label="11:30 - 12:00"
                           value="11:30 - 12:00"
                           name="timePicked4"
                           checked={timeSlot.timePicked4 === "" ? false : true}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("11:30 - 12:00"):false) )?true:false}
                         />
                         <Form.Check
                           onChange={checkHandler}
-                          disabled={submittedTimeSlots["13:00 - 13:30"]}
                           type={type}
                           id={`default-${type}`}
                           label="13:00 - 13:30"
                           value="13:00 - 13:30"
                           name="timePicked5"
                           checked={timeSlot.timePicked5 === "" ? false : true}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("13:00 - 13:30"):false) )?true:false}
                         />
                         <Form.Check
                           onChange={checkHandler}
-                          disabled={submittedTimeSlots["13:30 - 14:00"]}
                           type={type}
                           id={`default-${type}`}
                           label="13:30 - 14:00"
                           value="13:30 - 14:00"
                           name="timePicked6"
                           checked={timeSlot.timePicked6 === "" ? false : true}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("13:30 - 14:00"):false) )?true:false}
                         />
                         <Form.Check
                           onChange={checkHandler}
-                          disabled={submittedTimeSlots["14:00 - 14:30"]}
                           type={type}
                           id={`default-${type}`}
                           label="14:00 - 14:30"
                           value="14:00 - 14:30"
                           name="timePicked7"
                           checked={timeSlot.timePicked7 === "" ? false : true}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("14:00 - 14:30"):false) )?true:false}
                         />
                         <Form.Check
                           onChange={checkHandler}
-                          disabled={submittedTimeSlots["14:30 - 15:00"]}
                           type={type}
                           id={`default-${type}`}
                           label="14:30 - 15:00"
                           value="14:30 - 15:00"
                           name="timePicked8"
                           checked={timeSlot.timePicked8 === "" ? false : true}
+                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("14:30 - 15:00"):false) )?true:false}
                         />
                       </div>
                     ))}
