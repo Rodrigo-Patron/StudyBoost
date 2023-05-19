@@ -331,7 +331,9 @@ function TDashboard() {
                         />
                       </div>
                     ))}
-                    <Button type="submit">Submit</Button>
+                    <Button className="submit-btn" type="submit">
+                      Submit
+                    </Button>
                   </Form>
                 </Col>
               </Row>
