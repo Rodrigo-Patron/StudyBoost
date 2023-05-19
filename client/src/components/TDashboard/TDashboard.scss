@@ -1,3 +1,31 @@
+
+.pickdate {
+  min-height: 100vh;
+  .teachers-dashboard {
+    background-color: rgba(250, 184, 0, 0.924);
+    text-align: center;
+  }
+  .container {
+    .date-time {
+      // padding: 2rem;
+      .profile-teacher {
+        border-right: 2px solid black;
+      }
+      .col-sm-6 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 40vh;
+        border: 1px solid grey;
+        border-radius: 10px;
+      }
+      .react-calendar {
+        min-width: 400px;
+        // margin: 1rem 0;
+        border-radius: 10px;
+        // padding: 1rem;
+
 // .page-title {
 //   text-align: center;
 //   font-size: 2rem;
@@ -107,45 +135,6 @@
 //   }
 // }
 
-.Dashboard-container {
-  .Dashboard-row {
-    .navbarCol {
-      display: none;
-      @media (max-width: 600px) {
-        display: block;
-      }
-    }
-    .headerCol {
-      @media (max-width: 600px) {
-        display: none;
-      }
-    }
-  }
-  .pickdate {
-    min-height: 100vh;
-    .teachers-dashboard {
-      background-color: rgba(250, 184, 0, 0.924);
-      text-align: center;
-    }
-
-    .date-time {
-      padding: 2rem;
-
-      .profile-teacher {
-        border-right: 2px solid black;
-      }
-
-      .col-sm-8 {
-        padding: 2rem;
-        border-right: 2px solid black;
-        display: flex;
-        justify-content: center;
-      }
-      .react-calendar {
-        width: 500px;
-        margin: 1rem 0;
-        border-radius: 10px;
-        padding: 1rem;
 
         .react-calendar__viewContainer {
           text-align: center;
@@ -185,19 +174,20 @@
         }
       }
     }
-    .selected {
-      margin-top: 3rem;
-      text-align: center;
-    }
 
-    .upcoming-dates {
-      margin-top: 6rem;
-      text-align: center;
-    }
-    .submitted-date {
-      background-color: rgb(247, 131, 88) !important;
-      border-radius: 5px;
-      color: white !important;
-    }
+  }
+  .selected {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  .upcoming-dates {
+    margin-top: 6rem;
+    text-align: center;
+  }
+  .submitted-date {
+    background-color: rgb(247, 131, 88) !important;
+    border-radius: 5px;
+    color: white !important;
+
   }
 }
