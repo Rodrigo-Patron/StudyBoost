@@ -91,6 +91,31 @@
         border-radius: 5px;
         color: white !important;
       }
+      .submit-btn {
+        margin-right: 0.5rem;
+        background-color: rgba(250, 184, 0, 0.624);
+        border: none;
+        color: black;
+        box-shadow: none;
+        &:hover {
+          background-color: rgba(250, 184, 0, 0.924);
+          color: black;
+        }
+        &:focus {
+          background-color: rgba(250, 184, 0, 0.924);
+          color: black;
+        }
+      }
+
+      .form-check-input:checked {
+        background-color: rgba(250, 184, 0, 0.924);
+        border-color: rgba(250, 184, 0, 0.924);
+        box-shadow: none;
+      }
+      .form-check-input:active {
+        background-color: rgba(250, 184, 0, 0.924);
+        box-shadow: none;
+      }
     }
   }
 }
