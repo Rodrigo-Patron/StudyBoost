@@ -8,9 +8,17 @@ import { Context } from "../../Context.jsx";
 import THeader from "../T-Header/THeader";
 import Swal from "sweetalert2";
 import TNavbar from "../TNavbar/TNavbar";
+import { useNavigate } from "react-router-dom";
 
 function TDashboard() {
-  const { setErrors, isCollapsed } = useContext(Context);
+  const {
+    setErrors,
+    isCollapsed,
+    teacher,
+    setTeacher,
+    teacherToken,
+    setTeacherToken,
+  } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
   const [lastSelectedDate, setLastSelectedDate] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
@@ -25,21 +33,17 @@ function TDashboard() {
     timePicked8: "",
   });
   const [submittedDates, setSubmittedDates] = useState([]);
+  const navigate = useNavigate();
 
-  // Fetch the teacher object and its token from the localStorage
-  const teacher = JSON.parse(localStorage.getItem("teacher"));
-  const teacherAuthToken = JSON.parse(localStorage.getItem("teacherToken"));
-  // Extract teacherId from the teacher object
-  const teacherId = teacher._id;
   useEffect(() => {
     const fetchSubmittedDates = async () => {
       try {
         const response = await fetch(
-          `http://localhost:6500/api/availability/${teacherId}`,
+          `http://localhost:6500/api/availability/${teacher._id}`,
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${teacherAuthToken}`,
+              Authorization: `Bearer ${teacherToken}`,
             },
           }
         );
@@ -47,6 +51,14 @@ function TDashboard() {
           throw new Error("Failed to fetch submitted dates");
         }
         const data = await response.json();
+
+        //expired token redirect to home
+        // if (data.message.includes("jwt expired")) {
+        //   localStorage.removeItem("teacherToken");
+        //   localStorage.removeItem("teacher");
+        //   navigate("/Home");
+        // }
+
         if (!Array.isArray(data)) {
           throw new Error("Data is not an array");
         }
@@ -58,6 +70,7 @@ function TDashboard() {
     };
     fetchSubmittedDates();
   }, [date]);
+
   const dateHandler = (date) => {
     setDate(date);
     const formattedDate = date.toLocaleDateString(navigator.language);
@@ -69,21 +82,25 @@ function TDashboard() {
       icon: "success",
       title: "Date selected",
       text: "Please select your available time!",
-    }).then(()=>{
-
-      console.log(submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && d.time.includes("10:00 - 10:30") ))
+    }).then(() => {
+      console.log(
+        submittedDates.find(
+          (d) =>
+            new Date(d.date).getDate() == new Date(date).getDate() &&
+            d.time.includes("10:00 - 10:30")
+        )
+      );
     });
     if (foundDate && foundDate.timeSlots) {
       const timeSlotsWithChecked = foundDate.timeSlots.map((timeSlot) => ({
         time: timeSlot,
         checked: false,
-        disabled:true
+        disabled: true,
       }));
       setSelectedDate({
         date: foundDate.date,
         timeSlots: timeSlotsWithChecked,
       });
-      
     } else {
       setSelectedDate(null);
     }
@@ -172,7 +189,7 @@ function TDashboard() {
       body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${teacherAuthToken}`,
+        Authorization: `Bearer ${teacherToken}`,
       },
     };
     fetch("http://localhost:6500/api/availability", config)
@@ -250,7 +267,7 @@ function TDashboard() {
                 <Col sm={6}>
                   <h6>Please select your available time slots here</h6>
                   <Form onSubmit={submitHandler}>
-                    {["checkbox" ].map((type) => (
+                    {["checkbox"].map((type) => (
                       <div key={`default-${type}`} className="mb-3">
                         <Form.Check
                           onChange={checkHandler}
@@ -260,7 +277,18 @@ function TDashboard() {
                           value="10:00 - 10:30"
                           name="timePicked1"
                           checked={timeSlot.timePicked1 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("10:00 - 10:30"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("10:00 - 10:30")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                         <Form.Check
                           onChange={checkHandler}
@@ -270,7 +298,18 @@ function TDashboard() {
                           value="10:30 - 11:00"
                           name="timePicked2"
                           checked={timeSlot.timePicked2 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("10:30 - 11:00"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("10:30 - 11:00")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                         <Form.Check
                           onChange={checkHandler}
@@ -280,7 +319,18 @@ function TDashboard() {
                           value="11:00 - 11:30"
                           name="timePicked3"
                           checked={timeSlot.timePicked3 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("11:00 - 11:30"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("11:00 - 11:30")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                         <Form.Check
                           onChange={checkHandler}
@@ -290,7 +340,18 @@ function TDashboard() {
                           value="11:30 - 12:00"
                           name="timePicked4"
                           checked={timeSlot.timePicked4 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("11:30 - 12:00"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("11:30 - 12:00")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                         <Form.Check
                           onChange={checkHandler}
@@ -300,7 +361,18 @@ function TDashboard() {
                           value="13:00 - 13:30"
                           name="timePicked5"
                           checked={timeSlot.timePicked5 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("13:00 - 13:30"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("13:00 - 13:30")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                         <Form.Check
                           onChange={checkHandler}
@@ -310,7 +382,18 @@ function TDashboard() {
                           value="13:30 - 14:00"
                           name="timePicked6"
                           checked={timeSlot.timePicked6 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("13:30 - 14:00"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("13:30 - 14:00")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                         <Form.Check
                           onChange={checkHandler}
@@ -320,7 +403,18 @@ function TDashboard() {
                           value="14:00 - 14:30"
                           name="timePicked7"
                           checked={timeSlot.timePicked7 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("14:00 - 14:30"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("14:00 - 14:30")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                         <Form.Check
                           onChange={checkHandler}
@@ -330,7 +424,18 @@ function TDashboard() {
                           value="14:30 - 15:00"
                           name="timePicked8"
                           checked={timeSlot.timePicked8 === "" ? false : true}
-                          disabled={submittedDates.find(d=>new Date(d.date).getDate()==new Date(date).getDate() && (d.time?d.time.includes("14:30 - 15:00"):false) )?true:false}
+                          disabled={
+                            submittedDates.find(
+                              (d) =>
+                                new Date(d.date).getDate() ==
+                                  new Date(date).getDate() &&
+                                (d.time
+                                  ? d.time.includes("14:30 - 15:00")
+                                  : false)
+                            )
+                              ? true
+                              : false
+                          }
                         />
                       </div>
                     ))}

@@ -88,17 +88,17 @@ AvailabilityRouter
       const existingAvailability = await Availability.findOne({
         teacher: req.userId,
         date: req.body.date,
-        time: req.body.time,
       });
 
-      // If an existing availability is found, return an error message
+      // console.log("EXISTING", existingAvailability);
+
       if (existingAvailability) {
-        return next(
-          createError(
-            400,
-            "You have already set an availability for this date and time."
-          )
-        );
+        existingAvailability.time = [
+          ...existingAvailability.time,
+          ...req.body.time,
+        ].sort();
+        await existingAvailability.save();
+        return res.send(existingAvailability);
       }
 
       const newAvailability = await Availability.create(req.body);

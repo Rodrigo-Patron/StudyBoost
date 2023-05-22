@@ -4,6 +4,7 @@ import "./SweetAlert.scss";
 import { useContext, useRef } from "react";
 import { Context } from "../../Context.jsx";
 import { NavLink } from "react-router-dom";
+
 import {
   Form,
   FormControl,
@@ -88,7 +89,7 @@ function TRegister() {
     <div>
       {/* REGISTER */}
       <h5>
-        New here? Please Register! /
+        New here? Please register! /
         <NavLink onClick={() => setLoginForm(true)}>Login</NavLink>
       </h5>
       <Form onSubmit={submitHandler} className="the-form">

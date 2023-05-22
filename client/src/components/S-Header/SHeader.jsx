@@ -88,9 +88,11 @@ const SHeader = () => {
           </SidebarHeader>
 
           <SidebarContent>
-            <p id="LoggedInAs">
-              <span>{student.name}</span>
-            </p>
+            <div className="profile-card">
+              <p id="LoggedInAs">
+                <span>{student.name}</span>
+              </p>
+            </div>
             <Menu iconShape="square">
               <MenuItem active={true} icon={<RiPencilLine />}>
                 <Link to="/studentDashboard">Book appointments</Link>
@@ -101,7 +103,6 @@ const SHeader = () => {
                 </Link>
               </MenuItem>
             </Menu>
-            
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">

@@ -70,7 +70,7 @@ function TLogin() {
       {/* LOGIN */}
       <h5>
         No account? Please
-        <NavLink onClick={registerFormHandler}>Register</NavLink>
+        <NavLink onClick={registerFormHandler}>register</NavLink>
       </h5>
       <Form onSubmit={submitHandler}>
         <ListGroup className="input-container">
