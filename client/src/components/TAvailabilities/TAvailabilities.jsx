@@ -7,14 +7,14 @@ import Swal from "sweetalert2";
 import THeader from "../T-Header/THeader";
 import TNavbar from "../TNavbar/TNavbar";
 
-
 function TAvailabilities() {
   const { setAvailability, availability, teacherToken, teacher, isCollapsed } =
     useContext(Context);
   const [query, setQuery] = useState("");
   const [reqAgain, setReqAgain] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(false);
   const [selectedTime, setSelectedTime] = useState([]);
+  // const [checked, setChecked] = useState(false);
 
   const dateInput = useRef();
 
@@ -46,27 +46,23 @@ function TAvailabilities() {
       });
   }, [reqAgain, counter, selectedTime]);
 
-  const resetCheckBoxes = (e) => {
-    console.log(e.children[2][0]);
-    Array.from(e.children[2]).forEach((it) => {
-      console.log("UnChecking", it);
-      it.children[0].children[0].children[0].checked = false;
-    });
-  };
   // to delete availability
-  const submitHandler = (e) => {
-    const date = e.target.getAttribute("data");
+  const submitHandler = (e, deletingDate) => {
     e.preventDefault();
-    console.log(date);
+    // const date = e.target.getAttribute("data");
 
-    //selectedTime.forEach((selected) => {
-    // const data = {
-    //   teacher: teacher._id,
-    //   date: selected.date,
-    //   time: selected.time,
-    // };
-    const data = selectedTime.filter((t) => t.date === date)[0];
-    // console.log("DATA", data);
+    console.log(deletingDate);
+
+    const filtering = selectedTime.filter((time) => time.date === deletingDate);
+
+    const filtering2 = selectedTime.filter(
+      (time) => time.date !== deletingDate
+    );
+    setSelectedTime(filtering2);
+    console.log("FILTER", filtering);
+
+    const data = { date: deletingDate, time: filtering.map((x) => x.time) };
+    console.log("DATA", data);
 
     const config = {
       method: "POST",
@@ -77,92 +73,53 @@ function TAvailabilities() {
       },
     };
 
-    setSelectedTime(selectedTime.filter((t) => t.date !== date));
     fetch("http://localhost:6500/api/availability/deleteAvailability", config)
       .then((res) => {
-        if (res.ok) {
-          setCounter(counter + 1);
-          return Swal.fire({
-            icon: "success",
-            title: "Good job",
-            text: "Availability removed",
-          }).then(() => {
-            console.log("After fetch: ", selectedTime);
-            setSelectedTime(selectedTime.filter((t) => t.date !== date));
-            setTimeout(() => {
-              resetCheckBoxes(e.target);
-            }, 1000);
-          });
-        }
+        console.log(res.ok);
+
         return res.json();
       })
-      .then((result) => {})
+      .then((result) => {
+        console.log(result);
+
+        return Swal.fire({
+          icon: "success",
+          title: "Good job",
+          text: "Availability removed",
+        }).then(() => {
+          // window.location.reload();
+          setCounter(!counter);
+        });
+      })
       .catch((err) => {
         console.log(err);
       });
-    //});
-    //console.log("DELETE ORDER: ", data);
-    //setSelectedTime(selectedTime.filter((t) => t.date !== data.date));
   };
 
-  const t = (e) => {
-    // e.target.checked = !e.target.checked;
-    e.target.parentElement.parentElement.parentElement.parentElement.children[3].disabled = false;
+  const t = (e, time, date) => {
+    // console.log("Time", time);
+    // console.log("Date", date);
+    // console.log("TARGET", e.target.checked);
 
-    const selectedDate = e.target.getAttribute("data");
-    const selectedTimeSlot = e.target.value;
-    const existingSelectedDateIndex = selectedTime.findIndex(
-      (date) => date.date === selectedDate
-    );
     if (e.target.checked) {
-      // Add the selected time slot to the selected date
-      if (existingSelectedDateIndex === -1) {
-        setSelectedTime([
-          ...selectedTime,
-          {
-            date: selectedDate,
-            time: [selectedTimeSlot],
-          },
-        ]);
-      } else {
-        const existingSelectedTimeSlots =
-          selectedTime[existingSelectedDateIndex].time;
-        setSelectedTime([
-          ...selectedTime.slice(0, existingSelectedDateIndex),
-          {
-            ...selectedTime[existingSelectedDateIndex],
-            time: [...existingSelectedTimeSlots, selectedTimeSlot],
-          },
-          ...selectedTime.slice(existingSelectedDateIndex + 1),
-        ]);
-      }
+      setSelectedTime([
+        ...selectedTime,
+        {
+          date: date,
+          time: time,
+        },
+      ]);
     } else {
-      // Remove the selected time slot from the selected date
-      if (selectedTime[existingSelectedDateIndex]) {
-        const existingSelectedTimeSlots =
-          selectedTime[existingSelectedDateIndex].time;
-        if (existingSelectedTimeSlots.length === 1) {
-          setSelectedTime([
-            ...selectedTime.slice(0, existingSelectedDateIndex),
-            ...selectedTime.slice(existingSelectedDateIndex + 1),
-          ]);
-        } else {
-          setSelectedTime([
-            ...selectedTime.slice(0, existingSelectedDateIndex),
-            {
-              ...selectedTime[existingSelectedDateIndex],
-              time: existingSelectedTimeSlots.filter(
-                (time) => time !== selectedTimeSlot
-              ),
-            },
-            ...selectedTime.slice(existingSelectedDateIndex + 1),
-          ]);
-        }
-      }
+      const filterTime = selectedTime.filter(
+        (timeObj) =>
+          (timeObj.date === date && timeObj.time !== time) ||
+          timeObj.date !== date
+      );
+      setSelectedTime(filterTime);
+      console.log("FT", filterTime);
     }
-    console.log("SelectedTime: ", selectedTime);
   };
-
+  console.log("SelectedTime: ", selectedTime);
   const timeList = () => {
     return (
       <div>
@@ -192,7 +149,7 @@ function TAvailabilities() {
                 })
                 .map((appointment) => (
                   <Form
-                    onSubmit={submitHandler}
+                    onSubmit={(e) => submitHandler(e, appointment.date)}
                     data={appointment.date}
                     key={appointment._id}
                   >
@@ -209,9 +166,11 @@ function TAvailabilities() {
                       <li>
                         {appointment.time.map((time, index) => (
                           <Form.Check
-                            onChange={t}
-                            // checked={false}
+                            onChange={(e) => t(e, time, appointment.date)}
                             key={index}
+                            // checked={selectedTime.forEach((x) => {
+                            //   x.time === time && x.date === appointment.date;
+                            // })}
                             type="checkbox"
                             label={time}
                             value={time}
@@ -224,7 +183,7 @@ function TAvailabilities() {
                     </ul>
                     <Button
                       size="sm"
-                      disabled
+                      // disabled
                       type="submit"
                       className="delete-btn"
                     >
@@ -253,19 +212,17 @@ function TAvailabilities() {
   const headerWidth = isCollapsed ? 2 : 1;
   const remainingWidth = 12 - headerWidth;
   return (
-
     <Container fluid={true} className="availabilities-container">
       <Row className="availabilities-row">
-      <Col className="navbarCol">
-        <TNavbar />
+        <Col className="navbarCol">
+          <TNavbar />
         </Col>
         <Col className="headerCol" xs="12" md={headerWidth}>
           <THeader />
         </Col>
         <Col className="appointments" xs="12" md={remainingWidth}>
-           {display}
-          </Col>
-    
+          {display}
+        </Col>
       </Row>
     </Container>
   );
