@@ -175,6 +175,7 @@
         .card-img-top {
           height: 200px;
           width: 200px;
+          object-fit: cover;
           border-radius: 50%;
           box-shadow: 0 0 0 4px rgba(250, 184, 0, 0.924);
         }
