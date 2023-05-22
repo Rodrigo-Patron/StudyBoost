@@ -114,8 +114,8 @@ function TAppointments() {
   return (
     <Container fluid={true} className="dashboard-container">
       <Row className="dashboard-row">
-      <Col className="navbarCol">
-        <TNavbar />
+        <Col className="navbarCol">
+          <TNavbar />
         </Col>
         <Col className="headerCol" xs="12" md={headerWidth}>
           <THeader />
