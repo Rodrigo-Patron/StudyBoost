@@ -265,7 +265,7 @@ function TDashboard() {
                 </Col>
                 {/* column for the time slot */}
                 <Col sm={6}>
-                  <h6>Please select your available time slots here</h6>
+                  <h6>Please select your available time slots here:</h6>
                   <Form onSubmit={submitHandler}>
                     {["checkbox"].map((type) => (
                       <div key={`default-${type}`} className="mb-3">
