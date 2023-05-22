@@ -44,6 +44,7 @@ function About() {
                   responsibilities. That's why we came together to create Study
                   Boost, to simplifies the study process and helps students and
                   teachers make the most of their time. <br />
+                  <br />
                   <strong>Our Mission:</strong> Our mission is to empower
                   students and teachers to achieve their academic goals through
                   effective organization and collaboration. We believe that
@@ -59,6 +60,7 @@ function About() {
                   user experience and make learning more interactive. We believe
                   that studying should be stress-free, and everyone should have
                   the opportunity to learn and grow. <br />
+                  <br />
                   <strong>Our Future:</strong> We are committed to continuously
                   improving and expanding Study Boost to meet the needs of
                   students and teachers everywhere. We have exciting plans for
@@ -69,7 +71,7 @@ function About() {
             </Row>
             <Card className="heading">
               <Card.Body>
-                <h2>Our Team</h2>
+                <h2>Our team</h2>
               </Card.Body>
             </Card>
             <Row className="pics">
