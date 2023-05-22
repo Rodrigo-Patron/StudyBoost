@@ -165,7 +165,7 @@ AvailabilityRouter
         await deleteAv.save();
       }
 
-      res.status(205).send("");
+      res.status(200).send({ deleted: true });
     } catch (error) {
       next(createError(400, error.message));
     }
