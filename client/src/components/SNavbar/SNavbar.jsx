@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./SNavbar.scss";
 
 import { Link } from "react-router-dom";
 import {
@@ -16,13 +17,15 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function SNavbar() {
-  const {showNavExternal3, setShowNavExternal3} = useContext(Context);
+  const { showNavExternal3, setShowNavExternal3 } = useContext(Context);
 
   return (
     <>
-      <MDBNavbar sticky light >
+      <MDBNavbar sticky light>
         <MDBContainer fluid>
-        <MDBNavbarBrand href='#'><strong>Study Boost.</strong> app</MDBNavbarBrand>
+          <MDBNavbarBrand href="#">
+            <strong>Study Boost.</strong> app
+          </MDBNavbarBrand>
           <MDBNavbarToggler
             className="ms-auto"
             type="button"
@@ -40,15 +43,25 @@ export default function SNavbar() {
       <MDBCollapse show={showNavExternal3}>
         <div className="bg-yellow shadow-3 p-8">
           <MDBBtn block className="border-bottom m-0" color="link">
-          <MDBNavbarLink color="black" active aria-current='page' href='#Home'>
-          <Link color="black" to="/studentDashboard">Book appointments</Link>
-              </MDBNavbarLink>
+            <MDBNavbarLink
+              active
+              aria-current="page"
+              href="/studentDashboard"
+              className="links"
+            >
+              Book appointments
+            </MDBNavbarLink>
           </MDBBtn>
           <MDBBtn block className="border-bottom m-0" color="link">
-          <MDBNavbarLink color="black" active aria-current='page' href='#About'>
-          <Link color="black" to="/studentDashboard/studentAppointments">Your appointments</Link>
-              </MDBNavbarLink>
-            
+            <MDBNavbarLink
+              active
+              aria-current="page"
+              href="/studentDashboard/studentAppointments"
+              className="links"
+            >
+              {" "}
+              Your appointments
+            </MDBNavbarLink>
           </MDBBtn>
         </div>
       </MDBCollapse>

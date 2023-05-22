@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
-import { Link } from "react-router-dom";
+import "./TNavbar.scss";
 import {
   MDBContainer,
   MDBCollapse,
@@ -16,13 +15,15 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function TNavbar() {
-  const {showNavExternal3, setShowNavExternal3} = useContext(Context);
+  const { showNavExternal3, setShowNavExternal3 } = useContext(Context);
 
   return (
     <>
-      <MDBNavbar sticky light >
+      <MDBNavbar sticky light>
         <MDBContainer fluid>
-        <MDBNavbarBrand href='#'><strong>Study Boost.</strong> app</MDBNavbarBrand>
+          <MDBNavbarBrand href="#">
+            <strong>Study Boost.</strong> app
+          </MDBNavbarBrand>
           <MDBNavbarToggler
             className="ms-auto"
             type="button"
@@ -40,21 +41,34 @@ export default function TNavbar() {
       <MDBCollapse show={showNavExternal3}>
         <div className="bg-yellow shadow-3 p-8">
           <MDBBtn block className="border-bottom m-0" color="link">
-          <MDBNavbarLink color="black" active aria-current='page' href='#Home'>
-          <Link color="black" to="/teacherDashboard">Set availability</Link>
-              </MDBNavbarLink>
+            <MDBNavbarLink
+              className="links"
+              active
+              aria-current="page"
+              href="/teacherDashboard"
+            >
+              Set availability
+            </MDBNavbarLink>
           </MDBBtn>
           <MDBBtn block className="border-bottom m-0" color="link">
-          <MDBNavbarLink color="black" active aria-current='page' href='#About'>
-          <Link color="black" to="/teacherDashboard/teacherAvailabilities"> Your availability</Link>
-              </MDBNavbarLink>
-            
+            <MDBNavbarLink
+              className="links"
+              active
+              aria-current="page"
+              href="/teacherDashboard/teacherAvailabilities"
+            >
+              Your availability
+            </MDBNavbarLink>
           </MDBBtn>
           <MDBBtn block className="border-bottom m-0" color="link">
-          <MDBNavbarLink color="black" active aria-current='page' href='#About'>
-          <Link color="black" to="/teacherDashboard/teacherAppointments"> Your appointments</Link>
-              </MDBNavbarLink>
-            
+            <MDBNavbarLink
+              className="links"
+              active
+              aria-current="page"
+              href="/teacherDashboard/teacherAppointments"
+            >
+              Your appointments
+            </MDBNavbarLink>
           </MDBBtn>
         </div>
       </MDBCollapse>

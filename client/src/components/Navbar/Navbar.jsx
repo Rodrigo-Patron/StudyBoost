@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../../Context.jsx";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
+import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import {
   MDBContainer,
@@ -16,13 +16,15 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function Navbar() {
-  const {showNavExternal3, setShowNavExternal3} = useContext(Context);
+  const { showNavExternal3, setShowNavExternal3 } = useContext(Context);
 
   return (
     <>
-      <MDBNavbar sticky light >
+      <MDBNavbar sticky light>
         <MDBContainer fluid>
-        <MDBNavbarBrand href='#'><strong>Study Boost.</strong> app</MDBNavbarBrand>
+          <MDBNavbarBrand href="#">
+            <strong>Study Boost.</strong> app
+          </MDBNavbarBrand>
           <MDBNavbarToggler
             className="ms-auto"
             type="button"
@@ -40,15 +42,24 @@ export default function Navbar() {
       <MDBCollapse show={showNavExternal3}>
         <div className="bg-yellow shadow-3 p-8">
           <MDBBtn block className="border-bottom m-0" color="black">
-          <MDBNavbarLink active aria-current='page' href='#Home'>
-          <Link color="black" to="/Home">Home</Link>
-              </MDBNavbarLink>
+            <MDBNavbarLink
+              className="links"
+              active
+              aria-current="page"
+              href="/Home"
+            >
+              Home
+            </MDBNavbarLink>
           </MDBBtn>
           <MDBBtn block className="border-bottom m-0" color="black">
-          <MDBNavbarLink active aria-current='page' href='#About'>
-          <Link color="black" to="/About">About Us</Link>
-              </MDBNavbarLink>
-            
+            <MDBNavbarLink
+              className="links"
+              active
+              aria-current="page"
+              href="/About"
+            >
+              About Us
+            </MDBNavbarLink>
           </MDBBtn>
         </div>
       </MDBCollapse>
