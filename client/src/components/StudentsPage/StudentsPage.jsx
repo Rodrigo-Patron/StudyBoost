@@ -15,7 +15,7 @@ function StudentsPage() {
     <div className="students">
       <Card className="students-card">
         <Card.Body className="students-title">
-          <h2>Students page</h2>
+          <h2>Student</h2>
         </Card.Body>
       </Card>
       <Container className="student-page">

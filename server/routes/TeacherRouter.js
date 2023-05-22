@@ -104,7 +104,7 @@ TeacherRouter
       }
       // Token
       // token expiring time, if it expires, log in again
-      const option = { expiresIn: "3h" };
+      const option = { expiresIn: "10h" };
       const token = jwt.sign({ id: teacher._id }, process.env.SECRET, option);
       // send user and token to front end
       res.send({ teacher, token });

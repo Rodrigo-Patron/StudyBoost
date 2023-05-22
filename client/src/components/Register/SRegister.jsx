@@ -84,7 +84,7 @@ function SRegister() {
   return (
     <div>
       <h5>
-        New here? Please Register! /
+        New here? Please register! /
         <NavLink onClick={() => setLoginForm(true)}>Login</NavLink>
       </h5>
       <Form onSubmit={submitHandler} className="the-form">

@@ -30,7 +30,8 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./THeader.scss";
 
 const THeader = () => {
-  const { teacher, setTeacher, setTeacherToken, setIsCollapsed } = useContext(Context);
+  const { teacher, setTeacher, setTeacherToken, setIsCollapsed } =
+    useContext(Context);
   const navigate = useNavigate();
 
   //create initial menuCollapse state using useState hook
@@ -95,7 +96,7 @@ const THeader = () => {
             </div>
             <Menu iconShape="square">
               <MenuItem icon={<RiPencilLine />}>
-                <Link to="/teacherDashboard">Set Availability</Link>
+                <Link to="/teacherDashboard">Set availability</Link>
               </MenuItem>
               <MenuItem icon={<i className="fa fa-calendar-check-o"></i>}>
                 <Link to="/teacherDashboard/teacherAvailabilities">
