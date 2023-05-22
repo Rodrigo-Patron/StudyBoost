@@ -30,16 +30,18 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./THeader.scss";
 
 const THeader = () => {
-  const { teacher, setTeacher, setTeacherToken } = useContext(Context);
+  const { teacher, setTeacher, setTeacherToken, setIsCollapsed } = useContext(Context);
   const navigate = useNavigate();
 
   //create initial menuCollapse state using useState hook
-  const [menuCollapse, setMenuCollapse] = useState(false);
+  const [menuCollapse, setMenuCollapse] = useState(true);
 
   //create a custom function that will change menuCollapse state from false to true and true to false
   const menuIconClick = () => {
     //condition checking to change state from true to false and vice versa
-    menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
+    // menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
+    setMenuCollapse(!menuCollapse);
+    setIsCollapsed(menuCollapse);
   };
 
   function logoutHandler() {
