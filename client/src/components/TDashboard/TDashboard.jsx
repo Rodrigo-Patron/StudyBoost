@@ -83,13 +83,13 @@ function TDashboard() {
       title: "Date selected",
       text: "Please select your available time!",
     }).then(() => {
-      console.log(
-        submittedDates.find(
-          (d) =>
-            new Date(d.date).getDate() == new Date(date).getDate() &&
-            d.time.includes("10:00 - 10:30")
-        )
-      );
+      // console.log(
+      //   submittedDates.find(
+      //     (d) =>
+      //       new Date(d.date).getDate() == new Date(date).getDate() &&
+      //       d.time.includes("10:00 - 10:30")
+      //   )
+      // );
     });
     if (foundDate && foundDate.timeSlots) {
       const timeSlotsWithChecked = foundDate.timeSlots.map((timeSlot) => ({
@@ -133,6 +133,14 @@ function TDashboard() {
     submittedDates.forEach((submittedDate) => {
       if (submittedDate.timeSlots) {
         submittedDate.timeSlots.forEach((timeSlot) => {
+          // console.log(
+          //   "SubmittedDates",
+          //   submittedDates,
+          //   "submittedDate",
+          //   submittedDate,
+          //   "timeSlot",
+          //   timeSlot
+          // );
           submittedTimeSlots[timeSlot] = true;
         });
       }
@@ -174,9 +182,12 @@ function TDashboard() {
     const dateToSort = new Date(datePicked);
     const formData = {
       date: new Date(datePicked).toLocaleDateString(navigator.language),
-      time: timeArr.length === 1 ? timeArr[0] : timeArr,
+      // what is this commented line ?
+      // time: timeArr.length === 1 ? [timeArr[0]] : timeArr,
+      time: timeArr,
       dateInMil: Date.parse(dateToSort),
     };
+    console.log("FormData:", formData);
     if (timeArr.length === 0) {
       return Swal.fire({
         icon: "error",
@@ -203,6 +214,7 @@ function TDashboard() {
         return res.json();
       })
       .then((result) => {
+        console.log("Server: ", result);
         setLastSelectedDate({ date: result.date, time: result.time });
         // Add the submitted date to submittedDates state
         const updatedSubmittedDates = [
