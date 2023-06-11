@@ -15,13 +15,12 @@ function TDashboard() {
     setErrors,
     isCollapsed,
     teacher,
-    setTeacher,
+
     teacherToken,
-    setTeacherToken,
   } = useContext(Context);
   const [date, setDate] = useState(new Date().toUTCString());
-  const [lastSelectedDate, setLastSelectedDate] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null); // New state for selected date
+  const [setLastSelectedDate] = useState(null);
+  const [setSelectedDate] = useState(null); // New state for selected date
   const [timeSlot, setTimeSlot] = useState({
     timePicked1: "",
     timePicked2: "",
@@ -52,13 +51,6 @@ function TDashboard() {
         }
         const data = await response.json();
 
-        //expired token redirect to home
-        // if (data.message.includes("jwt expired")) {
-        //   localStorage.removeItem("teacherToken");
-        //   localStorage.removeItem("teacher");
-        //   navigate("/Home");
-        // }
-
         if (!Array.isArray(data)) {
           throw new Error("Data is not an array");
         }
@@ -82,15 +74,7 @@ function TDashboard() {
       icon: "success",
       title: "Date selected",
       text: "Please select your available time!",
-    }).then(() => {
-      // console.log(
-      //   submittedDates.find(
-      //     (d) =>
-      //       new Date(d.date).getDate() == new Date(date).getDate() &&
-      //       d.time.includes("10:00 - 10:30")
-      //   )
-      // );
-    });
+    }).then(() => {});
     if (foundDate && foundDate.timeSlots) {
       const timeSlotsWithChecked = foundDate.timeSlots.map((timeSlot) => ({
         time: timeSlot,

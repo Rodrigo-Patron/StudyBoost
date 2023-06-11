@@ -14,7 +14,6 @@ import {
 import { useContext, useEffect, useState, useRef } from "react";
 import "./SAppointment.scss";
 
-
 function SAppointment() {
   const { studentToken, appointment, setAppointment, student, isCollapsed } =
     useContext(Context);
@@ -111,8 +110,8 @@ function SAppointment() {
   return (
     <Container fluid={true} className="dashboard-container">
       <Row className="dashboard-row">
-      <Col className="navbarCol">
-        <SNavbar />
+        <Col className="navbarCol">
+          <SNavbar />
         </Col>
         <Col className="headerCol" xs="12" md={headerWidth}>
           <SHeader />

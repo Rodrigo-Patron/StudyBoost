@@ -14,7 +14,6 @@ function TAvailabilities() {
   const [reqAgain, setReqAgain] = useState(false);
   const [counter, setCounter] = useState(false);
   const [selectedTime, setSelectedTime] = useState([]);
-  // const [checked, setChecked] = useState(false);
 
   const dateInput = useRef();
 
@@ -49,7 +48,6 @@ function TAvailabilities() {
   // to delete availability
   const submitHandler = (e, deletingDate) => {
     e.preventDefault();
-    // const date = e.target.getAttribute("data");
 
     console.log(deletingDate);
 
@@ -122,7 +120,6 @@ function TAvailabilities() {
   console.log("SelectedTime: ", selectedTime);
   const timeList = () => {
     return (
-      
       <div>
         <Container className="availabilities">
           <div className="top-header">
@@ -169,9 +166,6 @@ function TAvailabilities() {
                           <Form.Check
                             onChange={(e) => t(e, time, appointment.date)}
                             key={index}
-                            // checked={selectedTime.forEach((x) => {
-                            //   x.time === time && x.date === appointment.date;
-                            // })}
                             type="checkbox"
                             label={time}
                             value={time}

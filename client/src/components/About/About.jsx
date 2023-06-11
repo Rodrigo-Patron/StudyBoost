@@ -9,12 +9,10 @@ import pic1 from "../../images/Ag.jpg";
 import pic2 from "../../images/Mo.jpg";
 import pic3 from "../../images/Ro.jpg";
 import pic4 from "../../images/Da.jpg";
-// import { useNavigate } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function About() {
-  // //^ NAVIGATE
-  // const navigate = useNavigate();
   const { isCollapsed } = useContext(Context);
 
   const headerWidth = isCollapsed ? 2 : 1;
@@ -115,14 +113,6 @@ function About() {
                 </Card>
               </CardGroup>
             </Row>
-            {/* <Button
-        className="back-btn"
-        onClick={(e) => {
-          navigate("/home");
-        }}
-      >
-        Back to homepage
-      </Button> */}
           </Container>
         </Col>
       </Row>
