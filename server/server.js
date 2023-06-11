@@ -22,15 +22,15 @@ const port = process.env.PORT || 6500;
 //Connecting to DB
 connectDB();
 
-//DEPLOYMENT - to make public folder accessible for browsers
-server.use(express.static(process.argv[1] + "/public"));
-
 // Middleware
 server.use(express.json());
 // server.use(logger("dev"));
 server.use(express.urlencoded({ extended: false }));
 // REMOVE BEFORE DEPLOY!!
 // server.use(cors());
+
+//DEPLOYMENT - to make public folder accessible for browsers
+server.use(express.static(process.argv[1] + "/public"));
 
 // Routes
 server.use("/api/students", StudentRouter);
@@ -52,7 +52,7 @@ server.use((err, req, res, next) => {
 
 //DEPLOYMENT - make response for any GET method to index.html(react)
 server.get("*", (req, res) => {
-  res.sendFile(`${Process.argv[1]}/public/index.html`);
+  res.sendFile(`${process.argv[1]}/public/index.html`);
 });
 
 // Starting the server
