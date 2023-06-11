@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import logger from "morgan";
-import cors from "cors";
+// import logger from "morgan";
+// import cors from "cors";
 import createError from "http-errors";
 import connectDB from "./lib/db.js";
 import StudentRouter from "./routes/StudentRouter.js";
@@ -22,12 +22,15 @@ const port = process.env.PORT || 6500;
 //Connecting to DB
 connectDB();
 
+//DEPLOYMENT - to make public folder accessible for browsers
+server.use(express.static(process.argv[1] + "/public"));
+
 // Middleware
 server.use(express.json());
-server.use(logger("dev"));
+// server.use(logger("dev"));
 server.use(express.urlencoded({ extended: false }));
 // REMOVE BEFORE DEPLOY!!
-server.use(cors());
+// server.use(cors());
 
 // Routes
 server.use("/api/students", StudentRouter);
@@ -45,6 +48,11 @@ server.use((err, req, res, next) => {
   res
     .status(err.status || 500)
     .send({ message: err.message || "Sorry, something went wrong" });
+});
+
+//DEPLOYMENT - make response for any GET method to index.html(react)
+server.get("*", (req, res) => {
+  res.sendFile(`${Process.argv[1]}/public/index.html`);
 });
 
 // Starting the server
