@@ -1,4 +1,6 @@
-# StudyBoost - Course Final Project
+# StudyBoost - Project
+
+A comprehensive fullstack application designed for users to schedule and manage meetings by creating appointments. Developed with React for the frontend, and Node.js with MongoDB for the backend.
 
 1. User Profiles: We will need to create user profiles for students and teachers that allow them to manage their personal information and view their appointment history.
 
